@@ -301,7 +301,7 @@ define('BASEFOLDER', substr(BASEPATH, 0, count(BASEPATH)-8));
 define('PREFIX', '');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DB_NAME', 'toppcvn_lsc');
+define('DB_NAME', '');
 
 
 //Config DIR Upload
