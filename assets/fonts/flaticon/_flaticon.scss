@@ -1,0 +1,99 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 17/11/2016 11:27
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-24-hours:before { content: "\f100"; }
+.flaticon-annual-calendar-symbol:before { content: "\f101"; }
+.flaticon-arrows:before { content: "\f102"; }
+.flaticon-building:before { content: "\f103"; }
+.flaticon-clock:before { content: "\f104"; }
+.flaticon-confirm-schedule:before { content: "\f105"; }
+.flaticon-construction:before { content: "\f106"; }
+.flaticon-cross:before { content: "\f107"; }
+.flaticon-cup:before { content: "\f108"; }
+.flaticon-dollar-symbol:before { content: "\f109"; }
+.flaticon-drawing:before { content: "\f10a"; }
+.flaticon-e-mail-envelope:before { content: "\f10b"; }
+.flaticon-employee:before { content: "\f10c"; }
+.flaticon-idea:before { content: "\f10d"; }
+.flaticon-interface:before { content: "\f10e"; }
+.flaticon-internet:before { content: "\f10f"; }
+.flaticon-lock-padlock-symbol-for-protect:before { content: "\f110"; }
+.flaticon-magnifying-glass:before { content: "\f111"; }
+.flaticon-map-marker-point:before { content: "\f112"; }
+.flaticon-multimedia:before { content: "\f113"; }
+.flaticon-new-email-outline:before { content: "\f114"; }
+.flaticon-people:before { content: "\f115"; }
+.flaticon-people-1:before { content: "\f116"; }
+.flaticon-right:before { content: "\f117"; }
+.flaticon-search:before { content: "\f118"; }
+.flaticon-signs:before { content: "\f119"; }
+.flaticon-social:before { content: "\f11a"; }
+.flaticon-technology:before { content: "\f11b"; }
+.flaticon-technology-1:before { content: "\f11c"; }
+.flaticon-user-silhouette:before { content: "\f11d"; }
+    
+    $font-Flaticon-24-hours: "\f100";
+    $font-Flaticon-annual-calendar-symbol: "\f101";
+    $font-Flaticon-arrows: "\f102";
+    $font-Flaticon-building: "\f103";
+    $font-Flaticon-clock: "\f104";
+    $font-Flaticon-confirm-schedule: "\f105";
+    $font-Flaticon-construction: "\f106";
+    $font-Flaticon-cross: "\f107";
+    $font-Flaticon-cup: "\f108";
+    $font-Flaticon-dollar-symbol: "\f109";
+    $font-Flaticon-drawing: "\f10a";
+    $font-Flaticon-e-mail-envelope: "\f10b";
+    $font-Flaticon-employee: "\f10c";
+    $font-Flaticon-idea: "\f10d";
+    $font-Flaticon-interface: "\f10e";
+    $font-Flaticon-internet: "\f10f";
+    $font-Flaticon-lock-padlock-symbol-for-protect: "\f110";
+    $font-Flaticon-magnifying-glass: "\f111";
+    $font-Flaticon-map-marker-point: "\f112";
+    $font-Flaticon-multimedia: "\f113";
+    $font-Flaticon-new-email-outline: "\f114";
+    $font-Flaticon-people: "\f115";
+    $font-Flaticon-people-1: "\f116";
+    $font-Flaticon-right: "\f117";
+    $font-Flaticon-search: "\f118";
+    $font-Flaticon-signs: "\f119";
+    $font-Flaticon-social: "\f11a";
+    $font-Flaticon-technology: "\f11b";
+    $font-Flaticon-technology-1: "\f11c";
+    $font-Flaticon-user-silhouette: "\f11d";
