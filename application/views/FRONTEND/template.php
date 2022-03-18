@@ -33,7 +33,8 @@
         <header>
             <div class="container">
                 <div class="logo">
-                    <a href="index.html" title="Kids Life"><img src="<?= PATH_URL; ?>assets/images/logo.png" alt="Kids Life" title="Kids Life"></a>
+                    <a href="<?= PATH_URL; ?>" title="Kids Life"><img src="<?= PATH_URL; ?>assets/images/logo.png" alt="Kids Life" title="Kids Life"></a>
+                    <span class="title">Kỹ năng sống và ngoại ngữ Let's Start</span>
                 </div>
                 <div class="contact-details">
                     <p class="mail">

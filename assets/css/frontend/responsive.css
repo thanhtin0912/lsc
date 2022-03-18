@@ -476,7 +476,7 @@ footer .copyright .footer-links{float:none; display:inline-block;}
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
 @media only screen and (min-width: 320px) and (max-width: 479px){
 
-.container{width:290px;}
+.container{width:100%;}
 
 .wrapper .column{margin-bottom:20px; margin-left:0px;}
 
@@ -495,7 +495,7 @@ th, td{padding:5px; font-size:10px;}
 .logo{width:100%; text-align:center;}
 
 .logo img{display:inline-block; max-width:130px;}
-
+.logo .title{ font-size: 18px; padding: 5px; font-weight: bold; color: #35538f;}
 header .contact-details{float:none; margin:0px 0px 30px; padding:0px; clear:both; width:100%; text-align:center;}
 
 header .contact-details p{text-align:center; margin:0px 0px 15px;}

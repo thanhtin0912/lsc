@@ -1,6 +1,5 @@
         <!--main starts-->
         <div id="main">
-        
             <!--slider starts-->
             <div id="slider"> 
                 <div id="layerslider_4" class="ls-wp-container" style="width:100%;height:610px;max-width:1920px;margin:0 auto;margin-bottom: 0px;">
@@ -16,13 +15,10 @@
             <section id="primary" class="content-full-width">
                 <!--container starts-->
                 <div class="container">
-                    
-                    
                     <h2 class="dt-sc-hr-green-title"> <?=lang('menu_course')?> </h2>
                     <?php foreach ($services as $key => $v): ;?>
                     <div class="column dt-sc-one-fourth">
                         <div class="activity <?php if (($key%2)==1) {echo 'box1';}else{echo 'box4';} ?>">
-                           
                             <a href="<?=PATH_URL.$this->lang->lang().'/service/'.$v->slug?>"><img src="<?=PATH_URL.DIR_UPLOAD_SERVICES.$v->image ?>" alt="" title=""></a>
                             <h4> <?php $lang = $this->lang->lang(); $title = "title_".$lang; cutText($v->$title,30) ?></h4>
                             <p><?php $lang = $this->lang->lang(); $description = "description_".$lang; cutText($v->$description, 100) ?></p>
@@ -126,7 +122,7 @@
                         <div class="dt-sc-team">    
                             <div class="image">
                                 <img class="item-mask" src="assets/images/mask.png" alt="" title="">
-                                <img src="http://placehold.it/381x331" alt="" title="">
+                                <img src="https://kidslifedev.wpengine.com/wp-content/uploads/2014/12/team2.jpg" alt="" title="">
                                 <div class="dt-sc-image-overlay">
                                     <a href="#" class="link"><span class="fa fa-link"></span></a>
                                     <a href="#" class="zoom"><span class="fa fa-search"></span></a>
@@ -143,7 +139,7 @@
                         <div class="dt-sc-team">    
                             <div class="image">
                                 <img class="item-mask" src="assets/images/mask.png" alt="" title="">
-                                <img src="http://placehold.it/381x331" alt="" title="">
+                                <img src="https://kidslifedev.wpengine.com/wp-content/uploads/2014/12/team2.jpg" alt="" title="">
                                 <div class="dt-sc-image-overlay">
                                     <a href="#" class="link"><span class="fa fa-link"></span></a>
                                     <a href="#" class="zoom"><span class="fa fa-search"></span></a>
@@ -160,7 +156,7 @@
                         <div class="dt-sc-team">    
                             <div class="image">
                                 <img class="item-mask" src="assets/images/mask.png" alt="" title="">
-                                <img src="http://placehold.it/381x331" alt="" title="">
+                                <img src="https://kidslifedev.wpengine.com/wp-content/uploads/2014/12/team2.jpg" alt="" title="">
                                 <div class="dt-sc-image-overlay">
                                     <a href="#" class="link"><span class="fa fa-link"></span></a>
                                     <a href="#" class="zoom"><span class="fa fa-search"></span></a>
@@ -177,7 +173,7 @@
                         <div class="dt-sc-team">    
                             <div class="image">
                                 <img class="item-mask" src="assets/images/mask.png" alt="" title="">
-                                <img src="http://placehold.it/381x331" alt="" title="">
+                                <img src="https://kidslifedev.wpengine.com/wp-content/uploads/2014/12/team2.jpg" alt="" title="">
                                 <div class="dt-sc-image-overlay">
                                     <a href="#" class="link"><span class="fa fa-link"></span></a>
                                     <a href="#" class="zoom"><span class="fa fa-search"></span></a>
