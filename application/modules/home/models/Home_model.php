@@ -60,6 +60,19 @@ class Home_model extends CI_Model {
 		}
 	}
 
+	function getListImages(){
+		$this->db->select('*');
+		$this->db->where('status',1);
+		$this->db->order_by('created','DESC');
+		$this->db->limit('7');
+		$query = $this->db->get(PREFIX.$this->table_comments);
+		if($query->result()){
+			return $query->result();
+		}else{
+			return false;
+		}	
+	}
+
 
 	function getDataCatagories($type){
 	    $this->db->select('n.*, COUNT(c.type) total');

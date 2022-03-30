@@ -153,7 +153,7 @@
   }
 
   .front-portfolio .image-overlay .zoom {
-    top: 60%;
+    top: 50%;
   }
 
   .front-portfolio:hover .link {
@@ -161,7 +161,7 @@
   }
 
   .front-portfolio:hover .zoom {
-    right: 28%;
+    right: 45%;
   }
 
   #main .fullwidth-background ul.products li {
@@ -1426,7 +1426,7 @@
   }
 
   .front-portfolio .image-overlay .zoom {
-    top: 60%;
+    top: 50%;
   }
 
   .front-portfolio:hover .link {
@@ -1434,7 +1434,7 @@
   }
 
   .front-portfolio:hover .zoom {
-    right: 30%;
+    right: 45%;
   }
 
   .fullwidth-background .blog-entry {
@@ -1966,7 +1966,7 @@
   }
 
   .front-portfolio .image-overlay .zoom {
-    top: 65%;
+    top: 55%;
   }
 
   .front-portfolio:hover .link {
@@ -1974,7 +1974,7 @@
   }
 
   .front-portfolio:hover .zoom {
-    right: 28%;
+    right: 45%;
   }
 
   .mailchimp-form p {

@@ -25,6 +25,7 @@ class Home extends MX_Controller {
 		$data['listproduct'] = $this->home->getList8LatestProducts();
 		$data['countlist'] = count($data['listproduct']);
 		$data['services'] = $this->home->getListServices();
+		$data['comments'] = $this->home->getListImages();
 		//
 		$this->template->write('title','Cty TNHH Hải Dương');
 		$this->template->write_view('content','index',$data);

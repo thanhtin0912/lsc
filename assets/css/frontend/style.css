@@ -2132,7 +2132,7 @@ header #menu-container ul.dt-sc-social-icons {
 }
 
 .front-portfolio:hover .zoom {
-	right: 35%;
+	right: 45%;
 }
 
 .front-portfolio:hover .image-overlay h5 {
@@ -2226,7 +2226,7 @@ header #menu-container ul.dt-sc-social-icons {
 
 .activity p {
 	padding: 0px 20px;
-	-webkit-line-clamp: 4;
+	-webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     display: -webkit-box;

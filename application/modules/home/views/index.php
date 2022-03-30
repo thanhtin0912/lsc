@@ -265,28 +265,6 @@
                 jssor_1_slider_init();
             </script>
             <!--primary starts-->
-            <section class="fullwidth-background turquoise-bg">
-                <div class="container">
-                    <form class="admission-form p-3" novalidate="novalidate">
-                        <p class="dt-sc-one-fourth column first">
-                            <input id="name" name="txtname" type="text" placeholder="Name" required="">
-                        </p>
-                        <p class="dt-sc-one-fourth column">
-                            <input id="age" name="txtPhone" type="text" placeholder="Phone" required="">
-                        </p>
-                        <p class="dt-sc-one-fourth column">
-                            <input id="course" name="txtcourse" type="text" placeholder="Course" required="">
-                        </p>
-                        <p class="dt-sc-one-fourth column">
-                            <input id="course" name="txtMail" type="text" placeholder="Mail" required="">
-                        </p>
-                        <div id="ajax_admission_msg"> </div>
-                        <p class="aligncenter pt-3">
-                            <input class="px-5" name="submit" type="submit" id="submit" value="<?= lang('btn_contact') ?>">
-                        </p>
-                    </form>
-                </div>
-            </section>
             <section id="primary" class="content-full-width">
                 <!--container starts-->
                 <div class="container">
@@ -315,147 +293,54 @@
                 <section class="fullwidth-background dt-sc-parallax-section turquoise-bg">
                     <!--container starts-->
                     <div class="container">
-                        <!--dt-sc-one-half starts-->
-                        <div class="dt-sc-one-half column first">
-                            <h2>Trẻ từ 5-11 tuổi - Giai đoạn phát triển</h2>
-                            <!--dt-sc-one-half starts-->
+                        <h2 class="dt-sc-hr-white-title"><?= lang('btn_contact') ?></h2>
 
-                            <div class="dt-sc-ico-content type2">
-                                <div class="icon">
-                                    <span class="fa fa-glass"> </span>
-                                </div>
-                                <h4><a href="#" target="_blank"> English Summer Camp </a></h4>
-                                <p>Trẻ trong độ tuổi này thường ngại ngùng trong lớp học đông người nên phương pháp học 1-1 sẽ giúp bé tự do thể hiện màu sắc của bản thân.</p>
-                            </div>
-                            <div class="dt-sc-hr-very-small"></div>
-                            <div class="dt-sc-ico-content type2">
-                                <div class="icon">
-                                    <span class="fa fa-pencil"> </span>
-                                </div>
-                                <h4><a href="#" target="_blank"> Drawing & Painting </a></h4>
-                                <p>Phụ huynh hoàn toàn có thể theo dõi được quá trình tiến bộ của trẻ hoặc tham gia cùng để tạo sự hứng thú học tiếng Anh cho con.</p>
-                            </div>
-                            <div class="dt-sc-hr-very-small"></div>
-                            <div class="dt-sc-ico-content type2">
-                                <div class="icon">
-                                    <span class="fa fa-bullseye"> </span>
-                                </div>
-                                <h4><a href="#" target="_blank"> Swimming Camp </a></h4>
-                                <p>Sự linh động thời gian của phương pháp học 1-1 này giúp trẻ cân đối được thời gian lên lớp và học ở nhà mà không bị quá tải.</p>
-                            </div>
-                            <!--dt-sc-one-half ends-->
-                        </div>
-                        <!--dt-sc-one-half ends-->
-
-                        <!--dt-sc-one-half starts-->
-                        <div class="dt-sc-one-half column">
-                            <h2>Trẻ từ 11-16 tuổi - Giai đoạn nâng cao</h2>
-                            <div class="dt-sc-ico-content type2">
-                                <div class="icon">
-                                    <span class="fa fa-tachometer"> </span>
-                                </div>
-                                <h4><a href="#" target="_blank"> Sports Camp </a></h4>
-                                <p>Giai đoạn này các em bắt đầu muốn tự chủ động học mà không thích bị bố mẹ theo dõi. Do vậy, phương pháp online 1-1 tại VIP ENGLISH sẽ giúp các em có tâm lý thoải mái trong việc học.</p>
-                            </div>
-                            <div class="dt-sc-hr-very-small"></div>
-                            <div class="dt-sc-ico-content type2">
-                                <div class="icon">
-                                    <span class="fa fa-magic"> </span>
-                                </div>
-                                <h4><a href="#" target="_blank"> Personalizing </a></h4>
-                                <p>Tuy nhiên, phụ huynh vẫn có thể theo dõi được việc học và chất lượng giảng dạy qua video quay lại tiết học được gửi cho phụ huynh ngay sau đó.</p>
-                            </div>
-                            <div class="dt-sc-hr-very-small"></div>
-                            <div class="dt-sc-ico-content type2">
-                                <div class="icon">
-                                    <span class="fa fa-music"> </span>
-                                </div>
-                                <h4><a href="#" target="_blank"> Sing & Dance </a></h4>
-                                <p>Việc được học tập với 100% giáo viên nước ngoài sẽ giúp các em tự tin vượt qua các kỳ thi lớn: IELTS, TOEFL, TOEIC,...</p>
-                            </div>
-                        </div>
-                        <!--dt-sc-one-half ends-->
+                        <form class="admission-form p-3" novalidate="novalidate">
+                            <p class="dt-sc-one-fourth column first">
+                                <input id="name" name="txtname" type="text" placeholder="Name" required="">
+                            </p>
+                            <p class="dt-sc-one-fourth column">
+                                <input id="age" name="txtPhone" type="text" placeholder="Phone" required="">
+                            </p>
+                            <p class="dt-sc-one-fourth column">
+                                <input id="course" name="txtcourse" type="text" placeholder="Course" required="">
+                            </p>
+                            <p class="dt-sc-one-fourth column">
+                                <input id="course" name="txtMail" type="text" placeholder="Mail" required="">
+                            </p>
+                            <div id="ajax_admission_msg"> </div>
+                            <p class="aligncenter pt-3">
+                                <input class="px-5" name="submit" type="submit" id="submit" value="<?= lang('btn_contact') ?>">
+                            </p>
+                        </form>
                     </div>
-                    <!--container ends-->
                 </section>
                 <!--fullwidth-background ends-->
                 <div class="dt-sc-hr"></div>
-                <!--container starts-->
                 <div class="container">
-                    <h2 class="dt-sc-hr-green-title"><?= lang('our_staff') ?></h2>
-
-                    <div class="column dt-sc-one-fourth first">
-                        <div class="dt-sc-team">
-                            <div class="image">
-                                <img class="item-mask" src="assets/images/mask.png" alt="" title="">
-                                <img src="https://kidslifedev.wpengine.com/wp-content/uploads/2014/12/team2.jpg" alt="" title="">
-                                <div class="dt-sc-image-overlay">
-                                    <a href="#" class="link"><span class="fa fa-link"></span></a>
-                                    <a href="#" class="zoom"><span class="fa fa-search"></span></a>
-                                </div>
-                            </div>
-                            <div class="team-details">
-                                <h4> Jack Daniels </h4>
-                                <h6> Senior Supervisor </h6>
-                                <p> Phasellus lorem augue, vulputate vel orci id, ultricies aliquet risus. </p>
-                            </div>
-                        </div>
+                    <h2 class="dt-sc-hr-green-title">Our Portfolio</h2>
+                    
+                    <!--portfolio-content starts-->
+                    <div class="front-portfolio-container">
+                    
+                        <?php foreach ($comments as $key => $v) : ?>
+                       <div class="portfolio-content portfolio-content<?=$key+1 ?>">
+                           <div class="front-portfolio">
+                              <div class="portfolio-outer">
+                                  <div class="portfolio-thumb">
+                                  	  <img src="<?= PATH_URL . DIR_UPLOAD_COMMENTS . $v->image ?>" alt="" title="">
+                                      <div class="image-overlay">
+                                        <a href="<?= PATH_URL . DIR_UPLOAD_COMMENTS . $v->image ?>" data-gal="prettyPhoto[gallery]" class="zoom"><span class="fa fa-search"></span></a>
+                                    </div>
+                                  </div>
+                              </div>
+                           </div>
+                       </div>
+                       <?php endforeach ?>
                     </div>
-                    <div class="column dt-sc-one-fourth">
-                        <div class="dt-sc-team">
-                            <div class="image">
-                                <img class="item-mask" src="assets/images/mask.png" alt="" title="">
-                                <img src="https://kidslifedev.wpengine.com/wp-content/uploads/2014/12/team2.jpg" alt="" title="">
-                                <div class="dt-sc-image-overlay">
-                                    <a href="#" class="link"><span class="fa fa-link"></span></a>
-                                    <a href="#" class="zoom"><span class="fa fa-search"></span></a>
-                                </div>
-                            </div>
-                            <div class="team-details">
-                                <h4> Linda Glendell </h4>
-                                <h6> Teaching Professor </h6>
-                                <p> Phasellus lorem augue, vulputate vel orci id, ultricies aliquet risus. </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column dt-sc-one-fourth">
-                        <div class="dt-sc-team">
-                            <div class="image">
-                                <img class="item-mask" src="assets/images/mask.png" alt="" title="">
-                                <img src="https://kidslifedev.wpengine.com/wp-content/uploads/2014/12/team2.jpg" alt="" title="">
-                                <div class="dt-sc-image-overlay">
-                                    <a href="#" class="link"><span class="fa fa-link"></span></a>
-                                    <a href="#" class="zoom"><span class="fa fa-search"></span></a>
-                                </div>
-                            </div>
-                            <div class="team-details">
-                                <h4> Kate Dennings </h4>
-                                <h6> Children Diet </h6>
-                                <p> Phasellus lorem augue, vulputate vel orci id, ultricies aliquet risus. </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column dt-sc-one-fourth">
-                        <div class="dt-sc-team">
-                            <div class="image">
-                                <img class="item-mask" src="assets/images/mask.png" alt="" title="">
-                                <img src="https://kidslifedev.wpengine.com/wp-content/uploads/2014/12/team2.jpg" alt="" title="">
-                                <div class="dt-sc-image-overlay">
-                                    <a href="#" class="link"><span class="fa fa-link"></span></a>
-                                    <a href="#" class="zoom"><span class="fa fa-search"></span></a>
-                                </div>
-                            </div>
-                            <div class="team-details">
-                                <h4> Kristof Slinghot </h4>
-                                <h6> Management </h6>
-                                <p> Phasellus lorem augue, vulputate vel orci id, ultricies aliquet risus. </p>
-                            </div>
-                        </div>
-                    </div>
-
+                    <!--front-portfolio-container ends-->
                 </div>
-                <!--container ends-->
-
+                
                 <div class="dt-sc-hr"></div>
                 <!--fullwidth-background starts-->
                 <section class="fullwidth-background dt-sc-parallax-section turquoise-bg">

@@ -17,7 +17,7 @@
 <link href="<?= PATH_URL; ?>assets/css/frontend/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/layerslider.css" type="text/css">
 <!--prettyPhoto-->
-<link href="<?= PATH_URL; ?>assets/js/frontend/prettyPhoto.css" rel="stylesheet" type="text/css" media="all" />   
+<link href="<?= PATH_URL; ?>assets/css/frontend/prettyPhoto.css" rel="stylesheet" type="text/css"/>   
 <!--  -->
 <link href="<?= PATH_URL; ?>assets/css/default.css" rel="stylesheet" type="text/css" /> 
 
@@ -58,7 +58,7 @@
                         <ul id="menu-main-menu" class="menu">
                             <li class="mustard"> <a href="<?= PATH_URL ?><?=$this->lang->lang();?>"><?=lang('menu_home')?></a> </li>
                             <li class="green"> <a href="<?= PATH_URL ?><?=$this->lang->lang();?>/about"><?=lang('menu_about')?></a></li>
-                            <li class="current_page_item menu-item-simple-parent menu-item-depth-0 blue"><a href="#"><?=lang('menu_course')?></a> 
+                            <li class="menu-item-simple-parent menu-item-depth-0 blue"><a href="#"><?=lang('menu_course')?></a> 
                                 <ul class="sub-menu">
                                 <?php foreach ($services as $key => $v) :; ?>
                                     <li><a href="<?= PATH_URL . $this->lang->lang() . '/service/' . $v->slug ?>">
@@ -196,12 +196,11 @@
     <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/validation.js"></script>
     <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.tipTip.minified.js"></script>
     <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.bxslider.min.js"></script>       
-    <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.prettyPhoto.js"></script>  
     <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/twitter/jquery.tweet.min.js"></script>
     <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.parallax-1.1.3.js"></script>   
     <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/shortcodes.js"></script>   
     <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/custom.js"></script>
-     
+    <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.prettyPhoto.js"></script>  
     <!-- Layer Slider --> 
     <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery-transit-modified.js"></script> 
     <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/layerslider.kreaturamedia.jquery.js"></script> 
