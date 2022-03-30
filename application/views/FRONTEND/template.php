@@ -15,16 +15,18 @@
 <link href="<?= PATH_URL; ?>assets/css/frontend/shortcodes.css" rel="stylesheet" type="text/css">
 <link href="<?= PATH_URL; ?>assets/css/frontend/responsive.css" rel="stylesheet" type="text/css">
 <link href="<?= PATH_URL; ?>assets/css/frontend/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link href="<?= PATH_URL; ?>assets/css/frontend/shortcodes.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/layerslider.css" type="text/css">
 <!--prettyPhoto-->
 <link href="<?= PATH_URL; ?>assets/js/frontend/prettyPhoto.css" rel="stylesheet" type="text/css" media="all" />   
+<!--  -->
+<link href="<?= PATH_URL; ?>assets/css/default.css" rel="stylesheet" type="text/css" /> 
 
 <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Bubblegum+Sans' rel='stylesheet' type='text/css'>
 <!--jquery-->
-<script src="<?= PATH_URL; ?>assets/js/frontend/modernizr-2.6.2.min.js"></script>
+<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jssor.slider-28.1.0.min.js"></script>
+<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/modernizr-2.6.2.min.js"></script>
 </head>
 <body class="main">
 	<!--wrapper starts-->
@@ -56,7 +58,18 @@
                         <ul id="menu-main-menu" class="menu">
                             <li class="mustard"> <a href="<?= PATH_URL ?><?=$this->lang->lang();?>"><?=lang('menu_home')?></a> </li>
                             <li class="green"> <a href="<?= PATH_URL ?><?=$this->lang->lang();?>/about"><?=lang('menu_about')?></a></li>
-                            <li class="blue"> <a href="<?= PATH_URL ?><?=$this->lang->lang();?>/course"><?=lang('menu_course')?></a></li>
+                            <li class="current_page_item menu-item-simple-parent menu-item-depth-0 blue"><a href="#"><?=lang('menu_course')?></a> 
+                                <ul class="sub-menu">
+                                <?php foreach ($services as $key => $v) :; ?>
+                                    <li><a href="<?= PATH_URL . $this->lang->lang() . '/service/' . $v->slug ?>">
+                                    <?php $lang = $this->lang->lang();
+                                    $title = "title_" . $lang;
+                                    echo $v->$title ?></a>
+                                    </li>
+                                <?php endforeach ?>
+                                </ul>
+                                <a class="dt-menu-expand">+</a>
+                            </li>
                             <li class="yellow"> <a href="<?= PATH_URL ?><?=$this->lang->lang();?>/news"><?=lang('menu_news')?></a></li>    
                             <li class="lavender"><a href="<?= PATH_URL ?><?=$this->lang->lang();?>/document"><?=lang('menu_document')?></a></li>
                             <li class="pink"><a href="<?= PATH_URL ?><?=$this->lang->lang();?>/contact"><?=lang('menu_contact')?></a></li>

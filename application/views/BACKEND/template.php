@@ -144,22 +144,24 @@
                                 <i class="fa fa-arrow-right"></i><span class="title">Thông tin công ty</span>
                             </a>
                         </li>
-<!--                         <li class="nav-item  <?php if ($this->uri->segment(2) == 'comments') { print 'active open';} ?>">
+                        <li class="nav-item  <?php if ($this->uri->segment(2) == 'comments') { print 'active open';} ?>">
                             <a href="<?= PATH_URL_ADMIN . 'comments' ?>" class="nav-link ">
-                                <i class="fa fa-arrow-right"></i><span class="title">Ý kiến khách hàng</span>
+                                <i class="fa fa-arrow-right"></i><span class="title">Ý kiến học viên </span>
                             </a>
-                        </li> -->
+                        </li>
                     </ul>
                 </li>
 
-                <li class="last <?php if ($this->uri->segment(2) == 'services') { print ' active';} ?>"><a href="<?= PATH_URL_ADMIN . 'services' ?>"><i class="fa fa-cutlery"></i><span class="title">Quản lý dịch vụ</span></a></li>
-<!--                 <li class="nav-item">
+                <li class="last <?php if ($this->uri->segment(2) == 'services') { print ' active';} ?>">
+                    <a href="<?= PATH_URL_ADMIN . 'services' ?>"><i class="fa fa-book"></i><span class="title">Quản lý khóa học</span></a>
+                </li>
+                <!-- <li class="nav-item">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="icon-social-dribbble"></i>
                         <span class="title">Quản lý dự án</span>
                         <span class="arrow"></span>
                     </a>
-                    <ul class="sub-menu" <?php if (($this->uri->segment(2) == 'projects_cata') ||  ($this->uri->segment(2) == 'projects' )) { print "style='display: block;' ";} ?>>
+                    <ul class="sub-menu" <?php if (($this->uri->segment(2) == 'services') ||  ($this->uri->segment(2) == 'projects' )) { print "style='display: block;' ";} ?>>
                         <li class="nav-item  last<?php if ($this->uri->segment(2) == 'projects_cata') { print 'active open';} ?>">
                             <a href="<?= PATH_URL_ADMIN . 'projects_cata' ?>" class="nav-link ">
                                 <i class="fa fa-arrow-right"></i><span class="title">Danh mục</span>
@@ -191,7 +193,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="icon-social-dribbble"></i>
                         <span class="title">Quản lý sản phẩm</span>
@@ -214,8 +216,13 @@
                             </a>
                         </li>
                     </ul>
+                </li> -->
+                <li class="last <?php if ($this->uri->segment(2) == 'teachers   ') { print ' active';} ?>">
+                    <a href="<?= PATH_URL_ADMIN . 'static_pages' ?>"><i class="fa fa-cutlery"></i><span class="title">Quản lý giáo viên</span></a>
                 </li>
-                <li class="last <?php if ($this->uri->segment(2) == 'static_pages') { print ' active';} ?>"><a href="<?= PATH_URL_ADMIN . 'static_pages' ?>"><i class="fa fa-cutlery"></i><span class="title">Quản lý pages</span></a></li>
+                <li class="last <?php if ($this->uri->segment(2) == 'static_pages') { print ' active';} ?>">
+                    <a href="<?= PATH_URL_ADMIN . 'static_pages' ?>"><i class="fa fa-cutlery"></i><span class="title">Quản lý pages</span></a>
+                </li>
                 <li class="last<?php if ($this->uri->segment(2) == 'library') { print ' active';} ?>">
                     <a href="<?= PATH_URL_ADMIN . 'library' ?>"><i class="fa fa-picture-o"></i><span class="title"> Thư viện hình ảnh</span></a>
                 </li>

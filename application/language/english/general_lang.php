@@ -21,7 +21,7 @@ $lang['btn_readmore'] = 'Read more';
 
 $lang['title_latest_project'] = 'Latest<span> products</span>';
 $lang['title_view_all'] = 'View all';
-
+$lang['btn_contact'] = 'Contact';
 
 // end home
 $lang['tag_offers'] = 'OFFERS';

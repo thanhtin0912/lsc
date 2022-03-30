@@ -44,8 +44,8 @@ body {
 	color: #5c5c5c;
 	margin: 0px;
 	padding: 0px;
-	font-family: 'Lato', sans-serif;
-	font-size: 14px;
+	font-family: 'FontAwesome', sans-serif;
+	font-size: 16px;
 	line-height: 22px;
 }
 
@@ -456,12 +456,12 @@ h5.dt-sc-toggle a,
 h5.dt-sc-toggle-accordion a,
 .product-details h5 a,
 .front-portfolio .image-overlay h5 a {
-	font-family: 'Lato', sans-serif;
+	font-family: 'FontAwesome', sans-serif;
 }
 
 #main-menu .megamenu-child-container .widget ul.product_list_widget li a,
 #main-menu .megamenu-child-container .widget ul.product_list_widget li span.amount {
-	font-family: 'Lato', sans-serif;
+	font-family: 'FontAwesome', sans-serif;
 }
 
 h1,
@@ -482,7 +482,7 @@ textarea,
 .breadcrumb-section h1,
 .activity h4,
 .megamenu-child-container>ul.sub-menu>li>a {
-	font-family: FontAwesome;
+	font-family: 'FontAwesome', sans-serif;
 	font-weight: normal;
 }
 
@@ -501,7 +501,7 @@ h5.dt-sc-toggle:before,
 .dt-sc-toggle-frame-set .dt-sc-toggle-frame h5.dt-sc-toggle:after,
 ul.dt-sc-fancy-list li:before,
 header ul.dt-sc-social-icons li a:before {
-	font-family: FontAwesome;
+	font-family: 'FontAwesome', sans-serif;
 	font-style: normal;
 	font-weight: normal;
 }
@@ -1260,7 +1260,7 @@ header ul.dt-sc-social-icons li a.gplus span {
 }
 
 #main-menu ul li.menu-item-simple-parent ul {
-	width: 220px;
+	width: 450px;
 	padding: 10px 0px 10px;
 	position: absolute;
 	top: 100%;
@@ -1608,6 +1608,8 @@ header #menu-container ul.dt-sc-social-icons {
 	padding: 0px 0px 30px;
 	margin: 0px 0px 30px;
 	line-height: inherit;
+	font-size: 44px;
+	font-weight: bold;
 }
 
 #main .dt-sc-hr-white-title {
@@ -1619,6 +1621,7 @@ header #menu-container ul.dt-sc-social-icons {
 	padding: 0px 0px 30px;
 	margin: 0px 0px 30px;
 	line-height: inherit;
+	font-weight: bold;
 }
 
 #main .fullwidth-background.product_bg .dt-sc-hr-white-title {
@@ -1684,7 +1687,7 @@ header #menu-container ul.dt-sc-social-icons {
 	clear: both;
 	width: 100%;
 	margin: 0px;
-	padding: 78px 0px;
+	padding: 38px 0px;
 	background-image: url(../../images/cloud-bg.png);
 	background-position: center center;
 	background-repeat: repeat;
@@ -1707,14 +1710,14 @@ header #menu-container ul.dt-sc-social-icons {
 .fullwidth-background.mustard-bg {
 	background: #df9b00;
 	width: 100%;
-	padding: 78px 0px;
+	padding: 30px 0px;
 	float: left;
 	clear: both;
 }
 
 .fullwidth-background.turquoise-plain-bg {
 	width: 100%;
-	padding: 78px 0px;
+	padding: 30px 0px;
 	float: left;
 	clear: both;
 }
@@ -2215,10 +2218,20 @@ header #menu-container ul.dt-sc-social-icons {
 
 .activity h4 {
 	text-align: center;
+	padding: 5px 20px;
+	line-height: 25px;
+	text-transform: uppercase;
+	height: 30px;
 }
 
 .activity p {
 	padding: 0px 20px;
+	-webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    line-height: 25px;
 }
 
 .activity.box1 {
@@ -2518,6 +2531,14 @@ header #menu-container ul.dt-sc-social-icons {
 	margin: 0 0 15px;
 }
 
+.entry-title h3 {
+	font-size: 30px;
+	color: #fff !important;
+	line-height: 1.1em;
+	font-weight: bold;
+	text-transform: capitalize;
+}
+
 .dt-sc-team:hover .dt-sc-entry-title span {
 	background: #e2b961;
 }
@@ -2605,6 +2626,7 @@ header #menu-container ul.dt-sc-social-icons {
 	float: left;
 	clear: both;
 	position: relative;
+	color: #f0f0f0;
 }
 
 .blog-entry-inner {
@@ -4035,5 +4057,68 @@ footer .footer-links p {
 	display: none;
 	z-index: 9999;
 }
-
+/*jssor slider bullet skin 132 css*/
+.jssorb132 {
+	position: absolute;
+  }
+  
+  .jssorb132 .i {
+	position: absolute;
+	cursor: pointer;
+  }
+  
+  .jssorb132 .i .b {
+	fill: #fff;
+	fill-opacity: 0.8;
+	stroke: #000;
+	stroke-width: 1600;
+	stroke-miterlimit: 10;
+	stroke-opacity: 0.7;
+  }
+  
+  .jssorb132 .i:hover .b {
+	fill: #000;
+	fill-opacity: 0.7;
+	stroke: #fff;
+	stroke-width: 2000;
+	stroke-opacity: 0.8;
+  }
+  
+  .jssorb132 .iav .b {
+	fill: #000;
+	stroke: #fff;
+	stroke-width: 2400;
+	fill-opacity: 0.8;
+	stroke-opacity: 1;
+  }
+  
+  .jssorb132 .i.idn {
+	opacity: 0.3;
+  }
+  
+  .jssora051 {
+	display: block;
+	position: absolute;
+	cursor: pointer;
+  }
+  
+  .jssora051 .a {
+	fill: none;
+	stroke: #fff;
+	stroke-width: 360;
+	stroke-miterlimit: 10;
+  }
+  
+  .jssora051:hover {
+	opacity: 0.8;
+  }
+  
+  .jssora051.jssora051dn {
+	opacity: 0.5;
+  }
+  
+  .jssora051.jssora051ds {
+	opacity: 0.3;
+	pointer-events: none;
+  }
 /*.back-to-top:hover{opacity:0.8;}*/

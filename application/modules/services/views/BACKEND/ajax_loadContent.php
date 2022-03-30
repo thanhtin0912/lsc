@@ -27,6 +27,7 @@
 					<th class="center sorting_disabled" width="35">No.</th>
 					<th class="sorting" width="150" onclick="sort('image')" id="image">Image</th>
 					<th class="sorting" onclick="sort('title')" id="title">Tên</th>
+					<th class="sorting" onclick="sort('cate_id')" >Sắp xếp</th>
 					<th class="sorting" onclick="sort('cate_id')" >Mô tả</th>
 					<th class="center sorting" width="60" onclick="sort('status')" id="status">Status</th>
 					<th class="center sorting" width="80" onclick="sort('created')" id="created">Created</th>
@@ -44,6 +45,7 @@
 					<td class="center"><?=$k+1+$start?></td>
 					<td><a href="<?=PATH_URL_ADMIN.$module.'/update/'.$v->id?>"><img src="<?=resizeImage(PATH_URL.DIR_UPLOAD_SERVICES.$v->image,150, 150)?>" /></a></td>
 					<td><a href="<?=PATH_URL_ADMIN.$module.'/update/'.$v->id?>"><?=$v->title_vn?></a></td>
+					<td><a href="<?=PATH_URL_ADMIN.$module.'/update/'.$v->id?>"><?=$v->order?></a></td>
 					<td><a href="<?=PATH_URL_ADMIN.$module.'/update/'.$v->id?>"><?=$v->description_vn?></a></td>
 					<td class="center" id="loadStatusID_<?=$v->id?>"><a class="no_underline" href="javascript:void(0)" onclick="updateStatus(<?=$v->id?>,<?=$v->status?>,'<?=$module?>')"><?php ($v->status==0) ? print '<span class="label label-sm label-default status-blocked">Blocked</span>' : print '<span class="label label-sm label-success status-approved">Approved</span>' ?></a></td>
 					<td class="center"><?=date('Y-m-d H:i:s',strtotime($v->created))?></td>
@@ -55,6 +57,7 @@
 						<td class="center"><?=$k+1+$start?></td>
 						<td><img src="<?=resizeImage(PATH_URL.DIR_UPLOAD_SERVICES.$v->image,150, 150)?>" /></td>
 						<td><?=$v->title_vn?></td>
+						<td><?=$v->order?></td>
 						<td><?=$v->description_vn?></td>
 						<td class="center" id="loadStatusID_<?=$v->id?>"><span class="label label-sm label-default status-deleted">Deleted</span></td>
 						<td class="center"><?=date('Y-m-d H:i:s',strtotime($v->created))?></td>

@@ -19,7 +19,7 @@ $lang['btn_viewmore'] = 'chi tiết';
 $lang['btn_readmore'] = 'Đọc thêm';
 $lang['title_latest_project'] = 'Sản phẩm<span> tiêu biểu</span>';
 $lang['title_view_all'] = 'Tất cả';
-
+$lang['btn_contact'] = 'Tư vấn miễn phí';
 
 
 // end home

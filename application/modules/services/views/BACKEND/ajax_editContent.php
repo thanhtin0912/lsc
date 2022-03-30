@@ -200,6 +200,10 @@ function showResponse(responseText, statusText, xhr, $form) {
 							<label class="control-label col-md-2">Slug: <span class="required" aria-required="true">*</span></label>
 							<div class="col-md-10"><input value="<?php if(isset($result->slug)) { print $result->slug; }else{ print '';} ?>" type="text" name="slugAdmincp" id="slugAdmincp" class="form-control"/></div>
 						</div>
+						<div class="form-group">
+							<label class="control-label col-md-2">Sort: <span class="required" aria-required="true">*</span></label>
+							<div class="col-md-10"><input value="<?php if(isset($result->order)) { print $result->order; }else{ print '';} ?>" type="text" name="orderAdmincp" id="orderAdmincp" class="form-control"/></div>
+						</div>
 						<div class="form-group last">
 							<label class="control-label col-md-2">Description: <span class="required" aria-required="true">*</span></label>
 							<div class="col-md-10"><textarea name="description_vnAdmincp" id="description_vnAdmincp" cols="" rows="5" class="form-control"><?php if(isset($result->description_vn)) { print $result->description_vn; }else{ print '';} ?></textarea></div>

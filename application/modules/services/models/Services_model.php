@@ -117,7 +117,7 @@ class Services_model extends CI_Model {
 				'description_en'=> trim($this->input->post('description_enAdmincp')),
 				'content_vn'=> trim($this->input->post('content_vnAdmincp')),
 				'content_en'=> trim($this->input->post('content_enAdmincp')),
-				'delete'=> 0,
+				'order'=> trim($this->input->post('orderAdmincp')),
 				'status'=> $this->input->post('statusAdmincp'),
 				'created'=> date('Y-m-d H:i:s',time()),
 			);
@@ -161,6 +161,7 @@ class Services_model extends CI_Model {
 				'description_en'=> trim($this->input->post('description_enAdmincp')),
 				'content_vn'=> trim($this->input->post('content_vnAdmincp')),
 				'content_en'=> trim($this->input->post('content_enAdmincp')),
+				'order'=> trim($this->input->post('orderAdmincp')),
 				'highlight'=> $this->input->post('highlightAdmincp'),
 				'status'=> $this->input->post('statusAdmincp')
 			);

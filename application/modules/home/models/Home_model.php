@@ -97,7 +97,7 @@ class Home_model extends CI_Model {
 		$this->db->select('*');
 		$this->db->where('status',1);
 		$this->db->where('delete',0);
-		$this->db->order_by('created','DESC');
+		$this->db->order_by('order','ASC');
 		$query = $this->db->get(PREFIX.$this->table_service);
 		if($query->result()){
 			return $query->result();
