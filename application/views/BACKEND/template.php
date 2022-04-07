@@ -155,25 +155,6 @@
                 <li class="last <?php if ($this->uri->segment(2) == 'services') { print ' active';} ?>">
                     <a href="<?= PATH_URL_ADMIN . 'services' ?>"><i class="fa fa-book"></i><span class="title">Quản lý khóa học</span></a>
                 </li>
-                <!-- <li class="nav-item">
-                    <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class="icon-social-dribbble"></i>
-                        <span class="title">Quản lý dự án</span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub-menu" <?php if (($this->uri->segment(2) == 'services') ||  ($this->uri->segment(2) == 'projects' )) { print "style='display: block;' ";} ?>>
-                        <li class="nav-item  last<?php if ($this->uri->segment(2) == 'projects_cata') { print 'active open';} ?>">
-                            <a href="<?= PATH_URL_ADMIN . 'projects_cata' ?>" class="nav-link ">
-                                <i class="fa fa-arrow-right"></i><span class="title">Danh mục</span>
-                            </a>
-                        </li>
-                        <li class="nav-item  <?php if ($this->uri->segment(2) == 'projects') { print 'active open';} ?>">
-                            <a href="<?= PATH_URL_ADMIN . 'projects' ?>" class="nav-link ">
-                                <i class="fa fa-arrow-right"></i><span class="title">Dự án</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li> -->
                 <li class="nav-item">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="icon-social-dribbble"></i>
@@ -193,38 +174,18 @@
                         </li>
                     </ul>
                 </li>
-                <!-- <li class="nav-item">
-                    <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class="icon-social-dribbble"></i>
-                        <span class="title">Quản lý sản phẩm</span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub-menu" <?php if (($this->uri->segment(2) == 'products_cata') ||  ($this->uri->segment(2) == 'products') ||  ($this->uri->segment(2) == 'parents') ) { print "style='display: block;' ";} ?>>
-                        <li class="nav-item  last<?php if ($this->uri->segment(2) == 'parents') { print 'active open';} ?>">
-                            <a href="<?= PATH_URL_ADMIN . 'parents' ?>" class="nav-link ">
-                                <i class="fa fa-arrow-right"></i><span class="title">Danh mục Cha</span>
-                            </a>
-                        </li>
-                        <li class="nav-item  last<?php if ($this->uri->segment(2) == 'products_cata') { print 'active open';} ?>">
-                            <a href="<?= PATH_URL_ADMIN . 'products_cata' ?>" class="nav-link ">
-                                <i class="fa fa-arrow-right"></i><span class="title">Danh mục Con</span>
-                            </a>
-                        </li>
-                        <li class="nav-item  <?php if ($this->uri->segment(2) == 'products') { print 'active open';} ?>">
-                            <a href="<?= PATH_URL_ADMIN . 'products' ?>" class="nav-link ">
-                                <i class="fa fa-arrow-right"></i><span class="title">Sản phẩm</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li> -->
-                <li class="last <?php if ($this->uri->segment(2) == 'teachers   ') { print ' active';} ?>">
-                    <a href="<?= PATH_URL_ADMIN . 'static_pages' ?>"><i class="fa fa-cutlery"></i><span class="title">Quản lý giáo viên</span></a>
+                <li class="last <?php if ($this->uri->segment(2) == 'mailbox') { print ' active';} ?>">
+                    <a href="<?= PATH_URL_ADMIN . 'mailbox' ?>"><i class="fa fa-cutlery"></i><span class="title">Mailbox</span></a>
                 </li>
-                <li class="last <?php if ($this->uri->segment(2) == 'static_pages') { print ' active';} ?>">
-                    <a href="<?= PATH_URL_ADMIN . 'static_pages' ?>"><i class="fa fa-cutlery"></i><span class="title">Quản lý pages</span></a>
+
+                <li class="last <?php if ($this->uri->segment(2) == 'staffs') { print ' active';} ?>">
+                    <a href="<?= PATH_URL_ADMIN . 'staffs' ?>"><i class="fa fa-cutlery"></i><span class="title">Quản lý giáo viên</span></a>
+                </li>
+                <li class="last <?php if ($this->uri->segment(2) == 'seo_pages') { print ' active';} ?>">
+                    <a href="<?= PATH_URL_ADMIN . 'seo_pages' ?>"><i class="fa fa-cutlery"></i><span class="title">SEO Pages</span></a>
                 </li>
                 <li class="last<?php if ($this->uri->segment(2) == 'library') { print ' active';} ?>">
-                    <a href="<?= PATH_URL_ADMIN . 'library' ?>"><i class="fa fa-picture-o"></i><span class="title"> Thư viện hình ảnh</span></a>
+                    <a href="<?= PATH_URL_ADMIN . 'library' ?>"><i class="fa fa-picture-o"></i><span class="title"> Thư viện</span></a>
                 </li>
                 <li class="last<?php if ($this->uri->segment(2) == 'admincp_modules') { print ' active';} ?>">
                     <a href="<?= PATH_URL_ADMIN . 'admincp_modules' ?>"><i class="icon-settings"></i><span class="title"> Quản lý modules</span></a>

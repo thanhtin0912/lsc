@@ -307,7 +307,6 @@ define('DB_NAME', 'toppcvn_lsc');
 //Config DIR Upload
 define('DIR_UPLOAD_BANNER', 'assets/uploads/banner/');
 define('DIR_UPLOAD_NEWS', 'assets/uploads/news/');
-define('DIR_UPLOAD_STATIC_PAGES', 'assets/uploads/static_pages/');
 
 define('DIR_UPLOAD_PRODUCTS', 'assets/uploads/products/');
 define('DIR_UPLOAD_PROJECTS', 'assets/uploads/projects/');
@@ -315,8 +314,10 @@ define('DIR_UPLOAD_COMMENTS', 'assets/uploads/comments/');
 define('DIR_UPLOAD_LIBRARY', 'assets/uploads/library/');
 define('DIR_UPLOAD_SERVICES', 'assets/uploads/services/');
 define('DIR_UPLOAD_CATA', 'assets/uploads/catalogue/');
+define('DIR_UPLOAD_STATIC_PAGES', 'assets/uploads/static_pages/');
+define('DIR_UPLOAD_SEOS', 'assets/uploads/seo/');
+define('DIR_UPLOAD_STAFF', 'assets/uploads/staff/');
 
-	
 /*
  * --------------------------------------------------------------------
  * LOAD THE BOOTSTRAP FILE

@@ -140,17 +140,6 @@
                                 <p class="dt-sc-contact-info"><span class="fa fa-envelope"></span><a href="mailto:<?=$info[0]->mail?>"> <?=$info[0]->mail?> </a></p>
                             </div>
                         </aside>
-                        <aside class="widget mailchimp">
-                            <p> We're social </p>
-                            <form name="frmnewsletter" class="mailchimp-form" action="php/subscribe.php" method="post">
-                                <p>
-                                    <span class="fa fa-envelope-o"> </span>
-                                    <input type="email" placeholder="Email Address" name="mc_email" required />	
-                                </p>	
-                                <input type="submit" value="Subscribe" class="button" name="btnsubscribe">
-                            </form>
-                            <div id="ajax_subscribe_msg"></div>
-                        </aside>
                     </div>
                     
                 </div>    
@@ -159,16 +148,7 @@
             <!--footer-widgets-wrapper ends-->  
             <div class="copyright">
         		<div class="container">
-                	<p class="copyright-info">© 2014 Kids Life. All rights reserved. Design by <a href="http://themeforest.net/user/designthemes" title=""> thanhtin0912@gmail.com </a></p>
-        			<div class="footer-links">
-                        <p>Follow us</p>
-                        <ul class="dt-sc-social-icons">
-                        	<li class="facebook"><a href="#"><img src="assets/images/facebook.png" alt="" title=""></a></li>
-                            <li class="twitter"><a href="#"><img src="assets/images/twitter.png" alt="" title=""></a></li>
-                            <li class="gplus"><a href="#"><img src="assets/images/gplus.png" alt="" title=""></a></li>
-                            <li class="pinterest"><a href="#"><img src="assets/images/pinterest.png" alt="" title=""></a></li>
-                        </ul>
-                    </div>
+                	<p class="copyright-info">© 2022 Kids Life. All rights reserved. Design by thanhtin0912@gmail.com </p>
         		</div>
         	</div>  
         </footer>
