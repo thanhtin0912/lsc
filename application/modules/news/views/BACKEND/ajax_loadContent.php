@@ -27,7 +27,7 @@
 					<th class="center sorting_disabled" width="35">No.</th>
 					<th class="sorting" width="150" onclick="sort('image')" id="image">Image</th>
 					<th class="sorting" onclick="sort('title')" id="title">Title</th>
-					<th class="sorting" onclick="sort('cate_id')" id="cate_id">Category Name</th>
+					<th class="sorting" onclick="sort('type')" id="type">Category Name</th>
 					<th class="center sorting" width="60" onclick="sort('status')" id="status">Status</th>
 					<th class="center sorting" width="80" onclick="sort('created')" id="created">Created</th>
 				</tr>

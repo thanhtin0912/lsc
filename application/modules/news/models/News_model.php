@@ -32,7 +32,7 @@ class News_model extends CI_Model {
 			$this->db->where('n.delete', $this->input->post('showData'));
 		}
 		$this->db->from(PREFIX.$this->table." n");
-		$this->db->join(PREFIX.$this->table_category." c", 'c.id = n.cate_id', "left");
+		$this->db->join(PREFIX.$this->table_category." c", 'c.id = n.type', "left");
 		$query = $this->db->get();
 
 		if($query->result()){
@@ -67,7 +67,7 @@ class News_model extends CI_Model {
 			$this->db->where('n.delete', $this->input->post('showData'));
 		}
 		$this->db->from(PREFIX.$this->table." n");
-		$this->db->join(PREFIX.$this->table_category." c", 'c.id = n.cate_id', "left");
+		$this->db->join(PREFIX.$this->table_category." c", 'c.id = n.type', "left");
 		$query = $this->db->count_all_results();
 
 		if($query > 0){
@@ -117,7 +117,7 @@ class News_model extends CI_Model {
 			}
 
 			$data = array(
-				'cate_id'=> trim($this->input->post('cateAdmincp', true)),
+				'type'=> trim($this->input->post('cateAdmincp', true)),
 				'image'=> trim($fileName['image']),
 				'title_vn'=> trim($this->input->post('titleAdmincp', true)),
 				'title_en'=> trim($this->input->post('title_enAdmincp', true)),
@@ -165,7 +165,7 @@ class News_model extends CI_Model {
 			}
 			
 			$data = array(
-				'cate_id'=> trim($this->input->post('cateAdmincp', true)),
+				'type'=> trim($this->input->post('cateAdmincp', true)),
 				'image'=> trim($fileName['image']),
 				'title_vn'=> trim($this->input->post('titleAdmincp', true)),
 				'title_en'=> trim($this->input->post('title_enAdmincp', true)),
@@ -243,7 +243,7 @@ class News_model extends CI_Model {
 		$this->db->limit($limit,$page);
 		$this->db->order_by('n.created','DESC');
 		$this->db->from(PREFIX.$this->table." n");
-		$this->db->join(PREFIX.$this->table_category." c", 'c.id = n.cate_id', "left");
+		$this->db->join(PREFIX.$this->table_category." c", 'c.id = n.type', "left");
 		$query = $this->db->get();
 
 		if($query->result()){
@@ -262,7 +262,7 @@ class News_model extends CI_Model {
 		$this->db->where('n.status',1);
 		$this->db->where('n.id',$id);
 		$this->db->from(PREFIX.$this->table." n");
-		$this->db->join(PREFIX.$this->table_category." c", 'c.id = n.cate_id', "left");
+		$this->db->join(PREFIX.$this->table_category." c", 'c.id = n.type', "left");
 		$query = $this->db->get();
 
 		if($query->result()){
@@ -278,7 +278,7 @@ class News_model extends CI_Model {
 		$this->db->order_by('created','DESC');
 		$this->db->limit('3');
 		$this->db->from(PREFIX.$this->table." n");
-		$this->db->join(PREFIX.$this->table_category." c", 'c.id = n.cate_id', "left");
+		$this->db->join(PREFIX.$this->table_category." c", 'c.id = n.type', "left");
 		$query = $this->db->get();
 
 		if($query->result()){

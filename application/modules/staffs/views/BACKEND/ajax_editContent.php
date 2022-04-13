@@ -151,7 +151,7 @@ function showResponse(responseText, statusText, xhr, $form) {
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-2">Tên: <span class="required" aria-required="true">*</span></label>
+							<label class="control-label col-md-2">Name: <span class="required" aria-required="true">*</span></label>
 							<div class="col-md-8"><input value="<?php if(isset($result->name)) { print $result->name; }else{ print '';} ?>" type="text" name="nameAdmincp" id="nameAdmincp" class="form-control"/></div>
 						</div>
 						<div class="form-group">
@@ -159,23 +159,23 @@ function showResponse(responseText, statusText, xhr, $form) {
 							<div class="col-md-8"><input value="<?php if(isset($result->slug)) { print $result->slug; }else{ print '';} ?>" type="text" name="slugAdmincp" id="slugAdmincp" class="form-control"/></div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-2">Số điện thoại: <span class="required" aria-required="true">*</span></label>
+							<label class="control-label col-md-2">Phone: <span class="required" aria-required="true">*</span></label>
 							<div class="col-md-3"><input value="<?php if(isset($result->phone)) { print $result->phone; }else{ print '';} ?>" type="text" name="phoneAdmincp" id="phoneAdmincp" class="form-control"/></div>
 							<label class="control-label col-md-2">Email: <span class="required" aria-required="true">*</span></label>
 							<div class="col-md-3"><input value="<?php if(isset($result->email)) { print $result->email; }else{ print '';} ?>" type="text" name="emailAdmincp" id="emailAdmincp" class="form-control"/></div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-2">Số CMND: <span class="required" aria-required="true">*</span></label>
+							<label class="control-label col-md-2">PID: <span class="required" aria-required="true">*</span></label>
 							<div class="col-md-3"><input value="<?php if(isset($result->pid)) { print $result->pid; }else{ print '';} ?>" type="text" name="pidAdmincp" id="pidAdmincp" class="form-control"/></div>
-							<label class="control-label col-md-2">Facebook (ID): <span class="required" aria-required="true">*</span></label>
+							<label class="control-label col-md-2">Facebook: <span class="required" aria-required="true">*</span></label>
 							<div class="col-md-3"><input value="<?php if(isset($result->facebook)) { print $result->facebook; }else{ print '';} ?>" type="text" name="facebookAdmincp" id="facebookAdmincp" class="form-control"/></div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-2">Bắt đầu làm việc: <span class="required" aria-required="true">*</span></label>
+							<label class="control-label col-md-2">Working status: <span class="required" aria-required="true">*</span></label>
 							<div class="col-md-3"><input value="<?php if(isset($result->start)) { print $result->start; }else{ print '';} ?>" type="text" name="startAdmincp" id="startAdmincp" class="form-control"/></div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-2">Ảnh chân dung (400X720): <span class="required" aria-required="true">*</span></label>
+							<label class="control-label col-md-2">Avatar (400X720): <span class="required" aria-required="true">*</span></label>
 							<div class="col-md-3">
 								<div class="fileinput fileinput-new" data-provides="fileinput">
 									<?php if(isset($result->image)){ if($result->image!=''){ ?>

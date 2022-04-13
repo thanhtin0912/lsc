@@ -103,6 +103,7 @@ class News_cata_model extends CI_Model {
 			}
 
 			$data = array(
+				'cataid'=> 'CATA_NEWS',
 				'name_vn'=> trim($this->input->post('nameAdmincp', true)),
 				'name_en'=> trim($this->input->post('name_enAdmincp', true)),
 				'slug'=> trim($this->input->post('slugAdmincp', true)),
@@ -135,6 +136,7 @@ class News_cata_model extends CI_Model {
 			}
 			
 			$data = array(
+				'cataid'=> 'CATA_NEWS',
 				'name_vn'=> trim($this->input->post('nameAdmincp', true)),
 				'name_en'=> trim($this->input->post('name_enAdmincp', true)),
 				'slug'=> trim($this->input->post('slugAdmincp', true)),

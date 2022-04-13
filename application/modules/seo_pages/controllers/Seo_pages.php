@@ -3,7 +3,7 @@
 class Seo_pages extends MX_Controller {
 
 	private $module = 'seo_pages';
-	private $table = 'static_pages';
+	private $table = 'tbl_seo';
 
 	function __construct(){
 		parent::__construct();

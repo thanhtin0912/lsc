@@ -8,38 +8,6 @@ $(document).ready( function() {
 		output: '#slugAdmincp',
 		space: '-'
 	});
-
-	$('#content_vnAdmincp').liveEdit({
-		height: 350,
-		css: ['<?=PATH_URL?>assets/editor/bootstrap/css/bootstrap.min.css', '<?=PATH_URL?>assets/editor/bootstrap/bootstrap_extend.css','<?=PATH_URL?>assets/css/styles.css'] /* Apply bootstrap css into the editing area */,
-		fileBrowser: '<?=PATH_URL?>assets/editor/assetmanager/asset.php',
-		returnKeyMode: 3,
-		groups: [
-				["group1", "", ["Bold", "Italic", "Underline", "ForeColor", "RemoveFormat"]],
-				["group2", "", ["Bullets", "Numbering", "Indent", "Outdent", "JustifyLeft", "JustifyCenter", "JustifyRight"]],
-				["group3", "", ["Paragraph", "FontSize", "FontDialog", "TextDialog"]],
-				["group4", "", ["LinkDialog", "ImageDialog", "TableDialog"]],
-				["group5", "", ["Undo", "Redo", "FullScreen", "SourceDialog"]],
-				["group6", "", ["Left", "Center", "Right"]]
-				] /* Toolbar configuration */
-	});
-	$('#content_vnAdmincp').data('liveEdit').startedit();
-	// english
-	$('#content_enAdmincp').liveEdit({
-		height: 350,
-		css: ['<?=PATH_URL?>assets/editor/bootstrap/css/bootstrap.min.css', '<?=PATH_URL?>assets/editor/bootstrap/bootstrap_extend.css','<?=PATH_URL?>assets/css/styles.css'] /* Apply bootstrap css into the editing area */,
-		fileBrowser: '<?=PATH_URL?>assets/editor/assetmanager/asset.php',
-		returnKeyMode: 3,
-		groups: [
-				["group1", "", ["Bold", "Italic", "Underline", "ForeColor", "RemoveFormat"]],
-				["group2", "", ["Bullets", "Numbering", "Indent", "Outdent", "JustifyLeft", "JustifyCenter", "JustifyRight"]],
-				["group3", "", ["Paragraph", "FontSize", "FontDialog", "TextDialog"]],
-				["group4", "", ["LinkDialog", "ImageDialog", "TableDialog"]],
-				["group5", "", ["Undo", "Redo", "FullScreen", "SourceDialog"]],
-				["group6", "", ["Left", "Center", "Right"]]
-				] /* Toolbar configuration */
-	});
-	$('#content_enAdmincp').data('liveEdit').startedit();
 });
 
 function save(){
@@ -47,8 +15,6 @@ function save(){
 		beforeSubmit:  showRequest,  // pre-submit callback 
 		success:       showResponse  // post-submit callback 
     };
-	// $('#content_vnAdmincp').val($('#content_vnAdmincp').data('liveEdit').getXHTMLBody());
-	// $('#content_enAdmincp').val($('#content_enAdmincp').data('liveEdit').getXHTMLBody());
 	$('#frmManagement').ajaxSubmit(options);
 }
 
@@ -62,18 +28,6 @@ function showRequest(formData, jqForm, options) {
             return false;
         }
     <?php } ?>
-    <?php if($id==0){ ?>
-        if($('#imageAdmincp').val() == ''){
-            $('#txt_error').html('Vui lòng chọn hình ảnh.');
-            show_perm_denied();
-            return false;
-        }
-    <?php } ?>
-	if(form.projectbyAdmincp.value == '' || form.customerAdmincp.value == '' || form.locationAdmincp.value == '' || form.startdateAdmincp.value == ''){
-		$('#txt_error').html('Please enter information.');
-		show_perm_denied();
-		return false;
-	}
 	if(form.name_vnAdmincp.value == '' || form.cateAdmincp.value == ''){
 		$('#txt_error').html('Please enter information.');
 		show_perm_denied();
@@ -173,33 +127,23 @@ function showResponse(responseText, statusText, xhr, $form) {
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-2">Danh mục: <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-6">
-								<select class="select form-control" data-live-search="true" data-size="8" name="cateAdmincp" id="cateAdmincp">
-									<option value="">None</option>
-									<?php foreach ($cates as $key => $cate): ?>
-										<?php  
-											$select = '';
-											if($result->type == $cate->id){
-												$select = 'selected="selected"';
-											}
-										?>
-										<option value="<?= $cate->id; ?>" <?= $select; ?> ><?= $cate->name_vn; ?></option>
-									<?php endforeach; ?>
-								</select>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-2">Tên dự án _vn: <span class="required" aria-required="true">*</span></label>
+							<label class="control-label col-md-2">Name _vn: <span class="required" aria-required="true">*</span></label>
 							<div class="col-md-10"><input value="<?php if(isset($result->name_vn)) { print $result->name_vn; }else{ print '';} ?>" type="text" name="name_vnAdmincp" id="name_vnAdmincp" class="form-control"/></div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-2">Tên dự án _en: <span class="required" aria-required="true">*</span></label>
+							<label class="control-label col-md-2">Name _en: <span class="required" aria-required="true">*</span></label>
 							<div class="col-md-10"><input value="<?php if(isset($result->name_en)) { print $result->name_en; }else{ print '';} ?>" type="text" name="name_enAdmincp" id="name_enAdmincp" class="form-control"/></div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-md-2">Slug: <span class="required" aria-required="true">*</span></label>
 							<div class="col-md-10"><input value="<?php if(isset($result->slug)) { print $result->slug; }else{ print '';} ?>" type="text" name="slugAdmincp" id="slugAdmincp" class="form-control"/></div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-2">Type:</label>
+							<div class="col-md-10">
+								<label class="radio-inline"><input type="radio" name="typeAdmincp" value="0" <?= isset($result->type) ? $result->type == 0 ? 'checked' : '' : '' ?> > Hình ảnh</label>
+								<label class="radio-inline"><input type="radio" name="typeAdmincp" value="1" <?= isset($result->type) ? $result->type == 1 ? 'checked' : '' : 'checked' ?> > Video</label>
+							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-md-2">Hình đại diện(800x500): <span class="required" aria-required="true">*</span></label>
@@ -259,57 +203,19 @@ function showResponse(responseText, statusText, xhr, $form) {
 								</div>
 							</div>
 						</div>
+						<div class="form-group" >
+							<label class="control-label col-md-2">Link video (youtube): <span class="required" aria-required="true">*</span></label>
+							<div class="col-md-10"><input value="<?php if(isset($result->urlVideo)) { print $result->urlVideo; }else{ print '';} ?>" type="text" name="urlVideoAdmincp" id="urlVideoAdmincp" class="form-control"/></div>
+						</div>
 						<div class="form-group last">
-							<label class="control-label col-md-2">Người thực hiện: <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-10">
-								<input value="<?php if(isset($result->projectby)) { print $result->projectby; }else{ print '';} ?>" type="text" name="projectbyAdmincp" id="projectbyAdmincp" class="form-control"/>
-							</div>
-						</div>
-						<div class="form-group">
-							<!--  -->
-							<label class="control-label col-md-2">Khách hàng: <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-3">
-								<input value="<?php if(isset($result->customer)) { print $result->customer; }else{ print '';} ?>" type="text" name="customerAdmincp" id="customerAdmincp" class="form-control "/>
-							</div>
-							<label class="control-label col-md-2">Địa chỉ khách hàng: <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-3">
-								<input value="<?php if(isset($result->location)) { print $result->location; }else{ print '';} ?>" type="text" name="locationAdmincp" id="locationAdmincp" class="form-control "/>
-							</div>
-						</div>
-						<div class="form-group">
-							<!--  -->
-							<label class="control-label col-md-2">Ngày bắt đầu: <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-3">
-								<input value="<?php if(isset($result->startdate)) { print $result->startdate; }else{ print '';} ?>" type="text" name="startdateAdmincp" id="startdateAdmincp" class="form-control "/>
-							</div>
-							<label class="control-label col-md-2">Ngày kết thúc: <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-3">
-								<input value="<?php if(isset($result->enddate )) { print $result->enddate; }else{ print '';} ?>" type="text" name="enddateAdmincp" id="enddateAdmincp" class="form-control "/>
-							</div>
-						</div>
-
-<!-- 						<div class="form-group last">
 							<label class="control-label col-md-2">Mô tả _vn: <span class="required" aria-required="true">*</span></label>
 							<div class="col-md-10"><textarea name="description_vnAdmincp" id="description_vnAdmincp" cols="" rows="5" class="form-control"><?php if(isset($result->description_vn)) { print $result->description_vn; }else{ print '';} ?></textarea></div>
 						</div>
 						<div class="form-group last">
 							<label class="control-label col-md-2">Mô tả _en: <span class="required" aria-required="true">*</span></label>
 							<div class="col-md-10"><textarea name="description_enAdmincp" id="description_enAdmincp" cols="" rows="5" class="form-control"><?php if(isset($result->description_en)) { print $result->description_en; }else{ print '';} ?></textarea></div>
-						</div> -->
-
-						<div class="form-group last">
-							<label class="control-label col-md-2">Thông tin chi tiết _vn: <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-10"><textarea name="content_vnAdmincp" id="content_vnAdmincp" cols="" rows="8"><?php if(isset($result->content_vn)) { print $result->content_vn; }else{ print '';} ?></textarea></div>
-						</div>
-						<div class="form-group last">
-							<label class="control-label col-md-2">Thông tin chi tiết _en: <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-10"><textarea name="content_enAdmincp" id="content_enAdmincp" cols="" rows="8"><?php if(isset($result->content_en)) { print $result->content_en; }else{ print '';} ?></textarea></div>
 						</div>
 
-						<!-- <div class="form-group">
-							<label class="control-label col-md-2">Phản hồi khách hàng (nếu có): <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-10"><input value="<?php if(isset($result->comment)) { print $result->comment; }else{ print '';} ?>" type="text" name="commentAdmincp" id="commentAdmincp" class="form-control"/></div>
-						</div> -->
 					</div>
 					<div class="form-actions">
 						<div class="row">

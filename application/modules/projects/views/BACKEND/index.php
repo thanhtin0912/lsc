@@ -61,20 +61,8 @@
 						<div class="col-md-12 col-sm-12">
 							<form class="form-horizontal">
 								<div class="form-group">
-									<label class="col-sm-2 control-label">Title:</label>
+									<label class="col-sm-2 control-label">Name:</label>
 									<div class="col-sm-4"><input onkeypress="return enterSearch(event)" type="text" class="form-control" id="search_title"></div>
-									<label class="col-sm-2 control-label">Category Name:</label>
-									<div class="col-sm-4"><input onkeypress="return enterSearch(event)" type="text" class="form-control" id="search_cate_name"></div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label">Create Date:</label>
-									<div class="col-sm-4">
-										<div class="input-group date-picker input-daterange" data-date-format="yyyy/mm/dd" style="width: 100%;">
-											<input onkeypress="return enterSearch(event)" id="caledar_from" type="text" class="form-control" name="from">
-											<span class="input-group-addon">to</span>
-											<input onkeypress="return enterSearch(event)" id="caledar_to" type="text" class="form-control" name="to">
-										</div>
-									</div>
 									<label class="col-sm-2 control-label">Status:</label>
 									<div class="col-sm-4">
 										<label class="radio-inline"><input onclick="searchContent(0)" type="radio" name="search_status" value="2" checked> All</label>

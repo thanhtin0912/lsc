@@ -174,7 +174,7 @@ function showResponse(responseText, statusText, xhr, $form) {
 									<?php foreach ($cates as $key => $cate): ?>
 										<?php  
 											$select = '';
-											if($result->cate_id == $cate->id){
+											if($result->type == $cate->id){
 												$select = 'selected="selected"';
 											}
 										?>

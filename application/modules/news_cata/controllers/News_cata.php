@@ -136,8 +136,8 @@ class News_cata extends MX_Controller {
 					modules::run('admincp/saveLog',$this->module,$id,'Trash','Trash');
 					$this->db->where('id',$id);
 					if($this->db->update(PREFIX.$this->table,$data)){
-						$this->db->where('cate_id',$value->id);
-						$this->db->update(PREFIX.'news',$data);
+						$this->db->where('type',$value->id);
+						$this->db->update(PREFIX.'tbl_news',$data);
 						print $this->security->get_csrf_hash();
 						exit;
 					}
@@ -146,8 +146,8 @@ class News_cata extends MX_Controller {
 					modules::run('admincp/saveLog',$this->module,$id,'Delete','Delete');
 					$this->db->where('id',$id);
 					if($this->db->delete(PREFIX.$this->table)){
-						$this->db->where('cate_id',$value->id);
-						$this->db->delete(PREFIX.'news');
+						$this->db->where('type',$value->id);
+						$this->db->delete(PREFIX.'tbl_news');
 						print $this->security->get_csrf_hash();
 						exit;
 					}

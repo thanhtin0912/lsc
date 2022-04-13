@@ -1,7 +1,7 @@
 <?php
 class Seo_pages_model extends CI_Model {
 	private $module = 'seo_pages';
-	private $table = 'static_pages';
+	private $table = 'tbl_seo';
 
 	function getsearchContent($limit,$page){
 		$this->db->select('*');

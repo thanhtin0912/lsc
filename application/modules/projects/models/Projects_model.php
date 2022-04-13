@@ -12,19 +12,6 @@ class Projects_model extends CI_Model {
 		if($this->input->post('title')!=''){
 			$this->db->where('(n.`name_vn` LIKE "%'.$this->input->post('title').'%")');
 		}
-		if($this->input->post('cate_name')!=''){
-			$this->db->where('(c.`name_vn` LIKE "%'.$this->input->post('cate_name').'%")');
-		}
-		if($this->input->post('dateFrom')!='' && $this->input->post('dateTo')==''){
-			$this->db->where('n.created >= "'.date('Y-m-d 00:00:00',strtotime($this->input->post('dateFrom'))).'"');
-		}
-		if($this->input->post('dateFrom')=='' && $this->input->post('dateTo')!=''){
-			$this->db->where('n.created <= "'.date('Y-m-d 23:59:59',strtotime($this->input->post('dateTo'))).'"');
-		}
-		if($this->input->post('dateFrom')!='' && $this->input->post('dateTo')!=''){
-			$this->db->where('n.created >= "'.date('Y-m-d 00:00:00',strtotime($this->input->post('dateFrom'))).'"');
-			$this->db->where('n.created <= "'.date('Y-m-d 23:59:59',strtotime($this->input->post('dateTo'))).'"');
-		}
 		if($this->input->post('status') != 2){
 			$this->db->where('n.status', $this->input->post('status'));
 		}
@@ -46,19 +33,6 @@ class Projects_model extends CI_Model {
 		$this->db->select('n.*, c.name_vn as cate_name');
 		if($this->input->post('title')!=''){
 			$this->db->where('(n.`name_vn` LIKE "%'.$this->input->post('title').'%")');
-		}
-		if($this->input->post('cate_name')!=''){
-			$this->db->where('(c.`name_vn` LIKE "%'.$this->input->post('cate_name').'%")');
-		}
-		if($this->input->post('dateFrom')!='' && $this->input->post('dateTo')==''){
-			$this->db->where('n.created >= "'.date('Y-m-d 00:00:00',strtotime($this->input->post('dateFrom'))).'"');
-		}
-		if($this->input->post('dateFrom')=='' && $this->input->post('dateTo')!=''){
-			$this->db->where('n.created <= "'.date('Y-m-d 23:59:59',strtotime($this->input->post('dateTo'))).'"');
-		}
-		if($this->input->post('dateFrom')!='' && $this->input->post('dateTo')!=''){
-			$this->db->where('n.created >= "'.date('Y-m-d 00:00:00',strtotime($this->input->post('dateFrom'))).'"');
-			$this->db->where('n.created <= "'.date('Y-m-d 23:59:59',strtotime($this->input->post('dateTo'))).'"');
 		}
 		if($this->input->post('status') != 2){
 			$this->db->where('n.status', $this->input->post('status'));
@@ -120,19 +94,11 @@ class Projects_model extends CI_Model {
 				'name_vn'=> trim($this->input->post('name_vnAdmincp', true)),
 				'name_en'=> trim($this->input->post('name_enAdmincp', true)),
 				'slug'=> trim($this->input->post('slugAdmincp', true)),
-				'projectby'=> trim($this->input->post('projectbyAdmincp', true)),
 				'avata'=> trim($fileName['avata']),
 				'images'=> serialize($imagesName),
-				'type'=> trim($this->input->post('cateAdmincp', true)),
-				'customer'=> trim($this->input->post('customerAdmincp', true)),
-				'location'=> trim($this->input->post('locationAdmincp', true)),
-				// 'description_vn'=> trim($this->input->post('description_vnAdmincp')),
-				// 'description_en'=> trim($this->input->post('description_enAdmincp')),
-				'startdate'=> trim($this->input->post('startdateAdmincp', true)),
-				'enddate'=> trim($this->input->post('enddateAdmincp', true)),
-				'content_vn'=> trim($this->input->post('content_vnAdmincp')),
-				'content_en'=> trim($this->input->post('content_enAdmincp')),
-				// 'comment'=> $this->input->post('commentAdmincp'),
+				'type'=> trim($this->input->post('typeAdmincp', true)),
+				'description_vn'=> trim($this->input->post('description_vnAdmincp')),
+				'description_en'=> trim($this->input->post('description_enAdmincp')),
 				'status'=> $this->input->post('statusAdmincp'),
 				'created'=> date('Y-m-d H:i:s',time()),
 			);
@@ -180,19 +146,11 @@ class Projects_model extends CI_Model {
 				'name_vn'=> trim($this->input->post('name_vnAdmincp', true)),
 				'name_en'=> trim($this->input->post('name_enAdmincp', true)),
 				'slug'=> trim($this->input->post('slugAdmincp', true)),
-				'projectby'=> trim($this->input->post('projectbyAdmincp', true)),
 				'avata'=> trim($fileName['avata']),
 				'images'=> serialize($imagesName),
-				'type'=> trim($this->input->post('cateAdmincp', true)),
-				'customer'=> trim($this->input->post('customerAdmincp', true)),
-				'location'=> trim($this->input->post('locationAdmincp', true)),
-				// 'description_vn'=> trim($this->input->post('description_vnAdmincp')),
-				// 'description_en'=> trim($this->input->post('description_enAdmincp')),
-				'startdate'=> trim($this->input->post('startdateAdmincp', true)),
-				'enddate'=> trim($this->input->post('enddateAdmincp', true)),
-				'content_vn'=> trim($this->input->post('content_vnAdmincp')),
-				'content_en'=> trim($this->input->post('content_enAdmincp')),
-				// 'comment'=> $this->input->post('commentAdmincp'),
+				'type'=> trim($this->input->post('typeAdmincp', true)),
+				'description_vn'=> trim($this->input->post('description_vnAdmincp')),
+				'description_en'=> trim($this->input->post('description_enAdmincp')),
 				'status'=> $this->input->post('statusAdmincp'),
 			);
 			modules::run('admincp/saveLog',$this->module,$this->input->post('hiddenIdAdmincp'),'','Update',$result,$data);

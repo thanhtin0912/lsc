@@ -25,10 +25,10 @@
 				<tr role="row">
 					<th class="table-checkbox sorting_disabled" width="25"><input type="checkbox" id="selectAllItems" onclick="selectAllItems(<?=count($result)?>)"></th>
 					<th class="center sorting_disabled" width="35">No.</th>
-					<th class="sorting" width="150" onclick="sort('image')" id="image">Hình ảnh</th>
-					<th class="sorting" onclick="sort('name_vn')" id="title">Tên dự án</th>
-					<th class="sorting" onclick="sort('cate_id')" id="cate_id">Danh mục</th>
-					<th class="sorting" onclick="sort('cate_id')" id="cate_id">Khách hàng</th>
+					<th class="sorting" width="150" onclick="sort('image')" id="image">Ảnh đại diện</th>
+					<th class="sorting">Name _vn</th>
+					<th class="sorting">Name _en</th>
+					<th class="sorting">Type</th>
 					<th class="center sorting" width="60" onclick="sort('status')" id="status">Status</th>
 					<th class="center sorting" width="80" onclick="sort('created')" id="created">Created</th>
 				</tr>
@@ -45,8 +45,8 @@
 					<td class="center"><?=$k+1+$start?></td>
 					<td><a href="<?=PATH_URL_ADMIN.$module.'/update/'.$v->id?>"><img src="<?=resizeImage(PATH_URL.DIR_UPLOAD_PROJECTS.$v->avata,150, 150)?>" /></a></td>
 					<td><a href="<?=PATH_URL_ADMIN.$module.'/update/'.$v->id?>"><?=$v->name_vn?></a></td>
-					<td><a href="<?=PATH_URL_ADMIN.$module.'/update/'.$v->id?>"><?=$v->cate_name?></a></td>
-					<td><a href="<?=PATH_URL_ADMIN.$module.'/update/'.$v->id?>"><?=$v->customer?></a></td>
+					<td><a href="<?=PATH_URL_ADMIN.$module.'/update/'.$v->id?>"><?=$v->name_en?></a></td>
+					<td><a href="<?=PATH_URL_ADMIN.$module.'/update/'.$v->id?>"><?=$v->type == 0 ? 'Hình ảnh' : 'Video' ?></a></td>
 					<td class="center" id="loadStatusID_<?=$v->id?>"><a class="no_underline" href="javascript:void(0)" onclick="updateStatus(<?=$v->id?>,<?=$v->status?>,'<?=$module?>')"><?php ($v->status==0) ? print '<span class="label label-sm label-default status-blocked">Blocked</span>' : print '<span class="label label-sm label-success status-approved">Approved</span>' ?></a></td>
 					<td class="center"><?=date('Y-m-d H:i:s',strtotime($v->created))?></td>
 				</tr>
@@ -57,8 +57,8 @@
 						<td class="center"><?=$k+1+$start?></td>
 						<td><img src="<?=resizeImage(PATH_URL.DIR_UPLOAD_PROJECTS.$v->avata,150, 150)?>" /></td>
 						<td><?=$v->name_vn?></td>
-						<td><?=$v->cate_name?></td>
-						<td><?=$v->customer?></td>
+						<td><?=$v->name_en?></td>
+						<td><?=$v->type == 0 ? 'Hình ảnh' : 'Video' ?></td>
 						<td class="center" id="loadStatusID_<?=$v->id?>"><span class="label label-sm label-default status-deleted">Deleted</span></td>
 						<td class="center"><?=date('Y-m-d H:i:s',strtotime($v->created))?></td>
 					</tr>

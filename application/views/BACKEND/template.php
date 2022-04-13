@@ -174,18 +174,21 @@
                         </li>
                     </ul>
                 </li>
+                <li class="last <?php if ($this->uri->segment(2) == 'projects') { print ' active';} ?>">
+                    <a href="<?= PATH_URL_ADMIN . 'projects' ?>"><i class="fa fa-language"></i><span class="title">Thư viện</span></a>
+                </li>
                 <li class="last <?php if ($this->uri->segment(2) == 'mailbox') { print ' active';} ?>">
-                    <a href="<?= PATH_URL_ADMIN . 'mailbox' ?>"><i class="fa fa-cutlery"></i><span class="title">Mailbox</span></a>
+                    <a href="<?= PATH_URL_ADMIN . 'mailbox' ?>"><i class="fa fa-comment-o"></i><span class="title">Mailbox</span></a>
                 </li>
 
                 <li class="last <?php if ($this->uri->segment(2) == 'staffs') { print ' active';} ?>">
-                    <a href="<?= PATH_URL_ADMIN . 'staffs' ?>"><i class="fa fa-cutlery"></i><span class="title">Quản lý giáo viên</span></a>
+                    <a href="<?= PATH_URL_ADMIN . 'staffs' ?>"><i class="fa fa-users"></i><span class="title">Quản lý giáo viên</span></a>
                 </li>
                 <li class="last <?php if ($this->uri->segment(2) == 'seo_pages') { print ' active';} ?>">
-                    <a href="<?= PATH_URL_ADMIN . 'seo_pages' ?>"><i class="fa fa-cutlery"></i><span class="title">SEO Pages</span></a>
+                    <a href="<?= PATH_URL_ADMIN . 'seo_pages' ?>"><i class="fa fa-cc"></i><span class="title">SEO Pages</span></a>
                 </li>
                 <li class="last<?php if ($this->uri->segment(2) == 'library') { print ' active';} ?>">
-                    <a href="<?= PATH_URL_ADMIN . 'library' ?>"><i class="fa fa-picture-o"></i><span class="title"> Thư viện</span></a>
+                    <a href="<?= PATH_URL_ADMIN . 'library' ?>"><i class="fa fa-picture-o"></i><span class="title">Upload Image</span></a>
                 </li>
                 <li class="last<?php if ($this->uri->segment(2) == 'admincp_modules') { print ' active';} ?>">
                     <a href="<?= PATH_URL_ADMIN . 'admincp_modules' ?>"><i class="icon-settings"></i><span class="title"> Quản lý modules</span></a>
