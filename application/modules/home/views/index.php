@@ -346,55 +346,48 @@
                 <section class="fullwidth-background dt-sc-parallax-section turquoise-bg">
                     <!--container starts-->
                     <div class="container">
-                        <!--dt-sc-one-half starts-->
                         <div class="dt-sc-one-half column first">
                             <h2>What do we teach?</h2>
-                            <!--dt-sc-one-half starts-->
                                 
-                                <div class="dt-sc-ico-content type2">
-                                    <div class="icon"> 
-                                        <span> 1 </span> 
-                                    </div>
-                                    <h4><a href="#" target="_blank"> International Curriculum </a></h4>
-                                    <p>Nam ullamcorper, diam sit amet euismod pelleontesque, eros risus rhoncus libero, inst tibulum nisl ligula....</p>
+                            <div class="dt-sc-ico-content type2">
+                                <div class="icon"> 
+                                    <span> 1 </span> 
                                 </div>
-                                <div class="dt-sc-hr-very-small"></div>
-                                <div class="dt-sc-ico-content type2">
-                                    <div class="icon"> 
-                                        <span> 2 </span> 
-                                    </div>
-                                    <h4><a href="#" target="_blank"> Logical thinking </a></h4>
-                                    <p>Nam ullamcorper, diam sit amet euismod pelleontesque, eros risus rhoncus libero, inst tibulum nisl ligula....</p>
+                                <h4><a href="#" target="_blank"> International Curriculum </a></h4>
+                                <p>Nam ullamcorper, diam sit amet euismod pelleontesque, eros risus rhoncus libero, inst tibulum nisl ligula....</p>
+                            </div>
+                            <div class="dt-sc-hr-very-small"></div>
+                            <div class="dt-sc-ico-content type2">
+                                <div class="icon"> 
+                                    <span> 2 </span> 
                                 </div>
-                                <div class="dt-sc-hr-very-small"></div>
-                                <div class="dt-sc-ico-content type2">
-                                    <div class="icon"> 
-                                        <span> 3 </span> 
-                                    </div>
-                                    <h4><a href="#" target="_blank"> Sensitive ability </a></h4>
-                                    <p>Nam ullamcorper, diam sit amet euismod pelleontesque, eros risus rhoncus libero, inst tibulum nisl ligula....</p>
+                                <h4><a href="#" target="_blank"> Logical thinking </a></h4>
+                                <p>Nam ullamcorper, diam sit amet euismod pelleontesque, eros risus rhoncus libero, inst tibulum nisl ligula....</p>
+                            </div>
+                            <div class="dt-sc-hr-very-small"></div>
+                            <div class="dt-sc-ico-content type2">
+                                <div class="icon"> 
+                                    <span> 3 </span> 
                                 </div>
-                            
-                                
-                                <div class="dt-sc-ico-content type2">
-                                    <div class="icon"> 
-                                        <span> 4 </span> 
-                                    </div>
-                                    <h4><a href="#" target="_blank">  Skill </a></h4>
-                                    <p>Nam ullamcorper, diam sit amet euismod pelleontesque, eros risus rhoncus libero, inst tibulum nisl ligula....</p>
-                                </div>
-                            <!--dt-sc-one-half ends-->
-                        </div>
-                        <!--dt-sc-one-half ends-->
+                                <h4><a href="#" target="_blank"> Sensitive ability </a></h4>
+                                <p>Nam ullamcorper, diam sit amet euismod pelleontesque, eros risus rhoncus libero, inst tibulum nisl ligula....</p>
+                            </div>
                         
-                        <!--dt-sc-one-half starts-->
+                            
+                            <div class="dt-sc-ico-content type2">
+                                <div class="icon"> 
+                                    <span> 4 </span> 
+                                </div>
+                                <h4><a href="#" target="_blank">  Skill </a></h4>
+                                <p>Nam ullamcorper, diam sit amet euismod pelleontesque, eros risus rhoncus libero, inst tibulum nisl ligula....</p>
+                            </div>
+                        </div>
                         <div class="dt-sc-one-half column">
                             <h2>How do we Teach?</h2>
                             <video class="video-fluid w-100" loop controls muted>
                                 <source src="<?= PATH_URL .'/assets/video/demo.mp4' ?>" type="video/mp4" height="400" />
                             </video>
                         </div>
-                        <!--dt-sc-one-half ends-->
                     </div>
                     <!--container ends-->
                 </section>
@@ -402,59 +395,21 @@
                 <div class="container">
                     <section id="primary" class="content-full-width">
                         <h2 class="dt-sc-hr-green-title">Our Teachers</h2>
+                        <?php foreach ($staffs as $key => $v) : ?>
                         <div class="column dt-sc-one-fourth first">
                             <div class="dt-sc-team">	
                                 <div class="image">
-                                    <img class="item-mask" src="assets/images/mask.png" alt="" title="">
-                                    <img src="https://wedesignthemes.com/html/kidslife/images/team1.jpg" alt="" title="">
+                                    <img class="item-mask" src="<?= PATH_URL?>assets/images/mask.png" title="<?= $v->name ?>">
+                                    <img src="<?= PATH_URL . DIR_UPLOAD_STAFF . $v->image ?>" title="<?= $v->name ?>">
                                 </div>
                                 <div class="team-details">
-                                    <h4> Jack Daniels </h4>
-                                    <h6> Senior Supervisor </h6>
+                                    <h4> <?= $v->name ?> </h4>
+                                    <h6> <?= $v->position ?> </h6>
                                     <p> Phasellus lorem augue, vulputate vel orci id, ultricies aliquet risus. </p>
                                 </div>
                             </div>
                         </div>
-                        <div class="column dt-sc-one-fourth">
-                            <div class="dt-sc-team">	
-                                <div class="image">
-                                    <img class="item-mask" src="assets/images/mask.png" alt="" title="">
-                                    <img src="https://wedesignthemes.com/html/kidslife/images/team2.jpg" alt="" title="">
-                                </div>
-                                <div class="team-details">
-                                    <h4> Linda Glendell </h4>
-                                    <h6> Teaching Professor </h6>
-                                    <p> Phasellus lorem augue, vulputate vel orci id, ultricies aliquet risus. </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="column dt-sc-one-fourth">
-                            <div class="dt-sc-team">	
-                                <div class="image">
-                                    <img class="item-mask" src="assets/images/mask.png" alt="" title="">
-                                    <img src="https://wedesignthemes.com/html/kidslife/images/team3.jpg" alt="" title="">
-                                </div>
-                                <div class="team-details">
-                                    <h4> Kate Dennings </h4>
-                                    <h6> Children Diet </h6>
-                                    <p> Phasellus lorem augue, vulputate vel orci id, ultricies aliquet risus. </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="column dt-sc-one-fourth">
-                            <div class="dt-sc-team">	
-                                <div class="image">
-                                    <img class="item-mask" src="assets/images/mask.png" alt="" title="">
-                                    <img src="https://wedesignthemes.com/html/kidslife/images/team4.jpg" alt="" title="">
-                                </div>
-                                <div class="team-details">
-                                    <h4> Kristof Slinghot </h4>
-                                    <h6> Management </h6>
-                                    <p> Phasellus lorem augue, vulputate vel orci id, ultricies aliquet risus. </p>
-                                </div>
-                            </div>
-                        </div>
-                    
+                        <?php endforeach ?>
                     </section>
                 </div>
                 <!--fullwidth-background starts-->

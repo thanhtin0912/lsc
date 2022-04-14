@@ -1,7 +1,7 @@
 <?php
 class Staffs_model extends CI_Model {
 	private $module = 'staffs';
-	private $table = 'staffs';
+	private $table = 'tbl_staffs';
 	private $table_cata = 'tbl_catagories';
 
 	function getsearchContent($limit,$page){
@@ -112,14 +112,11 @@ class Staffs_model extends CI_Model {
 				'phone'=> trim($this->input->post('phoneAdmincp', true)),
 				'pid'=> trim($this->input->post('pidAdmincp', true)),
 				'position'=> trim($this->input->post('positionAdmincp', true)),
-				'departmentId'=> trim($this->input->post('cateAdmincp', true)),
 				'start'=> trim($this->input->post('startAdmincp', true)),
 				'end'=> trim($this->input->post('endAdmincp', true)),
 				'image'=> trim($fileName['image']),
 				'description_vn'=> trim($this->input->post('description_vnAdmincp')),
-				'content_vn'=> trim($this->input->post('content_vnAdmincp')),
-				'description_en'=> trim($this->input->post('description_vnAdmincp')),
-				'content_en'=> trim($this->input->post('content_enAdmincp')),
+				'description_en'=> trim($this->input->post('description_enAdmincp')),
 				'facebook'=> $this->input->post('facebookAdmincp'),
 				'status'=> $this->input->post('statusAdmincp'),
 				'created'=> date('Y-m-d H:i:s',time()),
@@ -146,14 +143,11 @@ class Staffs_model extends CI_Model {
 				'phone'=> trim($this->input->post('phoneAdmincp', true)),
 				'pid'=> trim($this->input->post('pidAdmincp', true)),
 				'position'=> trim($this->input->post('positionAdmincp', true)),
-				'departmentId'=> trim($this->input->post('cateAdmincp', true)),
 				'start'=> trim($this->input->post('startAdmincp', true)),
 				'end'=> trim($this->input->post('endAdmincp', true)),
 				'image'=> trim($fileName['image']),
 				'description_vn'=> trim($this->input->post('description_vnAdmincp')),
-				'content_vn'=> trim($this->input->post('content_vnAdmincp')),
-				'description_en'=> trim($this->input->post('description_vnAdmincp')),
-				'content_en'=> trim($this->input->post('content_enAdmincp')),
+				'description_en'=> trim($this->input->post('description_enAdmincp')),
 				'facebook'=> $this->input->post('facebookAdmincp'),
 				'status'=> $this->input->post('statusAdmincp'),
 				'updated'=> date('Y-m-d H:i:s',time()),

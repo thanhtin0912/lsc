@@ -18,14 +18,11 @@ class Home extends MX_Controller {
 		$data['info'] = $this->home->getInfoSite();
 		$data['newsfooter'] = $this->home->getList3LatestNews();
 		$data['services'] = $this->home->getListServices();
-		$data['cataproduct'] = $this->home->getDataCatagories('CATA_PRODUCT');
-		$data['cataparent'] = $this->home->getDataCataParent();
 		// 
 		$data['banner'] = $this->banners->getData();
-		$data['listproduct'] = $this->home->getList8LatestProducts();
-		$data['countlist'] = count($data['listproduct']);
 		$data['services'] = $this->home->getListServices();
 		$data['comments'] = $this->home->getListImages();
+		$data['staffs'] = $this->home->getTopStaffs();
 		//
 		$this->template->write('title','Cty TNHH Hải Dương');
 		$this->template->write_view('content','index',$data);

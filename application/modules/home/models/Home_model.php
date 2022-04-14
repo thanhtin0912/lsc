@@ -13,6 +13,7 @@ class Home_model extends CI_Model {
 	private $table_site 		= 'tbl_infos';
 	private $table_service 		= 'tbl_services';
 	private $table_parent		= 'tbl_cataparent';
+	private $table_staffs		= 'tbl_staffs';
 	function getInfoSite(){
 		$this->db->select('*');
 		$query = $this->db->get(PREFIX.$this->table_site);
@@ -196,6 +197,21 @@ class Home_model extends CI_Model {
 		$this->db->from(PREFIX.$this->table_news." n");
 		$this->db->join(PREFIX.$this->table_cata." c", 'n.cate_id = c.id ', "left");
 		
+		$query = $this->db->get();
+		if($query->result()){
+			return $query->result();
+		}else{
+			return false;
+		}	
+	}
+
+	function getTopStaffs(){
+		$this->db->select('*');
+		$this->db->where('status',1);
+		$this->db->where('delete',0);
+		$this->db->order_by('created','DESC');
+		$this->db->limit('4');
+		$this->db->from(PREFIX.$this->table_staffs);
 		$query = $this->db->get();
 		if($query->result()){
 			return $query->result();

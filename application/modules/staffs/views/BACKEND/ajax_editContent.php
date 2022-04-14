@@ -8,38 +8,6 @@ $(document).ready( function() {
 		output: '#slugAdmincp',
 		space: '-'
 	});
-
-	$('#content_vnAdmincp').liveEdit({
-		height: 350,
-		css: ['<?=PATH_URL?>assets/editor/bootstrap/css/bootstrap.min.css', '<?=PATH_URL?>assets/editor/bootstrap/bootstrap_extend.css','<?=PATH_URL?>assets/css/styles.css'] /* Apply bootstrap css into the editing area */,
-		fileBrowser: '<?=PATH_URL?>assets/editor/assetmanager/asset.php',
-		returnKeyMode: 3,
-		groups: [
-				["group1", "", ["Bold", "Italic", "Underline", "ForeColor", "RemoveFormat"]],
-				["group2", "", ["Bullets", "Numbering", "Indent", "Outdent", "JustifyLeft", "JustifyCenter", "JustifyRight"]],
-				["group3", "", ["Paragraph", "FontSize", "FontDialog", "TextDialog"]],
-				["group4", "", ["LinkDialog", "ImageDialog", "TableDialog"]],
-				["group5", "", ["Undo", "Redo", "FullScreen", "SourceDialog"]],
-				["group6", "", ["Left", "Center", "Right"]]
-				] /* Toolbar configuration */
-	});
-	$('#content_vnAdmincp').data('liveEdit').startedit();
-
-	$('#content_enAdmincp').liveEdit({
-		height: 350,
-		css: ['<?=PATH_URL?>assets/editor/bootstrap/css/bootstrap.min.css', '<?=PATH_URL?>assets/editor/bootstrap/bootstrap_extend.css','<?=PATH_URL?>assets/css/styles.css'] /* Apply bootstrap css into the editing area */,
-		fileBrowser: '<?=PATH_URL?>assets/editor/assetmanager/asset.php',
-		returnKeyMode: 3,
-		groups: [
-				["group1", "", ["Bold", "Italic", "Underline", "ForeColor", "RemoveFormat"]],
-				["group2", "", ["Bullets", "Numbering", "Indent", "Outdent", "JustifyLeft", "JustifyCenter", "JustifyRight"]],
-				["group3", "", ["Paragraph", "FontSize", "FontDialog", "TextDialog"]],
-				["group4", "", ["LinkDialog", "ImageDialog", "TableDialog"]],
-				["group5", "", ["Undo", "Redo", "FullScreen", "SourceDialog"]],
-				["group6", "", ["Left", "Center", "Right"]]
-				] /* Toolbar configuration */
-	});
-	$('#content_enAdmincp').data('liveEdit').startedit();
 });
 
 function save(){
@@ -47,7 +15,6 @@ function save(){
 		beforeSubmit:  showRequest,  // pre-submit callback 
 		success:       showResponse  // post-submit callback 
     };
-	$('#contentAdmincp').val($('#contentAdmincp').data('liveEdit').getXHTMLBody());
 	$('#frmManagement').ajaxSubmit(options);
 }
 
@@ -62,10 +29,7 @@ function showRequest(formData, jqForm, options) {
         }
     <?php } ?>
 	
-	if(form.nameAdmincp.value == '' || form.description_vnAdmincp.value == '' || form.description_enAdmincp.value == '' 
-	|| $('#content_enAdmincp').val() == '<br>' || $('#content_enAdmincp').val() == ''
-	|| $('#content_vnAdmincp').val() == '<br>' || $('#content_vnAdmincp').val() == '' 
-	|| ($('#content_vnAdmincp').val().charCodeAt(0)==10 && isNaN($('#content_vnAdmincp').val().charCodeAt(1)))){
+	if(form.nameAdmincp.value == '' || form.description_vnAdmincp.value == '' || form.description_enAdmincp.value == ''){
 		$('#txt_error').html('Please enter information.');
 		show_perm_denied();
 		return false;
@@ -152,7 +116,10 @@ function showResponse(responseText, statusText, xhr, $form) {
 						</div>
 						<div class="form-group">
 							<label class="control-label col-md-2">Name: <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-8"><input value="<?php if(isset($result->name)) { print $result->name; }else{ print '';} ?>" type="text" name="nameAdmincp" id="nameAdmincp" class="form-control"/></div>
+							<div class="col-md-3"><input value="<?php if(isset($result->name)) { print $result->name; }else{ print '';} ?>" type="text" name="nameAdmincp" id="nameAdmincp" class="form-control"/></div>
+
+							<label class="control-label col-md-2">Position: <span class="required" aria-required="true">*</span></label>
+							<div class="col-md-3"><input value="<?php if(isset($result->position)) { print $result->position; }else{ print '';} ?>" type="text" name="positionAdmincp" id="positionAdmincp" class="form-control"/></div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-md-2">Slug (không quan tâm): <span class="required" aria-required="true">*</span></label>
@@ -208,14 +175,6 @@ function showResponse(responseText, statusText, xhr, $form) {
 						<div class="form-group last">
 							<label class="control-label col-md-2">Short description _en: <span class="required" aria-required="true">*</span></label>
 							<div class="col-md-8"><textarea name="description_enAdmincp" id="description_enAdmincp" cols="" rows="5" class="form-control"><?php if(isset($result->description_en)) { print $result->description_en; }else{ print '';} ?></textarea></div>
-						</div>
-						<div class="form-group last">
-							<label class="control-label col-md-2">Content _vn: <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-8"><textarea name="content_vnAdmincp" id="content_vnAdmincp" cols="" rows="8"><?php if(isset($result->content_vn)) { print $result->content_vn; }else{ print '';} ?></textarea></div>
-						</div>
-						<div class="form-group last">
-							<label class="control-label col-md-2">Content _en: <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-8"><textarea name="content_enAdmincp" id="content_enAdmincp" cols="" rows="8"><?php if(isset($result->content_en)) { print $result->content_en; }else{ print '';} ?></textarea></div>
 						</div>
 					</div>
 					<div class="form-actions">

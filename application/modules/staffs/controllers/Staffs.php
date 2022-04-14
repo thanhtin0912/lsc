@@ -3,7 +3,7 @@
 class Staffs extends MX_Controller {
 
 	private $module = 'staffs';
-	private $table = 'staffs';
+	private $table = 'tbl_staffs';
 	function __construct(){
 		parent::__construct();
 		$this->load->model($this->module.'_model','model');
