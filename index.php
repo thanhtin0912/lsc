@@ -307,7 +307,6 @@ define('DB_NAME', 'toppcvn_lsc');
 //Config DIR Upload
 define('DIR_UPLOAD_BANNER', 'assets/uploads/banner/');
 define('DIR_UPLOAD_NEWS', 'assets/uploads/news/');
-
 define('DIR_UPLOAD_PRODUCTS', 'assets/uploads/products/');
 define('DIR_UPLOAD_PROJECTS', 'assets/uploads/projects/');
 define('DIR_UPLOAD_COMMENTS', 'assets/uploads/comments/');

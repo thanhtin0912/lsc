@@ -2,6 +2,7 @@
 // header
 $lang['top_en'] = 'Tiếng Anh';
 $lang['top_vn'] = 'Tiếng Việt';
+$lang['company'] = "Kỹ năng sống và ngoại ngữ Let's Start";
 $lang['menu_home'] = 'Trang chủ';
 $lang['menu_about'] = 'Giới thiệu';
 $lang['menu_service'] = 'Dịch vụ';

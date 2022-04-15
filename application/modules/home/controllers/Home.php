@@ -16,13 +16,13 @@ class Home extends MX_Controller {
 	/*------------------------------------ FRONTEND ------------------------------------*/
 	public function index(){
 		$data['info'] = $this->home->getInfoSite();
-		$data['newsfooter'] = $this->home->getList3LatestNews();
 		$data['services'] = $this->home->getListServices();
 		// 
 		$data['banner'] = $this->banners->getData();
 		$data['services'] = $this->home->getListServices();
 		$data['comments'] = $this->home->getListImages();
 		$data['staffs'] = $this->home->getTopStaffs();
+		$data['news'] = $this->home->getList4LatestNews();
 		//
 		$this->template->write('title','Cty TNHH Hải Dương');
 		$this->template->write_view('content','index',$data);
@@ -31,10 +31,7 @@ class Home extends MX_Controller {
 
 	public function about(){
 		$data['info'] = $this->home->getInfoSite();
-		$data['newsfooter'] = $this->home->getList3LatestNews();
 		$data['services'] = $this->home->getListServices();
-		$data['cataproduct'] = $this->home->getDataCatagories('CATA_PRODUCT');
-		$data['cataparent'] = $this->home->getDataCataParent();
 		// 
 		$data['pages'] = $this->home->getDataPages('GIOITHIEU');
 		//
@@ -45,10 +42,7 @@ class Home extends MX_Controller {
 
 	public function design(){
 		$data['info'] = $this->home->getInfoSite();
-		$data['newsfooter'] = $this->home->getList3LatestNews();
 		$data['services'] = $this->home->getListServices();
-		$data['cataproduct'] = $this->home->getDataCatagories('CATA_PRODUCT');
-		$data['cataparent'] = $this->home->getDataCataParent();
 		// 
 		$data['pages'] = $this->home->getDataPages('THIETKE');
 		//
@@ -58,11 +52,8 @@ class Home extends MX_Controller {
 	}
 
 		public function construct(){
-		$data['info'] = $this->home->getInfoSite();
-		$data['newsfooter'] = $this->home->getList3LatestNews();
-		$data['services'] = $this->home->getListServices();
-		$data['cataproduct'] = $this->home->getDataCatagories('CATA_PRODUCT');
-		$data['cataparent'] = $this->home->getDataCataParent();
+			$data['info'] = $this->home->getInfoSite();
+			$data['services'] = $this->home->getListServices();
 		// 
 		$data['pages'] = $this->home->getDataPages('XAYDUNG');
 		//
@@ -73,10 +64,7 @@ class Home extends MX_Controller {
 
 	public function contact(){
 		$data['info'] = $this->home->getInfoSite();
-		$data['newsfooter'] = $this->home->getList3LatestNews();
 		$data['services'] = $this->home->getListServices();
-		$data['cataproduct'] = $this->home->getDataCatagories('CATA_PRODUCT');
-		$data['cataparent'] = $this->home->getDataCataParent();
 		// 
 		$data['pages'] = $this->home->getDataPages('LIENHE');
 		//
@@ -89,10 +77,7 @@ class Home extends MX_Controller {
 	public function news(){
 		//template
 		$data['info'] = $this->home->getInfoSite();
-		$data['newsfooter'] = $this->home->getList3LatestNews();
 		$data['services'] = $this->home->getListServices();
-		$data['cataproduct'] = $this->home->getDataCatagories('CATA_PRODUCT');
-		$data['cataparent'] = $this->home->getDataCataParent();
 		//
 		//
 		$this->template->write('title','Tin tức - Cty TNHH Hải Dương');

@@ -68,7 +68,7 @@ $route['^(en|vn)/construct'] 	= "home/construct";
 $route['^(en|vn)/contact'] 	= "home/contact";
 //
 $route['^(en|vn)/news'] 	= "home/news";
-$route["^(en|vn)/home/showAllNews"] 	= "home/showAllNews";
+$route["^(en|vn)/showAllNews"] 	= "home/showAllNews";
 $route['^(en|vn)/news-detail/(:any)'] 	  = "home/news_detail/$2";
 //
 $route['^(en|vn)/projects'] 	= "home/projects";

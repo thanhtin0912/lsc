@@ -24,12 +24,15 @@ class Home_model extends CI_Model {
 		}
 	}
 
-	function getList3LatestNews(){
-		$this->db->select('*');
-		$this->db->where('status',1);
-		$this->db->order_by('id','DESC');
-		$this->db->limit('2');
-		$query = $this->db->get(PREFIX.$this->table_news);
+	function getList4LatestNews(){
+		$this->db->select('n.*, c.name_vn as cata_vn, c.name_en as cata_en,');
+		$this->db->where('n.status',1);
+		$this->db->where('n.delete',0);
+		$this->db->order_by('n.id','DESC');
+		$this->db->limit('4');
+		$this->db->from(PREFIX.$this->table_news." n");
+		$this->db->join(PREFIX.$this->table_cata." c", 'c.id = n.type', "left");
+		$query = $this->db->get();
 		if($query->result()){
 			return $query->result();
 		}else{
@@ -138,7 +141,7 @@ class Home_model extends CI_Model {
 		$this->db->where('n.status',1);
 		$this->db->order_by('n.created','DESC');
 		$this->db->from(PREFIX.$this->table_news." n");
-		$this->db->join(PREFIX.$this->table_cata." c", 'c.id = n.cate_id', "left");
+		$this->db->join(PREFIX.$this->table_cata." c", 'c.id = n.type', "left");
 		$query = $this->db->get();
 
 		if($query->result()){
@@ -152,7 +155,7 @@ class Home_model extends CI_Model {
 		$this->db->select('n.*,c.name_vn as cataname_vn, c.name_en as cataname_en');
 		$this->db->where('n.status',1);
 		$this->db->from(PREFIX.$this->table_news." n");
-		$this->db->join(PREFIX.$this->table_cata." c", 'n.cate_id = c.id ', "left");
+		$this->db->join(PREFIX.$this->table_cata." c", 'n.type = c.id ', "left");
 		$query = $this->db->count_all_results();
 		if($query > 0){
 			return $query;
@@ -166,7 +169,7 @@ class Home_model extends CI_Model {
 		$this->db->where('n.status',1);
 		$this->db->where('n.slug',$link);
 		$this->db->from(PREFIX.$this->table_news." n");
-		$this->db->join(PREFIX.$this->table_cata." c", 'n.cate_id = c.id ', "left");
+		$this->db->join(PREFIX.$this->table_cata." c", 'n.type = c.id ', "left");
 		
 		$query = $this->db->get();
 		if($query->result()){
@@ -195,7 +198,7 @@ class Home_model extends CI_Model {
 		$this->db->order_by('n.created','DESC');
 		$this->db->limit('6');
 		$this->db->from(PREFIX.$this->table_news." n");
-		$this->db->join(PREFIX.$this->table_cata." c", 'n.cate_id = c.id ', "left");
+		$this->db->join(PREFIX.$this->table_cata." c", 'n.type = c.id ', "left");
 		
 		$query = $this->db->get();
 		if($query->result()){

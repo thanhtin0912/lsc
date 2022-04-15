@@ -25,9 +25,11 @@
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Bubblegum+Sans' rel='stylesheet' type='text/css'>
 <!--jquery-->
+<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jssor.slider-28.1.0.min.js"></script>
 <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/modernizr-2.6.2.min.js"></script>
 </head>
+<input type="hidden" value="<?=$this->security->get_csrf_hash()?>" id="csrf_token" />
 <body class="main">
 	<!--wrapper starts-->
     <div class="wrapper">
@@ -36,7 +38,7 @@
             <div class="container">
                 <div class="logo">
                     <a href="<?= PATH_URL; ?>" title="Kids Life"><img src="<?= PATH_URL; ?>assets/images/logo.png" alt="Kids Life" title="Kids Life"></a>
-                    <span class="title">Kỹ năng sống và ngoại ngữ Let's Start</span>
+                    <span class="title"><?=lang('company')?></span>
                 </div>
                 <div class="contact-details">
                     <p class="mail">
@@ -96,10 +98,9 @@
             <div class="footer-widgets-wrapper">
                 <!--container starts-->
                 <div class="container">
-                    
-                    <div class="column dt-sc-one-fourth first">
+                    <div class="column dt-sc-one-third first">
                         <aside class="widget widget_text">
-                            <h3 class="widgettitle red_sketch"> About Kids Life </h3>
+                            <h3 class="widgettitle red_sketch"> <?=lang('menu_about')?></h3>
                             <p><a href=""><strong>Let's Start Center</strong></a> <?php $lang = $this->lang->lang(); $description = "description_".$lang; echo $info[0]->$description ?></p>
                             <ul>
                                 <?php foreach ($services as $key => $v): ;?>
@@ -108,32 +109,16 @@
                             </ul>
                         </aside>
                     </div>
-                    <div class="column dt-sc-one-fourth">
-                        <aside class="widget widget_recent_entries">
-                            <h3 class="widgettitle green_sketch"> <?=lang('footer_row2_news')?> </h3>
-                            <ul>
-                                <?php foreach ($newsfooter as $key => $v):?>
-                                <li>
-                                    <a href="<?=PATH_URL.$this->lang->lang().'/news-detail/'.$v->slug?>">
-                                        <img src="<?=PATH_URL.DIR_UPLOAD_NEWS.$v->image ?>" alt="">
-                                    </a>    
-                                    <h6><a href="<?=PATH_URL.$this->lang->lang().'/news-detail/'.$v->slug?>"> <?php $lang = $this->lang->lang(); $title = "title_".$lang; echo cutText($v->$title,60) ?> </a></h6>
-                                    <span> <?= date('d/m/yy',strtotime($v->created))?></span>       
-                                </li>
-                                <?php endforeach ?>
-                            </ul>
-                        </aside>
-                    </div>
-                    <div class="column dt-sc-one-fourth">
+                    <div class="column dt-sc-one-third">
                         <aside class="widget tweetbox">
                             <h3 class="widgettitle yellow_sketch"><a href="#"> Facebook </a></h3>
                             <div class="fb-page" data-href="https://www.facebook.com/kynangsong.ngoaingu.LS/" data-tabs="" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/kynangsong.ngoaingu.LS/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/kynangsong.ngoaingu.LS/">Kỹ Năng Sống Và Ngoại Ngữ Lets Start Nha Trang</a></blockquote>
                             </div>
                         </aside>
                     </div>
-                    <div class="column dt-sc-one-fourth">
+                    <div class="column dt-sc-one-third">
                         <aside class="widget widget_text">
-                        <h3 class="widgettitle steelblue_sketch">Contact</h3>
+                        <h3 class="widgettitle steelblue_sketch"><?=lang('menu_contact')?></h3>
                             <div class="textwidget">
                                 <p class="dt-sc-contact-info"><span class="fa fa-map-marker"></span> <?php $lang = $this->lang->lang(); $address = "address_".$lang; echo $info[0]->$address ?> </p>
                                 <p class="dt-sc-contact-info"><span class="fa fa-phone"></span> <?=$info[0]->phoneother?> </p>

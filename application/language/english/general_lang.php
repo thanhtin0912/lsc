@@ -2,7 +2,7 @@
 // header
 $lang['top_en'] = 'English';
 $lang['top_vn'] = 'Vietnamese';
-
+$lang['company'] = "Life skill and language Let's Start";
 $lang['menu_home'] = 'Home';
 $lang['menu_about'] = 'About';
 $lang['menu_service'] = 'services';

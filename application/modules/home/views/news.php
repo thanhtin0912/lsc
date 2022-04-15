@@ -1,16 +1,11 @@
-<style type="text/css">
-    .main-menu .navigation > li:hover > a, .main-menu .navigation > li.news > a {
-      color: #006699;
-      opacity: 1;
-    }
-</style>
+
 <script type="text/javascript">
     $(document).ready(function() {
         showAllNews(0);
     });
     function showAllNews(start){
-        var module_url = '<?= PATH_URL ?><?=$this->lang->lang();?>/home/';
-        var per_page        = 12;
+        var module_url = '<?= PATH_URL ?><?=$this->lang->lang();?>/';
+        var per_page        = 8;
         $.post(module_url+'showAllNews',{
             start            : start,
             per_page         : per_page,
@@ -21,34 +16,30 @@
         });
     }
 </script>
-<section class="breadcrumb-area" style="background-image: url(<?= PATH_URL ?>assets/images/breadcrumb/breadcrumb-bg.jpg);">
-	<div class="container-fluid text-center">
-		<h1><?=lang('title_news')?></h1>
-		<div class="breadcrumb-bottom">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="left pull-left">
-                            <ul>
-                                <li><a href="<?=PATH_URL.$this->lang->lang();?>/"><?=lang('menu_home')?></a></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
-                                <li><?=lang('menu_news')?></li>
-                            </ul>    
-                        </div>
-                        <!--<div class="right pull-right">
-                            <a href="#"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>Get a Quote</a>
-                        </div> -->    
-                    </div>
-                </div>
+<style>
+    .blog-entry {
+        color: #5c5c5c ! important;
+        margin-bottom: 10px !important;
+    }
+</style>
+<!--main starts-->
+<div id="main">
+    <!--breadcrumb-section starts-->
+    <div class="breadcrumb-section">
+        <div class="container">
+            <h1><?=lang('menu_news')?></h1>
+            <div class="breadcrumb">
+                <a href="<?=PATH_URL.$this->lang->lang();?>/"><?=lang('menu_home')?></a>
+                <span class="fa fa-angle-double-right"></span>
+                <span class="current"><?=lang('menu_news')?></span>
             </div>
-		</div>
-	</div>
-</section>
-<!--End breadcrumb area-->
-
-<!--Start blog area-->
-<section id="blog-area" class="blog-with-sidebar-area">
-    <div class="container" id="wrap-post-news">
-
+        </div>
     </div>
-</section>
+    <!--breadcrumb-section ends-->
+    <!--container starts-->
+    <div class="container" id="wrap-post-news">
+        
+    </div>
+    <!--container ends-->
+</div>
+<!--main ends-->

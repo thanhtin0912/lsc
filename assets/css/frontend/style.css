@@ -2532,11 +2532,15 @@ header #menu-container ul.dt-sc-social-icons {
 }
 
 .entry-title h3 {
-	font-size: 30px;
+	font-size: 22px;
 	color: #fff !important;
-	line-height: 1.1em;
+	line-height: 1.2em;
 	font-weight: bold;
-	text-transform: capitalize;
+	-webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    display: -webkit-box;
+    text-overflow: ellipsis;
 }
 
 .dt-sc-team:hover .dt-sc-entry-title span {
@@ -2709,6 +2713,11 @@ header #menu-container ul.dt-sc-social-icons {
 
 .entry-details p {
 	line-height: 25px;
+	-webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    display: -webkit-box;
+    text-overflow: ellipsis;
 }
 
 .date,
