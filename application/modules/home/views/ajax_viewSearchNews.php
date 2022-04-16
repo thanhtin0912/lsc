@@ -13,6 +13,9 @@
                                     $title = "title_" . $lang;
                                     echo $v->$title ?></a></h3>
                             </div>
+                            <div class="author-description">
+                                <span class="author-role "><a href="#"><?php $lang = $this->lang->lang(); $cata = "cataname_" . $lang; echo $v->$cata ?></a></span>
+                        	</div>
                             <!--entry-metadata ends-->
                             <div class="entry-body">
                                 <p><?php $lang = $this->lang->lang();  $description = "description_" . $lang; echo $v->$description ?></p>

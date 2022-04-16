@@ -108,10 +108,7 @@ class Home extends MX_Controller {
 	public function news_detail($link){
 		//teamplate
 		$data['info'] = $this->home->getInfoSite();
-		$data['newsfooter'] = $this->home->getList3LatestNews();
 		$data['services'] = $this->home->getListServices();
-		$data['cataproduct'] = $this->home->getListCatagories();
-		$data['cataparent'] = $this->home->getDataCataParent();
         // 
 		$data['news'] = $this->home->getDetailNews($link);
 		$news = $this->home->getDetailNews($link);

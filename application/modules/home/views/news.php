@@ -27,7 +27,6 @@
     <!--breadcrumb-section starts-->
     <div class="breadcrumb-section">
         <div class="container">
-            <h1><?=lang('menu_news')?></h1>
             <div class="breadcrumb">
                 <a href="<?=PATH_URL.$this->lang->lang();?>/"><?=lang('menu_home')?></a>
                 <span class="fa fa-angle-double-right"></span>

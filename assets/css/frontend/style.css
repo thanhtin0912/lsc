@@ -1583,9 +1583,9 @@ header #menu-container ul.dt-sc-social-icons {
 }
 
 #primary {
-	margin: 80px 0px 0px;
 	padding: 0px;
 	float: left;
+	padding: 5px 10px;
 }
 
 #primary.with-sidebar {
@@ -1595,9 +1595,8 @@ header #menu-container ul.dt-sc-social-icons {
 
 #secondary {
 	width: 220px;
-	margin: 80px 0px 0px 0px;
 	float: left;
-	padding: 0px;
+	padding: 40px 10px;
 }
 
 #main .dt-sc-hr-green-title {
@@ -1661,11 +1660,11 @@ header #menu-container ul.dt-sc-social-icons {
 }
 
 .breadcrumb-section .breadcrumb a {
-	float: left;
+	/* float: right; */
 }
 
 .breadcrumb-section .breadcrumb span {
-	float: left;
+	/* float: left; */
 	margin: 0px 8px;
 	line-height: 24px;
 }
@@ -1675,7 +1674,7 @@ header #menu-container ul.dt-sc-social-icons {
 }
 
 .breadcrumb-section .breadcrumb {
-	float: right;
+	/* float: right; */
 	margin: 8px 0px 0px;
 }
 
@@ -2536,7 +2535,7 @@ header #menu-container ul.dt-sc-social-icons {
 	color: #fff !important;
 	line-height: 1.2em;
 	font-weight: bold;
-	-webkit-line-clamp: 2;
+	-webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     display: -webkit-box;
@@ -2713,7 +2712,7 @@ header #menu-container ul.dt-sc-social-icons {
 
 .entry-details p {
 	line-height: 25px;
-	-webkit-line-clamp: 3;
+	-webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     display: -webkit-box;
@@ -2758,7 +2757,7 @@ header #menu-container ul.dt-sc-social-icons {
 }
 
 .entry-thumb {
-	border: 5px solid #008c99;
+	/* border: 5px solid #008c99; */
 	margin-bottom: 30px;
 	display: block;
 }
@@ -3672,16 +3671,16 @@ ul.class_hours li span {
 	position: relative;
 	float: none;
 	display: block;
-	padding: 0px;
+	padding-bottom: 5px;
 	margin: 0px;
 }
 
 #secondary .widget_categories ul li a {
 	font-size: 16px;
-	padding: 0px 45px 0px 5px;
-	margin-bottom: 5px;
+	padding: 0px 5px;
+	margin-bottom: 10px;
 	display: block;
-	line-height: 35px;
+	line-height: 25px;
 	border-bottom: 1px dotted #a2a2a2;
 }
 
@@ -3750,7 +3749,7 @@ footer:before {
 }
 
 .footer-widgets-wrapper {
-	padding-bottom: 20px;
+	padding: 5px;
 	width: 100%;
 	clear: both;
 	float: left;
@@ -3782,7 +3781,7 @@ footer h3.widgettitle.steelblue_sketch {
 h3.widgettitle {
 	font-size: 22px;
 	padding-bottom: 10px;
-	margin-bottom: 25px;
+	/* margin-bottom: 25px; */
 	text-transform: capitalize;
 }
 

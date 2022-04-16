@@ -801,7 +801,7 @@ ul.dt-sc-tabs-frame li {
   float: left;
   clear: both;
   width: 100%;
-  padding: 20px 20px 20px;
+  padding: 5px 5px 5px;
   border-radius: 0px 5px 5px 5px;
   -webkit-border-radius: 0px 5px 5px 5px;
   -moz-border-radius: 0px 5px 5px 5px;
@@ -819,8 +819,9 @@ ul.dt-sc-tabs-frame li {
 
 .dt-sc-tabs-frame-content h5,
 .dt-sc-tabs-content h5 {
-  font-size: 18px;
+  font-size: 15px;
   margin-bottom: 15px;
+  padding-left: 10px;
 }
 
 .dt-sc-tabs-frame-content {
@@ -1235,6 +1236,11 @@ blockquote.alignright {
   margin-left: 20px;
   text-align: left;
   width: 30%;
+  float: right;
+}
+
+blockquote.aligncenter {
+  text-align: left;
   float: right;
 }
 
