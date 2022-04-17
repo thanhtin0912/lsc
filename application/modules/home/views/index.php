@@ -318,7 +318,7 @@
                 <!--fullwidth-background ends-->
                 <div class="dt-sc-hr"></div>
                 <div class="container">
-                    <h2 class="dt-sc-hr-green-title">Our Portfolio</h2>
+                    <h2 class="dt-sc-hr-green-title"><?= lang('our_activities') ?></h2>
                     
                     <!--portfolio-content starts-->
                     <div class="front-portfolio-container">
@@ -346,7 +346,7 @@
                 <section class="fullwidth-background dt-sc-parallax-section turquoise-bg">
                     <!--container starts-->
                     <div class="container">
-                        <div class="dt-sc-one-half column first">
+                        <div class="dt-sc-one-half column first px-2">
                             <h2>What do we teach?</h2>
                                 
                             <div class="dt-sc-ico-content type2">
@@ -394,7 +394,7 @@
                 <!--fullwidth-background ends-->
                 <div class="container">
                     <section id="primary" class="content-full-width pb-3">
-                        <h2 class="dt-sc-hr-green-title">Our Teachers</h2>
+                        <h2 class="dt-sc-hr-green-title p-3 mt-3"><?= lang('our_staff') ?></h2>
                         <?php foreach ($staffs as $key => $v) : ?>
                         <div class="column dt-sc-one-fourth first">
                             <div class="dt-sc-team">	
@@ -417,29 +417,32 @@
                     <!--container starts-->
                     <div class="container">
                         <h2 class="dt-sc-hr-white-title"><?= lang('footer_row2_news') ?></h2>
-                        <?php foreach ($news as $key => $v) : ?>
-                            <div class="column dt-sc-one-half">
-                                <article class="blog-entry">
-                                    <div class="p-3">
-                                        <div class="entry-thumb">
-                                            <a href="<?= PATH_URL . $this->lang->lang() . '/news-detail/' . $v->slug ?>"><img src="<?= resizeImage(PATH_URL . DIR_UPLOAD_NEWS . $v->image, 700 , 400) ?>" alt="" title=""></a>
-                                        </div>
-                                        <div class="entry-details">
-                                            <div class="entry-title">
-                                                <h3><?php $lang = $this->lang->lang();
-                                                    $title = "title_" . $lang;
-                                                    echo $v->$title ?></h3>
+                        <div class="content-full-width">
+                            <?php foreach ($news as $key => $v) : ?>
+                                <div class="column dt-sc-one-half">
+                                    <article class="blog-entry">
+                                        <div class="p-3">
+                                            <div class="entry-thumb">
+                                                <a href="<?= PATH_URL . $this->lang->lang() . '/news-detail/' . $v->slug ?>"><img src="<?= resizeImage(PATH_URL . DIR_UPLOAD_NEWS . $v->image, 700 , 400) ?>" alt="" title=""></a>
                                             </div>
-                                            <!--entry-metadata ends-->
-                                            <div class="entry-body">
-                                                <p><?php $lang = $this->lang->lang();  $description = "description_" . $lang; echo $v->$description ?></p>
+                                            <div class="entry-details">
+                                                <div class="entry-title">
+                                                    <h3><?php $lang = $this->lang->lang();
+                                                        $title = "title_" . $lang;
+                                                        echo $v->$title ?></h3>
+                                                </div>
+                                                <!--entry-metadata ends-->
+                                                <div class="entry-body">
+                                                    <p><?php $lang = $this->lang->lang();  $description = "description_" . $lang; echo $v->$description ?></p>
+                                                </div>
+                                                <a href="<?= PATH_URL . $this->lang->lang() . '/news-detail/' . $v->slug ?>" class="dt-sc-button small"> <?= lang('btn_viewmore') ?> <span class="fa fa-chevron-circle-right"> </span></a>
                                             </div>
-                                            <a href="<?= PATH_URL . $this->lang->lang() . '/news-detail/' . $v->slug ?>" class="dt-sc-button small"> <?= lang('btn_viewmore') ?> <span class="fa fa-chevron-circle-right"> </span></a>
                                         </div>
-                                    </div>
-                                </article>
-                            </div>
-                        <?php endforeach ?>
+                                    </article>
+                                </div>
+                            <?php endforeach ?>
+                        </div>
+
                     </div>
                     <!--container ends-->
                 </section>

@@ -26,7 +26,8 @@ $lang['btn_contact'] = 'Contact';
 // end home
 $lang['tag_offers'] = 'OFFERS';
 $lang['tag_overview'] = 'OVERVIEW';
-$lang['our_staff'] = 'Our Staff';
+$lang['our_activities'] = 'Activities';
+$lang['our_staff'] = 'Our Teachers';
 // page about
 $lang['about_title'] = 'About Calm Seas Hotel';
 $lang['about_title1'] = 'About Calm Seas Hotel';

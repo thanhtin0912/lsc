@@ -26,6 +26,7 @@ $lang['btn_contact'] = 'Tư vấn miễn phí';
 // end home
 $lang['tag_offers'] = 'Gói ưu đãi';
 $lang['tag_overview'] = 'Tổng quan';
+$lang['our_activities'] = 'Hoạt động tiêu biểu';
 $lang['our_staff'] = 'Đội ngũ giáo viên';
 
 $lang['title_special_offers'] = 'Ưu đãi đặc biệt';
