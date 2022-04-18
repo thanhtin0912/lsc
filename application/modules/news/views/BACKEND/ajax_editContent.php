@@ -1,6 +1,5 @@
 <script type="text/javascript" src="<?=PATH_URL.'assets/js/admin/'?>jquery.slugit.js"></script>
-<script type="text/javascript" src="<?=PATH_URL.'assets/editor/scripts/innovaeditor.js'?>"></script>
-<script type="text/javascript" src="<?=PATH_URL.'assets/editor/scripts/innovamanager.js'?>"></script>
+<script type="text/javascript" src="<?=PATH_URL.'assets/ckeditor/ckeditor.js'?>"></script>
 <script type="text/javascript">
 $(document).ready( function() {
 	$("#titleAdmincp").slugIt({
@@ -9,37 +8,23 @@ $(document).ready( function() {
 		space: '-'
 	});
 
-	$('#content_vnAdmincp').liveEdit({
-		height: 350,
-		css: ['<?=PATH_URL?>assets/editor/bootstrap/css/bootstrap.min.css', '<?=PATH_URL?>assets/editor/bootstrap/bootstrap_extend.css','<?=PATH_URL?>assets/css/styles.css'] /* Apply bootstrap css into the editing area */,
-		fileBrowser: '<?=PATH_URL?>assets/editor/assetmanager/asset.php',
-		returnKeyMode: 3,
-		groups: [
-				["group1", "", ["Bold", "Italic", "Underline", "ForeColor", "RemoveFormat"]],
-				["group2", "", ["Bullets", "Numbering", "Indent", "Outdent", "JustifyLeft", "JustifyCenter", "JustifyRight"]],
-				["group3", "", ["Paragraph", "FontSize", "FontDialog", "TextDialog"]],
-				["group4", "", ["LinkDialog", "ImageDialog", "TableDialog"]],
-				["group5", "", ["Undo", "Redo", "FullScreen", "SourceDialog"]],
-				["group6", "", ["Left", "Center", "Right"]]
-				] /* Toolbar configuration */
-	});
-	$('#content_vnAdmincp').data('liveEdit').startedit();
-	//english
-	$('#content_enAdmincp').liveEdit({
-		height: 350,
-		css: ['<?=PATH_URL?>assets/editor/bootstrap/css/bootstrap.min.css', '<?=PATH_URL?>assets/editor/bootstrap/bootstrap_extend.css','<?=PATH_URL?>assets/css/styles.css'] /* Apply bootstrap css into the editing area */,
-		fileBrowser: '<?=PATH_URL?>assets/editor/assetmanager/asset.php',
-		returnKeyMode: 3,
-		groups: [
-				["group1", "", ["Bold", "Italic", "Underline", "ForeColor", "RemoveFormat"]],
-				["group2", "", ["Bullets", "Numbering", "Indent", "Outdent", "JustifyLeft", "JustifyCenter", "JustifyRight"]],
-				["group3", "", ["Paragraph", "FontSize", "FontDialog", "TextDialog"]],
-				["group4", "", ["LinkDialog", "ImageDialog", "TableDialog"]],
-				["group5", "", ["Undo", "Redo", "FullScreen", "SourceDialog"]],
-				["group6", "", ["Left", "Center", "Right"]]
-				] /* Toolbar configuration */
-	});
-	$('#content_enAdmincp').data('liveEdit').startedit();
+	CKEDITOR.replace( 'content_vnAdmincp', {
+        filebrowserBrowseUrl: '<?=PATH_URL?>assets/ckfinder/ckfinder.html',
+        filebrowserImageBrowseUrl: '<?=PATH_URL?>assets/ckfinder/ckfinder.html?type=Images',
+        filebrowserFlashBrowseUrl: '<?=PATH_URL?>assets/ckfinder/ckfinder.html?type=Flash',
+        filebrowserUploadUrl: '<?=PATH_URL?>assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+        filebrowserImageUploadUrl: '<?=PATH_URL?>assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+        filebrowserFlashUploadUrl: '<?=PATH_URL?>assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+    } );
+
+    CKEDITOR.replace( 'content_enAdmincp', {
+        filebrowserBrowseUrl: '<?=PATH_URL?>assets/ckfinder/ckfinder.html',
+        filebrowserImageBrowseUrl: '<?=PATH_URL?>assets/ckfinder/ckfinder.html?type=Images',
+        filebrowserFlashBrowseUrl: '<?=PATH_URL?>assets/ckfinder/ckfinder.html?type=Flash',
+        filebrowserUploadUrl: '<?=PATH_URL?>assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+        filebrowserImageUploadUrl: '<?=PATH_URL?>assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+        filebrowserFlashUploadUrl: '<?=PATH_URL?>assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+    } );
 });
 
 function save(){
@@ -47,8 +32,8 @@ function save(){
 		beforeSubmit:  showRequest,  // pre-submit callback 
 		success:       showResponse  // post-submit callback 
     };
-	$('#content_vnAdmincp').val($('#content_vnAdmincp').data('liveEdit').getXHTMLBody());
-	$('#content_enAdmincp').val($('#content_enAdmincp').data('liveEdit').getXHTMLBody());
+	$('#content_vnAdmincp').val(CKEDITOR.instances['fullinfoAdmincp'].getData());
+	$('#content_enAdmincp').val(CKEDITOR.instances['shortinfoAdmincp'].getData());
 	$('#frmManagement').ajaxSubmit(options);
 }
 

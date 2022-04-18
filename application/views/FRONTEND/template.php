@@ -73,7 +73,7 @@
                                 <a class="dt-menu-expand">+</a>
                             </li>
                             <li class="yellow"> <a href="<?= PATH_URL ?><?=$this->lang->lang();?>/news"><?=lang('menu_news')?></a></li>    
-                            <li class="lavender"><a href="<?= PATH_URL ?><?=$this->lang->lang();?>/document"><?=lang('menu_document')?></a></li>
+                            <li class="lavender"><a href="<?= PATH_URL ?><?=$this->lang->lang();?>/library"><?=lang('menu_document')?></a></li>
                             <li class="pink"><a href="<?= PATH_URL ?><?=$this->lang->lang();?>/contact"><?=lang('menu_contact')?></a></li>
                         </ul>
                     </nav>

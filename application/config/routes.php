@@ -74,6 +74,9 @@ $route['^(en|vn)/news-detail/(:any)'] 	  = "home/news_detail/$2";
 $route['^(en|vn)/projects'] 	= "home/projects";
 $route['^(en|vn)/project/(:any)'] 	= "home/project_detail/$2";
 //
+$route['^(en|vn)/library'] 	= "home/library";
+$route['^(en|vn)/library-image/(:any)'] 	= "home/library_detail/$2";
+//
 $route['^(en|vn)/service/(:any)'] 	  = "home/services_detail/$2";
 //
 $route['^(en|vn)/products'] 	= "home/products";
