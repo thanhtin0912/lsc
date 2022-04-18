@@ -14,6 +14,8 @@ class Home_model extends CI_Model {
 	private $table_service 		= 'tbl_services';
 	private $table_parent		= 'tbl_cataparent';
 	private $table_staffs		= 'tbl_staffs';
+	private $table_seo 			= 'tbl_seo';
+
 	function getInfoSite(){
 		$this->db->select('*');
 		$query = $this->db->get(PREFIX.$this->table_site);
@@ -165,7 +167,7 @@ class Home_model extends CI_Model {
 	}
 
 	function getDetailNews($link){
-		$this->db->select('n.*,c.name_vn as cataname_vn, c.name_en as cataname_en');
+		$this->db->select('n.*,c.name_vn as cata_vn, c.name_en as cata_en');
 		$this->db->where('n.status',1);
 		$this->db->where('n.slug',$link);
 		$this->db->from(PREFIX.$this->table_news." n");
@@ -384,6 +386,20 @@ class Home_model extends CI_Model {
 		$query = $this->db->get();
 		if($query->result()){
 			return $query->result();
+		}else{
+			return false;
+		}
+	}
+
+
+	function getInfoSeoPage($slug){
+		$this->db->select('*');
+		$this->db->where('slug', $slug);
+		$this->db->from(PREFIX.$this->table_seo);
+		$query = $this->db->get();
+		if($query->result()){
+			$res = $query->result();
+			return $res[0];
 		}else{
 			return false;
 		}

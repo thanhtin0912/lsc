@@ -26,7 +26,11 @@ class Home extends MX_Controller
 		$data['staffs'] = $this->home->getTopStaffs();
 		$data['news'] = $this->home->getList4LatestNews();
 		//
-		$this->template->write('title', 'Cty TNHH Hải Dương');
+		$this->template->write('title',$data["info"][0]->name);
+		$this->template->write('meta_description',$data["info"][0]->description_vn);
+		$this->template->write('meta_url', PATH_URL);
+		$this->template->write('meta_image', PATH_URL . DIR_UPLOAD_BANNER . $data["banner"][0]->image);
+
 		$this->template->write_view('content', 'index', $data);
 		$this->template->render();
 	}
@@ -36,36 +40,17 @@ class Home extends MX_Controller
 		$data['info'] = $this->home->getInfoSite();
 		$data['services'] = $this->home->getListServices();
 		// 
-		$data['pages'] = $this->home->getDataPages('GIOITHIEU');
+		$data['page'] = $this->home->getInfoSeoPage('about');
+		$data['staffs'] = $this->home->getTopStaffs();
 		//
-		$this->template->write('title', 'Giới thiệu - Cty TNHH Hải Dương');
+		$this->template->write('title',$data["page"]->seo_title);
+		$this->template->write('meta_description',$data["page"]->seo_description);
+		$this->template->write('meta_url', $data["page"]->slug);
+		$this->template->write('meta_image', PATH_URL . DIR_UPLOAD_SEOS . $data["page"]->image);
 		$this->template->write_view('content', 'about', $data);
 		$this->template->render();
 	}
 
-	public function design()
-	{
-		$data['info'] = $this->home->getInfoSite();
-		$data['services'] = $this->home->getListServices();
-		// 
-		$data['pages'] = $this->home->getDataPages('THIETKE');
-		//
-		$this->template->write('title', 'Thiết kế- Cty TNHH Hải Dương');
-		$this->template->write_view('content', 'design', $data);
-		$this->template->render();
-	}
-
-	public function construct()
-	{
-		$data['info'] = $this->home->getInfoSite();
-		$data['services'] = $this->home->getListServices();
-		// 
-		$data['pages'] = $this->home->getDataPages('XAYDUNG');
-		//
-		$this->template->write('title', 'Xây dựng - Cty TNHH Hải Dương');
-		$this->template->write_view('content', 'construct', $data);
-		$this->template->render();
-	}
 
 	public function library()
 	{
@@ -73,8 +58,12 @@ class Home extends MX_Controller
 		$data['services'] = $this->home->getListServices();
 		// 
 		$data['pages'] = $this->home->getDataPages('XAYDUNG');
+		$data['page'] = $this->home->getInfoSeoPage('library');
 		//
-		$this->template->write('title', 'Xây dựng - Cty TNHH Hải Dương');
+		$this->template->write('title',$data["page"]->seo_title);
+		$this->template->write('meta_description',$data["page"]->seo_description);
+		$this->template->write('meta_url', $data["page"]->slug);
+		$this->template->write('meta_image', PATH_URL . DIR_UPLOAD_SEOS . $data["page"]->image);
 		$this->template->write_view('content', 'library', $data);
 		$this->template->render();
 	}
@@ -85,8 +74,8 @@ class Home extends MX_Controller
 		$data['info'] = $this->home->getInfoSite();
 		$data['services'] = $this->home->getListServices();
 		// 
-		// $data['news'] = $this->home->getDetailNews($link);
-		// $news = $this->home->getDetailNews($link);
+		$data['news'] = $this->home->getDetailNews($link);
+		$news = $this->home->getDetailNews($link);
 		// $data['likenews'] = $this->home->getListNewsLike($link);
 		//
 		$this->template->write('title', $news[0]->title_vn);
@@ -98,9 +87,12 @@ class Home extends MX_Controller
 		$data['info'] = $this->home->getInfoSite();
 		$data['services'] = $this->home->getListServices();
 		// 
-		$data['pages'] = $this->home->getDataPages('LIENHE');
+		$data['page'] = $this->home->getInfoSeoPage('contact');
 		//
-		$this->template->write('title', 'Liên hệ - Cty TNHH Hải Dương');
+		$this->template->write('title',$data["page"]->seo_title);
+		$this->template->write('meta_description',$data["page"]->seo_description);
+		$this->template->write('meta_url', $data["page"]->slug);
+		$this->template->write('meta_image', PATH_URL . DIR_UPLOAD_SEOS . $data["page"]->image);
 		$this->template->write_view('content', 'contact', $data);
 		$this->template->render();
 	}
@@ -112,8 +104,12 @@ class Home extends MX_Controller
 		$data['info'] = $this->home->getInfoSite();
 		$data['services'] = $this->home->getListServices();
 		//
+		$data['page'] = $this->home->getInfoSeoPage('news');
 		//
-		$this->template->write('title', 'Tin tức - Cty TNHH Hải Dương');
+		$this->template->write('title',$data["page"]->seo_title);
+		$this->template->write('meta_description',$data["page"]->seo_description);
+		$this->template->write('meta_url', $data["page"]->slug);
+		$this->template->write('meta_image', PATH_URL . DIR_UPLOAD_SEOS . $data["page"]->image);
 		$this->template->write_view('content', 'news', $data);
 		$this->template->render();
 	}
@@ -146,10 +142,12 @@ class Home extends MX_Controller
 		$data['services'] = $this->home->getListServices();
 		// 
 		$data['news'] = $this->home->getDetailNews($link);
-		$news = $this->home->getDetailNews($link);
 		$data['likenews'] = $this->home->getListNewsLike($link);
 		//
-		$this->template->write('title', $news[0]->title_vn);
+		$this->template->write('title', $data['news'][0]->title_vn);
+		$this->template->write('meta_description', $data['news'][0]->description_vn);
+		$this->template->write('meta_url', $data['news'][0]->slug);
+		$this->template->write('meta_image', PATH_URL . DIR_UPLOAD_NEWS . $data['news'][0]->image);
 		$this->template->write_view('content', 'news-detail', $data);
 		$this->template->render();
 	}
@@ -161,10 +159,11 @@ class Home extends MX_Controller
 		$data['services'] = $this->home->getListServices();
 		// 
 		$data['result'] = $this->home->getDetailService($link);
-		$result = $this->home->getDetailService($link);
-		$data['cataproduct'] = $this->home->getDataCatagories('CATA_PRODUCT');
 		//
-		$this->template->write('title', $result[0]->title_vn);
+		$this->template->write('title', $data['result'][0]->title_vn);
+		$this->template->write('meta_description', $data['result'][0]->description_vn);
+		$this->template->write('meta_url', $data['result'][0]->slug);
+		$this->template->write('meta_image', PATH_URL . DIR_UPLOAD_SERVICES . $data['result'][0]->image);
 		$this->template->write_view('content', 'service-detail', $data);
 		$this->template->render();
 	}

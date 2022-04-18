@@ -32,8 +32,8 @@ function save(){
 		beforeSubmit:  showRequest,  // pre-submit callback 
 		success:       showResponse  // post-submit callback 
     };
-	$('#content_vnAdmincp').val(CKEDITOR.instances['fullinfoAdmincp'].getData());
-	$('#content_enAdmincp').val(CKEDITOR.instances['shortinfoAdmincp'].getData());
+	$('#content_vnAdmincp').val(CKEDITOR.instances['content_vnAdmincp'].getData());
+	$('#content_enAdmincp').val(CKEDITOR.instances['content_enAdmincp'].getData());
 	$('#frmManagement').ajaxSubmit(options);
 }
 

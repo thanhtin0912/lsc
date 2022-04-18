@@ -127,9 +127,6 @@ class News_model extends CI_Model {
 				'content_vn'=> trim($this->input->post('content_vnAdmincp')),
 				'content_en'=> trim($this->input->post('content_enAdmincp')),
 				'highlight'=> $this->input->post('highlightAdmincp'),
-				// 'seo_title'=> trim($this->input->post('seo_titleAdmincp', true)),
-				// 'seo_keywords'=> trim($this->input->post('seo_keywordsAdmincp', true)),
-				// 'seo_description'=> trim($this->input->post('seo_descriptionAdmincp', true)),
 				'status'=> $this->input->post('statusAdmincp'),
 				'created'=> date('Y-m-d H:i:s',time()),
 			);

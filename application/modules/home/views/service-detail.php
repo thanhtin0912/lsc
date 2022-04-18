@@ -1,78 +1,99 @@
-<style type="text/css">
-    .main-menu .navigation > li:hover > a, .main-menu .navigation > li.services > a {
-      color: #006699;
-      opacity: 1;
+<style>
+    .blog-entry {
+        color: #5c5c5c ! important;
+        margin-bottom: 10px !important;
+    }
+    .entry-author p {
+        display: inline-block;
+        clear: none;
+        background: none;
+        margin: 0px;
+        line-height: inherit;
+        padding: 0px;
+        color: #b6b6b6
     }
 </style>
-<!--Start breadcrumb area-->     
-<section class="breadcrumb-area" style="background-image: url(<?= PATH_URL ?>assets/images/breadcrumb/breadcrumb-bg.jpg);">
-	<div class="container-fluid text-center">
-		<h1><?php $lang = $this->lang->lang(); $title = "title_".$lang; echo $result[0]->$title ?></h1>
-		<div class="breadcrumb-bottom">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="left pull-left">
-                            <ul>
-                                <li><a href="<?=PATH_URL.$this->lang->lang();?>/"><?=lang('menu_home')?></a></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
-                                <li><?php $lang = $this->lang->lang(); $title = "title_".$lang; echo $result[0]->$title ?></li>
-                            </ul>    
-                        </div>  
-                    </div>
-                </div>
+<!--main starts-->
+<div id="main">
+    <!--breadcrumb-section starts-->
+    <div class="breadcrumb-section">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="<?=PATH_URL.$this->lang->lang();?>/"><?=lang('menu_home')?></a>
+                <span class="fa fa-angle-double-right"></span>
+                <span class="current"><?=lang('menu_course')?></span>
             </div>
-		</div>
-	</div>
-</section>
-<!--End breadcrumb area-->
-
-<!--Start blog area-->
-<section id="blog-area" class="blog-single-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
-                <div class="blog-post">
-                    <!--Start single blog post-->
-                    <div class="single-blog-item">
-                        <div class="img-holder">
-                            <img src="<?=PATH_URL.DIR_UPLOAD_SERVICES.$result[0]->image ?>" alt="Awesome Image">
-                        </div>
-                        <div class="text-holder">
-                            <h3 class="blog-title"><?php $lang = $this->lang->lang(); $title = "title_".$lang; echo $result[0]->$title ?></h3>
-                            <div class="text">
-                                <p class="mar-bottom"><?php $lang = $this->lang->lang(); $description = "description_".$lang; echo $result[0]->$description ?></p>
-                                <?php $lang = $this->lang->lang(); $content = "content_".$lang; echo $result[0]->$content ?>
-                            </div>
-                        </div>    
-
-                    </div>
-                    <!--End single blog post-->
-                </div>
-            </div>
-            <!--Start sidebar Wrapper-->
-            <div class="col-lg-3 col-md-4 col-sm-7 col-xs-12">
-                <div class="sidebar-wrapper">
-                    <!--Start single sidebar-->
-                    <!--Start single sidebar--> 
-                    <div class="single-sidebar">
-                        <div class="sidebar-title">
-                            <h1>Categories</h1>
-                        </div>
-                        <ul class="categories clearfix">
-                            <?php foreach ($cataproduct as $key => $v): ;?>
-                                <li><a href="<?=PATH_URL.$this->lang->lang().'/cata/'.$v->slug?>"><i class="fa fa-angle-right" aria-hidden="true"></i><?php $lang = $this->lang->lang(); $name = "name_".$lang; echo $v->$name ?><span>(<?=$v->total ?>)</span></a></li>
-                            <?php endforeach ?>
-                        </ul>
-                    </div>
-                    <!--End single sidebar-->
-
-                   
-                </div>    
-            </div>
-            <!--End Sidebar Wrapper-->  
         </div>
     </div>
-</section> 
-<!--End blog area-->                                                                        
-  
+    <!--container starts-->
+    <div class="container">
+        <!--primary starts-->
+        <section id="primary" class="with-sidebar">
+            <article class="blog-entry">
+                <div class="blog-entry-inner">	
+                    <div class="entry-thumb">
+                        <img src="<?= PATH_URL . DIR_UPLOAD_SERVICES . $result[0]->image ?>" width="100%">
+                    </div>		
+                    <div class="entry-details">	
+                        <div class="entry-title">
+                            <h3><a href="#"><?php $lang = $this->lang->lang(); $title = "title_".$lang; echo $result[0]->$title ?> </a></h3>
+                        </div>		
+                        <!--entry-metadata ends-->	
+                        <div class="entry-body">
+                            <blockquote class="mb-3">
+                                <q><?php $lang = $this->lang->lang(); $description = "description_".$lang; echo $result[0]->$description ?></q> 
+                            </blockquote>
+                            <?php $lang = $this->lang->lang(); $content = "content_".$lang; echo $result[0]->$content ?>
+                        </div>	 		
+                    </div>	
+                </div>
+            </article>
+        </section>
+        <!--primary ends-->
+        
+        <!--secondary starts-->
+        <section id="secondary">
+            <aside class="widget widget_categories">
+                <h3 class="widgettitle"><?=lang('menu_course')?></h3>
+                <ul>
+                    <?php foreach ($services as $key => $v) :; ?>
+                        <li><a href="<?= PATH_URL . $this->lang->lang() . '/service/' . $v->slug ?>">
+                        <?php $lang = $this->lang->lang();
+                        $title = "title_" . $lang;
+                        echo $v->$title ?></a>
+                        </li>
+                    <?php endforeach ?>
+                </ul>
+            </aside>
+            
+        </section>
+        <!--secondary ends-->
+        
+    </div>
+    <!--container ends-->
+</div>
+<!--main ends-->
+<!--fullwidth-background starts-->
+<section class="fullwidth-background dt-sc-parallax-section turquoise-bg">
+    <!--container starts-->
+    <div class="container">
+        <form class="admission-form p-3" novalidate="novalidate">
+            <p class="dt-sc-one-fourth column first">
+                <input id="name" name="txtname" type="text" placeholder="Name" required="">
+            </p>
+            <p class="dt-sc-one-fourth column">
+                <input id="age" name="txtPhone" type="text" placeholder="Phone" required="">
+            </p>
+            <p class="dt-sc-one-fourth column">
+                <input id="course" name="txtcourse" type="text" placeholder="Course" required="">
+            </p>
+            <p class="dt-sc-one-fourth column">
+                <input id="course" name="txtMail" type="text" placeholder="Mail" required="">
+            </p>
+            <div id="ajax_admission_msg"> </div>
+            <p class="aligncenter pt-3">
+                <input class="px-5" name="submit" type="submit" id="submit" value="<?= lang('btn_contact') ?>">
+            </p>
+        </form>
+    </div>
+</section>

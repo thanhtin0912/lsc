@@ -7,10 +7,15 @@
 <head>
 <meta http-equiv="content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> 
-<title>Kids Life- Home</title>
-<meta name="description" content="">
-<meta name="author" content="">
-<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+<title><?= $title ?></title>
+<meta name="description" content="<?=$meta_description?>">
+<meta name="url" content="<?=$meta_url?>">  
+<meta property="og:image" content="<?=$meta_image?>">
+<meta property="og:image:width" content="700">
+<meta property="og:image:height" content="500">
+
+<link rel="shortcut icon" href="<?= PATH_URL; ?>favicon.png" type="image/x-icon" />
 <link href="<?= PATH_URL; ?>assets/css/frontend/style.css" rel="stylesheet" type="text/css">
 <link href="<?= PATH_URL; ?>assets/css/frontend/shortcodes.css" rel="stylesheet" type="text/css">
 <link href="<?= PATH_URL; ?>assets/css/frontend/responsive.css" rel="stylesheet" type="text/css">

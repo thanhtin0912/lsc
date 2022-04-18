@@ -2633,7 +2633,7 @@ header #menu-container ul.dt-sc-social-icons {
 }
 
 .blog-entry-inner {
-	padding: 0px 0px 0px 122px;
+	padding: 0px;
 }
 
 .entry-meta {
@@ -2723,7 +2723,6 @@ header #menu-container ul.dt-sc-social-icons {
 .comments,
 .entry_format {
 	margin: 0px 0px 10px 0px;
-	float: right;
 	color: #FFFFFF;
 	display: block;
 	padding: 0px 18px 0px 16px;
