@@ -34,7 +34,7 @@
                     <div class="entry-thumb">
                         <a href="#"><img src="<?=PATH_URL.DIR_UPLOAD_NEWS.$news[0]->image ?>" alt="" title=""></a>
                     </div>		
-                    <div class="entry-details">	
+                    <div class="entry-details px-3">	
                         <div class="entry-title">
                             <h3><a href="#"><?php $lang = $this->lang->lang(); $title = "title_".$lang; echo $news[0]->$title ?> </a></h3>
 

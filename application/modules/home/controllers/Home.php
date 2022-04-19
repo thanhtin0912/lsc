@@ -41,6 +41,7 @@ class Home extends MX_Controller
 		$data['services'] = $this->home->getListServices();
 		// 
 		$data['page'] = $this->home->getInfoSeoPage('about');
+		$data['about'] = $this->home->getDataPages('about');
 		$data['staffs'] = $this->home->getTopStaffs();
 		//
 		$this->template->write('title',$data["page"]->seo_title);

@@ -405,7 +405,7 @@
                                 <div class="team-details">
                                     <h4> <?= $v->name ?> </h4>
                                     <h6> <?= $v->position ?> </h6>
-                                    <p> Phasellus lorem augue, vulputate vel orci id, ultricies aliquet risus. </p>
+                                    <p><?php $lang = $this->lang->lang(); $description = "description_" . $lang; echo $v->$description ?>  </p>
                                 </div>
                             </div>
                         </div>

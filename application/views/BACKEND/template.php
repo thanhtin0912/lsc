@@ -133,7 +133,7 @@
                         <span class="title">Quản lý trang chủ</span>
                         <span class="arrow"></span>
                     </a>
-                    <ul class="sub-menu" <?php if (($this->uri->segment(2) == 'banners') ||  ($this->uri->segment(2) == 'comments' ) ||  ($this->uri->segment(2) == 'infos')) { print "style='display: block;' ";} ?>>
+                    <ul class="sub-menu" <?php if (($this->uri->segment(2) == 'banners') ||  ($this->uri->segment(2) == 'comments' ) ||  ($this->uri->segment(2) == 'infos') || ($this->uri->segment(2) == 'static_pages')) { print "style='display: block;' ";} ?>>
                         <li class="nav-item  last<?php if ($this->uri->segment(2) == 'Banners') { print 'active open';} ?>">
                             <a href="<?= PATH_URL_ADMIN . 'banners' ?>" class="nav-link ">
                                 <i class="fa fa-arrow-right"></i><span class="title">Banner</span>
@@ -149,6 +149,11 @@
                                 <i class="fa fa-arrow-right"></i><span class="title">Ý kiến học viên </span>
                             </a>
                         </li>
+                        <li class="nav-item  <?php if ($this->uri->segment(2) == 'static_pages') { print ' active open';} ?>">
+                            <a href="<?= PATH_URL_ADMIN . 'static_pages' ?>">
+                                <i class="fa fa-arrow-right"></i><span class="title">Quản lý pages</span>
+                            </a>
+                    </li>
                     </ul>
                 </li>
 

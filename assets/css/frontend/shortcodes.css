@@ -512,6 +512,13 @@ transform:scale(0); -webkit-transform:scale(0); -moz-transform:scale(0); transit
   float: left;
   width: 100%;
 }
+.dt-sc-team .team-details p{
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+}
 
 .dt-sc-team h4 {
   color: #252525;

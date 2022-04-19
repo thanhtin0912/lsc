@@ -1609,6 +1609,7 @@ header #menu-container ul.dt-sc-social-icons {
 	line-height: inherit;
 	font-size: 32px;
 	font-weight: bold;
+	text-transform: uppercase;
 }
 
 #main .dt-sc-hr-white-title {
@@ -1621,6 +1622,7 @@ header #menu-container ul.dt-sc-social-icons {
 	margin: 0px 0px 30px;
 	line-height: inherit;
 	font-weight: bold;
+	text-transform: uppercase;
 }
 
 #main .fullwidth-background.product_bg .dt-sc-hr-white-title {

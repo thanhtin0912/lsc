@@ -24,6 +24,7 @@
 <!--prettyPhoto-->
 <link href="<?= PATH_URL; ?>assets/css/frontend/prettyPhoto.css" rel="stylesheet" type="text/css"/>   
 <!--  -->
+<link href="<?= PATH_URL; ?>assets/css/frontend/report.css" rel="stylesheet" type="text/css" /> 
 <link href="<?= PATH_URL; ?>assets/css/default.css" rel="stylesheet" type="text/css" /> 
 
 <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -33,6 +34,7 @@
 <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jssor.slider-28.1.0.min.js"></script>
 <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/modernizr-2.6.2.min.js"></script>
+
 </head>
 <input type="hidden" value="<?=$this->security->get_csrf_hash()?>" id="csrf_token" />
 <body class="main">
@@ -156,12 +158,10 @@
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v7.0&appId=589670775117215&autoLogAppEvents=1"></script>
     <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.js"></script>
 	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery-migrate.min.js"></script>
-
-    
 	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery-easing-1.3.js"></script>
     <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.sticky.js"></script>
-    <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.nicescroll.min.js"></script>
+    <!-- <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.nicescroll.min.js"></script> -->
     <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.inview.js"></script>
     <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/validation.js"></script>
     <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.tipTip.minified.js"></script>
@@ -183,5 +183,6 @@
         var root = '<?=PATH_URL?>';
         var csrf_token;
     </script>
+    
 </body>
 </html>

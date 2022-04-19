@@ -127,7 +127,7 @@ class Home_model extends CI_Model {
 
 	function getDataPages($type){
 		$this->db->select('*');
-		$this->db->where('type',$type);
+		$this->db->where('slug',$type);
 		$query = $this->db->get(PREFIX.$this->table_static);
 		if($query->result()){
 			return $query->result();
