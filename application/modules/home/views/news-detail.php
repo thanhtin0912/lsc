@@ -32,7 +32,7 @@
             <article class="blog-entry">
                 <div class="blog-entry-inner">	
                     <div class="entry-thumb">
-                        <a href="#"><img src="<?=PATH_URL.DIR_UPLOAD_NEWS.$news[0]->image ?>" alt="" title=""></a>
+                        <a href="#"><img src="<?=PATH_URL.DIR_UPLOAD_NEWS.$news[0]->image ?>" alt="" title="" width="100%"></a>
                     </div>		
                     <div class="entry-details px-3">	
                         <div class="entry-title">

@@ -147,13 +147,19 @@
         <!--footer ends-->
         
     </div>
+    <div class="hotline">
+        <div id="phonering-alo-phoneIcon" class="phonering-alo-phone phonering-alo-green phonering-alo-show">
+        <div class="phonering-alo-ph-circle"></div>
+        <div class="phonering-alo-ph-circle-fill"></div>
+        <div class="phonering-alo-ph-img-circle">
+            <a class="pps-btn-img" title="Liên hệ" href="tel:<?=$info[0]->phoneother?>">
+            <img src="<?= PATH_URL; ?>assets/img/hotline.png" alt="Liên hệ" class="img-responsive" width="50"></a>
+        </div>
+        </div>
+    </div>
     <!--wrapper ends-->
     <a href="" title="Go to Top" class="back-to-top">To Top ↑</a>
     <!--Java Scripts-->
-    <script type="text/javascript">
-        var root = '<?=PATH_URL?>';
-        var csrf_token;
-    </script>
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v7.0&appId=589670775117215&autoLogAppEvents=1"></script>
     <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.js"></script>

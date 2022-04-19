@@ -1,86 +1,100 @@
 <style type="text/css">
-    .main-menu .navigation > li:hover > a, .main-menu .navigation > li.contact > a {
-      color: #006699;
-      opacity: 1;
+    .contact-info {
+        clear: both;
+        float: left;
+        width: 100%;
+        margin: 0px 0px 10px;
+        padding: 0px;
+        border: 0px;
+        padding: 5px 0;
+    }
+    .contact-info .fa{
+        color: #008c99;
+        padding-right: 10px;
+        font-size: 18px;
+    }
+    h3.widgettitle {
+        padding-bottom: 25px;
+    }
+    .class_hours {
+        background: none !important;
     }
 </style>
-<!--Start breadcrumb area-->     
-<section class="breadcrumb-area" style="background-image: url(<?= PATH_URL ?>assets/images/breadcrumb/breadcrumb-bg.jpg);">
-	<div class="container-fluid text-center">
-		<h1><?=lang('menu_contact')?></h1>
-		<div class="breadcrumb-bottom">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="left pull-left">
-                            <ul>
-                                <li><a href="<?=$this->lang->lang();?>/"><?=lang('menu_home')?></a></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
-                                <li><?=lang('menu_contact')?></li>
-                            </ul>    
-                        </div>   
-                    </div>
-                </div>
-            </div>
-		</div>
-	</div>
-</section>
-<!--End breadcrumb area-->
 
-<!--Start contact v1 area-->
-<section class="contact-v2-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="contact-info">
-                    <div class="title">
-                        <h3>Corporate Office</h3>
-                    </div>
-                    <ul class="contact-address">
-                        <li>
-                            <div class="icon-holder">
-                                <span class="flaticon-building"></span>
-                            </div>
-                            <div class="text-holder">
-                                <p><?php $lang = $this->lang->lang(); $address = "address_".$lang; echo $info[0]->$address ?></p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="icon-holder">
-                                <span class="flaticon-technology"></span>
-                            </div>
-                            <div class="text-holder">
-                                <p>+ (<?=$info[0]->phone?>)</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="icon-holder">
-                                <span class="flaticon-new-email-outline"></span>
-                            </div>
-                            <div class="text-holder">
-                                <p><?=$info[0]->mail?></p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="icon-holder">
-                                <span class="flaticon-clock"></span>
-                            </div>
-                            <div class="text-holder">
-                                <p>Thứ 2 - thứ 7 từ 08.00 đến 17.00<br> chủ nhật nghỉ</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+<!--End breadcrumb area-->
+<div id="main">
+    <!--breadcrumb-section starts-->
+    <div class="breadcrumb-section">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="<?= PATH_URL . $this->lang->lang(); ?>/"><?= lang('menu_home') ?></a>
+                <span class="fa fa-angle-double-right"></span>
+                <span class="current"><?= lang('menu_contact') ?></span>
             </div>
-            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                <div class="google-map-area">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3898.256680925624!2d109.20890175601981!3d12.29849340213121!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317069165874d169%3A0xb2e3246af01fa005!2zQ8O0bmcgdHkgVE5ISCBL4bu5IHRodeG6rXQgSOG6o2kgRMawxqFuZw!5e0!3m2!1svi!2s!4v1568348794815!5m2!1svi!2s" width=100% height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
-                </div>
-            </div> 
         </div>
     </div>
-</section>                                                                     
-<!--End contact v1 area-->
+    <section id="primary" class="content-full-width">
+        <div class="container"> 
+            <div class="content-full-width pt-4">
+                <div class="column dt-sc-one-third first">
+                    <aside class="widget widget_text">
+                    <h3 class="widgettitle green_sketch mb-2">Cơ sở 1</h3>
+                        <div class="textwidget">
+                            <p class="contact-info"><span class="fa fa-map-marker"></span> 174 Ngô Gia Tự, Tp. Nha Trang, Khánh Hòa </p>
+                            <p class="contact-info"><span class="fa fa-phone"></span> 0258 6555 999 </p>
+                            <p class="contact-info"><span class="fa fa-envelope"></span><a href="mailto:letsstartcenter@gmail.com"> letsstartcenter@gmail.com </a></p>
+                        </div>
+                    </aside>
+                </div>
+                <div class="column dt-sc-one-third">
+                    <aside class="widget widget_text">
+                    <h3 class="widgettitle green_sketch mb-2">Cơ sở 2</h3>
+                        <div class="textwidget">
+                            <p class="contact-info"><span class="fa fa-map-marker"></span> 174 Ngô Gia Tự, Tp. Nha Trang, Khánh Hòa </p>
+                            <p class="contact-info"><span class="fa fa-phone"></span> 0258 6555 999 </p>
+                            <p class="contact-info"><span class="fa fa-envelope"></span><a href="mailto:letsstartcenter@gmail.com"> letsstartcenter@gmail.com </a></p>
+                        </div>
+                    </aside>
+                </div>
+                <div class="column dt-sc-one-third">
+                    <aside class="widget widget_text mb-2">
+                        <h3 class="widgettitle green_sketch"> Class hours (Monday to Sunday)</h3>
+                        <ul class="class_hours">
+                            <li>Sáng<span>9am - 3pm</span></li>
+                            <li>Chiều<span>9am - 3pm</span></li>
+                        </ul>
+                    </aside>
+                </div>     
+            
+            </div>
+        </div>
+    </section>
+    <section id="primary" class="content-full-width">
+        <div class="container"> 
+            <div class="contact_form_outer">
+                <form name="frcontact" class="contact-form" method="post" action="php/contactmail.php">
+                    <h2>We'd Like to Hear From You!</h2>
+                    <p class="column dt-sc-one-third first">
+                        <input id="name" name="txtname" type="text" placeholder="Name" required="">
+                    </p>
+                    <p class="column dt-sc-one-third">
+                        <input id="email" name="txtemail" type="email" placeholder="Email ID" required="">
+                    </p>
+                    <p class="column dt-sc-one-third">
+                        <input id="subject" name="txtsubject" type="text" placeholder="Subject" required="">
+                    </p>
+                    <p>
+                        <textarea id="comment" name="txtmessage" placeholder="Message"></textarea>
+                    </p>
+                    <div id="ajax_contact_msg"> </div>
+                    <p>
+                        <input name="submit" type="submit" id="submit" class="dt-sc-button medium" value="Send Email">
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
 <!-- PAGE BANNER SECTION -->
 <script type="text/javascript">
     function message(){
@@ -131,31 +145,3 @@
         }); 
     }
 </script>
- 
-<!--Start contact v2 form area-->
-<section class="contact-v2-form-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="contact-v2-form">
-                    <div class="sec-title text-center">
-                        <h2><?=lang('send_message')?></h2>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <input type="text" id="name" placeholder="Name*">
-                            <input type="text" id="mail" placeholder="Email*">
-                            <input type="text" id="phone" placeholder="Phone">
-                        </div>
-                        <div class="col-md-6">
-                            <textarea id="message"  placeholder="Your Messge..."></textarea>
-                            <button class="thm-btn bg-cl-1" onclick="message()">Send Message</button>
-                            <p id="form-messege" style="color: red; display: none;"> Vui lòng chờ hệ thống xử lý</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>                                                                                           
-<!--End contact v2 form area--> 

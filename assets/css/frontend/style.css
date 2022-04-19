@@ -3771,6 +3771,9 @@ footer h3.widgettitle.green_sketch {
 	background: url(../../images/green_sketch.png) left bottom no-repeat;
 }
 
+.widgettitle.green_sketch {
+	background: url(../../images/green_sketch.png) left bottom no-repeat;
+}
 footer h3.widgettitle.yellow_sketch {
 	background: url(../../images/yellow_sketch.png) left bottom no-repeat;
 }
