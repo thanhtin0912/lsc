@@ -34,40 +34,9 @@
         </div>
     </div>
     <section id="primary" class="content-full-width">
-        <div class="container"> 
-            <div class="content-full-width pt-4">
-                <div class="column dt-sc-one-third first">
-                    <aside class="widget widget_text">
-                    <h3 class="widgettitle green_sketch mb-2">Cơ sở 1</h3>
-                        <div class="textwidget">
-                            <p class="contact-info"><span class="fa fa-map-marker"></span> 174 Ngô Gia Tự, Tp. Nha Trang, Khánh Hòa </p>
-                            <p class="contact-info"><span class="fa fa-phone"></span> 0258 6555 999 </p>
-                            <p class="contact-info"><span class="fa fa-envelope"></span><a href="mailto:letsstartcenter@gmail.com"> letsstartcenter@gmail.com </a></p>
-                        </div>
-                    </aside>
-                </div>
-                <div class="column dt-sc-one-third">
-                    <aside class="widget widget_text">
-                    <h3 class="widgettitle green_sketch mb-2">Cơ sở 2</h3>
-                        <div class="textwidget">
-                            <p class="contact-info"><span class="fa fa-map-marker"></span> 174 Ngô Gia Tự, Tp. Nha Trang, Khánh Hòa </p>
-                            <p class="contact-info"><span class="fa fa-phone"></span> 0258 6555 999 </p>
-                            <p class="contact-info"><span class="fa fa-envelope"></span><a href="mailto:letsstartcenter@gmail.com"> letsstartcenter@gmail.com </a></p>
-                        </div>
-                    </aside>
-                </div>
-                <div class="column dt-sc-one-third">
-                    <aside class="widget widget_text mb-2">
-                        <h3 class="widgettitle green_sketch"> Class hours (Monday to Sunday)</h3>
-                        <ul class="class_hours">
-                            <li>Sáng<span>9am - 3pm</span></li>
-                            <li>Chiều<span>9am - 3pm</span></li>
-                        </ul>
-                    </aside>
-                </div>     
-            
-            </div>
-        </div>
+    <?php $lang = $this->lang->lang();
+                $content = "content_" . $lang;
+                echo $about[0]->$content ?>
     </section>
     <section id="primary" class="content-full-width">
         <div class="container"> 
