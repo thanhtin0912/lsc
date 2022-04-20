@@ -48,7 +48,7 @@
 
         <?php $lang = $this->lang->lang();
                 $content = "content_" . $lang;
-                echo $about[0]->$content ?>
+                echo $page[0]->$content ?>
         <section class="content-full-width pt-4">
             <h2 class="dt-sc-hr-green-title"><?= lang('our_staff') ?></h2>
             <?php foreach ($staffs as $key => $v) : ?>

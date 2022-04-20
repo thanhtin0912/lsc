@@ -40,14 +40,14 @@ class Home extends MX_Controller
 		$data['info'] = $this->home->getInfoSite();
 		$data['services'] = $this->home->getListServices();
 		// 
-		$data['page'] = $this->home->getInfoSeoPage('about');
-		$data['about'] = $this->home->getDataPages('about');
+		$data['seo'] = $this->home->getInfoSeoPage('about');
+		$data['page'] = $this->home->getDataPages('about');
 		$data['staffs'] = $this->home->getTopStaffs();
 		//
-		$this->template->write('title',$data["page"]->seo_title);
-		$this->template->write('meta_description',$data["page"]->seo_description);
-		$this->template->write('meta_url', $data["page"]->slug);
-		$this->template->write('meta_image', PATH_URL . DIR_UPLOAD_SEOS . $data["page"]->image);
+		$this->template->write('title',$data["seo"]->seo_title);
+		$this->template->write('meta_description',$data["seo"]->seo_description);
+		$this->template->write('meta_url', $data["seo"]->slug);
+		$this->template->write('meta_image', PATH_URL . DIR_UPLOAD_SEOS . $data["seo"]->image);
 		$this->template->write_view('content', 'about', $data);
 		$this->template->render();
 	}
@@ -88,12 +88,13 @@ class Home extends MX_Controller
 		$data['info'] = $this->home->getInfoSite();
 		$data['services'] = $this->home->getListServices();
 		// 
-		$data['page'] = $this->home->getInfoSeoPage('contact');
+		$data['seo'] = $this->home->getInfoSeoPage('contact');
+		$data['page'] = $this->home->getDataPages('contact');
 		//
-		$this->template->write('title',$data["page"]->seo_title);
-		$this->template->write('meta_description',$data["page"]->seo_description);
-		$this->template->write('meta_url', $data["page"]->slug);
-		$this->template->write('meta_image', PATH_URL . DIR_UPLOAD_SEOS . $data["page"]->image);
+		$this->template->write('title',$data["seo"]->seo_title);
+		$this->template->write('meta_description',$data["seo"]->seo_description);
+		$this->template->write('meta_url', $data["seo"]->slug);
+		$this->template->write('meta_image', PATH_URL . DIR_UPLOAD_SEOS . $data["seo"]->image);
 		$this->template->write_view('content', 'contact', $data);
 		$this->template->render();
 	}
@@ -105,12 +106,12 @@ class Home extends MX_Controller
 		$data['info'] = $this->home->getInfoSite();
 		$data['services'] = $this->home->getListServices();
 		//
-		$data['page'] = $this->home->getInfoSeoPage('news');
+		$data['seo'] = $this->home->getInfoSeoPage('news');
 		//
-		$this->template->write('title',$data["page"]->seo_title);
-		$this->template->write('meta_description',$data["page"]->seo_description);
-		$this->template->write('meta_url', $data["page"]->slug);
-		$this->template->write('meta_image', PATH_URL . DIR_UPLOAD_SEOS . $data["page"]->image);
+		$this->template->write('title',$data["seo"]->seo_title);
+		$this->template->write('meta_description',$data["seo"]->seo_description);
+		$this->template->write('meta_url', $data["seo"]->slug);
+		$this->template->write('meta_image', PATH_URL . DIR_UPLOAD_SEOS . $data["seo"]->image);
 		$this->template->write_view('content', 'news', $data);
 		$this->template->render();
 	}

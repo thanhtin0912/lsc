@@ -36,7 +36,7 @@
     <section id="primary" class="content-full-width">
     <?php $lang = $this->lang->lang();
                 $content = "content_" . $lang;
-                echo $about[0]->$content ?>
+                echo $page[0]->$content ?>
     </section>
     <section id="primary" class="content-full-width">
         <div class="container"> 
