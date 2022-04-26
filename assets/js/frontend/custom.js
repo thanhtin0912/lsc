@@ -176,22 +176,6 @@ jQuery(document).ready(function($){
 			});
 			return false;
 		});
-		
-		//ISOTOPE...
-		if($container.length){
-			$container.isotope({ 
-				filter: '*',
-				animationOptions: {
-					duration: 750,
-					easing: 'linear',
-					queue: false
-				},
-				masonry: {
-					columnWidth: $('.dt-sc-portfolio-container .portfolio').width(),
-					gutterWidth: $gw
-				}
-			});
-		}
 				
 	});
 

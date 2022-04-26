@@ -2356,8 +2356,8 @@ header #menu-container ul.dt-sc-social-icons {
 }
 
 .portfolio.dt-sc-one-third {
-	width: 292px;
-	margin: 0px 0px 30px 0px;
+	/* width: 292px; */
+	margin: 0px 0px 10px 0px;
 	text-align: center;
 }
 
@@ -2393,13 +2393,18 @@ header #menu-container ul.dt-sc-social-icons {
 
 .portfolio-detail h5 {
 	margin: 0px 0px 10px;
+	-webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    display: -webkit-box;
+    text-overflow: ellipsis;
 }
 
-.portfolio-detail p:before {
+/* .portfolio-detail p:before {
 	content: "\f06b";
 	display: inline-block;
 	margin: 0px 5px 0px 0px;
-}
+} */
 
 
 /**portfolio detail styles**/
@@ -2500,17 +2505,15 @@ header #menu-container ul.dt-sc-social-icons {
 
 .dt-sc-team .dt-sc-image-overlay,
 .portfolio .image-overlay {
-	background: rgba(24, 151, 163, 0.9);
-	float: left;
+	background: rgb(67 87 89 / 40%);
 	height: 100%;
 	left: 0;
-	opacity: 0;
+	/* opacity: 0; */
 	position: absolute;
 	top: 0;
 	transition: opacity 0.2s ease 0s;
 	-moz-transition: opacity 0.2s ease 0s;
 	-webkit-transition: opacity 0.2s ease 0s;
-	visibility: hidden;
 	width: 100%;
 }
 
@@ -2573,6 +2576,11 @@ header #menu-container ul.dt-sc-social-icons {
 	right: 29%;
 }
 
+.content-full-width .portfolio.dt-sc-one-third:hover .image-overlay a.play {
+	left: 45%;
+	bottom: 40%;
+}
+
 .content-full-width .portfolio.dt-sc-one-third:hover .image-overlay a.link {
 	left: 35%;
 }
@@ -2583,41 +2591,16 @@ header #menu-container ul.dt-sc-social-icons {
 
 .dt-sc-image-overlay a,
 .portfolio .image-overlay a {
-	display: inline-block;
+	display: inline;
 	position: absolute;
 	text-align: center;
 	z-index: 999;
-	background: #FFFFFF;
-	width: 25px;
-	height: 40px;
-	line-height: 40px;
-	top: 50%;
-	margin: -18px 0px 0px;
+	left: 45%;
+	bottom: 40%;
+	font-size: 65px;
+	color: #fff;
 }
 
-.dt-sc-image-overlay a:before,
-.portfolio .image-overlay a:before {
-	content: "";
-	position: absolute;
-	left: -12px;
-	width: 0px;
-	height: 0px;
-	border-top: 20px solid transparent;
-	border-bottom: 20px solid transparent;
-	border-right: 12px solid #FFFFFF;
-}
-
-.dt-sc-image-overlay a:after,
-.portfolio .image-overlay a:after {
-	content: "";
-	position: absolute;
-	right: -12px;
-	width: 0px;
-	height: 0px;
-	border-top: 20px solid transparent;
-	border-bottom: 20px solid transparent;
-	border-left: 12px solid #FFFFFF;
-}
 
 
 /*--------------------------------------------------------------

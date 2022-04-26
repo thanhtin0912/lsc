@@ -58,7 +58,6 @@ class Home extends MX_Controller
 		$data['info'] = $this->home->getInfoSite();
 		$data['services'] = $this->home->getListServices();
 		// 
-		$data['pages'] = $this->home->getDataPages('XAYDUNG');
 		$data['page'] = $this->home->getInfoSeoPage('library');
 		//
 		$this->template->write('title',$data["page"]->seo_title);
@@ -69,6 +68,27 @@ class Home extends MX_Controller
 		$this->template->render();
 	}
 	
+	public function showAllLibraries()
+	{
+		$this->load->library('AdminPagination');
+		$config['total_rows'] = $this->home->searchAllLibrariesTotal();
+		$config['per_page'] = $_POST["per_page"];
+		$config['num_links'] = 3;
+		$config['func_ajax'] = 'showAllLibraries';
+		$config['start'] = $_POST["start"];
+		$this->adminpagination->initialize($config);
+
+		$result = $this->home->searchAllLibraries($config['per_page'], $config['start']);
+		
+		$data = array(
+			'result' => $result,
+			'per_page' => $_POST["per_page"],
+			'start' => $_POST["start"],
+			'total' => $config['total_rows']
+		);
+		$this->load->view('ajax_viewSearchLibraries', $data);
+	}
+
 	public function library_detail($link)
 	{
 		//teamplate
@@ -317,6 +337,24 @@ class Home extends MX_Controller
 			exit;
 		}
 	}
+	public function getDetailProject() {
+		$res = $this->home->getDetailProjectID($_POST["id"]);
+		if ($res){
+			$data = array(
+				"status"=> true,
+				"data" => $res,
+				"msg"=> $this->security->get_csrf_hash()
+			);
+		} else {
+			$data = array(
+				"status"=> false,
+				"msg"=> $this->security->get_csrf_hash(),
+			);
+		}
+		print json_encode($data);
+		exit();
+	}
+	
 
 	/*------------------------------------ End FRONTEND --------------------------------*/
 }

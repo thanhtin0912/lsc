@@ -72,6 +72,7 @@ $route["^(en|vn)/showAllNews"] 	= "home/showAllNews";
 $route['^(en|vn)/news-detail/(:any)'] 	  = "home/news_detail/$2";
 //
 $route['^(en|vn)/projects'] 	= "home/projects";
+$route["^(en|vn)/showAllLibraries"] 	= "home/showAllLibraries";
 $route['^(en|vn)/project/(:any)'] 	= "home/project_detail/$2";
 //
 $route['^(en|vn)/library'] 	= "home/library";
@@ -85,6 +86,8 @@ $route['^(en|vn)/product/(:any)'] 	= "home/product_detail/$2";
 $route['^(en|vn)/cata/(:any)'] 	= "home/catagory/$2";
 
 $route["^(en|vn)/home/InfoContact"] 	= "home/InfoContact";
+
+$route["^(en|vn)/getDetailProject"] 	= "home/getDetailProject";
 
 //Config Router Admincp
 $route[ADMINCP] = "admincp";

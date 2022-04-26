@@ -154,7 +154,7 @@ class Home_model extends CI_Model {
 	}
 	
 	function searchAllNewsTotal(){
-		$this->db->select('n.*,c.name_vn as cataname_vn, c.name_en as cataname_en');
+		$this->db->select('n.id');
 		$this->db->where('n.status',1);
 		$this->db->from(PREFIX.$this->table_news." n");
 		$this->db->join(PREFIX.$this->table_cata." c", 'n.type = c.id ', "left");
@@ -176,6 +176,36 @@ class Home_model extends CI_Model {
 		$query = $this->db->get();
 		if($query->result()){
 			return $query->result();
+		}else{
+			return false;
+		}
+	}
+
+	function searchAllLibraries($limit,$page){
+		$this->db->select('*');
+		$this->db->limit($limit,$page);
+		$this->db->where('status',1);
+		$this->db->where('delete',0);
+		$this->db->order_by('created','DESC');
+		$this->db->from(PREFIX.$this->table_project);
+		$query = $this->db->get();
+
+		if($query->result()){
+			return $query->result();
+		}else{
+			return false;
+		}
+	}
+	
+	function searchAllLibrariesTotal(){
+		$this->db->select('id');
+		$this->db->where('status',1);
+		$this->db->where('delete',0);
+		$this->db->order_by('created','DESC');
+		$this->db->from(PREFIX.$this->table_project);
+		$query = $this->db->count_all_results();
+		if($query > 0){
+			return $query;
 		}else{
 			return false;
 		}
@@ -248,6 +278,19 @@ class Home_model extends CI_Model {
 		$this->db->from(PREFIX.$this->table_project." n");
 		$this->db->join(PREFIX.$this->table_cata." c", 'n.type = c.id ', "left");
 		
+		$query = $this->db->get();
+		if($query->result()){
+			return $query->result();
+		}else{
+			return false;
+		}
+	}
+
+	function getDetailProjectID($id){
+		$this->db->select('urlVideo');
+		$this->db->where('status',1);
+		$this->db->where('id',$id);
+		$this->db->from(PREFIX.$this->table_project);
 		$query = $this->db->get();
 		if($query->result()){
 			return $query->result();

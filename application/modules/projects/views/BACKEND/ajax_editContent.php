@@ -28,7 +28,7 @@ function showRequest(formData, jqForm, options) {
             return false;
         }
     <?php } ?>
-	if(form.name_vnAdmincp.value == '' || form.cateAdmincp.value == ''){
+	if(form.name_vnAdmincp.value == ''){
 		$('#txt_error').html('Please enter information.');
 		show_perm_denied();
 		return false;
