@@ -78,7 +78,7 @@
 }
 .statistics_item .count {
     font-size: 60px;
-    font-family: 'Montserrat';
+    font-family: 'Arimo', sans-serif;
     color: #fff;
     display: block;
     line-height: 1.3em
@@ -222,7 +222,7 @@
 .guest-book .guest-book_head .text h2 {
     color: #fff;
     margin: 0;
-    font-family: 'Montserrat';
+    font-family: 'Arimo', sans-serif;
     font-size: 23px;
     text-transform: uppercase;
     line-height: 1.428em
@@ -355,7 +355,7 @@
 .guest-book_item h2 {
     margin-top: 10px;
     font-size: 20px;
-    font-family: 'Montserrat';
+    font-family: 'Arimo', sans-serif;
     text-transform: uppercase;
     color: #444444;
     font-weight: bold
@@ -392,7 +392,7 @@
 }
 .guest-book-form h2 {
     color: #333333;
-    font-family: 'Montserrat';
+    font-family: 'Arimo', sans-serif;
     font-size: 26px;
     text-transform: uppercase;
     font-weight: bold;
@@ -462,7 +462,7 @@
     color: #fff;
     text-transform: uppercase;
     font-size: 60px;
-    font-family: 'Montserrat';
+    font-family: 'Arimo', sans-serif;
     line-height: 1;
     margin-top: 20px
 }
@@ -474,7 +474,7 @@
     font-size: 36px;
     margin-top: 10px;
     font-weight: normal;
-    font-family: 'Hind'
+    font-family: 'Arimo', sans-serif;
 }
 .comingsoon p {
     margin-bottom: 0;

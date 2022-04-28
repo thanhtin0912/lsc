@@ -2343,6 +2343,6 @@
 .dt-sc-one-half:nth-child(2n+1) {
   clear: left;
 }
-.dt-sc-one-third:nth-child(3n+1) {
+.dt-sc-one-third:nth-child(4n+1) {
   clear: left;
 }

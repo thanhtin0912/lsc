@@ -303,14 +303,14 @@
                                 <input id="age" name="txtPhone" type="text" placeholder="Phone" required="">
                             </p>
                             <p class="dt-sc-one-fourth column">
-                                <input id="course" name="txtcourse" type="text" placeholder="Course" required="">
+                                <input id="course" name="txtOld" type="text" placeholder="Tuổi" required="">
                             </p>
                             <p class="dt-sc-one-fourth column">
                                 <input id="course" name="txtMail" type="text" placeholder="Mail" required="">
                             </p>
                             <div id="ajax_admission_msg"> </div>
                             <p class="aligncenter pt-3">
-                                <input class="px-5" name="submit" type="submit" id="submit" value="<?= lang('btn_contact') ?>">
+                                <input class="px-5" name="submit" type="submit" onclick="contact()"> value="<?= lang('btn_contact') ?>">
                             </p>
                         </form>
                     </div>

@@ -531,7 +531,7 @@ transform:scale(0); -webkit-transform:scale(0); -moz-transform:scale(0); transit
   font-weight: normal;
   font-size: 16px;
   margin-bottom: 20px;
-  font-family: "Lato", sans-serif;
+  font-family: 'Arimo', sans-serif;
 }
 
 /**carousel-arrows**/
@@ -993,7 +993,7 @@ ul.dt-sc-tabs-vertical-frame li a {
 .dt-sc-testimonial blockquote q:before,
 .dt-sc-testimonial blockquote q:after {
   font-size: 78px;
-  font-family: Georgia, serif;
+  font-family: 'Arimo', sans-serif;
   font-style: italic;
   position: absolute;
 }
@@ -1224,7 +1224,7 @@ blockquote {
 blockquote q:before,
 blockquote q:after {
   font-size: 48px;
-  font-family: Georgia, serif;
+  font-family: 'Arimo', sans-serif;
   font-style: italic;
   position: absolute;
 }

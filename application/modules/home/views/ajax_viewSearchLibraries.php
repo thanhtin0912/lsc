@@ -8,7 +8,7 @@
                                                                                                         echo $v->$name ?>">
                     <div class="image-overlay">
                         <?php if ($v->type == 0) { ?>
-                            <a href="portfolio-detail.html" class="play"><span class="fa fa-image"></span></a>
+                            <a href="<?=PATH_URL.$this->lang->lang().'/library/'.$v->slug?>" class="play"><span class="fa fa-image"></span></a>
                         <?php  } else { ?>
                             <a onclick="show_popup(<?= $v->id ?>)" class="play"><span class="fa fa-play"></span></a>
                         <?php  } ?>
@@ -16,7 +16,7 @@
                 </div>
                 <div class="portfolio-detail">
                     <div class="portfolio-title">
-                        <h5><a href="portfolio-detail.html"><?php $lang = $this->lang->lang();
+                        <h5><a href="<?=PATH_URL.$this->lang->lang().'/library/'.$v->slug?>"><?php $lang = $this->lang->lang();
                                                             $name = "name_" . $lang;
                                                             echo $v->$name ?></a></h5>
                     </div>

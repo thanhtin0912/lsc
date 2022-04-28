@@ -27,9 +27,9 @@
 <link href="<?= PATH_URL; ?>assets/css/frontend/report.css" rel="stylesheet" type="text/css" /> 
 <link href="<?= PATH_URL; ?>assets/css/default.css" rel="stylesheet" type="text/css" /> 
 
-<link href='https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Bubblegum+Sans' rel='stylesheet' type='text/css'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 <!--jquery-->
 <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jssor.slider-28.1.0.min.js"></script>

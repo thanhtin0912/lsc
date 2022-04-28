@@ -44,7 +44,7 @@ body {
 	color: #5c5c5c;
 	margin: 0px;
 	padding: 0px;
-	font-family: 'FontAwesome', sans-serif;
+	font-family: 'Arimo', sans-serif;
 	font-size: 16px;
 	line-height: 22px;
 }
@@ -456,12 +456,12 @@ h5.dt-sc-toggle a,
 h5.dt-sc-toggle-accordion a,
 .product-details h5 a,
 .front-portfolio .image-overlay h5 a {
-	font-family: 'FontAwesome', sans-serif;
+	font-family: 'Arimo', sans-serif;
 }
 
 #main-menu .megamenu-child-container .widget ul.product_list_widget li a,
 #main-menu .megamenu-child-container .widget ul.product_list_widget li span.amount {
-	font-family: 'FontAwesome', sans-serif;
+	font-family: 'Arimo', sans-serif;
 }
 
 h1,
@@ -482,7 +482,7 @@ textarea,
 .breadcrumb-section h1,
 .activity h4,
 .megamenu-child-container>ul.sub-menu>li>a {
-	font-family: 'FontAwesome', sans-serif;
+	font-family: 'Arimo', sans-serif;
 	font-weight: normal;
 }
 
@@ -1408,7 +1408,7 @@ a.meanmenu-reveal {
 	line-height: 22px;
 	font-size: 1px;
 	display: block;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: 'Arimo', sans-serif;
 	font-weight: 700;
 	z-index: 9999;
 }
@@ -1752,7 +1752,7 @@ header #menu-container ul.dt-sc-social-icons {
 }
 
 .fullwidth_banner h1 {
-	font-family: 'Berkshire Swash', cursive;
+	font-family: 'Arimo', sans-serif;
 	font-size: 36px;
 }
 

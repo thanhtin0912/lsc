@@ -691,7 +691,7 @@ body * .ls-tn,
 	border: 0 !important;
 	color: white !important;
 	text-shadow: none !important;
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, sans-serif !important;
+	font-family: 'Arimo', sans-serif;
 	line-height: normal !important;
 	-webkit-font-smoothing: antialiased !important;
 	text-align: left !important;
@@ -772,7 +772,7 @@ body * .ls-debug-console li:hover ul,
 	padding: 0 !important;
 	border: 0 !important;
 	text-align: justify !important;
-	font-family: Arial, sans-serif !important;
+	font-family: 'Arimo', sans-serif;
 }
 
 .ls-error .ls-error-title {
