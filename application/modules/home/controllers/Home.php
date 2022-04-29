@@ -298,44 +298,22 @@ class Home extends MX_Controller
 		$this->template->render();
 	}
 
-	public function InfoContact()
-	{
-		$data = array(
-			'name'		=> $_POST["name"],
-			'mail'			=> $_POST["mail"],
-			'phone'		=> $_POST["phone"],
-			'message'		=> $_POST["message"]
-		);
-		if ($data) {
-			$this->load->helper('language');
-			$this->lang->load('general');
-			$config = array(
-				'protocol' => 'smtp',
-				'smtp_host' => 'ssl://smtp.gmail.com',
-				'smtp_port' => '465',
-				'smtp_user' => 'server.k2office@gmail.com',
-				'smtp_pass' => 'erishczexsgvsbru' //Nhớ đánh đúng user và pass nhé
+
+	public function saveInfoContact(){
+		$res = $this->home->saveInfoContact();
+		if ($res){
+			$data = array(
+				"status"=> true,
+				"msg"=> $this->security->get_csrf_hash()
 			);
-
-
-			$this->load->library('Email', $config);
-			$this->email->set_mailtype("html");
-			$this->email->set_newline("\r\n");
-
-			$this->email->from('server.k2office@gmail.com', 'Hai Duong');
-			$this->email->to($_POST["mail"]);
-			$this->email->bcc('diennd.hds@gmail.com');
-			$this->email->subject('Message from Website haiduongengineer.com');
-			$body = $this->load->view('message', $data, true);
-			$this->email->message($body);
-			$this->email->send();
-			return true;
-			print 'success.' . $this->security->get_csrf_hash();
-			exit;
 		} else {
-			print 'error.' . $this->security->get_csrf_hash();
-			exit;
+			$data = array(
+				"status"=> false,
+				"msg"=> $this->security->get_csrf_hash(),
+			);
 		}
+		print json_encode($data);
+		exit();
 	}
 	public function getDetailProject() {
 		$res = $this->home->getDetailProjectID($_POST["id"]);

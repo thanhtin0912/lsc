@@ -15,6 +15,7 @@ class Home_model extends CI_Model {
 	private $table_parent		= 'tbl_cataparent';
 	private $table_staffs		= 'tbl_staffs';
 	private $table_seo 			= 'tbl_seo';
+	private $table_contact 		= 'mil_contact';
 
 	function getInfoSite(){
 		$this->db->select('*');
@@ -446,6 +447,75 @@ class Home_model extends CI_Model {
 		}else{
 			return false;
 		}
+	}
+
+	public function saveInfoContact(){
+		$description = '';
+		$subject = '';
+		if($_POST["isType"] == true){
+			$description = $_POST["old"];
+			$subject = 'Thông tin hỗ trợ tư vấn.';
+		} else {
+			$description = $_POST["description"];
+			$subject = 'Liên hệ hỗ trợ.';
+		}
+		$data = array(
+			'name'			=> $_POST["name"],
+			'phone'			=> $_POST["phone"],
+			'email'			=> $_POST["mail"],
+			'description'	=> $description,
+			'subject'		=> $subject,
+			'status'		=> 1,
+			'bcc'			=> 'letsstartcenter@gmail.com',
+			'created'		=> date('Y-m-d H:i:s',time()),
+		);
+
+		if($this->db->insert(PREFIX.$this->table_contact,$data)){
+			$id = $this->db->insert_id();
+			
+			$this->load->helper('language');
+			$this->lang->load('general');
+			$config = array(
+		    	'protocol' => 'smtp',
+	            'smtp_host' => 'ssl://smtp.gmail.com',
+	            'smtp_port' => '465',
+	            'smtp_user' => 'server.k2office@gmail.com',
+	            'smtp_pass' => 'erishczexsgvsbru'//Nhớ đánh đúng user và pass nhé
+			);
+
+			$this->load->library('Email',$config);
+			$this->email->set_mailtype("html");
+			$this->email->set_newline("\r\n");
+
+			$this->email->from("server.k2office@gmail.com','Kỹ năng sống và ngoại ngữ Let's Start.");
+			$this->email->to($data["email"]);
+			$this->email->bcc('thanhtin0912@gmail.com');
+			$this->email->subject($data['subject']);
+
+			if($_POST["isType"] === true){
+				$data['isCheck'] = true ;
+			} else {
+				$data['isCheck'] = false;
+			}
+			
+			$body=$this->load->view('mail_contact', $data, true);
+			$this->email->message($body);
+			$this->email->send();
+			if($this->updateBodyContact($id, $body)){
+				return true;
+			}
+		} else {
+			return false;
+		}
+	}
+
+	public function updateBodyContact($id, $body){
+		$this->db->where('id',$id);
+		$data=array(
+			"content"=> $body
+		);
+		$this->db->update(PREFIX.$this->table_contact, $data);  
+		return true;
 	}
 
 	

@@ -159,10 +159,13 @@
     </div>
     <!--wrapper ends-->
     <a href="" title="Go to Top" class="back-to-top">To Top ↑</a>
-    <!--Java Scripts-->
+        <!--Java Scripts-->
     <div id="fb-root"></div>
+    <link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/bootstrap.css">
+    <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/bootstrap-notify.min.js"></script>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v7.0&appId=589670775117215&autoLogAppEvents=1"></script>
-    <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.js"></script>
+    <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/global.js"></script>
+    <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.min.js"></script>
 	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery-migrate.min.js"></script>
 	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery-easing-1.3.js"></script>
@@ -185,10 +188,17 @@
     <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.carouFredSel-6.2.0-packed.js"></script>  
     <!--<script type="text/javascript">var lsjQuery = jQuery;</script>--> 
     <script type="text/javascript">var lsjQuery = jQuery;</script><script type="text/javascript"> lsjQuery(document).ready(function() { if(typeof lsjQuery.fn.layerSlider == "undefined") { lsShowNotice('layerslider_1','jquery'); } else { lsjQuery("#layerslider_4").layerSlider({responsiveUnder: 1240, layersContainer: 1060, skinsPath: '<?= PATH_URL; ?>assets/js/frontend/layerslider/skins/'}) } }); </script>
+
     <script type="text/javascript">
-        var root = '<?=PATH_URL?>';
+        var root = '<?php  PATH_URL . $this->lang->lang() ?>';
         var csrf_token;
-    </script>
-    
+          function notify(ms,type){
+            $.notify({
+              message: ms 
+            },{
+              type: type
+            });
+          }
+    </script>  
 </body>
 </html>

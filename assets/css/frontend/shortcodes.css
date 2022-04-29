@@ -1292,6 +1292,7 @@ blockquote.grey {
   box-shadow: 0px 0px 0px 2px #818181;
   -webkit-box-shadow: 0px 0px 0px 2px #818181;
   -moz-box-shadow: 0px 0px 0px 2px #818181;
+  border-left: 0px solid #eee !important;
 }
 
 blockquote.green {

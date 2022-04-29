@@ -85,7 +85,7 @@ $route["^(en|vn)/home/showAllProducts"] 	= "home/showAllProducts";
 $route['^(en|vn)/product/(:any)'] 	= "home/product_detail/$2";
 $route['^(en|vn)/cata/(:any)'] 	= "home/catagory/$2";
 
-$route["^(en|vn)/home/InfoContact"] 	= "home/InfoContact";
+$route["^(en|vn)/saveInfoContact"] 	= "home/saveInfoContact";
 
 $route["^(en|vn)/getDetailProject"] 	= "home/getDetailProject";
 

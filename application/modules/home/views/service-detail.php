@@ -73,27 +73,3 @@
     <!--container ends-->
 </div>
 <!--main ends-->
-<!--fullwidth-background starts-->
-<section class="fullwidth-background dt-sc-parallax-section turquoise-bg">
-    <!--container starts-->
-    <div class="container">
-        <form class="admission-form p-3" novalidate="novalidate">
-            <p class="dt-sc-one-fourth column first">
-                <input id="name" name="txtname" type="text" placeholder="Name" required="">
-            </p>
-            <p class="dt-sc-one-fourth column">
-                <input id="age" name="txtPhone" type="text" placeholder="Phone" required="">
-            </p>
-            <p class="dt-sc-one-fourth column">
-                <input id="course" name="txtcourse" type="text" placeholder="Course" required="">
-            </p>
-            <p class="dt-sc-one-fourth column">
-                <input id="course" name="txtMail" type="text" placeholder="Mail" required="">
-            </p>
-            <div id="ajax_admission_msg"> </div>
-            <p class="aligncenter pt-3">
-                <input class="px-5" name="submit" type="submit" id="submit" value="<?= lang('btn_contact') ?>">
-            </p>
-        </form>
-    </div>
-</section>

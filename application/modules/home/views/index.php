@@ -294,25 +294,24 @@
                     <!--container starts-->
                     <div class="container">
                         <h2 class="dt-sc-hr-white-title"><?= lang('btn_contact') ?></h2>
-
-                        <form class="admission-form p-3" novalidate="novalidate">
+                        <div class="admission-form p-3" novalidate="novalidate">
                             <p class="dt-sc-one-fourth column first">
-                                <input id="name" name="txtname" type="text" placeholder="Name" required="">
+                                <input id="txtName" type="text" placeholder="Name">
                             </p>
                             <p class="dt-sc-one-fourth column">
-                                <input id="age" name="txtPhone" type="text" placeholder="Phone" required="">
+                                <input id="txtPhone" type="text" placeholder="Phone">
                             </p>
                             <p class="dt-sc-one-fourth column">
-                                <input id="course" name="txtOld" type="text" placeholder="Tuổi" required="">
+                                <input id="txtOld" type="text" placeholder="Tuổi">
                             </p>
                             <p class="dt-sc-one-fourth column">
-                                <input id="course" name="txtMail" type="text" placeholder="Mail" required="">
+                                <input id="txtMail" type="text" placeholder="Mail">
                             </p>
                             <div id="ajax_admission_msg"> </div>
                             <p class="aligncenter pt-3">
-                                <input class="px-5" name="submit" type="submit" onclick="contact()"> value="<?= lang('btn_contact') ?>">
+                                <input class="px-5" name="submit" type="submit" onclick="contact()" value="<?= lang('btn_contact') ?>">
                             </p>
-                        </form>
+                        </div>
                     </div>
                 </section>
                 <!--fullwidth-background ends-->
@@ -343,7 +342,7 @@
                 
                 <div class="dt-sc-hr"></div>
                 <!--fullwidth-background starts-->
-                <section class="fullwidth-background dt-sc-parallax-section turquoise-bg">
+                <section class="fullwidth-background dt-sc-parallax-section turquoise-bg mb-5">
                     <!--container starts-->
                     <div class="container">
                         <div class="dt-sc-one-half column first px-2">
@@ -393,8 +392,9 @@
                 </section>
                 <!--fullwidth-background ends-->
                 <div class="container">
+                    <h2 class="dt-sc-hr-green-title"><?= lang('our_staff') ?></h2>
                     <section id="primary" class="content-full-width pb-3">
-                        <h2 class="dt-sc-hr-green-title p-3 mt-3"><?= lang('our_staff') ?></h2>
+                        
                         <?php foreach ($staffs as $key => $v) : ?>
                         <div class="column dt-sc-one-fourth first">
                             <div class="dt-sc-team">	
