@@ -89,8 +89,8 @@
                     <ul class="dt-sc-social-icons">
                         <li><a href="<?=$info[0]->facebook?>" title="Facebook" class="dt-sc-tooltip-top facebook"><span class="fa fa-facebook"></span></a></li>
                         <li><a href="https://www.youtube.com/channel/UCYm-kGTw-1mp3kKbD7W_5NQ" title="Youtube" class="dt-sc-tooltip-top youtube"><span class="fa fa-youtube"></span></a></li>
-                        <li><a href="<?= PATH_URL . $this->lang->switch_uri('en') ?>" title="English" class="dt-sc-tooltip-top"><img width="100%" src="<?= PATH_URL; ?>assets/images/en.png"></a></li>
-                        <li><a href="<?= PATH_URL . $this->lang->switch_uri('vn') ?>" title="Vietnamese" class="dt-sc-tooltip-top "><img src="<?= PATH_URL; ?>assets/images/vn.png"></a></li>
+                        <!-- <li><a href="<?= PATH_URL . $this->lang->switch_uri('en') ?>" title="English" class="dt-sc-tooltip-top"><img width="100%" src="<?= PATH_URL; ?>assets/images/en.png"></a></li>
+                        <li><a href="<?= PATH_URL . $this->lang->switch_uri('vn') ?>" title="Vietnamese" class="dt-sc-tooltip-top "><img src="<?= PATH_URL; ?>assets/images/vn.png"></a></li> -->
                     </ul>
                 </div>
             </div>

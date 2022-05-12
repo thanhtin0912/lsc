@@ -352,24 +352,24 @@
                                 <div class="icon"> 
                                     <span> 1 </span> 
                                 </div>
-                                <h4><a href="#" target="_blank"> International Curriculum </a></h4>
-                                <p>Nam ullamcorper, diam sit amet euismod pelleontesque, eros risus rhoncus libero, inst tibulum nisl ligula....</p>
+                                <h4><a href="#" target="_blank">Ngôn ngữ phổ biến</a></h4>
+                                <p>Xu hướng ngày nay là kinh tế hội nhập toàn cầu , có 53 quốc gia trên thế giới sử dụng tiếng Anh là ngôn ngữ chính thức. Nên tiếng Anh được lựa chọn là ngôn ngữ chung để các luồng thông tin dễ dàng tiếp nhận hơn.</p>
                             </div>
                             <div class="dt-sc-hr-very-small"></div>
                             <div class="dt-sc-ico-content type2">
                                 <div class="icon"> 
                                     <span> 2 </span> 
                                 </div>
-                                <h4><a href="#" target="_blank"> Logical thinking </a></h4>
-                                <p>Nam ullamcorper, diam sit amet euismod pelleontesque, eros risus rhoncus libero, inst tibulum nisl ligula....</p>
+                                <h4><a href="#" target="_blank">Tốt nhất để bắt đầu</a></h4>
+                                <p>Theo các nhà nghiên cứu, não bộ sẽ hoạt động và phát triển tốt hơn khi vận động liên tục .Trẻ học ngôn ngữ giúp tăng cường khả năng ghi nhớ vốn từ vựng, giúp tăng cường phát triển cơ thần kinh . </p>
                             </div>
                             <div class="dt-sc-hr-very-small"></div>
                             <div class="dt-sc-ico-content type2">
                                 <div class="icon"> 
                                     <span> 3 </span> 
                                 </div>
-                                <h4><a href="#" target="_blank"> Sensitive ability </a></h4>
-                                <p>Nam ullamcorper, diam sit amet euismod pelleontesque, eros risus rhoncus libero, inst tibulum nisl ligula....</p>
+                                <h4><a href="#" target="_blank">Tư duy toàn diện</a></h4>
+                                <p>Học tiếng Anh sớm, trẻ sẽ biết cách liên kết các sự vật, sự việc liên quan khi gặp tình huống ngoài xã hội và chọn cách giải quyết tình huống phù hợp .Chỉ số IQ, EQ của trẻ học tốt tiếng Anh cao hơn đáng kể, khả năng giải quyết các tình huống phức tạp nhanh hơn và tốt hơn trẻ khác.</p>
                             </div>
                         
                             
@@ -377,12 +377,13 @@
                                 <div class="icon"> 
                                     <span> 4 </span> 
                                 </div>
-                                <h4><a href="#" target="_blank">  Skill </a></h4>
-                                <p>Nam ullamcorper, diam sit amet euismod pelleontesque, eros risus rhoncus libero, inst tibulum nisl ligula....</p>
+                                <h4><a href="#" target="_blank">Phát triển mọi kỹ năng</a></h4>
+                                <p>Trẻ học tiếng Anh sẽ tiếp xúc nhiều thông tin thú vị, trẻ sẽ biết cách quan tâm đến điều mình thích và thể hiện những lĩnh vực không yêu thích .Giúp trẻ tìm ra ưu điểm để phát triển và khuyết điểm để bồi dưỡng, xem trẻ phù hợp với lĩnh vực nào và chọn giải pháp học tập để con phát huy khả năng , gia tăng hiểu biết lựa chọn nghề nghiệp tương lai. </p>
                             </div>
                         </div>
+
                         <div class="dt-sc-one-half column">
-                            <h2>How do we Teach?</h2>
+                            <h2>Học viên sẽ nhận được những gì ?</h2>
                             <video class="video-fluid w-100" loop controls muted>
                                 <source src="<?= PATH_URL .'/assets/video/demo.mp4' ?>" type="video/mp4" height="400" />
                             </video>
