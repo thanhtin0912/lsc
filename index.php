@@ -288,8 +288,9 @@ switch (ENVIRONMENT)
  * -------------------------------------------------------------------
  */
 date_default_timezone_set('Asia/Ho_Chi_Minh');
-define('FOLDER', '/lsc/');
+define('FOLDER', '/kho/');
 define('ADMINCP', 'admincp');
+define('API', 'api');
 if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on'){
 	define('PATH_URL', 'https://'.$_SERVER['HTTP_HOST'].FOLDER);
 	define('PATH_URL_ADMIN', 'https://'.$_SERVER['HTTP_HOST'].FOLDER.ADMINCP.'/');
@@ -301,22 +302,19 @@ define('BASEFOLDER', substr(BASEPATH, 0, count(BASEPATH)-8));
 define('PREFIX', '');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DB_NAME', 'toppcvn_lsc');
+define('DB_NAME', 'toyot426_leotea_kho');
 
 
 //Config DIR Upload
+define('DIR_UPLOAD_PRODUCT', 'assets/uploads/product/');
+define('DIR_UPLOAD_CATE', 'assets/uploads/cate/');
+define('DIR_UPLOAD_STORES', 'assets/uploads/store/');
 define('DIR_UPLOAD_BANNER', 'assets/uploads/banner/');
 define('DIR_UPLOAD_NEWS', 'assets/uploads/news/');
-define('DIR_UPLOAD_PRODUCTS', 'assets/uploads/products/');
-define('DIR_UPLOAD_PROJECTS', 'assets/uploads/projects/');
-define('DIR_UPLOAD_COMMENTS', 'assets/uploads/comments/');
-define('DIR_UPLOAD_LIBRARY', 'assets/uploads/library/');
-define('DIR_UPLOAD_SERVICES', 'assets/uploads/services/');
-define('DIR_UPLOAD_CATA', 'assets/uploads/catalogue/');
 define('DIR_UPLOAD_STATIC_PAGES', 'assets/uploads/static_pages/');
-define('DIR_UPLOAD_SEOS', 'assets/uploads/seo/');
-define('DIR_UPLOAD_STAFF', 'assets/uploads/staff/');
+define('LOGIN_IP', false);
 
+	
 /*
  * --------------------------------------------------------------------
  * LOAD THE BOOTSTRAP FILE

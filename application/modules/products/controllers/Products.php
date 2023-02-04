@@ -3,7 +3,7 @@
 class Products extends MX_Controller {
 
 	private $module = 'products';
-	private $table = 'tbl_products';
+	private $table = 'products';
 	function __construct(){
 		parent::__construct();
 		$this->load->model($this->module.'_model','model');
@@ -25,13 +25,15 @@ class Products extends MX_Controller {
 	/*------------------------------------ Admin Control Panel ------------------------------------*/
 	public function admincp_index(){
 		modules::run('admincp/chk_perm',$this->session->userdata('ID_Module'),'r',0);
-		$default_func = 'created';
+		$default_func = 'order';
 		$default_sort = 'DESC';
+		$this->load->model('categories/categories_model');
 		$data = array(
 			'module'=>$this->module,
 			'module_name'=>$this->session->userdata('Name_Module'),
 			'default_func'=>$default_func,
-			'default_sort'=>$default_sort
+			'default_sort'=>$default_sort,
+			'cates' => $this->categories_model->getDataCommonCode('PRODUCT'),
 		);
 		$this->template->write_view('content','BACKEND/index',$data);
 		$this->template->render();
@@ -39,23 +41,29 @@ class Products extends MX_Controller {
 	
 	
 	public function admincp_update($id=0){
-		$this->load->model('products_cata/products_cata_model');
+		$this->load->model('categories/categories_model');
+		$this->load->model('stores/stores_model');
 		if($id==0){
 			modules::run('admincp/chk_perm',$this->session->userdata('ID_Module'),'w',0);
 		}else{
 			modules::run('admincp/chk_perm',$this->session->userdata('ID_Module'),'r',0);
 		}
 		$result[0] = array();
+		$quotes = array();
+
 		if($id!=0){
 			$result = $this->model->getDetailManagement($id);
+			$quotes = $this->model->getDataQuote($id);
 		}
 		$data = array(
-			'cates'=>$this->model->getDataCategory(),
 			'result'=>$result[0],
+			'cates' => $this->categories_model->getDataCommonCode('PRODUCT'),
+			'units' => $this->categories_model->getDataCommonCode('UNIT'),
+			'stores' => $this->stores_model->getData(),
+			'quotes' => $quotes,
 			'module'=>$this->module,
 			'id'=>$id
 		);
-
 		$this->template->write_view('content','BACKEND/ajax_editContent',$data);
 		$this->template->render();
 	}
@@ -69,9 +77,8 @@ class Products extends MX_Controller {
 		if($_POST){
 			// Upload Image
 			$fileName = array(
-                    'avata'=>'',
+                    'image'=>'',
                 );
-			// $imagesName = array();
 			if($_FILES){
 				foreach($fileName as $k=>$v){
 					if(isset($_FILES['fileAdmincp']['error'][$k]) && $_FILES['fileAdmincp']['error'][$k]!=4){
@@ -89,11 +96,10 @@ class Products extends MX_Controller {
 				}
 			}
 			//End Upload Image
-			// if($this->model->saveManagement($imagesName,$fileName)){
 			if($this->model->saveManagement($fileName)){
 				//Upload Image
 				if($_FILES){
-					$upload_path = BASEFOLDER.DIR_UPLOAD_PRODUCTS;
+					$upload_path = BASEFOLDER.DIR_UPLOAD_PRODUCT;
 					check_dir_upload($upload_path);
 					foreach($fileName as $k=>$v){
 						if(isset($_FILES['fileAdmincp']['error'][$k]) && $_FILES['fileAdmincp']['error'][$k]!=4){
@@ -113,6 +119,7 @@ class Products extends MX_Controller {
 			}
 		}
 	}
+
 	
 	public function admincp_count($target = 2){
 		modules::run('admincp/chk_perm',$this->session->userdata('ID_Module'),'r',0);
@@ -194,11 +201,7 @@ class Products extends MX_Controller {
 					modules::run('admincp/saveLog',$this->module,$id,'Delete','Delete');
 					$this->db->where('id',$id);
 					if($this->db->delete(PREFIX.$this->table)){
-						// $delimages = unserialize($result[0]->images);
-						// foreach ($delimages as $key => $value) {
-						// 	@unlink(BASEFOLDER.DIR_UPLOAD_PRODUCTS.$delimages[$key]);
-						// }
-						@unlink(BASEFOLDER.DIR_UPLOAD_PRODUCTS.$result[0]->avata);
+						@unlink(BASEFOLDER.DIR_UPLOAD_PRODUCT.$result[0]->image);
 						print $this->security->get_csrf_hash();
 						exit;
 					}
@@ -207,6 +210,8 @@ class Products extends MX_Controller {
 		}
 	}
 	
+
+
 	public function admincp_ajaxLoadContent(){
 		$this->load->library('AdminPagination');
 		$config['total_rows'] = $this->model->getTotalsearchContent();
@@ -217,6 +222,7 @@ class Products extends MX_Controller {
 		$this->adminpagination->initialize($config);
 
 		$result = $this->model->getsearchContent($config['per_page'],$this->input->post('start'));
+		// var_dump($result); exit();
 		$data = array(
 			'result'=>$result,
 			'per_page'=>$this->input->post('per_page'),
@@ -257,6 +263,30 @@ class Products extends MX_Controller {
 		);
 		$this->load->view('BACKEND/ajax_updateStatus',$update);
 	}
+
+	public function admincp_getAllCatagoriesLV2(){
+		$parent                 = $_POST['parent'];
+		$req = $this->model->getAllCatagoriesLV2($parent);
+		if($req['Return']==1){
+			echo 'success*'.$this->security->get_csrf_hash().'*'.json_encode($req);
+			exit;
+		}else{
+			echo 'Error*'.$this->security->get_csrf_hash();
+			exit;
+		}
+	}
+
+	public function admincp_getImagesProduct(){
+		$objid                 = $_POST['objid'];
+		$req = $this->model->getImagesProduct($objid);
+		if($req['Return']==1){
+			echo 'success*'.$this->security->get_csrf_hash().'*'.json_encode($req);
+			exit;
+		}else{
+			echo 'Error*'.$this->security->get_csrf_hash();
+			exit;
+		}
+	}
 	/*------------------------------------ End Admin Control Panel --------------------------------*/
 
 	public function detail($slug){
@@ -266,7 +296,7 @@ class Products extends MX_Controller {
 		$this->template->write('meta_keywords',$data["item"][0]->seo_keywords);
 		$this->template->write('meta_description',$data["item"][0]->seo_description);
 		$this->template->write('meta_url', PATH_URL . "du-an/" . $slug);
-		$this->template->write('meta_image', PATH_URL . DIR_UPLOAD_NEWS . $data["item"][0]->image);
+		$this->template->write('meta_image', PATH_URL . DIR_UPLOAD_PRO_FILES . $data["item"][0]->image);
 		$this->template->write_view('content','FRONTEND/detail', $data);
 		$this->template->render();
 	}

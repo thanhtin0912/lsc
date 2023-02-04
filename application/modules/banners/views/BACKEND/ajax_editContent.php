@@ -19,7 +19,7 @@ function showRequest(formData, jqForm, options) {
         }
     <?php } ?>
 
-    if(form.urlAdmincp.value == '' || form.title_vnAdmincp.value == ''|| form.title_enAdmincp.value == ''){
+    if(form.urlAdmincp.value == '' || form.titleAdmincp.value == ''){
         $('#txt_error').html('Please enter information.');
         show_perm_denied();
         return false;
@@ -106,7 +106,7 @@ function showResponse(responseText, statusText, xhr, $form) {
 						</div>
 
 						<div class="form-group">
-							<label class="control-label col-md-2">Image (1920x800): <span class="required" aria-required="true">*</span></label>
+							<label class="control-label col-md-2">Image: <span class="required" aria-required="true">*</span></label>
 							<div class="col-md-3">
 								<div class="fileinput fileinput-new" data-provides="fileinput">
 									<?php if(isset($result->image)){ if($result->image!=''){ ?>
@@ -134,24 +134,14 @@ function showResponse(responseText, statusText, xhr, $form) {
 						</div>
 
 						<div class="form-group">
-							<label class="control-label col-md-2">Title_vn: <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-10"><input value="<?php if(isset($result->title_vn)) { print $result->title_vn; }else{ print '';} ?>" type="text" name="title_vnAdmincp" class="form-control"/></div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-2">Title_en: <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-10"><input value="<?php if(isset($result->title_en)) { print $result->title_en; }else{ print '';} ?>" type="text" name="title_enAdmincp" class="form-control"/></div>
+							<label class="control-label col-md-2">Title: <span class="required" aria-required="true">*</span></label>
+							<div class="col-md-10"><input value="<?php if(isset($result->title)) { print $result->title; }else{ print '';} ?>" type="text" name="titleAdmincp" class="form-control"/></div>
 						</div>
 
 						<div class="form-group">
-							<label class="control-label col-md-2">Description_vn:</label>
+							<label class="control-label col-md-2">Description:</label>
 							<div class="col-md-10">
-								<textarea rows="4" name="description_vnAdmincp" class="form-control"><?php if(isset($result->description_vn)) { print $result->description_vn; }else{ print '';} ?></textarea>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-2">Description_en:</label>
-							<div class="col-md-10">
-								<textarea rows="4" name="description_enAdmincp" class="form-control"><?php if(isset($result->description_en)) { print $result->description_en; }else{ print '';} ?></textarea>
+								<textarea rows="4" name="descriptionAdmincp" class="form-control"><?php if(isset($result->description)) { print $result->description; }else{ print '';} ?></textarea>
 							</div>
 						</div>
 

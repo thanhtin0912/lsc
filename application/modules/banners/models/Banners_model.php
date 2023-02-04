@@ -1,7 +1,7 @@
 <?php
 class Banners_model extends CI_Model {
 	private $module = 'banners';
-	private $table = 'tbl_banners';
+	private $table = 'banners';
 
 	function getsearchContent($limit,$page){
 		$this->db->select('*');
@@ -9,13 +9,13 @@ class Banners_model extends CI_Model {
 		$this->db->order_by('delete','ASC');
 		$this->db->order_by($this->input->post('func_order_by'),$this->input->post('order_by'));
 		if($this->input->post('title')!=''){
-			$this->db->where('(`title_vn` LIKE "%'.$this->input->post('title').'%")');
+			$this->db->where('(`title` LIKE "%'.$this->input->post('title').'%")');
 		}
 		if($this->input->post('url')!=''){
 			$this->db->where('(`url` LIKE "%'.$this->input->post('url').'%")');
 		}
-		if($this->input->post('description_vn')!=''){
-			$this->db->where('(`description_vn` LIKE "%'.$this->input->post('description_vn').'%")');
+		if($this->input->post('description')!=''){
+			$this->db->where('(`description` LIKE "%'.$this->input->post('description').'%")');
 		}
 		if($this->input->post('dateFrom')!='' && $this->input->post('dateTo')==''){
 			$this->db->where('created >= "'.date('Y-m-d 00:00:00',strtotime($this->input->post('dateFrom'))).'"');
@@ -45,7 +45,7 @@ class Banners_model extends CI_Model {
 	function getTotalsearchContent(){
 		$this->db->select('*');
 		if($this->input->post('title')!=''){
-			$this->db->where('(`title_vn` LIKE "%'.$this->input->post('title').'%")');
+			$this->db->where('(`title` LIKE "%'.$this->input->post('title').'%")');
 		}
 		if($this->input->post('url')!=''){
 			$this->db->where('(`url` LIKE "%'.$this->input->post('url').'%")');
@@ -93,10 +93,8 @@ class Banners_model extends CI_Model {
 			$data = array(
 				'url'=> trim($this->input->post('urlAdmincp', true)),
 				'image'=> trim($fileName['image']),
-				'title_vn'=> trim($this->input->post('title_vnAdmincp', true)),
-				'title_en'=> trim($this->input->post('title_enAdmincp', true)),
-				'description_vn'=> trim($this->input->post('description_vnAdmincp', true)),
-				'description_en'=> trim($this->input->post('description_enAdmincp', true)),
+				'title'=> trim($this->input->post('titleAdmincp', true)),
+				'description'=> trim($this->input->post('descriptionAdmincp', true)),
 				'status'=> $this->input->post('statusAdmincp'),
 				'created'=> date('Y-m-d H:i:s',time()),
 			);
@@ -117,10 +115,8 @@ class Banners_model extends CI_Model {
 			$data = array(
 				'url'=> trim($this->input->post('urlAdmincp', true)),
 				'image'=> trim($fileName['image']),
-				'title_vn'=> trim($this->input->post('title_vnAdmincp', true)),
-				'title_en'=> trim($this->input->post('title_enAdmincp', true)),
-				'description_vn'=> trim($this->input->post('description_vnAdmincp', true)),
-				'description_en'=> trim($this->input->post('description_enAdmincp', true)),
+				'title'=> trim($this->input->post('titleAdmincp', true)),
+				'description'=> trim($this->input->post('descriptionAdmincp', true)),
 				'status'=> $this->input->post('statusAdmincp')
 			);
 			modules::run('admincp/saveLog',$this->module,$this->input->post('hiddenIdAdmincp'),'','Update',$result,$data);

@@ -16,7 +16,7 @@ class Admincp extends MX_Controller {
 	}
 	
 	function index(){
-		header('Location: '.PATH_URL_ADMIN.'banners');
+		header('Location: '.PATH_URL_ADMIN.'report');
 		exit;
 		$data['module'] = 'admincp';
 		$this->template->write_view('content','index',$data);

@@ -1,7 +1,7 @@
 <?php
 class infos_model extends CI_Model {
 	private $module = 'infos';
-	private $table = 'tbl_infos';
+	private $table = 'infos';
 
 	function getsearchContent($limit,$page){
 		$this->db->select('*');
@@ -67,12 +67,11 @@ class infos_model extends CI_Model {
 				'phone'=> trim($this->input->post('phoneAdmincp')),
 				'phoneother'=> trim($this->input->post('phoneotherAdmincp')),
 				'mail'=> trim($this->input->post('mailAdmincp')),
-				'facebook'=> trim($this->input->post('facebookAdmincp')),
-				'address_vn'=> trim($this->input->post('address_vnAdmincp')),
-				'address_en'=> trim($this->input->post('address_enAdmincp')),
-				'description_vn'=> trim($this->input->post('description_vnAdmincp')),
-				'description_en'=> trim($this->input->post('description_enAdmincp')),
-				'status'=> ($this->input->post('statusAdmincp')=='on')?1:0,
+				'checkLogin'=> trim($this->input->post('checkLoginAdmincp')),
+				// 'facebook'=> trim($this->input->post('facebookAdmincp')),
+				// 'address'=> trim($this->input->post('addressAdmincp')),
+				// 'description'=> trim($this->input->post('descriptionAdmincp')),
+				// 'status'=> ($this->input->post('statusAdmincp')=='on')?1:0,
 				'created'=> date('Y-m-d H:i:s',time()),
 			);
 			if($this->db->insert(PREFIX.$this->table,$data)){
@@ -89,12 +88,11 @@ class infos_model extends CI_Model {
 				'phone'=> trim($this->input->post('phoneAdmincp')),
 				'phoneother'=> trim($this->input->post('phoneotherAdmincp')),
 				'mail'=> trim($this->input->post('mailAdmincp')),
-				'facebook'=> trim($this->input->post('facebookAdmincp')),
-				'address_vn'=> trim($this->input->post('address_vnAdmincp')),
-				'address_en'=> trim($this->input->post('address_enAdmincp')),
-				'description_vn'=> trim($this->input->post('description_vnAdmincp')),
-				'description_en'=> trim($this->input->post('description_enAdmincp')),
-				'status'=> 0,
+				'checkLogin'=> trim($this->input->post('checkLoginAdmincp')),
+				// 'facebook'=> trim($this->input->post('facebookAdmincp')),
+				// 'address'=> trim($this->input->post('addressAdmincp')),
+				// 'description'=> trim($this->input->post('descriptionAdmincp')),
+				'status'=> 1,
 				'created'=> date('Y-m-d H:i:s',time()),
 			);
 			modules::run('admincp/saveLog',$this->module,$this->input->post('hiddenIdAdmincp'),'','Update',$result,$data);
@@ -139,10 +137,10 @@ class infos_model extends CI_Model {
 	}
 	
 	/*----------------------FRONTEND----------------------*/
-	function getData($slug=''){
+	function getData(){
 		$this->db->select('*');
-		$this->db->where('slug',$slug);
-		$this->db->where('status',0);
+		$this->db->where('status',1);
+		$this->db->where('delete',0);
 		$this->db->limit(1);
 		$query = $this->db->get(PREFIX.$this->table);
         //echo $this->db->last_query();

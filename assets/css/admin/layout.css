@@ -952,6 +952,7 @@ Page sidebar
 }
 .page-sidebar .page-sidebar-menu > li.start > a,
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.start > a {
+
   border-top-color: transparent !important;
 }
 .page-sidebar .page-sidebar-menu > li.last > a,
@@ -2197,7 +2198,7 @@ Page content
 .page-content {
   margin-top: 0px;
   padding: 0px;
-  background-color: #fff;
+  background-color:#eef1f5;
 }
 .page-container-bg-solid .page-content {
   background: #f1f3fa;

@@ -63,7 +63,8 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label">Title:</label>
 									<div class="col-sm-4"><input onkeypress="return enterSearch(event)" type="text" class="form-control" id="search_title"></div>
-									
+									<label for="inputPassword" class="col-sm-2 control-label">Url:</label>
+									<div class="col-sm-4"><input onkeypress="return enterSearch(event)" type="text" class="form-control" id="search_url"></div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 control-label">Create Date:</label>
@@ -80,6 +81,10 @@
 										<label class="radio-inline"><input onclick="searchContent(0)" type="radio" name="search_status" value="0"> Blocked</label>
 										<label class="radio-inline"><input onclick="searchContent(0)" type="radio" name="search_status" value="1"> Approved</label>
                                     </div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">Description:</label>
+									<div class="col-sm-10"><input onkeypress="return enterSearch(event)" type="text" class="form-control" id="search_description"></div>
 								</div>
 							</form>
 						</div>

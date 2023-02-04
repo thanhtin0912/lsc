@@ -31,6 +31,7 @@ class Admincp_accounts_model extends CI_Model {
 		if($this->input->post('showData') != 2) {
 			$this->db->where('u.delete', $this->input->post('showData'));
 		}
+
 		$query = $this->db->get($this->table.' u');
 
 		if($query->result()){

@@ -3,118 +3,47 @@
 <script type="text/javascript" src="<?=PATH_URL.'assets/editor/scripts/innovamanager.js'?>"></script>
 <script type="text/javascript">
 $(document).ready( function() {
-	$("#name_vnAdmincp").slugIt({
+	$("#nameAdmincp").slugIt({
 		events: 'keyup blur',
 		output: '#slugAdmincp',
 		space: '-'
 	});
-
-	$('#content_vnAdmincp').liveEdit({
-		height: 350,
-		css: ['<?=PATH_URL?>assets/editor/bootstrap/css/bootstrap.min.css', '<?=PATH_URL?>assets/editor/bootstrap/bootstrap_extend.css','<?=PATH_URL?>assets/css/styles.css'] /* Apply bootstrap css into the editing area */,
-		fileBrowser: '<?=PATH_URL?>assets/editor/assetmanager/asset.php',
-		returnKeyMode: 3,
-		groups: [
-				["group1", "", ["Bold", "Italic", "Underline", "ForeColor", "RemoveFormat"]],
-				["group2", "", ["Bullets", "Numbering", "Indent", "Outdent", "JustifyLeft", "JustifyCenter", "JustifyRight"]],
-				["group3", "", ["Paragraph", "FontSize", "FontDialog", "TextDialog"]],
-				["group4", "", ["LinkDialog", "ImageDialog", "TableDialog"]],
-				["group5", "", ["Undo", "Redo", "FullScreen", "SourceDialog"]],
-				["group6", "", ["Left", "Center", "Right"]]
-				] /* Toolbar configuration */
+	$(function () {
+		$('select[multiple].active.3col').multiselect({
+			columns: 2,
+			placeholder: 'Add topping',
+			search: true,
+			searchOptions: {
+				'default': 'Search topping'
+			},
+			selectAll: true,
+		});
 	});
-	$('#content_vnAdmincp').data('liveEdit').startedit();
-	//english
-	$('#content_enAdmincp').liveEdit({
-		height: 350,
-		css: ['<?=PATH_URL?>assets/editor/bootstrap/css/bootstrap.min.css', '<?=PATH_URL?>assets/editor/bootstrap/bootstrap_extend.css','<?=PATH_URL?>assets/css/styles.css'] /* Apply bootstrap css into the editing area */,
-		fileBrowser: '<?=PATH_URL?>assets/editor/assetmanager/asset.php',
-		returnKeyMode: 3,
-		groups: [
-				["group1", "", ["Bold", "Italic", "Underline", "ForeColor", "RemoveFormat"]],
-				["group2", "", ["Bullets", "Numbering", "Indent", "Outdent", "JustifyLeft", "JustifyCenter", "JustifyRight"]],
-				["group3", "", ["Paragraph", "FontSize", "FontDialog", "TextDialog"]],
-				["group4", "", ["LinkDialog", "ImageDialog", "TableDialog"]],
-				["group5", "", ["Undo", "Redo", "FullScreen", "SourceDialog"]],
-				["group6", "", ["Left", "Center", "Right"]]
-				] /* Toolbar configuration */
-	});
-	$('#content_enAdmincp').data('liveEdit').startedit();
-
-	$('#description_vnAdmincp').liveEdit({
-		height: 250,
-		css: ['<?=PATH_URL?>assets/editor/bootstrap/css/bootstrap.min.css', '<?=PATH_URL?>assets/editor/bootstrap/bootstrap_extend.css','<?=PATH_URL?>assets/css/styles.css'] /* Apply bootstrap css into the editing area */,
-		fileBrowser: '<?=PATH_URL?>assets/editor/assetmanager/asset.php',
-		returnKeyMode: 3,
-		groups: [
-				["group1", "", ["Bold", "Italic", "Underline", "ForeColor", "RemoveFormat"]],
-				["group2", "", ["Bullets", "Numbering", "Indent", "Outdent", "JustifyLeft", "JustifyCenter", "JustifyRight"]],
-				["group3", "", ["Paragraph", "FontSize", "FontDialog", "TextDialog"]],
-				["group4", "", ["LinkDialog", "ImageDialog", "TableDialog"]],
-				["group5", "", ["Undo", "Redo", "FullScreen", "SourceDialog"]],
-				["group6", "", ["Left", "Center", "Right"]]
-				] /* Toolbar configuration */
-	});
-	$('#description_vnAdmincp').data('liveEdit').startedit();
-	//english
-	$('#description_enAdmincp').liveEdit({
-		height: 250,
-		css: ['<?=PATH_URL?>assets/editor/bootstrap/css/bootstrap.min.css', '<?=PATH_URL?>assets/editor/bootstrap/bootstrap_extend.css','<?=PATH_URL?>assets/css/styles.css'] /* Apply bootstrap css into the editing area */,
-		fileBrowser: '<?=PATH_URL?>assets/editor/assetmanager/asset.php',
-		returnKeyMode: 3,
-		groups: [
-				["group1", "", ["Bold", "Italic", "Underline", "ForeColor", "RemoveFormat"]],
-				["group2", "", ["Bullets", "Numbering", "Indent", "Outdent", "JustifyLeft", "JustifyCenter", "JustifyRight"]],
-				["group3", "", ["Paragraph", "FontSize", "FontDialog", "TextDialog"]],
-				["group4", "", ["LinkDialog", "ImageDialog", "TableDialog"]],
-				["group5", "", ["Undo", "Redo", "FullScreen", "SourceDialog"]],
-				["group6", "", ["Left", "Center", "Right"]]
-				] /* Toolbar configuration */
-	});
-	$('#description_enAdmincp').data('liveEdit').startedit();
-
 });
 
+
+
 function save(){
+	
 	var options = {
 		beforeSubmit:  showRequest,  // pre-submit callback 
 		success:       showResponse  // post-submit callback 
     };
-	$('#description_vnAdmincp').val($('#description_vnAdmincp').data('liveEdit').getXHTMLBody());
-	$('#description_enAdmincp').val($('#description_enAdmincp').data('liveEdit').getXHTMLBody());
-	$('#content_vnAdmincp').val($('#content_vnAdmincp').data('liveEdit').getXHTMLBody());
-	$('#content_enAdmincp').val($('#content_enAdmincp').data('liveEdit').getXHTMLBody());
 	$('#frmManagement').ajaxSubmit(options);
 }
-
 function showRequest(formData, jqForm, options) {
 	var form = jqForm[0];
 
-	<?php if($id==0){ ?>
-        if($('#avataAdmincp').val() == ''){
-            $('#txt_error').html('Vui lòng chọn hình ảnh.');
-            show_perm_denied();
-            return false;
-        }
-    <?php } ?>
+	if(form.codeAdmincp.value != ''){
+		$("#codeAdmincp").val($("#codeAdmincp").val().replace(/\s\s/g, ''));
+		$("#codeAdmincp").val($("#codeAdmincp").val().replace(/[<\!\>\?\@\#\$\%\^\&\*\"\'\[\]\{\}\=\𠮷\𠀋\𡈽\𠮟\𣘺\𡌛\𡢽\𡸴\𣜿]/g, ''));
+	}
 
-	if(form.cateAdmincp.value == ''){
+	if(form.nameAdmincp.value == ''  || form.unitAdmincp.value == '' || form.cateAdmincp.value == ''){
 		$('#txt_error').html('Please enter information.');
 		show_perm_denied();
 		return false;
 	}
-	if(form.name_vnAdmincp.value == ''  || form.description_vnAdmincp.value == '' || $('#content_vnAdmincp').val() == '<br>' || $('#content_vnAdmincp').val() == '' || ($('#content_vnAdmincp').val().charCodeAt(0)==10 && isNaN($('#content_vnAdmincp').val().charCodeAt(1)))){
-		$('#txt_error').html('Please enter information.');
-		show_perm_denied();
-		return false;
-	}
-
-	if(form.name_enAdmincp.value == '' || form.description_enAdmincp.value == '' || $('#content_enAdmincp').val() == '<br>' || $('#content_enAdmincp').val() == '' || ($('#content_enAdmincp').val().charCodeAt(0)==10 && isNaN($('#content_enAdmincp').val().charCodeAt(1)))){
-		$('#txt_error').html('Please enter information.');
-		show_perm_denied();
-		return false;
-	}
-
 }
 
 function showResponse(responseText, statusText, xhr, $form) {
@@ -125,13 +54,12 @@ function showResponse(responseText, statusText, xhr, $form) {
 	if(responseText[0]=='success'){
 		show_perm_success();
 	}
-
 	if(responseText[0]=='redirect'){
 		window.location = module_url;
 	}
 	
 	if(responseText[0]=='error-title-exists'){
-		$('#txt_error').html('Title already exists.');
+		$('#txt_error').html('Name Product already exists.');
 		show_perm_denied();
 		return false;
 	}
@@ -148,7 +76,15 @@ function showResponse(responseText, statusText, xhr, $form) {
 		return false;
 	}
 }
+
 </script>
+<style>
+.input-group {
+    float: left;
+    padding-right: 20px;
+}
+</style>
+
 <!-- BEGIN PAGE HEADER-->
 <h3 class="page-title"><?=$this->session->userdata('Name_Module')?></h3>
 <div class="page-bar">
@@ -160,6 +96,7 @@ function showResponse(responseText, statusText, xhr, $form) {
 </div>
 <!-- END PAGE HEADER-->
 <!-- BEGIN PAGE CONTENT-->
+
 <div class="row">
 	<div class="col-md-12">
 		<!-- BEGIN EXAMPLE TABLE PORTLET-->
@@ -186,112 +123,212 @@ function showResponse(responseText, statusText, xhr, $form) {
 				<form id="frmManagement" action="<?=PATH_URL_ADMIN.$module.'/save/'?>" method="post" enctype="multipart/form-data" class="form-horizontal form-row-seperated">
 					<input type="hidden" value="<?=$this->security->get_csrf_hash()?>" id="csrf_token" name="csrf_token" />
 					<input type="hidden" value="<?=$id?>" name="hiddenIdAdmincp" />
-					<div class="form-body">
-						<div class="form-group">
-							<label class="control-label col-md-2">Status:</label>
-							<div class="col-md-10">
-								<label class="radio-inline"><input type="radio" name="statusAdmincp" value="0" <?= isset($result->status) ? $result->status == 0 ? 'checked' : '' : '' ?> > Blocked</label>
-								<label class="radio-inline"><input type="radio" name="statusAdmincp" value="1" <?= isset($result->status) ? $result->status == 1 ? 'checked' : '' : 'checked' ?> > Approved</label>
+
+					<div class="portlet-body">
+						<div class="row">
+							<div class="col-md-2 col-sm-2 col-xs-2">
+								<ul class="nav nav-tabs tabs-left">
+									<li class="active">
+										<a href="#tab1" data-toggle="tab"><span class ="caption-subject font-green-haze bold uppercase"> Sản phẩm </span></a>
+									</li>
+									<li>
+										<a href="#tab2" data-toggle="tab"><span class ="caption-subject font-green-haze bold uppercase"> Định mức đại lý </span></a>
+									</li>
+
+								</ul>
 							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-2">HighLight:</label>
-							<div class="col-md-10">
-								<label class="radio-inline"><input type="radio" name="highlightAdmincp" value="0" <?= isset($result->status) ? $result->status == 0 ? 'checked' : '' : '' ?> > Blocked</label>
-								<label class="radio-inline"><input type="radio" name="highlightAdmincp" value="1" <?= isset($result->status) ? $result->status == 1 ? 'checked' : '' : 'checked' ?> > Approved</label>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-2">Danh mục: <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-6">
-								<select class="select form-control" data-live-search="true" data-size="8" name="cateAdmincp" id="cateAdmincp">
-									<option value="">None</option>
-									<?php foreach ($cates as $key => $cate): ?>
-										<?php  
-											$select = '';
-											if($result->type == $cate->id){
-												$select = 'selected="selected"';
-											}
-										?>
-										<option value="<?= $cate->id; ?>" <?= $select; ?> ><?= $cate->name_vn; ?></option>
-									<?php endforeach; ?>
-								</select>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-2">Tên sản phẩm _vn: <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-10"><input value="<?php if(isset($result->name_vn)) { print $result->name_vn; }else{ print '';} ?>" type="text" name="name_vnAdmincp" id="name_vnAdmincp" class="form-control"/></div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-2">Tên sản phẩm _en: <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-10"><input value="<?php if(isset($result->name_en)) { print $result->name_en; }else{ print '';} ?>" type="text" name="name_enAdmincp" id="name_enAdmincp" class="form-control"/></div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-2">Slug: <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-10"><input value="<?php if(isset($result->slug)) { print $result->slug; }else{ print '';} ?>" type="text" name="slugAdmincp" id="slugAdmincp" class="form-control"/></div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-2">Hình đại diện(500x800): <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-3">
-								<div class="fileinput fileinput-new" data-provides="fileinput">
-									<?php if(isset($result->avata)){ if($result->avata!=''){ ?>
-									<div class="fileinput-new thumbnail" style="width: 150px; height: 150px;">
-										<img src="<?=resizeImage(PATH_URL.DIR_UPLOAD_PRODUCTS.$result->avata,150, 150)?>" />
-									</div>
-									<?php }} ?>
-									<div class="input-group input-large fallback">
-										<div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
-											<i class="fa fa-file fileinput-exists"></i>&nbsp; <span class="fileinput-filename">
-											</span>
+							<div class="col-md-10 col-sm-10 col-xs-10">
+								<div class="tab-content">
+									<div class="tab-pane active" id="tab1">
+										<div class="form-body">
+											<div class="form-group">
+												<label class="control-label col-md-2">Status:</label>
+												<div class="col-md-10">
+													<label class="radio-inline"><input type="radio" name="statusAdmincp" value="0" <?= isset($result->status) ? $result->status == 0 ? 'checked' : '' : '' ?> > Blocked</label>
+													<label class="radio-inline"><input type="radio" name="statusAdmincp" value="1" <?= isset($result->status) ? $result->status == 1 ? 'checked' : '' : 'checked' ?> > Approved</label>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="control-label col-md-2">Danh mục: <span class="required" aria-required="true">*</span></label>
+												<div class="col-md-6">
+													<select class="bs-select form-control" data-live-search="true" data-size="8" name="cateAdmincp" id="cateAdmincp">
+														<option value="">None</option>
+														<?php foreach ($cates as $key => $cate): ?>
+															<?php  
+																$select = '';
+																if (isset($result->type)) {
+																	if($result->type == $cate->id){
+																		$select = 'selected="selected"';
+																	}
+																}
+															?>
+															<option value="<?= $cate->id; ?>" <?= $select; ?> ><?= $cate->name; ?></option>
+														<?php endforeach; ?>
+													</select>
+												</div>
+											</div>
+											<div class="form-group">
+												<!--  -->
+												<label class="control-label col-md-2">Tên: <span class="required" aria-required="true">*</span></label>
+												<div class="col-md-8">
+													<input value="<?php if(isset($result->name)) { print $result->name; }else{ print '';} ?>" type="text" name="nameAdmincp" id="nameAdmincp" class="form-control"/>
+												</div>
+											</div>
+											<div class="form-group">
+												<!--  -->
+												<label class="control-label col-md-2">Code: <span class="required" aria-required="true">*</span></label>
+												<div class="col-md-3">
+													<input value="<?php if(isset($result->code)) { print $result->code; }else{ print '';} ?>" type="text" name="codeAdmincp" id="codeAdmincp" class="form-control"/>
+												</div>
+												<label class="control-label col-md-2">Sắp xếp: <span class="required" aria-required="true">*</span></label>
+												<div class="col-md-3">
+													<input value="<?php if(isset($result->order)) { print $result->order; }else{ print '';} ?>" type="text" name="orderAdmincp" id="orderAdmincp" class="form-control"/>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="control-label col-md-2">Slug: <span class="required" aria-required="true">*</span></label>
+												<div class="col-md-8"><input value="<?php if(isset($result->slug)) { print $result->slug; }else{ print '';} ?>" type="text" name="slugAdmincp" id="slugAdmincp" class="form-control"/></div>
+											</div>
+											<div class="form-group">
+												<label class="control-label col-md-2">Đơn vị tính: <span class="required" aria-required="true">*</span></label>
+												<div class="col-md-3">
+													<select class="bs-select form-control" data-live-search="true" data-size="8" name="unitAdmincp" id="unitAdmincp">
+														<option value="">None</option>
+														<?php foreach ($units as $key => $unit): ?>
+															<?php  
+																$select = '';
+																if (isset($result->type)) {
+																	if(strcmp($result->unit, $unit->name) === 0){
+																		$select = 'selected="selected"';
+																	}
+																}
+															?>
+															<option value="<?= $unit->name; ?>" <?= $select; ?> ><?= $unit->name; ?></option>
+														<?php endforeach; ?>
+													</select>
+												</div>
+												<label class="control-label col-md-2">Cho phép xem tồn:</label>
+												<div class="col-md-3">
+													<label class="radio-inline"><input type="radio" name="viewAllAdmincp" value="0" <?= isset($result->viewAll) ? $result->viewAll == 0 ? 'checked' : '' : 'checked' ?> > Không</label>
+													<label class="radio-inline"><input type="radio" name="viewAllAdmincp" value="1" <?= isset($result->viewAll) ? $result->viewAll == 1 ? 'checked' : '' : '' ?> > Có</label>
+												</div>
+											</div>
+											
+											<div class="form-group">
+												<label class="control-label col-md-2">Cho phép hủy:</label>
+												<div class="col-md-3">
+													<label class="radio-inline"><input type="radio" name="cancelAdmincp" value="0" <?= isset($result->is_remove) ? $result->is_remove == 0 ? 'checked' : '' : 'checked' ?> > Không</label>
+													<label class="radio-inline"><input type="radio" name="cancelAdmincp" value="1" <?= isset($result->is_remove) ? $result->is_remove == 1 ? 'checked' : '' : '' ?> > Có</label>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="control-label col-md-2">Cửa hàng áp dụng: <span class="required" aria-required="true">*</span></label>
+												<div class="col-md-5">
+													<select class="3col active" multiple="multiple" name="useStoreAdmincp[]" >
+														<?php foreach ($stores as $key => $s) { ?>
+															<?php  
+																$select = '';
+																if (isset($result->useStore) && $result->useStore!='') {
+																	$storeSelected = explode(',', $result->useStore);
+																	// $storeSelected = unserialize($result->useStore);
+																	if(in_array($s->id, $storeSelected)){
+																		$select = 'selected="selected"';
+																	}
+																}
+																echo $select;
+															?>
+															<option value="<?= $s->id; ?>" <?= $select; ?> ><?= $s->name; ?></option>
+														<?php } ?>
+													</select>
+												</div>
+											</div>
+											<div class="form-group ">
+												<label class="control-label col-md-2">Mô tả phẩm: <span class="required" aria-required="true">*</span></label>
+												<div class="col-md-8"><textarea name="descriptionAdmincp" id="descriptionAdmincp" cols="" rows="5" class="form-control"><?php if(isset($result->description)) { print $result->description; }else{ print '';} ?></textarea></div>
+											</div>
+
+ 
+											<div class="form-group">
+												<label class="control-label col-md-2">Hình đại diện(400x180): <span class="required" aria-required="true">*</span></label>
+												<div class="col-md-3">
+													<div class="fileinput fileinput-new" data-provides="fileinput">
+														<?php if(isset($result->image)){ if($result->image!=''){ ?>
+														<div class="fileinput-new thumbnail" style="width: 150px; height: 150px;">
+															<img src="<?=resizeImage(PATH_URL.DIR_UPLOAD_PRODUCT.$result->image,150, 150)?>" />
+														</div>
+														<?php }} ?>
+														<div class="input-group input-large fallback">
+															<div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+																<i class="fa fa-file fileinput-exists"></i>&nbsp; <span class="fileinput-filename">
+																</span>
+															</div>
+															<span class="input-group-addon btn default btn-file">
+															<span class="fileinput-new">
+															Chọn image </span>
+															<span class="fileinput-exists">
+															Change </span>
+															<input type="file" id="imageAdmincp" name="fileAdmincp[image]">
+															</span>
+															<a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">
+															xóa </a>
+														</div>
+													</div>
+												</div>
+											</div>
 										</div>
-										<span class="input-group-addon btn default btn-file">
-										<span class="fileinput-new">
-										Chọn image </span>
-										<span class="fileinput-exists">
-										Change </span>
-										<input type="file" id="avataAdmincp" name="fileAdmincp[avata]">
-										</span>
-										<a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">
-										xóa </a>
 									</div>
+									<div class="tab-pane fade" id="tab2">
+										<div class="form-body">
+										<?php if($quotes) { ?>
+											<?php $checkQuoteExist = array(); ?>	
+											<?php foreach ($quotes as $key => $quote){
+												array_push($checkQuoteExist, $quote->storeId); 
+											} ?>
+										<?php } ?>
+										<?php foreach ($stores as $key => $store){ ?>
+											<?php if($quotes) { ?>
+												<?php if (in_array($store->id, $checkQuoteExist)) { ?>
+													<?php foreach ($quotes as $key => $quote){ ?>
+														<?php if($store->id == $quote->storeId) { ?>
+															<div class="form-group">
+																<label class="control-label col-md-2"><?=$store->name;?>: <span class="required" aria-required="true">*</span></label>
+																<div class="col-md-4">
+																	<input value="<?= $quote->value;?>" type="text" name="storeAdmincp[<?= $store->id;?>]" id="storeAdmincp" class="form-control"/>
+																</div>
+															</div>	
+														<?php } ?>
+													<?php } ?>
+												<?php } else { ?>
+													<div class="form-group">
+														<!--  -->
+														<label class="control-label col-md-2"><?=$store->name;?>: <span class="required" aria-required="true">*</span></label>
+														<div class="col-md-4">
+															<input type="text" name="storeAdmincp[<?=$store->id;?>]" id="storeAdmincp" class="form-control"/>
+														</div>
+													</div>
+												<?php } ?>
+											<?php } else { ?>			
+											<div class="form-group">
+												<!--  -->
+												<label class="control-label col-md-2"><?=$store->name;?>: <span class="required" aria-required="true">*</span></label>
+												<div class="col-md-4">
+													<input type="text" name="storeAdmincp[<?=$store->id;?>]" id="storeAdmincp" class="form-control"/>
+												</div>
+											</div>
+											<?php } ?>	
+										<?php } ?>
+										</div>
+									</div>
+
 								</div>
 							</div>
-						</div>
-
-						<div class="form-group">
-							<!--  -->
-							<label class="control-label col-md-2">Giá bán: <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-3">
-								<input value="<?php if(isset($result->price)) { print $result->price; }else{ print '';} ?>" type="text" name="priceAdmincp" id="priceAdmincp" class="form-control number"/>
-							</div>
-							<label class="control-label col-md-2">Đánh giá (1->5): <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-3">
-								<input value="<?php if(isset($result->review)) { print $result->review; }else{ print '';} ?>" type="text" name="reviewAdmincp" id="reviewAdmincp" class="form-control number"/>
-							</div>
-						</div>
-
-						<div class="form-group last">
-							<label class="control-label col-md-2">Mô tả _vn: <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-10"><textarea name="description_vnAdmincp" id="description_vnAdmincp" cols="" rows="5" class="form-control"><?php if(isset($result->description_vn)) { print $result->description_vn; }else{ print '';} ?></textarea></div>
-						</div>
-						<div class="form-group last">
-							<label class="control-label col-md-2">Mô tả _en: <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-10"><textarea name="description_enAdmincp" id="description_enAdmincp" cols="" rows="5" class="form-control"><?php if(isset($result->description_en)) { print $result->description_en; }else{ print '';} ?></textarea></div>
-						</div>
-
-						<div class="form-group last">
-							<label class="control-label col-md-2">Thông tin sản phẩm_vn: <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-10"><textarea name="content_vnAdmincp" id="content_vnAdmincp" cols="" rows="8"><?php if(isset($result->content_vn)) { print $result->content_vn; }else{ print '';} ?></textarea></div>
-						</div>
-						<div class="form-group last">
-							<label class="control-label col-md-2">Thông tin sản phẩm _en: <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-10"><textarea name="content_enAdmincp" id="content_enAdmincp" cols="" rows="8"><?php if(isset($result->content_en)) { print $result->content_en; }else{ print '';} ?></textarea></div>
 						</div>
 					</div>
 					<div class="form-actions">
 						<div class="row">
 							<div class="col-md-offset-2 col-md-9">
-								<button onclick="save()" type="button" class="btn green"><i class="fa fa-pencil"></i> Save</button>
+								<button onclick="save()" type="button" class="btn green" id="btnsave"><i class="fa fa-pencil"></i> Save</button>
 								<a href="<?=PATH_URL_ADMIN.$module.'/#/back'?>"><button type="button" class="btn default">Cancel</button></a>
 							</div>
 						</div>

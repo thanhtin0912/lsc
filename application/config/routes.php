@@ -50,44 +50,44 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'home';
-
-
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-//Config Router Multi Language8
-$route["^(en|vn)"] = $route['default_controller'];
+$route['dang-nhap'] = "home/login";
+$route['dang-xuat'] = "home/logout";
+$route['nhap-kho'] = "home/import";
+$route['xuat-kho'] = "home/export";
+$route['hang-huy'] = "home/remove";
+$route['lich-su'] = "home/history";
+$route['tim-kiem-lich-su'] = "home/search_history";
+
+$route['don-hang-online'] = "home/orderApp";
+$route['ton-kho-cua-hang'] = "home/inventoryStore";
+// api
+$route['checkLogin'] = "home/checkLogin";
+$route['importInventory'] = "home/importInventory";
+$route['exportInventory'] = "home/exportInventory";
+$route['removeInventory'] = "home/removeInventory";
+
+$route['ajaxSearchImportProduct'] = "home/ajaxSearchImportProduct";
+$route['ajaxSearchExportProduct'] = "home/ajaxSearchExportProduct";
+$route['ajaxSearchRemoveProduct'] = "home/ajaxSearchRemoveProduct";
+
+$route['searchHistoryInventory'] = "home/searchHistoryInventory";
+$route['importListQtyPruoduct'] = "home/importListQtyPruoduct";
+$route['exportListQtyPruoduct'] = "home/exportListQtyPruoduct";
+$route['loadNoteProductofStore'] = "home/loadNoteProductofStore";
+$route['saveNoteInventory'] = "home/saveNoteInventory";
+
+// 
+$route['kho-tong'] = "home/main_info";
+$route['nhap-kho-chinh'] = "home/main_import";
+$route['xuat-kho-chinh'] = "home/main_export";
+$route['ajaxSearchExportMainStore'] = "home/ajaxSearchExportMainStore";
+//Config Router Multi Language
+// $route['^(en|jp)$'] = $route['default_controller'];
 
 
-//Config Router Front End
-$route["^(en|vn)/home"] 	= "home";
-$route['^(en|vn)/about'] 	= "home/about";
-$route['^(en|vn)/design'] 	= "home/design";
-$route['^(en|vn)/construct'] 	= "home/construct";
-
-$route['^(en|vn)/contact'] 	= "home/contact";
-//
-$route['^(en|vn)/news'] 	= "home/news";
-$route["^(en|vn)/showAllNews"] 	= "home/showAllNews";
-$route['^(en|vn)/news-detail/(:any)'] 	  = "home/news_detail/$2";
-//
-$route['^(en|vn)/projects'] 	= "home/projects";
-$route["^(en|vn)/showAllLibraries"] 	= "home/showAllLibraries";
-$route['^(en|vn)/project/(:any)'] 	= "home/project_detail/$2";
-//
-$route['^(en|vn)/library'] 	= "home/library";
-$route['^(en|vn)/library-image/(:any)'] 	= "home/library_detail/$2";
-//
-$route['^(en|vn)/service/(:any)'] 	  = "home/services_detail/$2";
-//
-$route['^(en|vn)/products'] 	= "home/products";
-$route["^(en|vn)/home/showAllProducts"] 	= "home/showAllProducts";
-$route['^(en|vn)/product/(:any)'] 	= "home/product_detail/$2";
-$route['^(en|vn)/cata/(:any)'] 	= "home/catagory/$2";
-
-$route["^(en|vn)/saveInfoContact"] 	= "home/saveInfoContact";
-
-$route["^(en|vn)/getDetailProject"] 	= "home/getDetailProject";
 
 //Config Router Admincp
 $route[ADMINCP] = "admincp";
@@ -105,3 +105,4 @@ $route[ADMINCP.'/(:any)/(:any)/(:any)/(:any)'] = "$1/admincp_$2/$3/$4";
 $route[ADMINCP.'/(:any)/(:any)/(:any)'] = "$1/admincp_$2/$3";
 $route[ADMINCP.'/(:any)/(:any)'] = "$1/admincp_$2";
 $route[ADMINCP.'/(:any)'] = "$1/admincp_index";
+

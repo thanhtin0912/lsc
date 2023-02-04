@@ -1,0 +1,40 @@
+/* Add here all your css styles (customizations) */
+.profile-body {
+    padding: 20px;
+    background: #f7f7f7;
+}
+
+/*Quantity Field Form*/
+.import .quantity-button {
+	color: #888;
+	width: 35px;
+	height: 30px;
+	padding: 2px;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	font-size: 16px;
+	background: #eee;
+	text-align: center;
+	font-weight: normal;
+	white-space: nowrap;
+	display: inline-block;
+	background-image: none;
+}
+
+.import .quantity-field {
+	width: 85px;
+	height: 30px;
+	outline: none;
+	margin: 0 -4px;
+	font-size: 16px;
+	text-align: center;
+	display: inline-block;
+	border: 1px solid #eee;
+}
+
+@media (max-width: 991px) {
+	.import .quantity-field {
+		width: 55px;
+	}
+}

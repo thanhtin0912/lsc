@@ -39,10 +39,11 @@
     <!-- BEGIN THEME STYLES -->
     <link href="<?= PATH_URL . 'assets/css/admin/' ?>components.css" rel="stylesheet" type="text/css"
           id="style_components"/>
-    <link href="<?= PATH_URL . 'assets/css/admin/' ?>plugins.css" rel="stylesheet" type="text/css"/>
+    <!-- <link href="<?= PATH_URL . 'assets/css/admin/' ?>plugins.css" rel="stylesheet" type="text/css"/> -->
     <link href="<?= PATH_URL . 'assets/css/admin/' ?>layout.css" rel="stylesheet" type="text/css"/>
     <link href="<?= PATH_URL . 'assets/css/admin/' ?>default.css" rel="stylesheet" type="text/css" id="style_color"/>
     <link href="<?= PATH_URL . 'assets/css/admin/' ?>style.css" rel="stylesheet" type="text/css" id="style_color"/>
+    <link href="<?= PATH_URL . 'assets/css/admin/' ?>jquery.multiselect.css" rel="stylesheet" type="text/css"/>
     <!-- END THEME STYLES -->
     <link rel="shortcut icon" href="<?= PATH_URL . 'assets/images/admin/' ?>favicon.ico" type="image/x-icon">
     <link rel="icon" href="<?= PATH_URL . 'assets/images/admin/' ?>favicon.ico" type="image/x-icon">
@@ -51,17 +52,6 @@
         <script type="text/javascript" src="<?= PATH_URL . 'assets/js/admin/' ?>jquery.form.js"></script>
     <?php } ?>
 </head>
-<style type="text/css">
-    .nav>li>a {
-    position: relative;
-    display: block;
-    padding: 10px 30px;
-    color: #fff !important; 
-}
-    .nav>li.active {
-    background-color: #5b9bd1 ! important;
-}
-</style>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="page-header-fixed page-quick-sidebar-over-content">
@@ -71,7 +61,8 @@
     <div class="page-header-inner">
         <!-- BEGIN LOGO -->
         <div class="page-logo">
-            <a href="<?= PATH_URL_ADMIN ?>"><img src="<?=PATH_URL ?>assets/logo_admin_page.png" alt="logo" width='50%' class="logo-default"/></a>
+            <a href="<?= PATH_URL_ADMIN ?>"><img src="https://preview.keenthemes.com/metronic-v4/theme/assets/layouts/layout/img/logo.png" alt="logo"
+                                                 class="logo-default"/></a>
         </div>
         <!-- END LOGO -->
 
@@ -109,7 +100,6 @@
 </div>
 <!-- END HEADER -->
 <div class="clearfix">
-
 </div>
 <!-- BEGIN CONTAINER -->
 <div class="page-container">
@@ -117,7 +107,14 @@
     <div class="page-sidebar-wrapper">
         <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
         <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
-        <div class="page-sidebar navbar-collapse collapse">
+        <div class="page-sidebar navbar-collapse">
+            <!-- BEGIN SIDEBAR MENU -->
+            <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+            <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+            <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+            <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+            <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+            <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
             <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
                 <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
                 <li class="sidebar-toggler-wrapper">
@@ -126,81 +123,137 @@
                     </div>
                     <!-- END SIDEBAR TOGGLER BUTTON -->
                 </li>
+                <li class="nav-item">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <i class="icon-bar-chart"></i>
+                        <span class="title">Kho và Đại lý</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu" <?php if (($this->uri->segment(2) == 'report') ||  ($this->uri->segment(2) == 'history' ) ||  ($this->uri->segment(2) == 'compare')) { print "style='display: block;' ";} ?>>
+                        <li class="nav-item  last<?php if ($this->uri->segment(2) == 'report') { print 'active open';} ?>">
+                            <a href="<?= PATH_URL_ADMIN . 'report' ?>" class="nav-link ">
+                                <i class="fa fa-arrow-right"></i><span class="title">Báo cáo</span>
+                            </a>
+                        </li>
+                        <li class="nav-item  <?php if ($this->uri->segment(2) == 'compare') { print 'active open';} ?>">
+                            <a href="<?= PATH_URL_ADMIN . 'compare' ?>" class="nav-link ">
+                                <i class="fa fa-arrow-right"></i><span class="title">So sánh</span>
+                            </a>
+                        </li>
+                        <li class="nav-item  last<?php if ($this->uri->segment(2) == 'history') { print 'active open';} ?>">
+                            <a href="<?= PATH_URL_ADMIN . 'history' ?>" class="nav-link ">
+                                <i class="fa fa-arrow-right"></i><span class="title">Lịch sử</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item  <?php if ($this->uri->segment(2) == 'products') { print 'active open';} ?>">
+                    <a href="<?= PATH_URL_ADMIN . 'products' ?>" class="nav-link ">
+                        <i class="icon-basket"></i><span class="title">Sản phẩm </span>
+                    </a>
+                </li>
 
                 <li class="nav-item">
                     <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class="icon-social-dribbble"></i>
-                        <span class="title">Quản lý trang chủ</span>
+                        <i class="icon-layers"></i>
+                        <span class="title">Định mức</span>
                         <span class="arrow"></span>
                     </a>
-                    <ul class="sub-menu" <?php if (($this->uri->segment(2) == 'banners') ||  ($this->uri->segment(2) == 'comments' ) ||  ($this->uri->segment(2) == 'infos') || ($this->uri->segment(2) == 'static_pages')) { print "style='display: block;' ";} ?>>
-                        <li class="nav-item  last<?php if ($this->uri->segment(2) == 'Banners') { print 'active open';} ?>">
-                            <a href="<?= PATH_URL_ADMIN . 'banners' ?>" class="nav-link ">
-                                <i class="fa fa-arrow-right"></i><span class="title">Banner</span>
+                    <ul class="sub-menu" <?php if (($this->uri->segment(2) == 'quote_detail') || ($this->uri->segment(2) == 'quote') || ($this->uri->segment(2) == 'products' )) { print "style='display: block;' ";} ?>>
+                        <li class="nav-item  last<?php if ($this->uri->segment(2) == 'quote') { print 'active open';} ?>">
+                            <a href="<?= PATH_URL_ADMIN . 'quote' ?>" class="nav-link ">
+                                <i class="fa fa-arrow-right"></i><span class="title">Định mức đại lý</span>
                             </a>
                         </li>
-                        <li class="nav-item  <?php if ($this->uri->segment(2) == 'infos') { print 'active open';} ?>">
+                        
+                        <li class="nav-item  last<?php if ($this->uri->segment(2) == 'quote_detail') { print 'active open';} ?>">
+                            <a href="<?= PATH_URL_ADMIN . 'quote_detail' ?>" class="nav-link ">
+                                <i class="fa fa-arrow-right"></i><span class="title">Định mức đặt trước </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="heading">
+                    <h3 class="uppercase">Hệ thống & cài đặt</h3>
+                </li>
+                <li class="nav-item  <?php if ($this->uri->segment(2) == 'customers') { print 'active open';} ?>">
+                    <a href="<?= PATH_URL_ADMIN . 'customers' ?>" class="nav-link ">
+                        <i class="icon-users"></i><span class="title">Tài khoản nhân viên </span>
+                    </a>
+                </li>
+                <li class="nav-item  <?php if ($this->uri->segment(2) == 'stores') { print 'active open';} ?>">
+                    <a href="<?= PATH_URL_ADMIN . 'stores' ?>" class="nav-link ">
+                        <i class="icon-home"></i><span class="title">Cửa hàng </span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <i class="icon-wrench"></i>
+                        <span class="title">Cấu hình chung</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu" <?php if (($this->uri->segment(2) == 'categories') ||  ($this->uri->segment(2) == 'common' ) ||  ($this->uri->segment(2) == 'connections' )) { print "style='display: block;' ";} ?>>
+                        <li class="nav-item  <?php if ($this->uri->segment(2) == 'common') { print 'active open';} ?>">
+                            <a href="<?= PATH_URL_ADMIN . 'common' ?>" class="nav-link ">
+                                <i class="fa fa-arrow-right"></i><span class="title">Danh mục cha </span>
+                            </a>
+                        </li>
+                        <li class="nav-item  last<?php if ($this->uri->segment(2) == 'categories') { print 'active open';} ?>">
+                            <a href="<?= PATH_URL_ADMIN . 'categories' ?>" class="nav-link ">
+                                <i class="fa fa-arrow-right"></i><span class="title">Danh mục con</span>
+                            </a>
+                        </li>
+                        <li class="nav-item  last<?php if ($this->uri->segment(2) == 'connections') { print 'active open';} ?>">
+                            <a href="<?= PATH_URL_ADMIN . 'connections' ?>" class="nav-link ">
+                                <i class="fa fa-arrow-right"></i><span class="title">IP kết nối</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <i class="icon-settings"></i>
+                        <span class="title">Hệ thống</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu" <?php if (($this->uri->segment(2) == 'admincp_accounts') ||  
+                    ($this->uri->segment(2) == 'admincp_modules') || 
+                    ($this->uri->segment(2) == 'admincp_logs' ||
+                    ($this->uri->segment(2) == 'infos')) ) { print "style='display: block;' ";} ?>>
+                        <li class="nav-item  <?php if ($this->uri->segment(2) == 'admincp_accounts') { print 'active open';} ?>">
+                            <a href="<?= PATH_URL_ADMIN . 'admincp_accounts' ?>" class="nav-link ">
+                                <i class="fa fa-arrow-right"></i><span class="title"> Tài khoản</span>
+                            </a>
+                        </li>
+                        <li class="nav-item  last<?php if ($this->uri->segment(2) == 'admincp_modules') { print 'active open';} ?>">
+                            <a href="<?= PATH_URL_ADMIN . 'admincp_modules' ?>" class="nav-link ">
+                                <i class="fa fa-arrow-right"></i><span class="title"> Module</span>
+                            </a>
+                        </li>
+                        <li class="nav-item  last<?php if ($this->uri->segment(2) == 'admincp_logs') { print 'active open';} ?>">
+                            <a href="<?= PATH_URL_ADMIN . 'admincp_logs' ?>" class="nav-link ">
+                            <i class="fa fa-arrow-right"></i><span class="title"> Logs</span>
+                            </a>
+                        </li>
+                        <li class="nav-item  last<?php if ($this->uri->segment(2) == 'infos') { print 'active open';} ?>">
                             <a href="<?= PATH_URL_ADMIN . 'infos' ?>" class="nav-link ">
-                                <i class="fa fa-arrow-right"></i><span class="title">Thông tin công ty</span>
-                            </a>
-                        </li>
-                        <li class="nav-item  <?php if ($this->uri->segment(2) == 'comments') { print 'active open';} ?>">
-                            <a href="<?= PATH_URL_ADMIN . 'comments' ?>" class="nav-link ">
-                                <i class="fa fa-arrow-right"></i><span class="title">Ý kiến học viên </span>
-                            </a>
-                        </li>
-                        <li class="nav-item  <?php if ($this->uri->segment(2) == 'static_pages') { print ' active open';} ?>">
-                            <a href="<?= PATH_URL_ADMIN . 'static_pages' ?>">
-                                <i class="fa fa-arrow-right"></i><span class="title">Quản lý pages</span>
-                            </a>
-                    </li>
-                    </ul>
-                </li>
-
-                <li class="last <?php if ($this->uri->segment(2) == 'services') { print ' active';} ?>">
-                    <a href="<?= PATH_URL_ADMIN . 'services' ?>"><i class="fa fa-book"></i><span class="title">Quản lý khóa học</span></a>
-                </li>
-                <li class="nav-item">
-                    <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class="icon-social-dribbble"></i>
-                        <span class="title">Quản lý tin tức</span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub-menu" <?php if (($this->uri->segment(2) == 'news_cata') ||  ($this->uri->segment(2) == 'news' )) { print "style='display: block;' ";} ?>>
-                        <li class="nav-item  last<?php if ($this->uri->segment(2) == 'news_cata') { print 'active open';} ?>">
-                            <a href="<?= PATH_URL_ADMIN . 'news_cata' ?>" class="nav-link ">
-                                <i class="fa fa-arrow-right"></i><span class="title">Danh mục</span>
-                            </a>
-                        </li>
-                        <li class="nav-item  <?php if ($this->uri->segment(2) == 'news') { print 'active open';} ?>">
-                            <a href="<?= PATH_URL_ADMIN . 'news' ?>" class="nav-link ">
-                                <i class="fa fa-arrow-right"></i><span class="title">Tin tức</span>
+                            <i class="fa fa-arrow-right"></i><span class="title"> Cài đặt chung</span>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li class="last <?php if ($this->uri->segment(2) == 'projects') { print ' active';} ?>">
-                    <a href="<?= PATH_URL_ADMIN . 'projects' ?>"><i class="fa fa-language"></i><span class="title">Thư viện</span></a>
-                </li>
-                <li class="last <?php if ($this->uri->segment(2) == 'mailbox') { print ' active';} ?>">
-                    <a href="<?= PATH_URL_ADMIN . 'mailbox' ?>"><i class="fa fa-comment-o"></i><span class="title">Mailbox</span></a>
-                </li>
 
-                <li class="last <?php if ($this->uri->segment(2) == 'staffs') { print ' active';} ?>">
-                    <a href="<?= PATH_URL_ADMIN . 'staffs' ?>"><i class="fa fa-users"></i><span class="title">Quản lý giáo viên</span></a>
-                </li>
-                <li class="last <?php if ($this->uri->segment(2) == 'seo_pages') { print ' active';} ?>">
-                    <a href="<?= PATH_URL_ADMIN . 'seo_pages' ?>"><i class="fa fa-cc"></i><span class="title">SEO Pages</span></a>
-                </li>
-                <li class="last<?php if ($this->uri->segment(2) == 'library') { print ' active';} ?>">
-                    <a href="<?= PATH_URL_ADMIN . 'library' ?>"><i class="fa fa-picture-o"></i><span class="title">Upload Image</span></a>
-                </li>
-                <li class="last<?php if ($this->uri->segment(2) == 'admincp_modules') { print ' active';} ?>">
-                    <a href="<?= PATH_URL_ADMIN . 'admincp_modules' ?>"><i class="icon-settings"></i><span class="title"> Quản lý modules</span></a>
-                </li>
-                <li class="last<?php if ($this->uri->segment(2) == 'setting') { print ' active';} ?>">
-                    <a href="<?= PATH_URL_ADMIN . 'setting' ?>"><i class="icon-settings"></i><span class="title">Settings</span></a>
-                </li>
+                <!--<li class="start<?php if ($this->uri->segment(2) == '') {
+                    print ' active';
+                } ?>"><a href="<?= PATH_URL_ADMIN ?>"><i class="icon-home"></i><span class="title">Dashboard</span></a></li>-->
+                <!--<?= modules::run('admincp/menu') ?>
+                <li class="last<?php if ($this->uri->segment(2) == 'setting') {
+                    print ' active';
+                } ?>"><a href="<?= PATH_URL_ADMIN . 'setting' ?>"><i class="icon-settings"></i><span class="title">Settings</span></a>
+                </li> -->
             </ul>
             <!-- END SIDEBAR MENU -->
         </div>
@@ -218,7 +271,7 @@
 <!-- BEGIN FOOTER -->
 <div class="page-footer">
     <div class="page-footer-inner">
-        &copy; 2015 JV-IT. All rights reserved.
+        &copy; thanhtin0912@gmal.com. All rights reserved.
     </div>
     <div class="scroll-to-top">
         <i class="icon-arrow-up"></i>
@@ -234,14 +287,12 @@
     var token_value = '<?=$this->security->get_csrf_hash()?>';
     var Metronic;
 </script>
-
 <!-- BEGIN CORE PLUGINS -->
 <!--[if lt IE 9]>
 <script src="<?=PATH_URL.'assets/js/admin/'?>respond.min.js"></script>
 <script src="<?=PATH_URL.'assets/js/admin/'?>excanvas.min.js"></script>
 <![endif]-->
-<script src="<?= PATH_URL . 'assets/js/admin/ckeditor/' ?>ckeditor.js"></script>
-<script src="<?= PATH_URL . 'assets/js/' ?>jquery.smoothscroll.js"></script>
+<!-- <script src="<?= PATH_URL . 'assets/js/' ?>jquery.smoothscroll.js"></script> -->
 <script src="<?= PATH_URL . 'assets/js/admin/' ?>jquery.url.js"></script>
 <script src="<?= PATH_URL . 'assets/js/admin/' ?>admin.js"></script>
 <script src="<?= PATH_URL . 'assets/js/admin/' ?>jquery-migrate.min.js" type="text/javascript"></script>
@@ -268,7 +319,7 @@
 <script src="<?= PATH_URL . 'assets/js/admin/' ?>layout.js" type="text/javascript"></script>
 <script src="<?= PATH_URL . 'assets/js/admin/' ?>components-pickers.js" type="text/javascript"></script>
 <script src="<?= PATH_URL . 'assets/js/admin/' ?>components-dropdowns.js" type="text/javascript"></script>
-
+<script src="<?= PATH_URL . 'assets/js/admin/' ?>jquery.multiselect.js" type="text/javascript"></script>
 <script>
     jQuery(document).ready(function () {
         Metronic.init(); // init metronic core components

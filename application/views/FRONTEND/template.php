@@ -1,204 +1,212 @@
-<!DOCTYPE HTML>
-<!--[if IE 7 ]>    <html lang="en-gb" class="isie ie7 oldie no-js"> <![endif]-->
-<!--[if IE 8 ]>    <html lang="en-gb" class="isie ie8 oldie no-js"> <![endif]-->
-<!--[if IE 9 ]>    <html lang="en-gb" class="isie ie9 no-js"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> 
-<html lang="en-gb" class="no-js"> <!--<![endif]-->
+<!DOCTYPE html>
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
 <head>
-<meta http-equiv="content-Type" content="text/html; charset=utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> 
+	<title>Quản lý kho LeoTea</title>
 
-<title><?= $title ?></title>
-<meta name="description" content="<?=$meta_description?>">
-<meta name="url" content="<?=$meta_url?>">  
-<meta property="og:image" content="<?=$meta_image?>">
-<meta property="og:image:width" content="700">
-<meta property="og:image:height" content="500">
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
 
-<link rel="shortcut icon" href="<?= PATH_URL; ?>favicon.png" type="image/x-icon" />
-<link href="<?= PATH_URL; ?>assets/css/frontend/style.css" rel="stylesheet" type="text/css">
-<link href="<?= PATH_URL; ?>assets/css/frontend/shortcodes.css" rel="stylesheet" type="text/css">
-<link href="<?= PATH_URL; ?>assets/css/frontend/responsive.css" rel="stylesheet" type="text/css">
-<link href="<?= PATH_URL; ?>assets/css/frontend/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/layerslider.css" type="text/css">
-<!--prettyPhoto-->
-<link href="<?= PATH_URL; ?>assets/css/frontend/prettyPhoto.css" rel="stylesheet" type="text/css"/>   
-<!--  -->
-<link href="<?= PATH_URL; ?>assets/css/frontend/report.css" rel="stylesheet" type="text/css" /> 
-<link href="<?= PATH_URL; ?>assets/css/default.css" rel="stylesheet" type="text/css" /> 
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="favicon.ico">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
-<!--jquery-->
-<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jssor.slider-28.1.0.min.js"></script>
-<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/modernizr-2.6.2.min.js"></script>
+	<!-- Web Fonts -->
+	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin">
 
+	<!-- CSS Global Compulsory -->
+	<link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/bootstrap.css">
+	<link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/bootstrap.min.css">
+
+	<link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/style.css">
+	<!-- <link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/profile.css"> -->
+	<!-- CSS Header and Footer -->
+	<link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/header-default.css">
+	<link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/footer-v1.css">
+
+	<!-- CSS Implementing Plugins -->
+	<link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/animate.css">
+	<link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/line-icons.css">
+	<link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/font-awesome.min.css">
+
+	<!-- CSS Theme -->
+	<link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/default.css" id="style_color">
+	<link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/dark.css">
+	<!-- CSS Customization -->
+	<link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/custom.css">
+	<link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/profile.css">
+	<link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/shortcode_timeline2.css">
+	<script type="text/javascript" src="<?= PATH_URL . 'assets/js/' ?>jquery-1.11.2.min.js"></script>
+	
 </head>
-<input type="hidden" value="<?=$this->security->get_csrf_hash()?>" id="csrf_token" />
-<body class="main">
-	<!--wrapper starts-->
-    <div class="wrapper">
-        <!--header starts-->
-        <header>
-            <div class="container">
-                <div class="logo">
-                    <a href="<?= PATH_URL; ?>" title="Kids Life"><img src="<?= PATH_URL; ?>assets/images/logo.png" alt="Kids Life" title="Kids Life"></a>
-                    <span class="title"><?=lang('company')?></span>
-                </div>
-                <div class="contact-details">
-                    <p class="mail">
-                        <a href="#"><?=$info[0]->mail?></a>
-                        <span class="fa fa-envelope"></span>
-					</p>
-                    <p class="phone-no">
-                        <i>+(<?=$info[0]->phoneother?>)</i>
-                        <span class="fa fa-phone"></span>
-                	</p>        
-                </div>
-            </div>
-            <!--menu-container starts-->
-            <div id="menu-container">
-                <div class="container">
-                    <!--nav starts-->
-                    <nav id="main-menu">
-                    	<div class="dt-menu-toggle" id="dt-menu-toggle">Menu<span class="dt-menu-toggle-icon"></span></div>
-                        <ul id="menu-main-menu" class="menu">
-                            <li class="mustard"> <a href="<?= PATH_URL ?><?=$this->lang->lang();?>"><?=lang('menu_home')?></a> </li>
-                            <li class="green"> <a href="<?= PATH_URL ?><?=$this->lang->lang();?>/about"><?=lang('menu_about')?></a></li>
-                            <li class="menu-item-simple-parent menu-item-depth-0 blue"><a href="#"><?=lang('menu_course')?></a> 
-                                <ul class="sub-menu">
-                                <?php foreach ($services as $key => $v) :; ?>
-                                    <li><a href="<?= PATH_URL . $this->lang->lang() . '/service/' . $v->slug ?>">
-                                    <?php $lang = $this->lang->lang();
-                                    $title = "title_" . $lang;
-                                    echo $v->$title ?></a>
-                                    </li>
-                                <?php endforeach ?>
-                                </ul>
-                                <a class="dt-menu-expand">+</a>
-                            </li>
-                            <li class="yellow"> <a href="<?= PATH_URL ?><?=$this->lang->lang();?>/news"><?=lang('menu_news')?></a></li>    
-                            <li class="lavender"><a href="<?= PATH_URL ?><?=$this->lang->lang();?>/library"><?=lang('menu_document')?></a></li>
-                            <li class="pink"><a href="<?= PATH_URL ?><?=$this->lang->lang();?>/contact"><?=lang('menu_contact')?></a></li>
-                        </ul>
-                    </nav>
-                    <!--nav ends-->
+<input type="hidden" value="<?=$this->security->get_csrf_hash()?>" id="csrf_token" name="csrf_token" />
+<body>
+	<div class="wrapper">
+		<div class="header">
+			<div class="container pb-2">
+				<!-- Logo -->
+				<a class="logo">
+					<img src="assets/images/logo.jpg" alt="Logo">
+				</a>
+				<!-- End Logo -->
+				<!-- Topbar -->
 
-                    <ul class="dt-sc-social-icons">
-                        <li><a href="<?=$info[0]->facebook?>" title="Facebook" class="dt-sc-tooltip-top facebook"><span class="fa fa-facebook"></span></a></li>
-                        <li><a href="https://www.youtube.com/channel/UCYm-kGTw-1mp3kKbD7W_5NQ" title="Youtube" class="dt-sc-tooltip-top youtube"><span class="fa fa-youtube"></span></a></li>
-                        <!-- <li><a href="<?= PATH_URL . $this->lang->switch_uri('en') ?>" title="English" class="dt-sc-tooltip-top"><img width="100%" src="<?= PATH_URL; ?>assets/images/en.png"></a></li>
-                        <li><a href="<?= PATH_URL . $this->lang->switch_uri('vn') ?>" title="Vietnamese" class="dt-sc-tooltip-top "><img src="<?= PATH_URL; ?>assets/images/vn.png"></a></li> -->
-                    </ul>
-                </div>
-            </div>
-            <!--menu-container ends-->
-        </header>
-        <!--header ends-->
-        <?= $content; ?>
-            
-        <!--footer starts-->
-        <footer>
-            <!--footer-widgets-wrapper starts-->
-            <div class="footer-widgets-wrapper">
-                <!--container starts-->
-                <div class="container">
-                    <div class="column dt-sc-one-third first">
-                        <aside class="widget widget_text">
-                            <h3 class="widgettitle red_sketch"> <?=lang('menu_about')?></h3>
-                            <p><a href=""><strong>Let's Start Center</strong></a> <?php $lang = $this->lang->lang(); $description = "description_".$lang; echo $info[0]->$description ?></p>
-                            <ul>
-                                <?php foreach ($services as $key => $v): ;?>
-                                <li><a href="<?= PATH_URL ?><?=$this->lang->lang();?>/service/<?=$v->slug ?>"><?php $lang = $this->lang->lang(); $title = "title_".$lang; echo $v->$title ?></a></li>
-                                <?php endforeach ?>
-                            </ul>
-                        </aside>
-                    </div>
-                    <div class="column dt-sc-one-third">
-                        <aside class="widget tweetbox">
-                            <h3 class="widgettitle yellow_sketch"><a href="#"> Facebook </a></h3>
-                            <div class="fb-page" data-href="https://www.facebook.com/kynangsong.ngoaingu.LS/" data-tabs="" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/kynangsong.ngoaingu.LS/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/kynangsong.ngoaingu.LS/">Kỹ Năng Sống Và Ngoại Ngữ Lets Start Nha Trang</a></blockquote>
-                            </div>
-                        </aside>
-                    </div>
-                    <div class="column dt-sc-one-third">
-                        <aside class="widget widget_text">
-                        <h3 class="widgettitle steelblue_sketch"><?=lang('menu_contact')?></h3>
-                            <div class="textwidget">
-                                <p class="dt-sc-contact-info"><span class="fa fa-map-marker"></span> <?php $lang = $this->lang->lang(); $address = "address_".$lang; echo $info[0]->$address ?> </p>
-                                <p class="dt-sc-contact-info"><span class="fa fa-phone"></span> <?=$info[0]->phoneother?> </p>
-                                <p class="dt-sc-contact-info"><span class="fa fa-envelope"></span><a href="mailto:<?=$info[0]->mail?>"> <?=$info[0]->mail?> </a></p>
-                            </div>
-                        </aside>
-                    </div>
-                    
-                </div>    
-                <!--container ends-->
-            </div>
-            <!--footer-widgets-wrapper ends-->  
-            <div class="copyright">
-        		<div class="container">
-                	<p class="copyright-info">© 2022 Kids Life. All rights reserved. Design by thanhtin0912@gmail.com </p>
-        		</div>
-        	</div>  
-        </footer>
-        <!--footer ends-->
-        
-    </div>
-    <div class="hotline">
-        <div id="phonering-alo-phoneIcon" class="phonering-alo-phone phonering-alo-green phonering-alo-show">
-        <div class="phonering-alo-ph-circle"></div>
-        <div class="phonering-alo-ph-circle-fill"></div>
-        <div class="phonering-alo-ph-img-circle">
-            <a class="pps-btn-img" title="Liên hệ" href="tel:<?=$info[0]->phoneother?>">
-            <img src="<?= PATH_URL; ?>assets/img/hotline.png" alt="Liên hệ" class="img-responsive" width="50"></a>
-        </div>
-        </div>
-    </div>
-    <!--wrapper ends-->
-    <a href="" title="Go to Top" class="back-to-top">To Top ↑</a>
-        <!--Java Scripts-->
-    <div id="fb-root"></div>
-    <link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/bootstrap.css">
-    <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/bootstrap-notify.min.js"></script>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v7.0&appId=589670775117215&autoLogAppEvents=1"></script>
-    <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/global.js"></script>
-    <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.min.js"></script>
-	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery-migrate.min.js"></script>
-	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.validate.min.js"></script>
-	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery-easing-1.3.js"></script>
-    <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.sticky.js"></script>
-    <!-- <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.nicescroll.min.js"></script> -->
-    <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.inview.js"></script>
-    <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/validation.js"></script>
-    <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.tipTip.minified.js"></script>
-    <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.bxslider.min.js"></script>       
-    <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/twitter/jquery.tweet.min.js"></script>
-    <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.parallax-1.1.3.js"></script>   
-    <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/shortcodes.js"></script>   
-    <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/custom.js"></script>
-    <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.prettyPhoto.js"></script>  
-    <!-- Layer Slider --> 
-    <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery-transit-modified.js"></script> 
-    <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/layerslider.kreaturamedia.jquery.js"></script> 
-    <script type='text/javascript' src="<?= PATH_URL; ?>assets/js/frontend/greensock.js"></script> 
-    <script type='text/javascript' src="<?= PATH_URL; ?>assets/js/frontend/layerslider.transitions.js"></script> 
-    <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.carouFredSel-6.2.0-packed.js"></script>  
-    <!--<script type="text/javascript">var lsjQuery = jQuery;</script>--> 
-    <script type="text/javascript">var lsjQuery = jQuery;</script><script type="text/javascript"> lsjQuery(document).ready(function() { if(typeof lsjQuery.fn.layerSlider == "undefined") { lsShowNotice('layerslider_1','jquery'); } else { lsjQuery("#layerslider_4").layerSlider({responsiveUnder: 1240, layersContainer: 1060, skinsPath: '<?= PATH_URL; ?>assets/js/frontend/layerslider/skins/'}) } }); </script>
+				<div class="topbar">
+					<ul class="loginbar pull-right">
+						<li><a href="page_faq.html"><?= $this->session->userdata('userStaff')[0]->name;?></a></li>
+					</ul>
+				</div>
+				<!-- End Topbar -->
 
-    <script type="text/javascript">
-        var root = '<?php  PATH_URL . $this->lang->lang() ?>';
+				<!-- Toggle get grouped for better mobile display -->
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="fa fa-bars"></span>
+				</button>
+				<!-- End Toggle -->
+			</div><!--/end container-->
+
+			<?php if($this->session->userdata('userStaff')[0]->isMain) {?>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
+				<div class="container">
+					<ul class="nav navbar-nav">
+						<!-- Tables -->
+						<li class="home-page"><a href="<?= PATH_URL ?>home">Thông tin</a></li>
+						<!-- End Tables -->
+
+						<!-- Tables -->
+						<li class="import-page"><a href="<?= PATH_URL ?>nhap-kho-chinh">Nhập kho</a></li>
+						<!-- End Tables -->
+
+						<!-- Tables -->
+						<li class="export-page"><a href="<?= PATH_URL ?>xuat-kho-chinh">Xuất kho</a></li>
+						<!-- End Tables -->
+						<!-- Tables -->
+						<!-- <li class="history-page"><a href="<?= PATH_URL ?>lich-su-nhap-xuat">Lịch sử</a></li> -->
+						<!-- End Tables -->
+					</ul>
+				</div><!--/end container-->
+			</div><!--/navbar-collapse-->
+			<?php } else { ?>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
+				<div class="container">
+					<ul class="nav navbar-nav">
+						<!-- Tables -->
+						<li class="home-page"><a href="<?= PATH_URL ?>home">Thông tin</a></li>
+						<!-- End Tables -->
+
+						<!-- Tables -->
+						<li class="import-page"><a href="<?= PATH_URL ?>nhap-kho">Nhập kho</a></li>
+						<!-- End Tables -->
+
+						<!-- Tables -->
+						<li class="export-page"><a href="<?= PATH_URL ?>xuat-kho">Xuất kho</a></li>
+						<!-- End Tables -->
+						<!-- Tables -->
+						<li class="remove-page"><a href="<?= PATH_URL ?>hang-huy">Hàng hủy</a></li>
+						<!-- End Tables -->
+						
+						<!-- Tables -->
+						<!-- <li class="history-page"><a href="<?= PATH_URL ?>lich-su">Lịch sử</a></li> -->
+						<!-- End Tables -->
+						<!-- Tables -->
+						<li class="inventory-page"><a href="<?= PATH_URL ?>ton-kho-cua-hang">TK Đại lý</a></li>
+						<!-- End Tables -->
+					</ul>
+				</div><!--/end container-->
+			</div><!--/navbar-collapse-->
+			<?php }?>
+		</div>
+		<!--=== End Header ===-->
+		
+		<!--=== Content Part ===-->
+		<div class="container content profile p-0 p-md-4 py-4">
+			<div class="row">
+
+                <?= $content; ?>
+			</div>
+		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" id="modalNote" role="dialog" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title font-bold">Ghi chú <span id="txtProductName"></span> <input id="txtProductID" type="hidden"></input></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+						<div class="form-group">
+						<label for="message-text" class="col-form-label">Ghi chú:</label>
+						<textarea class="form-control" id="txtNote" rows="5"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn-u rounded-4x btn-u-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn-u rounded-4x btn-u-green" id="btn-save-note" onclick="saveNote()">Save</button>
+				</div>
+				</div>
+			</div>
+		</div>
+		<!--=== Footer Version 1 ===-->
+<!-- 		<div class="footer-v1" style="display: block;">
+
+			<div class="copyright">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-6">
+							<p>
+								2021 &copy; All Rights Reserved.
+								<a href="#">Design by</a> | <a href="#">thanhtin0912@gmail.com</a>
+							</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div> -->
+		<!--=== End Footer Version 1 ===-->
+	</div><!--/End Wrapepr-->
+	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/datepicker.js"></script>
+	<!-- JS Global Compulsory -->
+	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.min.js"></script>
+	<script type="text/javascript" src="<?= PATH_URL;?>assets/js/admin/jquery.form.js"></script>
+	<!-- <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery-migrate.js"></script> -->
+	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/bootstrap.min.js"></script>
+	<!-- JS Implementing Plugins -->
+	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/back-to-top.js"></script>
+	<!-- JS Customization -->
+	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/custom.js"></script>
+	<!-- JS Page Level -->
+	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/app.js"></script>
+	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/style-switcher.js"></script>
+
+	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/bootstrap-notify.min.js"></script>
+
+	
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			App.init();
+			StyleSwitcher.initStyleSwitcher();
+			Datepicker.initDatepicker();
+		});
+        var root = '<?= PATH_URL ?>';
         var csrf_token;
-          function notify(ms,type){
-            $.notify({
-              message: ms 
-            },{
-              type: type
-            });
-          }
-    </script>  
+
+		function notify(ms,type){
+			$.notify({
+				message: ms 
+			},{
+				type: type
+			});
+		}
+			
+    </script>
 </body>
 </html>

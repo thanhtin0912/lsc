@@ -3,7 +3,7 @@
 class Banners extends MX_Controller {
 
 	private $module = 'banners';
-	private $table = 'tbl_banners';
+	private $table = 'banners';
 	function __construct(){
 		parent::__construct();
 		$this->load->model($this->module.'_model','model');

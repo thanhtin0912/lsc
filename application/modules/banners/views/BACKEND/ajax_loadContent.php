@@ -27,8 +27,9 @@
 					<th class="table-checkbox sorting_disabled" width="25"><input type="checkbox" id="selectAllItems" onclick="selectAllItems(<?=count($result)?>)"></th>
 					<th class="center sorting_disabled" width="35">No.</th>
 					<th class="sorting" width="150" onclick="sort('image')" id="image">Image</th>
-					<th class="sorting" onclick="sort('title')" id="title">Title_vn</th>
-					<th class="sorting" onclick="sort('description')" id="description">Description_vn</th>
+					<th class="sorting" onclick="sort('title')" id="title">Title</th>
+					<th class="sorting" onclick="sort('url')" id="url">Url</th>
+					<th class="sorting" onclick="sort('description')" id="description">Description</th>
 					<th class="center sorting" width="60" onclick="sort('status')" id="status">Status</th>
 					<th class="center sorting" width="80" onclick="sort('created')" id="created">Created</th>
 				</tr>
@@ -44,8 +45,9 @@
 					<td><input type="checkbox" id="item<?=$i?>" onclick="selectItem(<?=$i?>)" value="<?=$v->id?>"></td>
 					<td class="center"><?=$k+1+$start?></td>
 					<td><a href="<?=PATH_URL_ADMIN.$module.'/update/'.$v->id?>"><img src="<?=resizeImage(PATH_URL.DIR_UPLOAD_BANNER.$v->image,150, 150)?>" /></a></td>
-					<td><a href="<?=PATH_URL_ADMIN.$module.'/update/'.$v->id?>"><?=$v->title_vn?></a></td>
-					<td><a href="<?=PATH_URL_ADMIN.$module.'/update/'.$v->id?>"><?=$v->description_vn?></a></td>
+					<td><a href="<?=PATH_URL_ADMIN.$module.'/update/'.$v->id?>"><?= cutText($v->title, 20); ?></a></td>
+					<td><a href="<?=PATH_URL_ADMIN.$module.'/update/'.$v->id?>"><?= cutText($v->url, 20); ?></a></td>
+					<td><a href="<?=PATH_URL_ADMIN.$module.'/update/'.$v->id?>"><?= cutText($v->description, 20); ?></a></td>
 					<td class="center" id="loadStatusID_<?=$v->id?>"><a class="no_underline" href="javascript:void(0)" onclick="updateStatus(<?=$v->id?>,<?=$v->status?>,'<?=$module?>')"><?php ($v->status==0) ? print '<span class="label label-sm label-default status-blocked">Blocked</span>' : print '<span class="label label-sm label-success status-approved">Approved</span>' ?></a></td>
 					<td class="center"><?=date('Y-m-d H:i:s',strtotime($v->created))?></td>
 				</tr>
@@ -55,8 +57,9 @@
 						<td><input type="checkbox" id="item<?=$i?>" onclick="selectItem(<?=$i?>)" value="<?=$v->id?>"></td>
 						<td class="center"><?=$k+1+$start?></td>
 						<td><img src="<?=resizeImage(PATH_URL.DIR_UPLOAD_BANNER.$v->image,150, 150)?>" /></td>
-						<td><?=$v->title_vn ?></td>
-						<td><?=$v->description_vn?></td>
+						<td><?= cutText($v->title, 20); ?></td>
+						<td><?= cutText($v->url, 20); ?></td>
+						<td><?= cutText($v->description, 20); ?></td>
 						<td class="center" id="loadStatusID_<?=$v->id?>"><span class="label label-sm label-default status-deleted">Deleted</span></td>
 						<td class="center"><?=date('Y-m-d H:i:s',strtotime($v->created))?></td>
 					</tr>

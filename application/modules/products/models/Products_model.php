@@ -1,30 +1,21 @@
 <?php
 class Products_model extends CI_Model {
 	private $module = 'products';
-	private $table = 'tbl_products';
-	private $table_category = 'tbl_catagories';
+	private $table = 'products';
+	private $table_cate = 'categories';
+	private $table_quote = 'quote';
+	private $table_inven = 'inventory';
 
 	function getsearchContent($limit,$page){
-		$this->db->select('n.*, c.name_vn as cate_name');
+		$this->db->select('n.*, c.name as cate_name');
 		$this->db->limit($limit,$page);
 		$this->db->order_by('n.delete','ASC');
-		$this->db->order_by($this->input->post('func_order_by'),$this->input->post('order_by'));
-		$this->db->where('c.cataid','CATA_PRODUCT');
+		$this->db->order_by('n.'.$this->input->post('func_order_by'),$this->input->post('order_by'));
 		if($this->input->post('title')!=''){
-			$this->db->where('(n.`name_vn` LIKE "%'.$this->input->post('title').'%")');
+			$this->db->where('(n.`name` LIKE "%'.$this->input->post('title').'%")');
 		}
 		if($this->input->post('cate_name')!=''){
-			$this->db->where('(c.`name_vn` LIKE "%'.$this->input->post('cate_name').'%")');
-		}
-		if($this->input->post('dateFrom')!='' && $this->input->post('dateTo')==''){
-			$this->db->where('n.created >= "'.date('Y-m-d 00:00:00',strtotime($this->input->post('dateFrom'))).'"');
-		}
-		if($this->input->post('dateFrom')=='' && $this->input->post('dateTo')!=''){
-			$this->db->where('n.created <= "'.date('Y-m-d 23:59:59',strtotime($this->input->post('dateTo'))).'"');
-		}
-		if($this->input->post('dateFrom')!='' && $this->input->post('dateTo')!=''){
-			$this->db->where('n.created >= "'.date('Y-m-d 00:00:00',strtotime($this->input->post('dateFrom'))).'"');
-			$this->db->where('n.created <= "'.date('Y-m-d 23:59:59',strtotime($this->input->post('dateTo'))).'"');
+			$this->db->where('(n.`type` LIKE "%'.$this->input->post('cate_name').'%")');
 		}
 		if($this->input->post('status') != 2){
 			$this->db->where('n.status', $this->input->post('status'));
@@ -33,7 +24,7 @@ class Products_model extends CI_Model {
 			$this->db->where('n.delete', $this->input->post('showData'));
 		}
 		$this->db->from(PREFIX.$this->table." n");
-		$this->db->join(PREFIX.$this->table_category." c", 'c.id = n.type', "left");
+		$this->db->join(PREFIX.$this->table_cate." c", 'n.type = c.id', "left");
 		$query = $this->db->get();
 
 		if($query->result()){
@@ -44,23 +35,12 @@ class Products_model extends CI_Model {
 	}
 	
 	function getTotalsearchContent(){
-		$this->db->select('n.*, c.name_vn as cate_name');
-		$this->db->where('c.cataid','CATA_PRODUCT');
+		$this->db->select('n.*, c.name as cate_name');
 		if($this->input->post('title')!=''){
-			$this->db->where('(n.`name_vn` LIKE "%'.$this->input->post('title').'%")');
+			$this->db->where('(n.`name` LIKE "%'.$this->input->post('title').'%")');
 		}
 		if($this->input->post('cate_name')!=''){
-			$this->db->where('(c.`name_vn` LIKE "%'.$this->input->post('cate_name').'%")');
-		}
-		if($this->input->post('dateFrom')!='' && $this->input->post('dateTo')==''){
-			$this->db->where('n.created >= "'.date('Y-m-d 00:00:00',strtotime($this->input->post('dateFrom'))).'"');
-		}
-		if($this->input->post('dateFrom')=='' && $this->input->post('dateTo')!=''){
-			$this->db->where('n.created <= "'.date('Y-m-d 23:59:59',strtotime($this->input->post('dateTo'))).'"');
-		}
-		if($this->input->post('dateFrom')!='' && $this->input->post('dateTo')!=''){
-			$this->db->where('n.created >= "'.date('Y-m-d 00:00:00',strtotime($this->input->post('dateFrom'))).'"');
-			$this->db->where('n.created <= "'.date('Y-m-d 23:59:59',strtotime($this->input->post('dateTo'))).'"');
+			$this->db->where('(n.`type` LIKE "%'.$this->input->post('cate_name').'%")');
 		}
 		if($this->input->post('status') != 2){
 			$this->db->where('n.status', $this->input->post('status'));
@@ -69,7 +49,7 @@ class Products_model extends CI_Model {
 			$this->db->where('n.delete', $this->input->post('showData'));
 		}
 		$this->db->from(PREFIX.$this->table." n");
-		$this->db->join(PREFIX.$this->table_category." c", 'c.id = n.type', "left");
+		$this->db->join(PREFIX.$this->table_cate." c", 'n.type = c.id', "left");
 		$query = $this->db->count_all_results();
 
 		if($query > 0){
@@ -79,6 +59,7 @@ class Products_model extends CI_Model {
 		}
 	}
 	
+
 	function getDetailManagement($id){
 		$this->db->select('*');
 		$this->db->where('id',$id);
@@ -102,102 +83,119 @@ class Products_model extends CI_Model {
 			return false;
 		}
 	}
+
 	
-	// function saveManagement($imagesName='',$fileName=''){
 	function saveManagement($fileName=''){
 		if($this->input->post('hiddenIdAdmincp')==0){
-			//Kiểm tra đã tồn tại chưa?
-			$checkData = $this->checkData($this->input->post('titleAdmincp'));
-			if($checkData){
-				print 'error-title-exists.'.$this->security->get_csrf_hash();
-				exit;
-			}
-
-			$checkSlug = $this->checkSlug($this->input->post('slugAdmincp'));
-			if($checkSlug){
-				print 'error-slug-exists.'.$this->security->get_csrf_hash();
-				exit;
-			}
-
 			$data = array(
-				'name_vn'=> trim($this->input->post('name_vnAdmincp', true)),
-				'name_en'=> trim($this->input->post('name_enAdmincp', true)),
+				'name'=> trim($this->input->post('nameAdmincp', true)),
+				'code'=> trim($this->input->post('codeAdmincp', true)),
+				'order'=> trim($this->input->post('orderAdmincp', true)),
 				'slug'=> trim($this->input->post('slugAdmincp', true)),
+				'image'=> trim($fileName['image']),
 				'type'=> trim($this->input->post('cateAdmincp', true)),
-				'avata'=> trim($fileName['avata']),
-				// 'images'=> serialize($imagesName),
+				'unit'=> trim($this->input->post('unitAdmincp', true)),
 				'price'=> trim($this->input->post('priceAdmincp', true)),
-				'review'=> trim($this->input->post('reviewAdmincp', true)),
-				'description_vn'=> trim($this->input->post('description_vnAdmincp')),
-				'description_en'=> trim($this->input->post('description_enAdmincp')),
-				'content_vn'=> trim($this->input->post('content_vnAdmincp')),
-				'content_en'=> trim($this->input->post('content_enAdmincp')),
+				'description'=> trim($this->input->post('descriptionAdmincp', true)),
+				'viewAll'=> trim($this->input->post('viewAllAdmincp', true)),
+				'is_remove'=> trim($this->input->post('cancelAdmincp', true)),
+				'useStore'=> implode(',',$this->input->post('useStoreAdmincp', true)),
 				'status'=> $this->input->post('statusAdmincp'),
 				'created'=> date('Y-m-d H:i:s',time()),
 			);
 			if($this->db->insert(PREFIX.$this->table,$data)){
-				modules::run('admincp/saveLog',$this->module,$this->db->insert_id(),'Add new','Add new');
+				$id = $this->db->insert_id();
+				modules::run('admincp/saveLog',$this->module, $id,'Add new','Add new');
+				
+				$quotes = $this->input->post('storeAdmincp[]', true);
+				if (count($quotes) > 0) {
+					foreach ($quotes as $key => $quote) {
+						$data = array(
+							'productId'=> $id,
+							'storeId'=> $key,
+							'value'=> $quote,
+							'created'=> date('Y-m-d H:i:s',time()),
+						);
+						$this->db->insert(PREFIX.$this->table_quote, $data);
+
+						$invenData = array(
+							'productId'=> $id,
+							'storeId'=> $key,
+							'value'=> 0,
+							'created'=> date('Y-m-d H:i:s',time()),
+						);
+						$this->db->insert(PREFIX.$this->table_inven, $invenData);
+					}
+				}
+
 				return true;
 			}
 		}else{
 			$result = $this->getDetailManagement($this->input->post('hiddenIdAdmincp'));
-
 			//Xử lý xóa hình khi update thay đổi hình
-			// if(empty($imagesName)){
-			// 	$imagesName = unserialize($result[0]->images);
-			// }else{
-			// 	$delimages = unserialize($result[0]->images);
-			// 	foreach ($delimages as $key => $value) {
-			// 		@unlink(BASEFOLDER.DIR_UPLOAD_PRODUCT.$delimages[$key]);
-			// 	}
-			// }
-			if($fileName['avata']==''){
-				$fileName['avata'] = $result[0]->avata;
+			if($fileName['image']==''){
+				$fileName['image'] = $result[0]->image;
 			}else{
-				@unlink(BASEFOLDER.DIR_UPLOAD_PRODUCT.$result[0]->avata);
+				@unlink(BASEFOLDER.DIR_UPLOAD_PRODUCT.$result[0]->image);
 			}
-
-
-			//Kiểm tra đã tồn tại chưa?
-			if($result[0]->name_vn!=$this->input->post('name_vnAdmincp')){
-				$checkData = $this->checkData($this->input->post('name_vnAdmincp'),$this->input->post('hiddenIdAdmincp'));
-				if($checkData){
-					print 'error-title-exists.'.$this->security->get_csrf_hash();
-					exit;
-				}
-			}
-
-			if($result[0]->slug!=$this->input->post('slugAdmincp')){
-				$checkSlug = $this->checkSlug($this->input->post('slugAdmincp'),$this->input->post('hiddenIdAdmincp'));
-				if($checkSlug){
-					print 'error-slug-exists.'.$this->security->get_csrf_hash();
-					exit;
-				}
-			}
-			
 			$data = array(
-				'name_vn'=> trim($this->input->post('name_vnAdmincp', true)),
-				'name_en'=> trim($this->input->post('name_enAdmincp', true)),
+				'name'=> trim($this->input->post('nameAdmincp', true)),
+				'code'=> trim($this->input->post('codeAdmincp', true)),
+				'order'=> trim($this->input->post('orderAdmincp', true)),
 				'slug'=> trim($this->input->post('slugAdmincp', true)),
+				'image'=> trim($fileName['image']),
 				'type'=> trim($this->input->post('cateAdmincp', true)),
-				'avata'=> trim($fileName['avata']),
-				// 'images'=> serialize($imagesName),
+				'unit'=> trim($this->input->post('unitAdmincp', true)),
 				'price'=> trim($this->input->post('priceAdmincp', true)),
-				'review'=> trim($this->input->post('reviewAdmincp', true)),
-				'description_vn'=> trim($this->input->post('description_vnAdmincp')),
-				'description_en'=> trim($this->input->post('description_enAdmincp')),
-				'content_vn'=> trim($this->input->post('content_vnAdmincp')),
-				'content_en'=> trim($this->input->post('content_enAdmincp')),
-				'status'=> $this->input->post('statusAdmincp')
+				'description'=> trim($this->input->post('descriptionAdmincp', true)),
+				'viewAll'=> trim($this->input->post('viewAllAdmincp', true)),
+				'is_remove'=> trim($this->input->post('cancelAdmincp', true)),
+				'useStore'=> implode(',',$this->input->post('useStoreAdmincp', true)),
+				'status'=> $this->input->post('statusAdmincp'),
 			);
 			modules::run('admincp/saveLog',$this->module,$this->input->post('hiddenIdAdmincp'),'','Update',$result,$data);
 			$this->db->where('id',$this->input->post('hiddenIdAdmincp'));
 			if($this->db->update(PREFIX.$this->table,$data)){
+				$quotes = $this->input->post('storeAdmincp[]', true);
+				foreach ($quotes as $key => $quote) {
+					$checkDataQuote = $this->checkDataQuote($this->input->post('hiddenIdAdmincp'), $key);
+					if ($checkDataQuote) {
+						$data =  array(
+							'value' => $quote, 
+							'updated'=> date('Y-m-d H:i:s',time())
+						);
+						$this->db->where('productId',$this->input->post('hiddenIdAdmincp'));
+						$this->db->where('storeId', $key);
+						$this->db->update(PREFIX.$this->table_quote, $data);
+					} else {
+						$data = array(
+							'productId'=> trim($this->input->post('hiddenIdAdmincp', true)),
+							'storeId'=> $key,
+							'value'=> $quote,
+							'created'=> date('Y-m-d H:i:s',time()),
+						);
+						$this->db->insert(PREFIX.$this->table_quote, $data);
+
+					}
+
+					$checkDataInventory = $this->checkDataInventory($this->input->post('hiddenIdAdmincp'), $key);
+					if(!$checkDataInventory) {
+						$invenData = array(
+							'productId'=> trim($this->input->post('hiddenIdAdmincp', true)),
+							'storeId'=> $key,
+							'value'=> 0,
+							'created'=> date('Y-m-d H:i:s',time()),
+						);
+						$this->db->insert(PREFIX.$this->table_inven, $invenData);
+					}
+				}
 				return true;
 			}
 		}
 		return false;
 	}
+
+
 
 	function checkSlug($slug,$id=0){
 		$this->db->select('id');
@@ -217,7 +215,7 @@ class Products_model extends CI_Model {
 	
 	function checkData($title,$id=0){
 		$this->db->select('id');
-		$this->db->where('name_vn',$title);
+		$this->db->where('name',$title);
 		if($id!=0){
 			$this->db->where_not_in('id',array($id));
 		}
@@ -230,15 +228,11 @@ class Products_model extends CI_Model {
 			return false;
 		}
 	}
-
-	function getDataCategory(){
-		$this->db->select('*');
-		$this->db->where('status',1);
-		$this->db->where('cataid','CATA_PRODUCT');
-		$this->db->where('delete',0);
-		$this->db->order_by('created','DESC');
-		$query = $this->db->get(PREFIX.$this->table_category);
-
+	function checkDataQuote($productId, $storeId){
+		$this->db->select('id');
+		$this->db->where('productId',$productId);
+		$this->db->where('storeId',$storeId);
+		$query = $this->db->get(PREFIX.$this->table_quote);
 		if($query->result()){
 			return $query->result();
 		}else{
@@ -246,50 +240,35 @@ class Products_model extends CI_Model {
 		}
 	}
 	
+
+	function checkDataInventory($productId, $storeId){
+		$this->db->select('id');
+		$this->db->where('productId',$productId);
+		$this->db->where('storeId',$storeId);
+		$query = $this->db->get(PREFIX.$this->table_inven);
+		if($query->result()){
+			return $query->result();
+		}else{
+			return false;
+		}
+	}
+
+	function getDataQuote($productId){
+		$this->db->select('*');
+		$this->db->where('productId',$productId);
+		$query = $this->db->get(PREFIX.$this->table_quote);
+		if($query->result()){
+			return $query->result();
+		}else{
+			return false;
+		}
+	}
 	/*----------------------FRONTEND----------------------*/
-	function getData($limit,$page){
-		$this->db->select('n.*,c.name_vn as cate_name_vn,c.name_en as cate_name_en');
-		$this->db->where('n.status',1);
-		$this->db->limit($limit,$page);
-		$this->db->order_by('n.created','DESC');
-		$this->db->from(PREFIX.$this->table." n");
-		$this->db->join(PREFIX.$this->table_category." c", 'c.id = n.type', "left");
-		$query = $this->db->get();
-
-		if($query->result()){
-			return $query->result();
-		}else{
-			return false;
-		}
-	}
-
-	function getDetailData($link){
-		$arr = explode("-", $link);
-        $n= count($arr) - 1;
-        $id = $arr[$n];
-
-		$this->db->select('n.*,c.name_vn as cate_name_vn,c.name_en as cate_name_en');
-		$this->db->where('n.status',1);
-		$this->db->where('n.id',$id);
-		$this->db->from(PREFIX.$this->table." n");
-		$this->db->join(PREFIX.$this->table_category." c", 'c.id = n.type', "left");
-		$query = $this->db->get();
-
-		if($query->result()){
-			return $query->result();
-		}else{
-			return false;
-		}
-	}
-
-	function getThreeDataLatest(){
-		$this->db->select('n.*,c.name_vn as cate_name_vn,c.name_en as cate_name_en');
-		$this->db->where('n.status',1);
+	function getData(){
+		$this->db->select('*');
+		$this->db->where('status',1);
 		$this->db->order_by('created','DESC');
-		$this->db->limit('3');
-		$this->db->from(PREFIX.$this->table." n");
-		$this->db->join(PREFIX.$this->table_category." c", 'c.id = n.type', "left");
-		$query = $this->db->get();
+		$query = $this->db->get(PREFIX.$this->table);
 
 		if($query->result()){
 			return $query->result();
@@ -297,7 +276,6 @@ class Products_model extends CI_Model {
 			return false;
 		}
 	}
-
 
 	function getDataHighlight($amount){
 		$this->db->select('*');
@@ -361,6 +339,28 @@ class Products_model extends CI_Model {
 		}
 		else{
 			return 0;
+		}
+	}
+
+	function getCommonTinhTrang(){
+		$this->db->select('*');
+		$this->db->where('commontype','TINHTRANG');
+		$query = $this->db->get(PREFIX.$this->table_comm);
+		if($query->result()){
+			return $query->result();
+		}else{
+			return false;
+		}
+	}
+
+	function getCommonBodyType(){
+		$this->db->select('*');
+		$this->db->where('commontype','BODYTYPE');
+		$query = $this->db->get(PREFIX.$this->table_comm);
+		if($query->result()){
+			return $query->result();
+		}else{
+			return false;
 		}
 	}
 	/*--------------------END FRONTEND--------------------*/

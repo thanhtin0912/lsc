@@ -89,4 +89,4 @@ $template['admin']['parser'] = 'parser';
 $template['admin']['parser_method'] = 'parse';
 $template['admin']['parse_template'] = FALSE;
 /*End Template BACKEND*/
-/* End of file template.php */
+
