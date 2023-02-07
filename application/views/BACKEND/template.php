@@ -21,6 +21,7 @@
           type="text/css"/>
     <link href="<?= PATH_URL . 'assets/css/admin/' ?>font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <link href="<?= PATH_URL . 'assets/css/admin/' ?>simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/bootstrap.css">
     <link href="<?= PATH_URL . 'assets/css/admin/' ?>bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="<?= PATH_URL . 'assets/css/admin/' ?>uniform.default.css" rel="stylesheet" type="text/css"/>
     <link href="<?= PATH_URL . 'assets/css/admin/' ?>bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
@@ -129,12 +130,7 @@
                         <span class="title">Kho và Đại lý</span>
                         <span class="arrow"></span>
                     </a>
-                    <ul class="sub-menu" <?php if (($this->uri->segment(2) == 'report') ||  ($this->uri->segment(2) == 'history' ) ||  ($this->uri->segment(2) == 'compare')) { print "style='display: block;' ";} ?>>
-                        <li class="nav-item  last<?php if ($this->uri->segment(2) == 'report') { print 'active open';} ?>">
-                            <a href="<?= PATH_URL_ADMIN . 'report' ?>" class="nav-link ">
-                                <i class="fa fa-arrow-right"></i><span class="title">Báo cáo</span>
-                            </a>
-                        </li>
+                    <ul class="sub-menu" <?php if (($this->uri->segment(2) == 'history' ) ||  ($this->uri->segment(2) == 'compare')) { print "style='display: block;' ";} ?>>
                         <li class="nav-item  <?php if ($this->uri->segment(2) == 'compare') { print 'active open';} ?>">
                             <a href="<?= PATH_URL_ADMIN . 'compare' ?>" class="nav-link ">
                                 <i class="fa fa-arrow-right"></i><span class="title">So sánh</span>
@@ -153,6 +149,34 @@
                         <i class="icon-basket"></i><span class="title">Sản phẩm </span>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <i class="icon-layers"></i>
+                        <span class="title">Báo cáo</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu" <?php if (($this->uri->segment(2) == 'report') || ($this->uri->segment(2) == 'report_nhap_xuat_trong_ngay') || ($this->uri->segment(2) == 'report_nhap_xuat_kho_cua_hang' )) { print "style='display: block;' ";} ?>>
+                        <li class="nav-item  last<?php if ($this->uri->segment(2) == 'report') { print 'active open';} ?>">
+                            <a href="<?= PATH_URL_ADMIN . 'report' ?>" class="nav-link ">
+                                <i class="fa fa-arrow-right"></i><span class="title">Tồn kho </span>
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item  last<?php if ($this->uri->segment(2) == 'report_nhap_xuat_trong_ngay') { print 'active open';} ?>">
+                            <a href="<?= PATH_URL_ADMIN . 'report_nhap_xuat_trong_ngay' ?>" class="nav-link ">
+                                <i class="fa fa-arrow-right"></i><span class="title">Nhập xuất trong ngày </span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item  last<?php if ($this->uri->segment(2) == 'report_nhap_xuat_kho_cua_hang') { print 'active open';} ?>">
+                            <a href="<?= PATH_URL_ADMIN . 'report_nhap_xuat_kho_cua_hang' ?>" class="nav-link ">
+                                <i class="fa fa-arrow-right"></i><span class="title">SS nhập xuất kho/CH </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
 
                 <li class="nav-item">
                     <a href="javascript:;" class="nav-link nav-toggle">

@@ -68,7 +68,7 @@ class Home_model extends CI_Model {
 		$this->db->where('p.status', 1);
 		$this->db->where('p.delete', 0);
 		$this->db->where('i.storeId', $store);
-		$this->db->like('p.name', $name);
+		$this->db->where('p.`name` LIKE "%'.$name.'%"');
 		$this->db->where('FIND_IN_SET('.$store.', p.useStore)');
 		$this->db->order_by('p.order','DESC');
 		$this->db->from(PREFIX.$this->tbl_products." p");
