@@ -12,7 +12,7 @@
                             <div class="d-flex p-3 justify-content-between">
                                 <span class="bold font-red mt-sweetalert">XK: <?= $p->totalExportKho; ?></span>
                                 <span class="bold font-green mt-sweetalert">NCH: <?= $p->totalImportCH; ?></span>
-                                <span class="bold font-green mt-sweetalert">CL: <?php if($p->totalExportKho) {echo (number_format($p->totalExportKho) - number_format($p->totalImportCH)); } else {echo '-'.$p->totalImportCH; } ?></span>
+                                <span class="bold mt-sweetalert">CL: <?php if($p->totalExportKho) {echo (number_format($p->totalExportKho) - number_format($p->totalImportCH)); } else {echo '-'.$p->totalImportCH; } ?></span>
                             </div>
                         </div>
                     </div>    
