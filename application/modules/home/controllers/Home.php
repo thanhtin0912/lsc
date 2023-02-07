@@ -155,7 +155,11 @@ class Home extends MX_Controller {
 		if(!empty($_POST)){
 			$id = $_POST['productId'];
 			$qty = $_POST['qty'];
-			$updateInventory = $this->home->updateExportInventory($id, $qty);
+			$mainStore = NULL;
+			if (!empty($_POST['mainStore'])) {
+				$mainStore = $_POST['mainStore'];
+			}
+			$updateInventory = $this->home->updateExportInventory($id, $qty, $mainStore);
 			if ($updateInventory) {
 				print 'success.'.$this->security->get_csrf_hash();
 				exit;
@@ -166,7 +170,10 @@ class Home extends MX_Controller {
 	public function exportListQtyPruoduct() {
 		$products = $this->home->getProducts($this->session->userdata('userStaff')[0]->storeId);
 		$count = 0;
-		$mainStore = $_POST['mainStore'] ? $_POST['mainStore'] : NULL;
+		$mainStore = NULL;
+		if (!empty($_POST['mainStore'])) {
+			$mainStore = $_POST['mainStore'];
+		}
 		foreach ($products as $key => $p) {
 			if (isset($_POST['qty'.$p->id]) && $_POST['qty'.$p->id] > 0) {
 				$updateInventory = $this->home->updateExportInventory($p->id, $_POST['qty'.$p->id], $mainStore);
@@ -222,7 +229,10 @@ class Home extends MX_Controller {
 		$config['func_ajax'] = 'searchHistoryInventory';
 		$config['start'] = $_POST["start"];
 		$this->adminpagination->initialize($config);
-
+		// 
+		$this->load->model('stores/stores_model');
+		$stores =$this->stores_model->getData();
+		// 
 		$result = $this->home->searchHistoryInventory($config['per_page'], $config['start']);
 
 		$data = array(
@@ -230,6 +240,7 @@ class Home extends MX_Controller {
 			'per_page'=> $_POST["per_page"],
 			'start'=> $_POST["start"],
 			'total'=>$config['total_rows'],
+			'stores'=>$stores,
 		);
 		$this->load->view('ajaxSearchHistoryInventory',$data);
 	}
@@ -333,6 +344,36 @@ class Home extends MX_Controller {
 	public function search_history(){
 		$this->template->write_view('content','search_history');
 		$this->template->render();
+	}
+
+	function ajaxSearchHistory() {
+		if(!empty($_POST)){
+			$products = $this->home->getProducts($this->session->userdata('userStaff')[0]->storeId, $_POST['name']);
+			if($_POST['date']) {
+				$date = date("Y-m-d H:i:s", strtotime($_POST['date']));
+			} else {
+				exit; 
+			}
+			$storeId = $this->session->userdata('userStaff')[0]->storeId;
+			if ($products) {
+				$historyDate = array();
+				foreach ($products as $key => $p) {
+					$imported = $this->home->totalImportDate($p->id, $storeId, $date);
+					$exported = $this->home->totalExportdate($p->id, $storeId, $date);
+					if ($imported || $exported) {
+						$object = new StdClass;
+						$object->import = serialize($imported);
+						$object->export = serialize($exported);
+						$object->name = $p->name;
+						$object->totalImport = $this->home->totalImportToday($p->id, $storeId, $date)[0]->adjQty;
+						$object->totalExport = $this->home->totalExportToday($p->id, $storeId, $date)[0]->adjQty;
+						$historyDate[] = $object;
+					}
+				}
+				$data['products'] = $historyDate; 
+				$this->load->view("ajaxSearchDate", $data);
+			}
+		}
 	}
 
 	/*------------------------------------ End API --------------------------------*/

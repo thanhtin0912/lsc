@@ -116,6 +116,7 @@
             data: {
                 qty    : qty,
 				productId : proId,
+				mainStore : $('#mainStore').val(),
 				csrf_token: $('#csrf_token').val()
             },           
             success: function(data) { 

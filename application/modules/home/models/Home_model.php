@@ -317,5 +317,68 @@ class Home_model extends CI_Model {
 		}
 	}
 
+	function totalImportDate($proId, $storeId, $date){
+		$this->db->select('adjQty, created');
+		$this->db->where('newQty > prevQty');
+		$this->db->where('productId', $proId);
+		$this->db->where('storeId', $storeId);
+		$this->db->where('created >=', date('Y-m-d 00:00:01', strtotime($date)));
+		$this->db->where('created <=', date('Y-m-d 23:59:59', strtotime($date)));
+		$query = $this->db->get('inventory_history');
+		
+		if($query->result()){
+			return $query->result();
+		}else{
+			return false;
+		}
+	}
+	function totalExportDate($proId, $storeId, $date){
+		$this->db->select('adjQty, created');
+		$this->db->where('newQty < prevQty');
+		$this->db->where('is_remove', 0);
+		$this->db->where('productId', $proId);
+		$this->db->where('storeId', $storeId);
+		$this->db->where('created >=', date('Y-m-d 00:00:01', strtotime($date)));
+		$this->db->where('created <=', date('Y-m-d 23:59:59', strtotime($date)));
+		$query = $this->db->get('inventory_history');
+		
+		if($query->result()){
+			return $query->result();
+		}else{
+			return false;
+		}
+	}
+
+	function totalImportToday($proId, $storeId, $date){
+		$this->db->select_sum('adjQty');
+		$this->db->where('newQty > prevQty');
+		$this->db->where('productId', $proId);
+		$this->db->where('storeId', $storeId);
+		$this->db->where('created >=', date('Y-m-d 00:00:01', strtotime($date)));
+		$this->db->where('created <=', date('Y-m-d 23:59:59', strtotime($date)));
+		$query = $this->db->get('inventory_history');
+		
+		if($query->result()){
+			return $query->result();
+		}else{
+			return false;
+		}
+	}
+	function totalExportToday($proId, $storeId, $date){
+		$this->db->select_sum('adjQty');
+		$this->db->where('newQty < prevQty');
+		$this->db->where('is_remove', 0);
+		$this->db->where('productId', $proId);
+		$this->db->where('storeId', $storeId);
+		$this->db->where('created >=', date('Y-m-d 00:00:01', strtotime($date)));
+		$this->db->where('created <=', date('Y-m-d 23:59:59', strtotime($date)));
+		$query = $this->db->get('inventory_history');
+		
+		if($query->result()){
+			return $query->result();
+		}else{
+			return false;
+		}
+	}
 }
 ?>

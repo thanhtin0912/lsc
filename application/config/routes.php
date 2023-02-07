@@ -72,6 +72,7 @@ $route['removeInventory'] = "home/removeInventory";
 $route['ajaxSearchImportProduct'] = "home/ajaxSearchImportProduct";
 $route['ajaxSearchExportProduct'] = "home/ajaxSearchExportProduct";
 $route['ajaxSearchRemoveProduct'] = "home/ajaxSearchRemoveProduct";
+$route['ajaxSearchHistory'] = "home/ajaxSearchHistory";
 
 $route['searchHistoryInventory'] = "home/searchHistoryInventory";
 $route['importListQtyPruoduct'] = "home/importListQtyPruoduct";

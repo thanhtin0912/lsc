@@ -29,7 +29,8 @@
 	<link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/animate.css">
 	<link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/line-icons.css">
 	<link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/font-awesome.min.css">
-
+	<link rel="stylesheet" type="text/css" href="<?= PATH_URL;?>assets/css/admin/datepicker3.css"/>
+	<link rel="stylesheet" type="text/css" href="<?= PATH_URL;?>assets/css/admin/bootstrap-timepicker.min.css"/>
 	<!-- CSS Theme -->
 	<link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/default.css" id="style_color">
 	<link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/dark.css">
@@ -37,6 +38,7 @@
 	<link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/custom.css">
 	<link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/profile.css">
 	<link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/shortcode_timeline2.css">
+
 	<script type="text/javascript" src="<?= PATH_URL . 'assets/js/' ?>jquery-1.11.2.min.js"></script>
 	
 </head>
@@ -110,10 +112,10 @@
 						<!-- End Tables -->
 						
 						<!-- Tables -->
-						<!-- <li class="history-page"><a href="<?= PATH_URL ?>lich-su">Lịch sử</a></li> -->
+						<li class="history-page"><a href="<?= PATH_URL ?>lich-su">Lịch sử</a></li>
 						<!-- End Tables -->
 						<!-- Tables -->
-						<li class="inventory-page"><a href="<?= PATH_URL ?>ton-kho-cua-hang">TK Đại lý</a></li>
+						<li class="inventory-page"><a href="<?= PATH_URL ?>tim-kiem-lich-su">Nhập/xuất Ngày</a></li>
 						<!-- End Tables -->
 					</ul>
 				</div><!--/end container-->
@@ -172,21 +174,23 @@
 		</div> -->
 		<!--=== End Footer Version 1 ===-->
 	</div><!--/End Wrapepr-->
-	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/datepicker.js"></script>
+
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.min.js"></script>
 	<script type="text/javascript" src="<?= PATH_URL;?>assets/js/admin/jquery.form.js"></script>
-	<!-- <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery-migrate.js"></script> -->
+	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery-migrate.js"></script>
 	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/bootstrap.min.js"></script>
 	<!-- JS Implementing Plugins -->
 	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/back-to-top.js"></script>
+	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery-ui.min.js"></script>
 	<!-- JS Customization -->
 	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/custom.js"></script>
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/app.js"></script>
+	<script src="<?= PATH_URL;?>assets/js/admin/metronic.js" type="text/javascript"></script>
 	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/style-switcher.js"></script>
-
+	<script src="<?= PATH_URL . 'assets/js/admin/' ?>components-pickers.js" type="text/javascript"></script>
 	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/bootstrap-notify.min.js"></script>
 
 	
@@ -194,7 +198,7 @@
 		jQuery(document).ready(function() {
 			App.init();
 			StyleSwitcher.initStyleSwitcher();
-			Datepicker.initDatepicker();
+			ComponentsPickers.init();
 		});
         var root = '<?= PATH_URL ?>';
         var csrf_token;
@@ -206,7 +210,6 @@
 				type: type
 			});
 		}
-			
     </script>
 </body>
 </html>
