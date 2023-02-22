@@ -10,6 +10,7 @@ class Home_model extends CI_Model {
 	private $tbl_inven				= 'inventory';
 	private $tbl_inven_his				= 'inventory_history';
 	private $tbl_conn				= 'connections';
+	private $tbl_inven_quote				= 'inventory_quote';
 
 	function checkLogin($user){
 		$this->db->select('c.*');
@@ -379,6 +380,18 @@ class Home_model extends CI_Model {
 		}else{
 			return false;
 		}
+	}
+	function insertInventoryQuote($id, $qty, $store, $date) {
+		$logInventory  = array (
+			'productId' => $id,
+			'value'  	=> $qty,
+			'checkDate'=> $date,
+			'storeId' => $store,
+			'created'=> date('Y-m-d H:i:s',time()),
+		);
+		if($this->db->insert($this->tbl_inven_quote, $logInventory)){
+			return true;
+		} 
 	}
 }
 ?>

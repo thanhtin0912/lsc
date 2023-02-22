@@ -310,7 +310,7 @@ class Home extends MX_Controller {
 					$object = new StdClass;
 					$object->id = $p->id;
 					$object->name = $p->name;
-					$object->inventory = $p->inventory;
+					$object->inventory = (float)$p->inventory;
 					$object->note = $p->note;
 
 					$inventoryForStore = 0;
@@ -375,6 +375,81 @@ class Home extends MX_Controller {
 			}
 		}
 	}
+
+	public function check_export(){
+		//teamplate
+		$data['stores'] = $this->home->getListOtherStore($this->session->userdata('userStaff')[0]->storeId);
+		$this->template->write_view('content', 'main-store/check_export', $data);
+		$this->template->render();
+	}
+
+	public function ajaxSearchExportProductFromStore() {
+		if(!empty($_POST)){
+			$products = $this->home->getProducts($_POST['store']);
+			if($_POST['date']) {
+				$date = date("Y-m-d H:i:s", strtotime($_POST['date']));
+			} else {
+				exit; 
+			}
+			$storeId = $_POST['store'];
+			if ($products) {
+				$historyDate = array();
+				foreach ($products as $key => $p) {	
+					$object = new StdClass;
+					$object->id = $p->id;
+					$object->name = $p->name;
+					$exported = $this->home->totalExportdate($p->id, $storeId, $date);
+					if ($exported) {
+						$object->totalExport = $this->home->totalExportToday($p->id, $storeId, $date)[0]->adjQty;
+					} else {
+						$object->totalExport = 0;
+					}
+					$historyDate[] = $object;
+				}
+				$data['products'] = $historyDate; 
+				$this->load->view("main-store/ajaxSearchExportProductFromStore", $data);
+			}
+		}
+	}
+	
+	public function importListQtyCheckStore(){
+		//teamplate
+		$products = $this->home->getProducts($_POST['store']);
+		$count = 0;
+		$store = $_POST['store'];
+		$date = date("Y-m-d H:i:s", strtotime($_POST['date']));
+		foreach ($products as $key => $p) {
+			$qty = $_POST['qty'.$p->id];
+			if ($qty && $qty > 0) {
+				$insertInventoryQuote = $this->home->insertInventoryQuote($p->id, $qty, $store, $date);
+				if ($insertInventoryQuote) {
+					$count = $count + 1;
+				}
+			}
+		}
+
+		if($count > 0){
+			print 'success.'.$count.'.'.$this->security->get_csrf_hash();
+			exit;
+		} 
+	}
+
+	public function importQtyCheckStore(){
+		//teamplate
+		if(!empty($_POST)){
+			$id = $_POST['productId'];
+			$qty = $_POST['qty'];
+			$store = $_POST['store'];
+			$date = date("Y-m-d H:i:s", strtotime($_POST['date']));
+			$insertInventoryQuote = $this->home->insertInventoryQuote($id, $qty, $store, $date);
+			if ($insertInventoryQuote) {
+				print 'success.'.$this->security->get_csrf_hash();
+				exit;
+			}
+		} 
+	}
+
+
 
 	/*------------------------------------ End API --------------------------------*/
 

@@ -61,6 +61,7 @@ $route['hang-huy'] = "home/remove";
 $route['lich-su'] = "home/history";
 $route['tim-kiem-lich-su'] = "home/search_history";
 
+
 $route['don-hang-online'] = "home/orderApp";
 $route['ton-kho-cua-hang'] = "home/inventoryStore";
 // api
@@ -85,6 +86,11 @@ $route['kho-tong'] = "home/main_info";
 $route['nhap-kho-chinh'] = "home/main_import";
 $route['xuat-kho-chinh'] = "home/main_export";
 $route['ajaxSearchExportMainStore'] = "home/ajaxSearchExportMainStore";
+// 
+$route['kiem-tra-xuat-cua-hang'] = "home/check_export";
+$route['ajaxSearchExportProductFromStore'] = "home/ajaxSearchExportProductFromStore";
+$route['importQtyCheckStore'] = "home/importQtyCheckStore";
+$route['importListQtyCheckStore'] = "home/importListQtyCheckStore";
 //Config Router Multi Language
 // $route['^(en|jp)$'] = $route['default_controller'];
 
