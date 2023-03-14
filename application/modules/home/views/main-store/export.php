@@ -226,24 +226,7 @@
         });	
     }
 
-	function confirm(params) {
-		$('#modalConfirm').modal('show');
-		var p = <?php echo json_encode($products) ?>;
-		var str = '' ;
-		for (var i = 0; i < p.length; i++) {
-			var checkQty = $('#qty' + p[i].id).val();
-			if (checkQty > 0) {
-				str += '<tr>';
-				str += '<td>' + (i + 1) + '</td>';
-				str += '<td class="font-bold">' + p[i].name + '</td>';
-				str += '<td class="font-bold">' + p[i].inventory + '</td>';
-				str += '<td ><span class="badge bg-color-red font-16">' + checkQty+ '</span></td>';
-				str += '</tr>';
-			}
-		}
-		$('#tableDataConfirm').children().remove();
-        $('#tableDataConfirm').append(str);
-	}
+
 </script>
 <div class="col-md-12">
 	<div class="profile-body p-0 p-md-4">
@@ -324,6 +307,7 @@
 							<th>Tên sản phẩm</th>
 							<th>Tồn kho</th>
 							<th>Xuất kho</th>
+							<th>ghi chú</th>
 						</tr>
 					</thead>
 					<tbody id="tableDataConfirm" >

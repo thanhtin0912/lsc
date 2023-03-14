@@ -1,8 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Report_nhap_xuat_kho_cua_hang extends MX_Controller {
+class Report_kiem_tra_xuat_cua_hang extends MX_Controller {
 
-	private $module = 'report_nhap_xuat_kho_cua_hang';
+	private $module = 'report_kiem_tra_xuat_cua_hang';
 	private $table = 'usr_services';
 	function __construct(){
 		parent::__construct();
@@ -166,34 +166,34 @@ class Report_nhap_xuat_kho_cua_hang extends MX_Controller {
 			$date = date('Y-m-d H:i:s',time());
 		}
 		$storeId = $_POST['store'];
-		$mainStore = 70;
 		if ($products) {
 			$arrCompare = array();
 			foreach ($products as $key => $p) {
 				// total xuất từ kho chính qua cửa hàng
-				$exportedKho = $this->model->getExportKho($p->id, $mainStore, $date, $storeId);
+				$exported = $this->model->getExportDate($p->id, $storeId, $date);
 				// 
-				$importedCH = $this->model->getImportCH($p->id, $storeId, $date);
-				if ($exportedKho || $importedCH) {
+				$checkDate = $this->model->getCheckDate($p->id, $storeId, $date);
+
+				if ($exported || $checkDate) {
 					$object = new StdClass;
-					$object->import = serialize($importedCH);
-					$object->export = serialize($exportedKho);
+					$object->exported = serialize($exported);
+					$object->checkDate = serialize($checkDate);
 					$object->name = $p->name;
-					
-					if($this->model->totalImportCH($p->id, $storeId, $date)) {
-						$object->totalImportCH = $this->model->totalImportCH($p->id, $storeId, $date)[0]->adjQty;
+					if($this->model->totalExportDate($p->id, $storeId, $date)) {
+						$object->totalExport = $this->model->totalExportDate($p->id, $storeId, $date)[0]->adjQty;
 					} else {
-						$object->totalImportCH = 0;
+						$object->totalExport = 0;
 					}
 
-					if($this->model->totalExportKho($p->id, $mainStore, $date, $storeId)) {
-						$object->totalExportKho = $this->model->totalExportKho($p->id, $mainStore, $date, $storeId)[0]->adjQty;
+					if($this->model->totalCheckDate($p->id, $storeId, $date)) {
+						$object->totalCheck = $this->model->totalCheckDate($p->id, $storeId, $date)[0]->value;
 					} else {
-						$object->totalExportKho = 0;
+						$object->totalCheck = 0;
 					}
-					$object->totalChange = abs($object->totalImportCH - $object->totalExportKho);
+					$object->totalChange = abs($object->totalExport - $object->totalCheck);
 					$arrCompare[] = $object;
 				}
+
 				uasort($arrCompare, function ($a, $b) {
 					return $a->totalChange < $b->totalChange;
 				});

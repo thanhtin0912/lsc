@@ -18,7 +18,7 @@
     <td>
         <button type="button" class="quantity-button hidden-xs" name="subtract" onclick="javascript: document.getElementById(&quot;qty<?=$p->id?>&quot;).value--;" value="-">-</button>
         <input type="number" min="0" onkeypress="return Enter(event,<?=$p->id?>)"  class="quantity-field" id="qty<?=$p->id?>" 
-            name="qty<?=$p->id?>" value="<?= ($p->estimates < $foramt_inventory) ? $p->estimates : $foramt_inventory ;?>" 
+            name="qty<?=$p->id?>" value="<?= ($p->estimates < $p->inventory) ? $p->estimates : $p->inventory ;?>" 
             data-inventory="<?= $p->inventory;?>"
         >
         <button type="button" class="quantity-button hidden-xs" name="add" onclick="javascript: document.getElementById(&quot;qty<?=$p->id?>&quot;).value++;" value="+">+</button>
@@ -81,4 +81,36 @@
             $button.closest('tr').find('.label-red').text(parseFloat(oldInventory) - parseFloat(qty));
 	});
 
+	function confirm(params) {
+		$('#modalConfirm').modal('show');
+		var p = <?php echo json_encode($products) ?>;
+		var str = '' ;
+        var str1 = '' ;
+		for (var i = 0; i < p.length; i++) {
+			var checkQty = $('#qty' + p[i].id).val();
+			if (p[i].inventory >= p[i].estimates && p[i].inventory > 0 && p[i].estimates > 0) {
+				str += '<tr>';
+				str += '<td>' + (i + 1) + '</td>';
+				str += '<td class="font-bold">' + p[i].name + '</td>';
+				str += '<td class="font-bold">' + p[i].inventory + '</td>';
+				str += '<td ><span class="badge bg-color-red font-16">' + checkQty+ '</span></td>';
+                str += '<td></td>';
+				str += '</tr>';
+			} else {
+                var thieu = p[i].estimates  - p[i].inventory;
+                if (p[i].estimates > 0) {
+                    str1 += '<tr class="bg-color-orange">';
+                    str1 += '<td>' + (i + 1) + '</td>';
+                    str1 += '<td class="font-bold">' + p[i].name + '</td>';
+                    str1 += '<td class="font-bold">' + p[i].inventory + '</td>';
+                    str1 += '<td ><span class="badge bg-color-red font-16">' + checkQty+ '</span></td>';
+                    str1 += '<td><span class="badge bg-color-green font-16">' + thieu+ ' </span>Thiếu</td>';
+                    str1 += '</tr>';
+                }
+
+            }
+		}
+		$('#tableDataConfirm').children().remove();
+        $('#tableDataConfirm').append(str, str1);
+	}
 </script>

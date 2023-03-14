@@ -85,10 +85,11 @@ function showResponse(responseText, statusText, xhr, $form) {
 						<?php foreach ($results as $key => $p) { ?>
 							<div class="form-group">
 								<label class="control-label col-md-2"><?= $p->name;?> : </label>
-								<div class="col-md-3"><input value="<?= $p->value;?>" type="text" name="valueAdmincp[<?= $p->id;?>]" class="form-control"/></div>
-
+								<div class="col-md-2"><input value="<?= $p->value;?>" type="text" name="valueAdmincp[<?= $p->id;?>]" class="form-control"/></div>
+								<label class="control-label col-md-2">Tự động : </label>
+								<div class="col-md-2"><input value="<?= $p->valueCustom;?>" type="text"  class="form-control"/></div>
 								<label class="control-label col-md-2">Tối thiểu : </label>
-								<div class="col-md-3"><input value="<?= $p->valueMin;?>" type="text" name="valueMinAdmincp[<?= $p->id;?>]"  class="form-control"/></div>
+								<div class="col-md-2"><input value="<?= $p->valueMin;?>" type="text" name="valueMinAdmincp[<?= $p->id;?>]"  class="form-control"/></div>
 							</div>
 						<?php } ?>
 						
