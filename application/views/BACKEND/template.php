@@ -174,6 +174,11 @@
                                 <i class="fa fa-arrow-right"></i><span class="title">SS nhập xuất kho/CH </span>
                             </a>
                         </li>
+                        <li class="nav-item  last<?php if ($this->uri->segment(2) == 'report_kiem_tra_xuat_cua_hang') { print 'active open';} ?>">
+                            <a href="<?= PATH_URL_ADMIN . 'report_kiem_tra_xuat_cua_hang' ?>" class="nav-link ">
+                                <i class="fa fa-arrow-right"></i><span class="title">Kiểm tra xuất CH </span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 
@@ -184,16 +189,16 @@
                         <span class="title">Định mức</span>
                         <span class="arrow"></span>
                     </a>
-                    <ul class="sub-menu" <?php if (($this->uri->segment(2) == 'quote_detail') || ($this->uri->segment(2) == 'quote') || ($this->uri->segment(2) == 'products' )) { print "style='display: block;' ";} ?>>
+                    <ul class="sub-menu" <?php if (($this->uri->segment(2) == 'quote_custom') || ($this->uri->segment(2) == 'quote') || ($this->uri->segment(2) == 'products' )) { print "style='display: block;' ";} ?>>
                         <li class="nav-item  last<?php if ($this->uri->segment(2) == 'quote') { print 'active open';} ?>">
                             <a href="<?= PATH_URL_ADMIN . 'quote' ?>" class="nav-link ">
                                 <i class="fa fa-arrow-right"></i><span class="title">Định mức đại lý</span>
                             </a>
                         </li>
                         
-                        <li class="nav-item  last<?php if ($this->uri->segment(2) == 'quote_detail') { print 'active open';} ?>">
-                            <a href="<?= PATH_URL_ADMIN . 'quote_detail' ?>" class="nav-link ">
-                                <i class="fa fa-arrow-right"></i><span class="title">Định mức đặt trước </span>
+                        <li class="nav-item  last<?php if ($this->uri->segment(2) == 'quote_custom') { print 'active open';} ?>">
+                            <a href="<?= PATH_URL_ADMIN . 'quote_custom' ?>" class="nav-link ">
+                                <i class="fa fa-arrow-right"></i><span class="title">Định mức tự động </span>
                             </a>
                         </li>
                     </ul>
@@ -344,6 +349,7 @@
 <script src="<?= PATH_URL . 'assets/js/admin/' ?>components-pickers.js" type="text/javascript"></script>
 <script src="<?= PATH_URL . 'assets/js/admin/' ?>components-dropdowns.js" type="text/javascript"></script>
 <script src="<?= PATH_URL . 'assets/js/admin/' ?>jquery.multiselect.js" type="text/javascript"></script>
+<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/bootstrap-notify.min.js"></script>
 <script>
     jQuery(document).ready(function () {
         Metronic.init(); // init metronic core components
@@ -351,6 +357,13 @@
         ComponentsPickers.init();
         ComponentsDropdowns.init();
     });
+    function notify(ms,type){
+			$.notify({
+				message: ms 
+			},{
+				type: type
+			});
+		}
 </script>
 </body>
 <!-- END BODY -->
