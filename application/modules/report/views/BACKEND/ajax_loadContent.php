@@ -75,7 +75,7 @@
         </div>
         <div class="fixed-table-body">
             <div class="fixed-table-loading" style="top: 41px; display: none;">Loading, please wait...</div>
-            <table data-toggle="table" data-url="../assets/global/plugins/bootstrap-table/data/data1.json" data-height="599" class="table table-hover" style="margin-top: -40px;">
+            <table data-toggle="table" data-height="599" class="table table-hover" id="data-table" style="margin-top: -40px;">
                 <thead>
                     <tr>
                         <th data-field="id" tabindex="0" width="5%">

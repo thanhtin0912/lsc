@@ -3,7 +3,7 @@
 class Quote_custom extends MX_Controller {
 
 	private $module = 'quote_custom';
-	private $table = 'usr_services';
+	private $table = 'quote';
 	function __construct(){
 		parent::__construct();
 		$this->load->model($this->module.'_model','model');
@@ -28,12 +28,14 @@ class Quote_custom extends MX_Controller {
 		$default_func = 'created';
 		$default_sort = 'DESC';
 		$this->load->model('stores/stores_model');
+		$this->load->model('categories/categories_model');	
 		$data = array(
 			'module'=>$this->module,
 			'module_name'=>$this->session->userdata('Name_Module'),
 			'default_func'=>$default_func,
 			'default_sort'=>$default_sort,
 			'cates' => $this->model->getDataStore(),
+			'days' => $this->categories_model->getDataCommonCode('DAYS'),
 		);
 		$this->template->write_view('content','BACKEND/index',$data);
 		$this->template->render();
@@ -83,19 +85,29 @@ class Quote_custom extends MX_Controller {
 	
 
 	public function admincp_ajaxLoadContent(){
-		if (isset($_POST['store']) && isset($_POST['from']) && isset($_POST['to'])) {
+		if (isset($_POST['store'])) {
 			$products = $this->model->getProducts($_POST['store']);
-			$fromDate = $_POST['from'];
-			$toDate = $_POST['to'];
+
+			$fromDate = date('Y-m-d',time());
+			$toDate = date('Y-m-d',time());
 			$rate = 0;
 			if(isset($_POST['rate'])) {
 				$rate = $_POST['rate'];
 			}
 			$storeId = $_POST['store'];
-			$diff =  abs(strtotime($_POST['to']) - strtotime($_POST['from']));
-			$years = floor($diff / (365*60*60*24));
-			$months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
-			$days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24)) + 1;
+			$days = 1; 
+			if ($_POST['days']) {
+				$days = (float)$_POST['days'];
+				$fromDate =  date('Y-m-d', strtotime($toDate . "-".$days. "days"));
+			} else {
+				$fromDate = $_POST['from'];
+				$toDate = $_POST['to'];
+
+				$diff =  abs(strtotime($_POST['to']) - strtotime($_POST['from']));
+				$years = floor($diff / (365*60*60*24));
+				$months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+				$days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));				
+			}
 			if ($products) {
 				$arrProduct = array();
 				foreach ($products as $key => $p) {
@@ -110,7 +122,7 @@ class Quote_custom extends MX_Controller {
 						foreach ($quotetoDate as $key => $q) {
 							$sum = $sum + $q->value;
 						}
-						$cal = number_format((float)($sum/$days) + (float)((($sum/$days) * $rate)/100), 0 );
+						$cal = number_format((float)($sum/($days+1)) + (float)((($sum/($days+1)) * $rate)/100), 0 );
 						if($cal < 1) {
 							$object->value = 1;
 						} else {
@@ -161,10 +173,69 @@ class Quote_custom extends MX_Controller {
 		$this->load->view('BACKEND/ajax_updateStatus',$update);
 	}
 
-	public function loadDataStore() {
-		$data["result"] = $this->model->getDataStore();
-		echo json_encode($data);
-		exit;
+	function admincp_cronAutoSetup() {
+		$stores = $this->model->getData();
+		if ($stores) {
+			foreach ($stores as $key => $s) {
+				if ($s->days > 0) {
+					$toDate = date('Y-m-d',time());
+					$days = $s->days;
+					$fromDate =  date('Y-m-d', strtotime($toDate . "-".$days. "days"));
+					$rate = $s->rate;
+					$products = $this->model->getProducts($s->storeId);
+					if($products) {
+						$count = 0;
+						foreach ($products as $key => $p) {
+							// total xuất từ kho chính qua cửa hàng
+							$quotetoDate = $this->model->getExportQuotetoDate($p->id, $s->storeId, $fromDate, $toDate);
+							if ($quotetoDate) {
+								$sum = 0;
+								foreach ($quotetoDate as $key => $q) {
+									$sum = $sum + $q->value;
+								}
+								$cal = number_format((float)($sum/($days+1)) + (float)((($sum/($days+1)) * $rate)/100), 0 );
+								echo json_encode(3);
+								$value = 1;
+								if($cal > 1) {
+									$value = $cal;
+								}
+								
+								$data = array(
+									'value'=> $value,
+									'updated'=> date('Y-m-d H:i:s',time()),
+								);
+								$this->db->where('storeId', $s->storeId);
+								$this->db->where('productId', $p->id);
+								if($this->db->update('quote',$data)) {
+									$count++;
+								}
+							}
+						}
+						echo json_encode($count);					
+					}
+				}
+			}
+		}
+		$storeMain = $this->model->getDataStoreMain();
+		if ($storeMain) {
+			$products = $this->model->getProducts($storeMain[0]->id);
+			if($products) {
+				foreach ($products as $key => $p) {
+					$totalValue = $this->model->getTotalValue($p->id, $storeMain[0]->id);
+					if ($totalValue) {
+						$data = array(
+							'value'=> $totalValue[0]->value,
+							'updated'=> date('Y-m-d H:i:s',time()),
+						);
+						$this->db->where('storeId', $storeMain[0]->id);
+						$this->db->where('productId', $p->id);
+						$this->db->update('quote', $data);
+					}
+				}
+			}
+		}
 	}
+
+
 	/*------------------------------------ End Admin Control Panel --------------------------------*/
 }

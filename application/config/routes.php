@@ -113,3 +113,4 @@ $route[ADMINCP.'/(:any)/(:any)/(:any)'] = "$1/admincp_$2/$3";
 $route[ADMINCP.'/(:any)/(:any)'] = "$1/admincp_$2";
 $route[ADMINCP.'/(:any)'] = "$1/admincp_index";
 
+$route[ADMINCP.'/cronAutoSetup'] = "admincp/cronAutoSetup";

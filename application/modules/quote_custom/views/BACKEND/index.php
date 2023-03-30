@@ -35,33 +35,41 @@
 		var rate = $('#rate').val();
 		var from = $('#caledar_from').val();
 		var to = $('#caledar_to').val();
+		var days = $('#days').val();
 		$.post(root+module+'/ajaxLoadContent',{
 			rate : rate,
 			from: from,
 			to: to,
+			days: days,
 			store: store,
 			csrf_token: token_value
 		},function(data){
 			$('#data-table-report').show();
 			$('.dataTables_wrapper').html(data);
 			document.getElementsByClassName("handle-control")[0].classList.remove("d-none");
+			document.getElementsByClassName("dataTables_wrapper")[0].classList.remove("d-none");
 		});
 	}
 
-	function loadFilter(store, name, from= '', to = '', isCustom = 0, rate = 0, storeId = 0){
+	function loadFilter(store, name, from= '', to = '', days, isCustom = 0, rate = 0, storeId = 0){
 			$('#data-table-report').show();
 			$('#store').val(store);
 			$('#rate').val(rate);
+			$('#storeId').val(storeId);
 			$('#caledar_from').val(from);
 			$('#caledar_to').val(to);
-			$('#storeId').val(storeId);
 			if (isCustom!=0) {
 				$('#isCustom').parent("span").addClass('checked');
 			} else {
 				$('#isDefault').parent("span").addClass('checked');
 			}
-			$('#title-report').text('Cài đặt định mức - ' + name);
+			// 
+			$('#days').val(days);
 
+			$('#title-report').text('Cài đặt định mức - ' + name);
+			document.getElementsByClassName("dataTables_wrapper")[0].className += " d-none";
+			document.getElementsByClassName("handle-control")[0].classList+= " d-none";
+			
 	}
 
 	function save(){
@@ -137,7 +145,7 @@
 </div>
 <!-- BEGIN PAGE CONTENT-->
 <div class="row">
-	<div class="col-md-5">
+	<div class="col-md-4">
 		<div class="portlet light portlet-fit bordered">
 			<div class="">
 				<div class="mt-element-list">
@@ -157,7 +165,7 @@
 									</div>
 									<div class="list-todo-item blue-steel">
 										<a class="list-toggle-container font-white collapsed" data-toggle="modal" href="#todo-task-modal" 
-										onclick="loadFilter('<?=$c->id; ?>','<?=$c->name; ?>', '<?=$c->fromDate; ?>', '<?=$c->toDate; ?>', '<?=$c->isCustom; ?>', '<?=$c->rate; ?>', '<?=$c->storeId; ?>')">
+										onclick="loadFilter('<?=$c->id; ?>','<?=$c->name; ?>', '<?=$c->fromDate; ?>', '<?=$c->toDate; ?>','<?=$c->days; ?>', '<?=$c->isCustom; ?>', '<?=$c->rate; ?>', '<?=$c->storeId; ?>')">
 											<div class="list-toggle done uppercase">
 												<div class="list-toggle-title bold"><?=$c->name; ?></div>
 												<div class="badge badge-default pull-right" style="height: 22px;"><i class="fa fa-arrow-right"></i></div>
@@ -175,43 +183,63 @@
 		</div>
 		<!-- END EXAMPLE TABLE PORTLET-->
 	</div>
-	<div class="col-md-7"  id="data-table-report" style="display:none">
+	<div class="col-md-8"  id="data-table-report" style="display:none">
 		<div class="portlet light portlet-fit bordered">
-			<div class="portlet box blue data-table">
 				<div class="portlet-title">
-					<div class="caption bold" ><span id="title-report"></span></div>
+					<div class="caption">
+						<i class="icon-paper-plane font-green-haze"></i>
+						<span class="caption-subject bold font-green-haze uppercase" id="title-report">Form Input</span>
+					</div>
 				</div>
-				<div class="portlet-body">
+				<div class="portlet-body form">
 					<form id="frmManagement" action="<?=PATH_URL_ADMIN.$module.'/save/'?>" method="post" enctype="multipart/form-data" class="form-horizontal form-row-seperated">
         			<input type="hidden" value="<?=$this->security->get_csrf_hash()?>" id="csrf_token" name="csrf_token" />
 					<input type="hidden" value="" id="store" name="storeAdmincp"/>
 					<input type="hidden" value="" id="storeId" name="hiddenIdAdmincp"/>
-                    <div class="table-toolbar">
-                        <div class="row">
-							<div class="col-md-2">
-                                <div class="input-group py-1">
-                                    <input type="text" class="form-control" placeholder="Tỷ lệ %" id="rate" name="rateAdmincp">
-                                </div>
-                            </div>
-							<div class="col-md-3">
-                                <div class="input-group py-1">
-									<label class="radio-inline"><input type="radio" id="isDefault" name="isCustomAdmincp" value="0" > Mặc định</label>
-									<label class="radio-inline"><input type="radio" id="isCustom" name="isCustomAdmincp" value="1" > Tự động</label>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-								<div class="input-group date-picker input-daterange" data-date-format="yyyy-mm-dd" style="width: 100%;">
-									<input onkeypress="return enterSearch(event)" id="caledar_from" type="text" placeholder="date" class="form-control" name="from">
-									<span class="input-group-addon">to</span>
-									<input onkeypress="return enterSearch(event)" id="caledar_to" type="text" placeholder="date" class="form-control" name="to">
-									<span class="input-group-btn">
-                                       <button class="btn blue" type="button" onclick="calculatorQuoteCustom()">Xem</button>	
-									</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-					<div class="dataTables_wrapper">
+					
+					<div class="form-group">
+						<label class="control-label col-md-3">Loại định mức:</label>
+						<div class="col-md-9">
+							<label class="radio-inline"><input type="radio" id="isDefault" name="isCustomAdmincp" value="0" > Mặc định</label>
+							<label class="radio-inline"><input type="radio" id="isCustom" name="isCustomAdmincp" value="1" > Tự động</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-3">Tỷ lệ :</label>
+						<div class="col-md-9">
+							<input type="text" class="form-control" placeholder="Tỷ lệ %" id="rate" name="rateAdmincp">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-md-3">Khoản thời gian:</label>
+						<div class="col-md-9">
+							<div class="input-group date-picker input-daterange" data-date-format="yyyy-mm-dd" style="width: 100%;">
+								<input onkeypress="return enterSearch(event)" id="caledar_from" type="text" placeholder="date" class="form-control" name="from">
+								<span class="input-group-addon">to</span>
+								<input onkeypress="return enterSearch(event)" id="caledar_to" type="text" placeholder="date" class="form-control" name="to">
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-3">Chọn nhanh ngày:</label>
+						<div class="col-md-6">
+							<select class="form-control" data-live-search="true" data-size="8" name="daysAdmincp" id="days">
+								<option value="">None</option>
+								<?php foreach ($days as $key => $c): ?>
+									<option value="<?= $c->name; ?>"><?= $c->name; ?></option>
+								<?php endforeach; ?>
+							</select>
+						</div>
+					</div>
+					<div class="form-actions">
+						<div class="row">
+							<div class="col-md-offset-2 col-md-9">
+								<button class="btn blue" type="button" onclick="calculatorQuoteCustom()">Xem</button>	
+							</div>
+						</div>
+					</div>
+					<div class="dataTables_wrapper form-actions">
 											
 					</div>
 					<div id="importControl" style="position: fixed; right: 5px; opacity: 1; cursor: pointer;">

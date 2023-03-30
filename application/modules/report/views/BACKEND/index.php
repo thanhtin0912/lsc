@@ -9,6 +9,7 @@
 </div>
 <link rel="stylesheet" href="https://preview.keenthemes.com/metronic-v4/theme/assets/global/css/components.min.css">
 <link rel="stylesheet" href="https://preview.keenthemes.com/metronic-v4/theme/assets/apps/css/todo.min.css">
+<script type="text/javascript" src="<?= PATH_URL . 'assets/js/admin/' ?>table2csv.min.js"></script>
 <style>
 .mt-element-list .list-todo.mt-list-container ul>.mt-list-item>.list-todo-item {
     margin-left: 15px;
@@ -34,6 +35,14 @@
 			$('#title-report').text('Báo cáo tồn kho - '+ name +' - ngày  ' + date );
 			$('#search-report').html(button);
 		});
+	}
+	function exportExcel() {
+		// document.getElementsByClassName("table")[0].classList.remove("hidden");
+		var date = new Date();
+		$("#data-table").table2csv({
+			filename: date + '.csv'
+		});
+		// document.getElementsByClassName("table")[0].classList+= " hidden";
 	}
 </script>
 <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
@@ -118,13 +127,13 @@
 				<div class="portlet-body">
                     <div class="table-toolbar">
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="input-group">
+                            <div class="col-md-6 d-flex">
+                                <div class="input-group pr-2">
                                     <input type="text" class="form-control date-picker" data-date-format="yyyy-mm-dd" value="<?= date('Y-m-d'); ?>" id="report-date">
 									<span class="input-group-btn" id="search-report">
-                                       
                                     </span>
                                 </div>
+								<button class="btn blue" type="button" onclick="exportExcel()">Xuất File</button>
                             </div>
                         </div>
                     </div>

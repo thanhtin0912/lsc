@@ -1,3 +1,4 @@
+<script type="text/javascript" src="<?= PATH_URL . 'assets/js/admin/' ?>table2csv.min.js"></script>
 <script type="text/javascript">
 
 function save(){
@@ -35,6 +36,15 @@ function showResponse(responseText, statusText, xhr, $form) {
 	}
 }
 
+function exportExcel() {
+	document.getElementsByClassName("table")[0].classList.remove("hidden");
+	var date = new Date();
+	$("#tab").table2csv({
+		filename: date + '.csv'
+	});
+	document.getElementsByClassName("table")[0].classList+= " hidden";
+}
+
 </script>
 <!-- BEGIN PAGE HEADER-->
 <h3 class="page-title"><?=$this->session->userdata('Name_Module')?></h3>
@@ -56,6 +66,9 @@ function showResponse(responseText, statusText, xhr, $form) {
                     <i class="icon-paper-plane font-green-haze"></i>
                     <span class="caption-subject bold font-green-haze uppercase">Form Input</span>
                 </div>
+				<div class="float-right">
+					<button onclick="exportExcel()" type="button" class="btn green"><i class="fa fa-pencil"></i> Xuất File</button>
+				</div>
 			</div>
 			
 			<div class="portlet-body form">
@@ -86,13 +99,24 @@ function showResponse(responseText, statusText, xhr, $form) {
 							<div class="form-group">
 								<label class="control-label col-md-2"><?= $p->name;?> : </label>
 								<div class="col-md-2"><input value="<?= $p->value;?>" type="text" name="valueAdmincp[<?= $p->id;?>]" class="form-control"/></div>
-								<label class="control-label col-md-2">Tự động : </label>
-								<div class="col-md-2"><input value="<?= $p->valueCustom;?>" type="text"  class="form-control"/></div>
+								<label class="control-label col-md-2">Update: <?= $p->updated;?>  </label>
 								<label class="control-label col-md-2">Tối thiểu : </label>
 								<div class="col-md-2"><input value="<?= $p->valueMin;?>" type="text" name="valueMinAdmincp[<?= $p->id;?>]"  class="form-control"/></div>
 							</div>
 						<?php } ?>
 						
+						<table id="tab" class="table hidden">
+							<tr>
+								<th>Tên</th>
+								<th>Định lượng</th>
+							</tr>
+							<?php foreach ($results as $key => $p) { ?>
+							<tr>
+								<td><?= $p->name;?></td>
+								<td><?= $p->value;?></td>
+							</tr>
+							<?php } ?>
+						</table>
 					</div>
 					
 					<div class="form-actions">

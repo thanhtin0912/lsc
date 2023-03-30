@@ -129,6 +129,7 @@ class Quote_custom_model extends CI_Model {
 				'to'=> date('Y-m-d 23:59:59', strtotime($this->input->post('to', true))),
 				'rate'=> trim($this->input->post('rateAdmincp', true)),
 				'storeId'=> $this->input->post('storeAdmincp', true),
+				'days'=> trim($this->input->post('daysAdmincp', true)),
 				'created'=> date('Y-m-d H:i:s',time()),
 			);
 			if($this->db->insert(PREFIX.$this->table_quote_custom,$data)){
@@ -142,6 +143,7 @@ class Quote_custom_model extends CI_Model {
 				'from'=> date('Y-m-d 00:00:00', strtotime($this->input->post('from', true))),
 				'to'=> date('Y-m-d 23:59:59', strtotime($this->input->post('to', true))),
 				'rate'=> trim($this->input->post('rateAdmincp', true)),
+				'days'=> trim($this->input->post('daysAdmincp', true)),
 				'created'=> date('Y-m-d H:i:s',time()),
 			);
 
@@ -171,12 +173,41 @@ class Quote_custom_model extends CI_Model {
 	}
 
 	function getDataStore() {
-		$this->db->select('s.*, c.from as fromDate , c.to as toDate, c.isCustom, c.rate, c.storeId');
+		$this->db->select('s.*, c.from as fromDate , c.to as toDate, c.isCustom, c.days, c.rate, c.storeId');
 		$this->db->where('s.status',1);
 		$this->db->where('s.delete',0);
 		$this->db->order_by('order','DESC');
 		$this->db->from(PREFIX.$this->table_store." s");
 		$this->db->join(PREFIX.$this->table_quote_custom." c", 'c.storeId = s.id', "left");
+		$query = $this->db->get();
+
+		if($query->result()){
+			return $query->result();
+		}else{
+			return false;
+		}
+	}
+
+	function getDataStoreMain() {
+		$this->db->select('*');
+		$this->db->where('status',1);
+		$this->db->where('delete',0);
+		$this->db->where('isMain',1);
+		$this->db->from(PREFIX.$this->table_store);
+		$query = $this->db->get();
+
+		if($query->result()){
+			return $query->result();
+		}else{
+			return false;
+		}
+	}
+
+	function getTotalValue($proId, $mainStore) {
+		$this->db->select_sum('value');
+		$this->db->where('storeId !=', $mainStore);
+		$this->db->where('productId', $proId);
+		$this->db->from(PREFIX.$this->table_quote);
 		$query = $this->db->get();
 
 		if($query->result()){
@@ -191,7 +222,7 @@ class Quote_custom_model extends CI_Model {
 		$this->db->select('*');
 		$this->db->where('status',1);
 		$this->db->order_by('created','DESC');
-		$query = $this->db->get(PREFIX.$this->table);
+		$query = $this->db->get(PREFIX.$this->table_quote_custom);
 
 		if($query->result()){
 			return $query->result();
