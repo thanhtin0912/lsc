@@ -449,7 +449,63 @@ class Home extends MX_Controller {
 		} 
 	}
 
+	public function cronEstimatesExportStore (){
+		$stores = $this->home->getListStore();
+		if($stores){
+			foreach ($stores as $key => $s) {
+				$productsEstimatesOrderStore = array();
+				$products = $this->home->getProducts($s->id, '');
+				$store = $s->id;
+				if ($products) {
+					foreach ($products as $key => $p) {
+						$object = new StdClass;
+						$object->id = $p->id;
+						$object->name = $p->name;
+						$object->inventory = (float)$p->inventory;
+						$object->note = $p->note;
 
+						$inventoryForStore = 0;
+						$quoteForStore = 0;
+
+						$inventoryProductStore = $this->home->getInventory($p->id, $store);
+						// var_dump($inventoryProductStore);
+						if($inventoryProductStore) {
+							$inventoryForStore = $inventoryProductStore[0]->value;
+						}
+						// var_dump($inventoryForStore);
+						$quoteProductStore = $this->home->getQuote($p->id, $store);
+						if($quoteProductStore) {
+							$quoteForStore = $quoteProductStore[0]->value;
+						}
+						// var_dump($quoteForStore);
+						$sumEstimates = $quoteForStore - $inventoryForStore;
+						
+						$object->estimates = $sumEstimates;
+
+						$productsEstimatesOrderStore[] = $object;
+						// exit();
+					}
+					// xuất file pdf
+					$data['products'] = $productsEstimatesOrderStore;
+					$data['store'] = $s->name;
+					$htmltopdf =$this->load->view('main-store/template_pdf',$data,true);
+					// Load pdf library
+					$this->load->library('Pdf');
+					$this->pdf->loadHtml($htmltopdf);
+					$this->pdf->setPaper('A4', 'portrait');
+					$this->pdf->render();
+					$name = $s->slug.'.pdf';
+					$path = 'assets/uploads/lib/'.date('Y').'/'.date('m').'/'.date('d');
+					if(!is_dir($path)){
+						mkdir($path, 0755, true);
+					}
+					file_put_contents($path.'/'.$name, $this->pdf->output());
+					break;
+				}
+			}
+
+		}
+	}
 
 	/*------------------------------------ End API --------------------------------*/
 

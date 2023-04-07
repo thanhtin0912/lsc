@@ -393,5 +393,16 @@ class Home_model extends CI_Model {
 			return true;
 		} 
 	}
+
+	function getListStore() {
+		$this->db->select('*');
+		$this->db->where('isMain !=', 1);
+		$query = $this->db->get('stores');
+		if($query->result()){
+			return $query->result();
+		}else{
+			return false;
+		}
+	}
 }
 ?>

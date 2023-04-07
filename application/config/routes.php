@@ -93,7 +93,7 @@ $route['importQtyCheckStore'] = "home/importQtyCheckStore";
 $route['importListQtyCheckStore'] = "home/importListQtyCheckStore";
 //Config Router Multi Language
 // $route['^(en|jp)$'] = $route['default_controller'];
-
+$route['cronEstimatesExportStore'] = "home/cronEstimatesExportStore";
 
 
 //Config Router Admincp
@@ -114,3 +114,4 @@ $route[ADMINCP.'/(:any)/(:any)'] = "$1/admincp_$2";
 $route[ADMINCP.'/(:any)'] = "$1/admincp_index";
 
 $route[ADMINCP.'/cronAutoSetup'] = "admincp/cronAutoSetup";
+
