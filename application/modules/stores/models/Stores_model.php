@@ -75,6 +75,8 @@ class Stores_model extends CI_Model {
 				'order'=> trim($this->input->post('orderAdmincp', true)),
 				'address'=> trim($this->input->post('addressAdmincp', true)),
 				'isMain'=> trim($this->input->post('isMainAdmincp', true)),
+				'percenQuoteMain'=> trim($this->input->post('percenQuoteMainAdmincp', true)),
+				'percenCompareMin'=> trim($this->input->post('percenCompareMinAdmincp', true)),
 				'status'=> $this->input->post('statusAdmincp'),
 				'created'=> date('Y-m-d H:i:s',time()),
 			);
@@ -104,6 +106,8 @@ class Stores_model extends CI_Model {
 				'order'=> trim($this->input->post('orderAdmincp', true)),
 				'address'=> trim($this->input->post('addressAdmincp', true)),
 				'isMain'=> trim($this->input->post('isMainAdmincp', true)),
+				'percenQuoteMain'=> trim($this->input->post('percenQuoteMainAdmincp', true)),
+				'percenCompareMin'=> trim($this->input->post('percenCompareMinAdmincp', true)),
 				'status'=> $this->input->post('statusAdmincp'),
 			);
 			modules::run('admincp/saveLog',$this->module,$this->input->post('hiddenIdAdmincp'),'','Update',$result,$data);

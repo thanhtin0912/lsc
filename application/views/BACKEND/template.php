@@ -203,6 +203,21 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <i class="icon-layers"></i>
+                        <span class="title">Kho tổng</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu" <?php if ($this->uri->segment(2) == 'quote_main_store') { print "style='display: block;' ";} ?>>
+                        <li class="nav-item  last<?php if ($this->uri->segment(2) == 'quote') { print 'active open';} ?>">
+                            <a href="<?= PATH_URL_ADMIN . 'quote_main_store' ?>" class="nav-link ">
+                                <i class="fa fa-arrow-right"></i><span class="title">Hàng cần </span>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </li>
 
                 <li class="heading">
                     <h3 class="uppercase">Hệ thống & cài đặt</h3>

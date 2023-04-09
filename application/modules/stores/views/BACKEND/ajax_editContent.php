@@ -144,6 +144,14 @@ function showResponse(responseText, statusText, xhr, $form) {
 							</div>
 						
 						</div>
+						<div class="form-group">
+							<label class="control-label col-md-2">Định lượng kho tổng(%): <span class="required" aria-required="true">*</span></label>
+							<div class="col-md-3"><input value="<?php if(isset($result->percenQuoteMain)) { print $result->percenQuoteMain; }else{ print '';} ?>" type="text" name="percenQuoteMainAdmincp" id="orderAdmincp" class="form-control"/></div>
+
+							<label class="control-label col-md-2">Định lượng tối thiểu (%) : <span class="required" aria-required="true">*</span></label>
+							<div class="col-md-3"><input value="<?php if(isset($result->percenCompareMin)) { print $result->percenCompareMin; }else{ print '';} ?>" type="text" name="percenCompareMinAdmincp" id="orderAdmincp" class="form-control"/></div>
+						
+						</div>
 
 						<div class="form-group">
 							<label class="control-label col-md-2">Mô tả:</label>
