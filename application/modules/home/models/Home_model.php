@@ -11,7 +11,7 @@ class Home_model extends CI_Model {
 	private $tbl_inven_his				= 'inventory_history';
 	private $tbl_conn				= 'connections';
 	private $tbl_inven_quote				= 'inventory_quote';
-
+	
 	function checkLogin($user){
 		$this->db->select('c.*');
 		$this->db->where('c.phone', $user);
@@ -365,6 +365,7 @@ class Home_model extends CI_Model {
 			return false;
 		}
 	}
+	
 	function totalExportToday($proId, $storeId, $date){
 		$this->db->select_sum('adjQty');
 		$this->db->where('newQty < prevQty');
@@ -381,6 +382,7 @@ class Home_model extends CI_Model {
 			return false;
 		}
 	}
+	
 	function insertInventoryQuote($id, $qty, $store, $date) {
 		$logInventory  = array (
 			'productId' => $id,
@@ -392,17 +394,6 @@ class Home_model extends CI_Model {
 		if($this->db->insert($this->tbl_inven_quote, $logInventory)){
 			return true;
 		} 
-	}
-
-	function getListStore() {
-		$this->db->select('*');
-		$this->db->where('isMain !=', 1);
-		$query = $this->db->get('stores');
-		if($query->result()){
-			return $query->result();
-		}else{
-			return false;
-		}
 	}
 }
 ?>

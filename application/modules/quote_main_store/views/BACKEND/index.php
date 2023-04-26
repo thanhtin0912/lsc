@@ -20,20 +20,18 @@
 }
 </style>
 <script>
-	function searchInvenToday(store, name){
+	function searchInvenToday(store, name, sort){
 		var el = $('a.reload').closest(".portlet").children(".portlet-body");
 		var date = $('#report-date').val();
 	
 		$.post(root+module+'/ajaxLoadContent',{
 			store : store,
 			date: date,
+			sort: sort,
 			csrf_token: token_value
 		},function(data){
 			$('#data-table-report').show();
 			$('.dataTables_wrapper').html(data);
-			const button = `<button class="btn blue" type="button" onclick="searchInvenToday(${store}, '${name}')">Tìm kiếm</button>`
-			$('#title-report').text('Báo cáo tồn kho chính - '+ name +' - ngày  ' + date );
-			$('#search-report').html(button);
 		});
 	}
 	function exportExcel() {
@@ -102,7 +100,7 @@
 										<i class="fa fa-database"></i>
 									</div>
 									<div class="list-todo-item blue-steel">
-										<a class="list-toggle-container font-white collapsed" data-toggle="modal" href="#todo-task-modal" onclick="searchInvenToday(<?=$c->id; ?>, '<?=$c->name; ?>')">
+										<a class="list-toggle-container font-white collapsed" data-toggle="modal" href="#todo-task-modal" onclick="searchInvenToday(<?=$c->id; ?>, '<?=$c->name; ?>', 1)">
 											<div class="list-toggle done uppercase">
 												<div class="list-toggle-title bold"><?=$c->name; ?></div>
 												<div class="badge badge-default pull-right" style="height: 22px;"><i class="fa fa-arrow-right"></i></div>
@@ -127,7 +125,7 @@
 					<div class="caption bold" ><span id="title-report"></span></div>
 				</div>
 				<div class="portlet-body">
-                    <div class="table-toolbar">
+                    <div class="table-toolbar d-none">
                         <div class="row">
                             <div class="col-md-6 d-flex">
                                 <div class="input-group pr-2">

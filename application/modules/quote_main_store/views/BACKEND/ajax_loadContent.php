@@ -30,7 +30,7 @@
     <div class="fixed-table-toolbar"></div>
     <div class="fixed-table-container" style="height: 599px;">
         <div class="fixed-table-header" style="margin-right: 0px;">
-            <table class="table table-hover">
+            <table class="table table-hover dataTable">
                 <thead>
                     <tr>
                         <th data-field="id" tabindex="0" width="5%">
@@ -41,8 +41,12 @@
                             <div class="th-inner bold">Sản phẩm</div>
                             <div class="fht-cell" ></div>
                         </th>
-                        <th data-field="name" tabindex="0" width="10%">
-                            <div class="th-inner center">Cần hàng</div>
+                        <th data-field="name" tabindex="0" width="10%" class="sorting" onclick="searchInvenToday(79, '30d', 1)" >
+                            <div class="th-inner sorting center">% Cần hàng</div>
+                            <div class="fht-cell"></div>
+                        </th>
+                        <th data-field="name" tabindex="0" width="10%" class="sorting" onclick="searchInvenToday(79, '30d', 0)" >
+                            <div class="th-inner sorting center">Tỷ số </div>
                             <div class="fht-cell"></div>
                         </th>
                         <th data-field="name" tabindex="0" width="10%">
@@ -55,7 +59,7 @@
                             <div class="fht-cell"></div>
                         </th>
                         <th data-field="name" tabindex="0" width="10%">
-                            <div class="th-inner center">Note</div>
+                            <div class="th-inner center">Cần Hàng</div>
                             <div class="fht-cell"></div>
                         </th>
                     </tr>
@@ -76,7 +80,11 @@
                             <div class="fht-cell" ></div>
                         </th>
                         <th data-field="name" tabindex="0" width="10%">
-                            <div class="th-inner center">Cần hàng</div>
+                            <div class="th-inner center">% Cần hàng</div>
+                            <div class="fht-cell"></div>
+                        </th>
+                        <th data-field="name" tabindex="0" width="10%">
+                            <div class="th-inner sorting center">Tỷ số</div>
                             <div class="fht-cell"></div>
                         </th>
                         <th data-field="name" tabindex="0" width="10%">
@@ -88,7 +96,7 @@
                             <div class="fht-cell"></div>
                         </th>
                         <th data-field="name" tabindex="0" width="10%">
-                            <div class="th-inner center">Note</div>
+                            <div class="th-inner center">Cần Hàng</div>
                             <div class="fht-cell"></div>
                         </th>
                     </tr>
@@ -99,10 +107,11 @@
                         <tr class="<?php if($p->notify){echo "color-up";}?>">
                             <td class="center"><?=$key+1;?></td>
                             <td class="bold" ><?=$p->name;?></td>
-                            <td class="center bold "><?= $p->quote - $p->inventory;?></td>
+                            <td class="center bold "><?=$p->percen;?></td>
+                            <td class="center bold "><?= $p->effect;?></td>
                             <td class="center bold"><?=$p->quote;?></td>
                             <td class="center bold"><?=$p->inventory;?></td>
-                            <td class="center bold"></td>
+                            <td class="center bold"><?= $p->quote - $p->inventory;?></td>
                         </tr>
                         <?php } ?>
                     <?php } ?>

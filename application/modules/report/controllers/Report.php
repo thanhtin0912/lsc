@@ -170,6 +170,11 @@ class Report extends MX_Controller {
 			$totalImport = $this->model->totalImportToday($pro->id, $_POST['store'], $date);
 			$totalExport = $this->model->totalExportToday($pro->id, $_POST['store'], $date);
 			$totalRemove = $this->model->totalRemoveToday($pro->id, $_POST['store'], $date);
+			$inventoryStoreDate = $this->model->inventoryStoreDate($pro->id, $_POST['store'], $date);
+			$pro->inventoryKT = "NULL";
+			if ($inventoryStoreDate) {
+				$pro->inventoryKT = $inventoryStoreDate[0]->newQty;
+			}
 			if ($totalImport[0]->adjQty) {
 				$pro->import = floatval($totalImport[0]->adjQty);
 			}

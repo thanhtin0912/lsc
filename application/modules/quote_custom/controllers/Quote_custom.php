@@ -90,10 +90,7 @@ class Quote_custom extends MX_Controller {
 
 			$fromDate = date('Y-m-d',time());
 			$toDate = date('Y-m-d',time());
-			$rate = 0;
-			if(isset($_POST['rate'])) {
-				$rate = $_POST['rate'];
-			}
+			
 			$storeId = $_POST['store'];
 			$days = 1; 
 			if ($_POST['days']) {
@@ -110,25 +107,32 @@ class Quote_custom extends MX_Controller {
 			}
 			if ($products) {
 				$arrProduct = array();
+				$rate = 0;
 				foreach ($products as $key => $p) {
+				    if(isset($_POST['rate'])) {
+        				$rate = $_POST['rate'];
+        			}
 					// total xuất từ kho chính qua cửa hàng
 					$quotetoDate = $this->model->getExportQuotetoDate($p->id, $storeId, $fromDate, $toDate);
 					$object = new StdClass;
 					$object->id = $p->id;
 					$object->name = $p->name;
 					$object->value = 1;
+					if ($p->isRateStore && $p->rateStore > 0) {
+						$rate = $p->rateStore;
+					}
 					if ($quotetoDate) {
 						$sum = 0;
 						foreach ($quotetoDate as $key => $q) {
 							$sum = $sum + $q->value;
 						}
-						$cal = number_format((float)($sum/($days+1)) + (float)((($sum/($days+1)) * $rate)/100), 0 );
+						$cal = number_format((float)($sum/($days)) + (float)((($sum/($days)) * $rate)/100), 0 );
 						if($cal < 1) {
 							$object->value = 1;
 						} else {
 							$object->value = $cal;
 						}
-						
+						$object->rate = $rate;
 						$object->sum = $sum;
 					}
 					$arrCompare[] = $object;
@@ -181,20 +185,22 @@ class Quote_custom extends MX_Controller {
 					$toDate = date('Y-m-d',time());
 					$days = $s->days;
 					$fromDate =  date('Y-m-d', strtotime($toDate . "-".$days. "days"));
-					$rate = $s->rate;
 					$products = $this->model->getProducts($s->storeId);
 					if($products) {
 						$count = 0;
 						foreach ($products as $key => $p) {
+						    $rate = $s->rate;
 							// total xuất từ kho chính qua cửa hàng
 							$quotetoDate = $this->model->getExportQuotetoDate($p->id, $s->storeId, $fromDate, $toDate);
+							if ($p->isRateStore && $p->rateStore > 0) {
+        						$rate = $p->rateStore;
+        					}
 							if ($quotetoDate) {
 								$sum = 0;
 								foreach ($quotetoDate as $key => $q) {
 									$sum = $sum + $q->value;
 								}
-								$cal = number_format((float)($sum/($days+1)) + (float)((($sum/($days+1)) * $rate)/100), 0 );
-								echo json_encode(3);
+								$cal = number_format((float)($sum/$days) + (float)((($sum/$days) * $rate)/100), 0 );
 								$value = 1;
 								if($cal > 1) {
 									$value = $cal;
@@ -206,7 +212,7 @@ class Quote_custom extends MX_Controller {
 								);
 								$this->db->where('storeId', $s->storeId);
 								$this->db->where('productId', $p->id);
-								if($this->db->update('quote',$data)) {
+								if($this->db->update(PREFIX.$this->table,$data)) {
 									$count++;
 								}
 							}
@@ -215,6 +221,7 @@ class Quote_custom extends MX_Controller {
 					}
 				}
 			}
+			
 		}
 		$storeMain = $this->model->getDataStoreMain();
 		if ($storeMain) {
@@ -222,9 +229,17 @@ class Quote_custom extends MX_Controller {
 			if($products) {
 				foreach ($products as $key => $p) {
 					$totalValue = $this->model->getTotalValue($p->id, $storeMain[0]->id);
+					$value = 0;
 					if ($totalValue) {
+						$value = $totalValue[0]->value;
+						if($storeMain[0]->percenQuoteMain > 0 && $totalValue[0]->value) {
+							$value = number_format($totalValue[0]->value + (($totalValue[0]->value*$storeMain[0]->percenQuoteMain)/100),0);
+						}
+						if(($p->isRateStoreMain && $p->rateStoreMain > 0) && $totalValue[0]->value) {
+							$value = number_format($totalValue[0]->value + (($totalValue[0]->value*$p->rateStoreMain)/100),0);
+						}
 						$data = array(
-							'value'=> $totalValue[0]->value,
+							'value'=> $value,
 							'updated'=> date('Y-m-d H:i:s',time()),
 						);
 						$this->db->where('storeId', $storeMain[0]->id);
@@ -234,6 +249,7 @@ class Quote_custom extends MX_Controller {
 				}
 			}
 		}
+		exit;
 	}
 
 

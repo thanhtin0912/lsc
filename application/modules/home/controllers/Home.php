@@ -335,12 +335,12 @@ class Home extends MX_Controller {
 					// exit();
 				}
 			}
-			$data['products'] = $compareEstimatesOrderStore ? $compareEstimatesOrderStore : []; 
+			$data['products'] = $compareEstimatesOrderStore;
 
 			$this->load->view("main-store/ajaxSearchExportMainStore", $data);
 		}
 	}
-
+	
 	public function search_history(){
 		$this->template->write_view('content','search_history');
 		$this->template->render();
@@ -375,8 +375,7 @@ class Home extends MX_Controller {
 			}
 		}
 	}
-
-	public function check_export(){
+public function check_export(){
 		//teamplate
 		$data['stores'] = $this->home->getListOtherStore($this->session->userdata('userStaff')[0]->storeId);
 		$this->template->write_view('content', 'main-store/check_export', $data);
@@ -448,65 +447,41 @@ class Home extends MX_Controller {
 			}
 		} 
 	}
-
-	public function cronEstimatesExportStore (){
-		$stores = $this->home->getListStore();
-		if($stores){
-			foreach ($stores as $key => $s) {
-				$productsEstimatesOrderStore = array();
-				$products = $this->home->getProducts($s->id, '');
-				$store = $s->id;
-				if ($products) {
-					foreach ($products as $key => $p) {
-						$object = new StdClass;
-						$object->id = $p->id;
-						$object->name = $p->name;
-						$object->inventory = (float)$p->inventory;
-						$object->note = $p->note;
-
-						$inventoryForStore = 0;
-						$quoteForStore = 0;
-
-						$inventoryProductStore = $this->home->getInventory($p->id, $store);
-						// var_dump($inventoryProductStore);
-						if($inventoryProductStore) {
-							$inventoryForStore = $inventoryProductStore[0]->value;
-						}
-						// var_dump($inventoryForStore);
-						$quoteProductStore = $this->home->getQuote($p->id, $store);
-						if($quoteProductStore) {
-							$quoteForStore = $quoteProductStore[0]->value;
-						}
-						// var_dump($quoteForStore);
-						$sumEstimates = $quoteForStore - $inventoryForStore;
-						
-						$object->estimates = $sumEstimates;
-
-						$productsEstimatesOrderStore[] = $object;
-						// exit();
-					}
-					// xuất file pdf
-					$data['products'] = $productsEstimatesOrderStore;
-					$data['store'] = $s->name;
-					$htmltopdf =$this->load->view('main-store/template_pdf',$data,true);
-					// Load pdf library
-					$this->load->library('Pdf');
-					$this->pdf->loadHtml($htmltopdf);
-					$this->pdf->setPaper('A4', 'portrait');
-					$this->pdf->render();
-					$name = $s->slug.'.pdf';
-					$path = 'assets/uploads/lib/'.date('Y').'/'.date('m').'/'.date('d');
-					if(!is_dir($path)){
-						mkdir($path, 0755, true);
-					}
-					file_put_contents($path.'/'.$name, $this->pdf->output());
-					break;
-				}
-			}
-
-		}
+	
+	public function mainStoreInventory() {
+		$data['stores'] = $this->home->getListOtherStore($this->session->userdata('userStaff')[0]->storeId);
+		$data['products'] = $this->loadMainStoreInventory();
+		$this->template->write_view('content', 'main-store/hangcan', $data);
+		$this->template->render();
 	}
 
+	public function loadMainStoreInventory(){
+		$this->load->model('stores/stores_model');
+		$this->load->model('quote_main_store/quote_main_store_model');
+		$products = $this->quote_main_store_model->getAllProductInventory($this->session->userdata('userStaff')[0]->storeId, '');
+		$date = date('Y-m-d H:i:s',time());
+		$mainStore = $this->stores_model->getDetailManagement($this->session->userdata('userStaff')[0]->storeId);
+		foreach ($products as $key => $pro) {
+			$cal = 0;
+			if($pro->quote > 0) {
+				$cal = number_format((($pro->quote - $pro->inventory)/($pro->quote)),2);
+			}
+			$pro->percen = $cal*100;
+			if ($pro->percen > $mainStore[0]->percenCompareMin) {
+				$pro->notify = true;
+			} else {
+				$pro->notify = false;
+			}
+			$pro->effect = 0;
+			if ($pro->isEffectStoreMain && $pro->effectStoreMain > 0) {
+				$pro->effect = number_format((($pro->quote - $pro->inventory)/$pro->effectStoreMain),1);
+			}
+		}
+		uasort($products, function ($a, $b) {
+			return $a->percen < $b->percen;
+		});
+		return $products;
+	}
 	/*------------------------------------ End API --------------------------------*/
 
 }

@@ -61,7 +61,6 @@ $route['hang-huy'] = "home/remove";
 $route['lich-su'] = "home/history";
 $route['tim-kiem-lich-su'] = "home/search_history";
 
-
 $route['don-hang-online'] = "home/orderApp";
 $route['ton-kho-cua-hang'] = "home/inventoryStore";
 // api
@@ -69,11 +68,11 @@ $route['checkLogin'] = "home/checkLogin";
 $route['importInventory'] = "home/importInventory";
 $route['exportInventory'] = "home/exportInventory";
 $route['removeInventory'] = "home/removeInventory";
+$route['ajaxSearchHistory'] = "home/ajaxSearchHistory";
 
 $route['ajaxSearchImportProduct'] = "home/ajaxSearchImportProduct";
 $route['ajaxSearchExportProduct'] = "home/ajaxSearchExportProduct";
 $route['ajaxSearchRemoveProduct'] = "home/ajaxSearchRemoveProduct";
-$route['ajaxSearchHistory'] = "home/ajaxSearchHistory";
 
 $route['searchHistoryInventory'] = "home/searchHistoryInventory";
 $route['importListQtyPruoduct'] = "home/importListQtyPruoduct";
@@ -91,9 +90,10 @@ $route['kiem-tra-xuat-cua-hang'] = "home/check_export";
 $route['ajaxSearchExportProductFromStore'] = "home/ajaxSearchExportProductFromStore";
 $route['importQtyCheckStore'] = "home/importQtyCheckStore";
 $route['importListQtyCheckStore'] = "home/importListQtyCheckStore";
+$route['hang-can'] = "home/mainStoreInventory";
 //Config Router Multi Language
 // $route['^(en|jp)$'] = $route['default_controller'];
-$route['cronEstimatesExportStore'] = "home/cronEstimatesExportStore";
+
 
 
 //Config Router Admincp
@@ -114,4 +114,3 @@ $route[ADMINCP.'/(:any)/(:any)'] = "$1/admincp_$2";
 $route[ADMINCP.'/(:any)'] = "$1/admincp_index";
 
 $route[ADMINCP.'/cronAutoSetup'] = "admincp/cronAutoSetup";
-

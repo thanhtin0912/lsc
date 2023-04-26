@@ -223,6 +223,33 @@ function showResponse(responseText, statusText, xhr, $form) {
 												</div>
 											</div>
 											<div class="form-group">
+												<label class="control-label col-md-2">Cho phép tỷ lệ định mức cho cửa hàng:</label>
+												<div class="col-md-3">
+													<label class="radio-inline"><input type="radio" name="isRateStoreAdmincp" value="0" <?= isset($result->isRateStore) ? $result->isRateStore == 0 ? 'checked' : '' : 'checked' ?> > Không</label>
+													<label class="radio-inline"><input type="radio" name="isRateStoreAdmincp" value="1" <?= isset($result->isRateStore) ? $result->isRateStore == 1 ? 'checked' : '' : '' ?> > Có</label>
+												</div>
+												<label class="control-label col-md-2">Nhập tỷ lệ (%):</label>
+												<div class="col-md-3"><input value="<?php if(isset($result->rateStore)) { print $result->rateStore; }else{ print '';} ?>" type="text" name="rateStoreAdmincp" id="rateStoreAdmincp" class="form-control"/></div>
+											</div>
+											<div class="form-group">
+												<label class="control-label col-md-2">Cho phép tỷ lệ định mức cho kho chính:</label>
+												<div class="col-md-3">
+													<label class="radio-inline"><input type="radio" name="isRateStoreMainAdmincp" value="0" <?= isset($result->isRateStoreMain) ? $result->isRateStoreMain == 0 ? 'checked' : '' : 'checked' ?> > Không</label>
+													<label class="radio-inline"><input type="radio" name="isRateStoreMainAdmincp" value="1" <?= isset($result->isRateStoreMain) ? $result->isRateStoreMain == 1 ? 'checked' : '' : '' ?> > Có</label>
+												</div>
+												<label class="control-label col-md-2">Nhập tỷ lệ (%):</label>
+												<div class="col-md-3"><input value="<?php if(isset($result->rateStoreMain)) { print $result->rateStoreMain; }else{ print '';} ?>" type="text" name="rateStoreMainAdmincp" id="rateMainStoreAdmincp" class="form-control"/></div>
+											</div>
+											<div class="form-group">
+												<label class="control-label col-md-2">Cho phép chia tỷ số kho chính:</label>
+												<div class="col-md-3">
+													<label class="radio-inline"><input type="radio" name="isEffectStoreMainAdmincp" value="0" <?= isset($result->isEffectStoreMain) ? $result->isEffectStoreMain == 0 ? 'checked' : '' : 'checked' ?> > Không</label>
+													<label class="radio-inline"><input type="radio" name="isEffectStoreMainAdmincp" value="1" <?= isset($result->isEffectStoreMain) ? $result->isEffectStoreMain == 1 ? 'checked' : '' : '' ?> > Có</label>
+												</div>
+												<label class="control-label col-md-2">Nhập tỷ số:</label>
+												<div class="col-md-3"><input value="<?php if(isset($result->effectStoreMain)) { print $result->effectStoreMain; }else{ print '';} ?>" type="text" name="effectStoreMainAdmincp" id="effectStoreMainAdmincp" class="form-control"/></div>
+											</div>
+											<div class="form-group">
 												<label class="control-label col-md-2">Cửa hàng áp dụng: <span class="required" aria-required="true">*</span></label>
 												<div class="col-md-5">
 													<select class="3col active" multiple="multiple" name="useStoreAdmincp[]" >

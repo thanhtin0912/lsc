@@ -131,9 +131,10 @@
                                 <div class="input-group pr-2">
                                     <input type="text" class="form-control date-picker" data-date-format="yyyy-mm-dd" value="<?= date('Y-m-d'); ?>" id="report-date">
 									<span class="input-group-btn" id="search-report">
+                                       
                                     </span>
                                 </div>
-								<button class="btn blue" type="button" onclick="exportExcel()">Xuất File</button>
+                                <button class="btn blue" type="button" onclick="exportExcel()">Xuất File</button>
                             </div>
                         </div>
                     </div>

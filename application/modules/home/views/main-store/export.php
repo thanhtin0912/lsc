@@ -19,6 +19,10 @@
 .font-16 {
     font-size: 20px;
 }
+.modal-body {
+    height: 85vh;
+    overflow-y: auto;
+}
 </style>
 
 <script type="text/javascript">
@@ -142,12 +146,15 @@
 			notify('Vui lòng chọn cửa hàng cần xuất kho.', 'danger');
 			return false;
 		}
+		let selText = $("#seachStore option:selected").text();
+		console.log(selText);
+		$('#nameStoreModal').html(selText);
         $('#tableProduct').load('<?= PATH_URL ?>ajaxSearchExportMainStore', {
 			name: $('#seachProduct').val(),
             store: $('#seachStore').val(),
             csrf_token: $("#csrf_token").val(),
         },function() {
-            
+           
         }); 
     }
 
@@ -253,7 +260,7 @@
 		<!--Basic Table-->
 		<div class="panel panel-grey margin-bottom-40 ">
 			<div class="panel-heading d-flex justify-content-between">
-				<h3 class="panel-title font-bold"><i class="fa fa-tasks"></i> Danh sách sản phẩm</h3>
+				<h3 class="panel-title font-bold"><i class="fa fa-tasks"></i> Danh sách sản phẩm </h3>
 				<div class="form-check">
 					<input class="form-check-input" type="checkbox" value="" id="flexInputAll">
 					<label class="form-check-label panel-title pl-4" for="flexCheckDefault">
@@ -294,7 +301,7 @@
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title font-bold">Xem lại thông tin xuất kho</h5>
+				<h5 class="modal-title font-bold">Thông tin xuất - <strong><span id="nameStoreModal"></span></strong></h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				<span aria-hidden="true">&times;</span>
 				</button>
@@ -307,7 +314,7 @@
 							<th>Tên sản phẩm</th>
 							<th>Tồn kho</th>
 							<th>Xuất kho</th>
-							<th>ghi chú</th>
+							<th>Ghi chú</th>
 						</tr>
 					</thead>
 					<tbody id="tableDataConfirm" >

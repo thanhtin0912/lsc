@@ -166,7 +166,7 @@ class Report_nhap_xuat_kho_cua_hang extends MX_Controller {
 			$date = date('Y-m-d H:i:s',time());
 		}
 		$storeId = $_POST['store'];
-		$mainStore = 70;
+		$mainStore = 79;
 		if ($products) {
 			$arrCompare = array();
 			foreach ($products as $key => $p) {
@@ -180,7 +180,7 @@ class Report_nhap_xuat_kho_cua_hang extends MX_Controller {
 					$object->export = serialize($exportedKho);
 					$object->name = $p->name;
 					
-					if($this->model->totalImportCH($p->id, $storeId, $date)) {
+                    if($this->model->totalImportCH($p->id, $storeId, $date)) {
 						$object->totalImportCH = $this->model->totalImportCH($p->id, $storeId, $date)[0]->adjQty;
 					} else {
 						$object->totalImportCH = 0;

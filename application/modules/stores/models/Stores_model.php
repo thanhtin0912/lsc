@@ -105,9 +105,9 @@ class Stores_model extends CI_Model {
 				'content'=> trim($this->input->post('contentAdmincp', true)),
 				'order'=> trim($this->input->post('orderAdmincp', true)),
 				'address'=> trim($this->input->post('addressAdmincp', true)),
-				'isMain'=> trim($this->input->post('isMainAdmincp', true)),
 				'percenQuoteMain'=> trim($this->input->post('percenQuoteMainAdmincp', true)),
 				'percenCompareMin'=> trim($this->input->post('percenCompareMinAdmincp', true)),
+				'isMain'=> trim($this->input->post('isMainAdmincp', true)),
 				'status'=> $this->input->post('statusAdmincp'),
 			);
 			modules::run('admincp/saveLog',$this->module,$this->input->post('hiddenIdAdmincp'),'','Update',$result,$data);

@@ -104,20 +104,20 @@ function searchContent(start,per_page){
 		showData: $("#hdshowData").val(),
 		csrf_token: token_value
 	},function(data){
-		if (data) {
-			$('.portlet-body').html(data);
-			Metronic.unblockUI(el);
-			Metronic.initAjax();
-			
-			//Set Icon Order By
-			if(type_sort=='DESC'){
-				$('#'+func_sort).removeClass('sorting');
-				$('#'+func_sort).addClass('sorting_desc');
-			}else{
-				$('#'+func_sort).removeClass('sorting');
-				$('#'+func_sort).addClass('sorting_asc');
-			}
-		}
+	    if (data) {
+    		$('.portlet-body').html(data);
+    		Metronic.unblockUI(el);
+    		Metronic.initAjax();
+    		
+    		//Set Icon Order By
+    		if(type_sort=='DESC'){
+    			$('#'+func_sort).removeClass('sorting');
+    			$('#'+func_sort).addClass('sorting_desc');
+    		}else{
+    			$('#'+func_sort).removeClass('sorting');
+    			$('#'+func_sort).addClass('sorting_asc');
+    		}
+	    }
 	});
 }
 

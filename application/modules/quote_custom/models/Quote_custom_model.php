@@ -158,7 +158,7 @@ class Quote_custom_model extends CI_Model {
 			if (count($quoteProducts) > 0) {
 				foreach ($quoteProducts as $key => $value) {
 					$data = array(
-						'valueCustom'=> $value,
+						'value'=> $value,
 						'updated'=> date('Y-m-d H:i:s',time()),
 					);
 					$this->db->where('storeId', $this->input->post('storeAdmincp', true));
@@ -187,7 +187,7 @@ class Quote_custom_model extends CI_Model {
 			return false;
 		}
 	}
-
+	
 	function getDataStoreMain() {
 		$this->db->select('*');
 		$this->db->where('status',1);

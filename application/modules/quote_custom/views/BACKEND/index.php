@@ -205,7 +205,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-3">Tỷ lệ :</label>
+						<label class="control-label col-md-3">Định mức tăng thêm (%) :</label>
 						<div class="col-md-9">
 							<input type="text" class="form-control" placeholder="Tỷ lệ %" id="rate" name="rateAdmincp">
 						</div>

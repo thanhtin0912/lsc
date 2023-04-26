@@ -43,6 +43,23 @@ class Report_model extends CI_Model {
 			return false;
 		}
 	}
+	
+		function inventoryStoreDate($proId, $storeId, $date){
+		$this->db->select('*');
+		$this->db->where('productId', $proId);
+		$this->db->where('storeId', $storeId);
+		$this->db->where('created <=', date('Y-m-d 23:59:59', strtotime($date)));
+		$this->db->order_by('created','DESC');
+		$this->db->limit(1);
+		$query = $this->db->get('inventory_history');
+		
+		if($query->result()){
+			return $query->result();
+		}else{
+			return false;
+		}
+	}
+	
 	function totalExportToday($proId, $storeId, $date){
 		$this->db->select_sum('adjQty');
 		$this->db->where('newQty < prevQty');

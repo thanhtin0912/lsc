@@ -226,12 +226,12 @@
 		<div class="panel panel-grey margin-bottom-40">
 			<div class="panel-heading d-flex justify-content-between">
 				<h3 class="panel-title font-bold"><i class="fa fa-tasks"></i> Danh sách sản phẩm</h3>
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" value="" id="flexInputAll">
-					<label class="form-check-label panel-title pl-4" for="flexCheckDefault">
-						Nhập nhiều sản phẩm
-					</label>
-				</div>
+				<!--<div class="form-check">-->
+				<!--	<input class="form-check-input" type="checkbox" value="" id="flexInputAll">-->
+				<!--	<label class="form-check-label panel-title pl-4" for="flexCheckDefault">-->
+				<!--		Nhập nhiều sản phẩm-->
+				<!--	</label>-->
+				<!--</div>-->
 			</div>
 			<form id="frmManagement" action="<?= PATH_URL ?>exportListQtyPruoduct" method="post" enctype="multipart/form-data" class="form-horizontal form-row-seperated">
 			<input type="hidden" value="<?=$this->security->get_csrf_hash()?>" name="csrf_token" />

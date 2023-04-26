@@ -77,7 +77,9 @@
 						<!-- Tables -->
 						<li class="home-page"><a href="<?= PATH_URL ?>home">Thông tin</a></li>
 						<!-- End Tables -->
-
+						<!-- Tables -->
+						<li class="main-page"><a href="<?= PATH_URL ?>hang-can">Cần Hàng</a></li>
+						<!-- End Tables -->
 						<!-- Tables -->
 						<li class="import-page"><a href="<?= PATH_URL ?>nhap-kho-chinh">Nhập kho</a></li>
 						<!-- End Tables -->
@@ -85,8 +87,9 @@
 						<!-- Tables -->
 						<li class="export-page"><a href="<?= PATH_URL ?>xuat-kho-chinh">Xuất kho</a></li>
 						<!-- End Tables -->
-						<!-- Tables -->
 						<li class="kt-xuat-page"><a href="<?= PATH_URL ?>kiem-tra-xuat-cua-hang">KT xuất CH</a></li>
+						<!-- Tables -->
+						 <li class="history-page"><a href="<?= PATH_URL ?>lich-su">Lịch sử</a></li> 
 						<!-- End Tables -->
 					</ul>
 				</div><!--/end container-->
@@ -112,10 +115,10 @@
 						<!-- End Tables -->
 						
 						<!-- Tables -->
-						<li class="history-page"><a href="<?= PATH_URL ?>lich-su">Lịch sử</a></li>
+						 <li class="history-page"><a href="<?= PATH_URL ?>lich-su">Lịch sử</a></li> 
 						<!-- End Tables -->
 						<!-- Tables -->
-						<li class="inventory-page"><a href="<?= PATH_URL ?>tim-kiem-lich-su">Nhập/xuất Ngày</a></li>
+						<!--<li class="inventory-page"><a href="<?= PATH_URL ?>tim-kiem-lich-su">Nhập/xuất Ngày</a></li>-->
 						<!-- End Tables -->
 					</ul>
 				</div><!--/end container-->
@@ -177,6 +180,7 @@
 
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery-3.1.1.min.js"></script>
+
 	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.min.js"></script>
 	<script type="text/javascript" src="<?= PATH_URL;?>assets/js/admin/jquery.form.js"></script>
 	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery-migrate.js"></script>

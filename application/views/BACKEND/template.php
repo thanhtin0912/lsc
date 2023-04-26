@@ -17,8 +17,6 @@
     <meta content="" name="description"/>
     <meta content="" name="author"/>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=all" rel="stylesheet"
-          type="text/css"/>
     <link href="<?= PATH_URL . 'assets/css/admin/' ?>font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <link href="<?= PATH_URL . 'assets/css/admin/' ?>simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/bootstrap.css">
@@ -143,13 +141,6 @@
                         </li>
                     </ul>
                 </li>
-
-                <li class="nav-item  <?php if ($this->uri->segment(2) == 'products') { print 'active open';} ?>">
-                    <a href="<?= PATH_URL_ADMIN . 'products' ?>" class="nav-link ">
-                        <i class="icon-basket"></i><span class="title">Sản phẩm </span>
-                    </a>
-                </li>
-
                 <li class="nav-item">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="icon-layers"></i>
@@ -171,17 +162,22 @@
 
                         <li class="nav-item  last<?php if ($this->uri->segment(2) == 'report_nhap_xuat_kho_cua_hang') { print 'active open';} ?>">
                             <a href="<?= PATH_URL_ADMIN . 'report_nhap_xuat_kho_cua_hang' ?>" class="nav-link ">
-                                <i class="fa fa-arrow-right"></i><span class="title">SS nhập xuất kho/CH </span>
+                                <i class="fa fa-arrow-right"></i><span class="title">KT nhập CH</span>
                             </a>
                         </li>
                         <li class="nav-item  last<?php if ($this->uri->segment(2) == 'report_kiem_tra_xuat_cua_hang') { print 'active open';} ?>">
                             <a href="<?= PATH_URL_ADMIN . 'report_kiem_tra_xuat_cua_hang' ?>" class="nav-link ">
-                                <i class="fa fa-arrow-right"></i><span class="title">Kiểm tra xuất CH </span>
+                                <i class="fa fa-arrow-right"></i><span class="title">KT xuất CH </span>
                             </a>
                         </li>
                     </ul>
                 </li>
 
+                <li class="nav-item  <?php if ($this->uri->segment(2) == 'products') { print 'active open';} ?>">
+                    <a href="<?= PATH_URL_ADMIN . 'products' ?>" class="nav-link ">
+                        <i class="icon-basket"></i><span class="title">Sản phẩm </span>
+                    </a>
+                </li>
 
                 <li class="nav-item">
                     <a href="javascript:;" class="nav-link nav-toggle">
@@ -218,7 +214,6 @@
                         
                     </ul>
                 </li>
-
                 <li class="heading">
                     <h3 class="uppercase">Hệ thống & cài đặt</h3>
                 </li>
@@ -313,14 +308,14 @@
 </div>
 <!-- END CONTAINER -->
 <!-- BEGIN FOOTER -->
-<div class="page-footer">
-    <div class="page-footer-inner">
-        &copy; thanhtin0912@gmal.com. All rights reserved.
-    </div>
-    <div class="scroll-to-top">
-        <i class="icon-arrow-up"></i>
-    </div>
-</div>
+<!--<div class="page-footer">-->
+<!--    <div class="page-footer-inner">-->
+<!--        &copy; thanhtin0912@gmal.com. All rights reserved.-->
+<!--    </div>-->
+<!--    <div class="scroll-to-top">-->
+<!--        <i class="icon-arrow-up"></i>-->
+<!--    </div>-->
+<!--</div>-->
 <!-- END FOOTER -->
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 <script type="text/javascript">
@@ -364,7 +359,9 @@
 <script src="<?= PATH_URL . 'assets/js/admin/' ?>components-pickers.js" type="text/javascript"></script>
 <script src="<?= PATH_URL . 'assets/js/admin/' ?>components-dropdowns.js" type="text/javascript"></script>
 <script src="<?= PATH_URL . 'assets/js/admin/' ?>jquery.multiselect.js" type="text/javascript"></script>
+
 <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/bootstrap-notify.min.js"></script>
+
 <script>
     jQuery(document).ready(function () {
         Metronic.init(); // init metronic core components
@@ -373,12 +370,12 @@
         ComponentsDropdowns.init();
     });
     function notify(ms,type){
-			$.notify({
-				message: ms 
-			},{
-				type: type
-			});
-		}
+		$.notify({
+			message: ms 
+		},{
+			type: type
+		});
+	}
 </script>
 </body>
 <!-- END BODY -->
