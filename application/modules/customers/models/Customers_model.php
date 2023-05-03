@@ -100,6 +100,7 @@ class Customers_model extends CI_Model {
 				'address'=> $this->input->post('addressAdmincp'),
 				'email'=> $this->input->post('emailAdmincp'),
 				'storeId'=> $this->input->post('storeAdmincp'),
+				'isCheck'=> $this->input->post('isCheckAdmincp'),
 				'status'=> $this->input->post('statusAdmincp'),
 				'created'=> date('Y-m-d H:i:s',time()),
 			);
@@ -130,6 +131,7 @@ class Customers_model extends CI_Model {
 				'address'=> $this->input->post('addressAdmincp'),
 				'email'=> $this->input->post('emailAdmincp'),
 				'storeId'=> $this->input->post('storeAdmincp'),
+				'isCheck'=> $this->input->post('isCheckAdmincp'),
 				'status'=> $this->input->post('statusAdmincp')
 			);
 			modules::run('admincp/saveLog',$this->module,$this->input->post('hiddenIdAdmincp'),'','Update',$result,$data);

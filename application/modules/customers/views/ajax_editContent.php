@@ -126,6 +126,13 @@ function showResponse(responseText, statusText, xhr, $form) {
 							</div>
 						</div>
 						<div class="form-group">
+							<label class="control-label col-md-2">Chỉ đăng nhập Kiểm tra:</label>
+							<div class="col-md-3">
+								<label class="radio-inline"><input type="radio" name="isCheckAdmincp" value="0" <?= isset($result->isCheck) ? $result->isCheck == 0 ? 'checked' : '' : 'checked' ?> > Không</label>
+								<label class="radio-inline"><input type="radio" name="isCheckAdmincp" value="1" <?= isset($result->isCheck) ? $result->isCheck == 1 ? 'checked' : '' : '' ?> > Có</label>
+							</div>
+						</div>
+						<div class="form-group">
 							<label class="control-label col-md-2">Số điện thoại: <span class="required" aria-required="true">*</span></label>
 							<div class="col-md-10"><input value="<?php if(isset($result->phone)) { print $result->phone; }else{ print '';} ?>" type="text" name="phoneAdmincp" id="phoneAdmincp" class="form-control"/></div>
 						</div>
