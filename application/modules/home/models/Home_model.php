@@ -49,12 +49,13 @@ class Home_model extends CI_Model {
 	}
 	
 	function getInfo($user){
-		$this->db->select('*');
-		$this->db->where('phone', $user);
-		$this->db->where('status', 1);
-		$this->db->where('delete', 0);
+		$this->db->select('c.*, s.name as store_name, s.isMain');
+		$this->db->where('c.phone', $user);
+		$this->db->where('c.status', 1);
+		$this->db->where('c.delete', 0);
 
-		$this->db->from(PREFIX.$this->tbl_customer);
+		$this->db->from(PREFIX.$this->tbl_customer." c");
+		$this->db->join(PREFIX.$this->tbl_store." s", 's.id = c.storeID', "left");
 		$query = $this->db->get();
 
 		if($query->result()){
