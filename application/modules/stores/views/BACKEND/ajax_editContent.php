@@ -146,11 +146,16 @@ function showResponse(responseText, statusText, xhr, $form) {
 						</div>
 						<div class="form-group">
 							<label class="control-label col-md-2">Định mức kho tổng tăng thêm(%): <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-3"><input value="<?php if(isset($result->percenQuoteMain)) { print $result->percenQuoteMain; }else{ print '';} ?>" type="text" name="percenQuoteMainAdmincp" id="orderAdmincp" class="form-control"/></div>
+							<div class="col-md-3"><input value="<?php if(isset($result->percenQuoteMain)) { print $result->percenQuoteMain; }else{ print '';} ?>" type="text" name="percenQuoteMainAdmincp" class="form-control"/></div>
 
 							<label class="control-label col-md-2">Định lượng tối thiểu (%) : <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-3"><input value="<?php if(isset($result->percenCompareMin)) { print $result->percenCompareMin; }else{ print '';} ?>" type="text" name="percenCompareMinAdmincp" id="orderAdmincp" class="form-control"/></div>
+							<div class="col-md-3"><input value="<?php if(isset($result->percenCompareMin)) { print $result->percenCompareMin; }else{ print '';} ?>" type="text" name="percenCompareMinAdmincp" class="form-control"/></div>
 						
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-2">Hạn mức giao hàng lần 2 / lần 1(%): <span class="required" aria-required="true">*</span></label>
+							<div class="col-md-3"><input value="<?php if(isset($result->percenLimitExportSecord)) { print $result->percenLimitExportSecord; }else{ print '';} ?>" type="text" name="percenLimitExportSecordAdmincp" id="percenLimitExportSecordAdmincp" class="form-control"/></div>
+
 						</div>
 						<div class="form-group">
 							<label class="control-label col-md-2">Mô tả:</label>
