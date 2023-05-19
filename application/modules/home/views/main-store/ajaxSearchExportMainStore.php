@@ -3,7 +3,7 @@
 <?php foreach ($products as $key => $p) {?>
 <tr>
     <td><?= $key +1; ?></td>
-    <td class="font-bold"><?= $p->name; ?></td>
+    <td class="font-bold"><span id="name<?=$p->id?>"><?= $p->name; ?></span></td>
     <td class="hidden-xs"><span id="note-<?=$p->id?>" ><?= $p->note; ?></span></td>
     <?php
     $foramt_inventory = 0;

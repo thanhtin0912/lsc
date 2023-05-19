@@ -113,32 +113,57 @@
 			return false;
 		}
 		$('#qty' + proId).attr('disabled', true);
-		$('#btn-save-' + proId).attr('disabled', true);		
-        $.ajax({    
-            type: 'POST',
-            url:  url +'exportInventory',
-            data: {
-                qty    : qty,
-				productId : proId,
-				mainStore : $('#mainStore').val(),
-				csrf_token: $('#csrf_token').val()
-            },           
-            success: function(data) { 
-                responseText = data.split(".");          
-                if(responseText[0]=='success'){
-					notify('Sản phẩm đã được xuất kho.', 'success');
-					setTimeout(function(){ 
-						searchProduct(); 
-					}, 1500);
-                } else {
-					notify('Sản phẩm đã được xuất kho.', 'danger');
-				}
-            },
-            error: function () {
-            },
-            async:false ,       
-        });
-		
+		$('#btn-save-' + proId).attr('disabled', true);
+		let selText = $("#seachStore option:selected").text();
+		var d = new Date();
+		$.confirm({
+			title: 'Xuất hàng cho '+ selText +'',
+			content: '' +
+			'<form action="" class="formName">' +
+			'<strong>'+formatDate(d)+'</strong>' +
+			'<div class="form-group d-flex align-items-center pt-2">' +
+			'<label>'+$('#name' + proId).html()+'</label>' +
+			'<input value="'+qty+'" class="ml-2 name form-control" disabled />' +
+			'</div>' +
+			'</form>',
+			buttons: {
+				formSubmit: {
+					text: 'Xác nhận',
+					btnClass: 'btn-blue',
+					action: function () {
+						$.ajax({    
+						    type: 'POST',
+						    url:  url +'exportInventory',
+						    data: {
+						        qty    : qty,
+								productId : proId,
+								mainStore : $('#mainStore').val(),
+								csrf_token: $('#csrf_token').val()
+						    },           
+						    success: function(data) { 
+						        responseText = data.split(".");          
+						        if(responseText[0]=='success'){
+									$("#csrf_token").val(responseText[1])
+									notify('Sản phẩm đã được xuất kho.', 'success');
+									setTimeout(function(){ 
+										searchProduct(); 
+									}, 1500);
+						        } else {
+									notify('Sản phẩm đã được xuất kho.', 'danger');
+								}
+						    },
+						    error: function () {
+						    },
+						    async:false ,       
+						});
+					}
+				},
+				cancel: function () {
+					//close
+					$('#btn-save-' + proId).attr('disabled', false);
+				},
+			},
+		});
     }
 
     function searchProduct(){
@@ -147,8 +172,8 @@
 			return false;
 		}
 		let selText = $("#seachStore option:selected").text();
-		console.log(selText);
-		$('#nameStoreModal').html(selText);
+		var d = new Date();
+		$('#nameStoreModal').html(selText + ' - ' +formatDate(d));
         $('#tableProduct').load('<?= PATH_URL ?>ajaxSearchExportMainStore', {
 			name: $('#seachProduct').val(),
             store: $('#seachStore').val(),
@@ -232,6 +257,16 @@
             }     
         });	
     }
+	function formatDate(d) {
+		var yyyy = d.getFullYear().toString();
+		var mm = (d.getMonth()+1).toString(); // getMonth() is zero-based
+		var dd  = d.getDate().toString();
+		var h = d.getHours().toString();
+		var m = d.getMinutes().toString();
+		var s = d.getSeconds().toString();
+
+		return (dd[1]?dd:"0"+dd[0])  + "/" + (mm[1]?mm:"0"+mm[0]) + "/" + yyyy + " - " + ((h > 12) ? h-12 : h) + ":" + m + ":" + s;
+	};
 
 
 </script>

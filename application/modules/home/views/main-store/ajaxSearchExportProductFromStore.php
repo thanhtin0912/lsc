@@ -3,7 +3,7 @@
 <?php foreach ($products as $key => $p) {?>
 <tr>
     <td><?= $key +1; ?></td>
-    <td class="font-bold"><?= $p->name; ?></td>
+    <td class="font-bold"><span id="name<?=$p->id?>"><?= $p->name; ?></span></td>
     <?php $total = 0;
         if (($p->totalExport*2)%2 > 0) { 
             $total = $p->totalExport;

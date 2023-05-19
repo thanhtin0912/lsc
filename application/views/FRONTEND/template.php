@@ -197,7 +197,8 @@
 	<script src="<?= PATH_URL . 'assets/js/admin/' ?>components-pickers.js" type="text/javascript"></script>
 	<script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/bootstrap-notify.min.js"></script>
 
-	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+	<script src="<?= PATH_URL; ?>assets/js/frontend/jquery-confirm.min.js"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			App.init();
