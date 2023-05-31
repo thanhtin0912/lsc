@@ -93,8 +93,11 @@ $route['importListQtyCheckStore'] = "home/importListQtyCheckStore";
 $route['hang-can'] = "home/mainStoreInventory";
 //Config Router Multi Language
 // $route['^(en|jp)$'] = $route['default_controller'];
-
-
+//Config Router API
+$route[API] = "api";
+$route[API.'/apiAutoSetupQuote'] = "api/apiAutoSetupQuote";
+$route[API.'/apiCheckInputDataImport'] = "api/apiCheckInputDataImport";
+$route[API.'/apiCheckInputDataExport'] = "api/apiCheckInputDataExport";
 
 //Config Router Admincp
 $route[ADMINCP] = "admincp";
@@ -112,5 +115,3 @@ $route[ADMINCP.'/(:any)/(:any)/(:any)/(:any)'] = "$1/admincp_$2/$3/$4";
 $route[ADMINCP.'/(:any)/(:any)/(:any)'] = "$1/admincp_$2/$3";
 $route[ADMINCP.'/(:any)/(:any)'] = "$1/admincp_$2";
 $route[ADMINCP.'/(:any)'] = "$1/admincp_index";
-
-$route[ADMINCP.'/cronAutoSetup'] = "admincp/cronAutoSetup";

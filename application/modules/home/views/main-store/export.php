@@ -188,6 +188,7 @@
 			beforeSubmit:  showRequest,  // pre-submit callback 
 			success:       showResponse  // post-submit callback 
 		};
+		$('#btn-save-list').attr('disabled', true);
 		$('#frmManagement').ajaxSubmit(options);
 	}
 	function showRequest(formData, jqForm, options) {
@@ -359,7 +360,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn-u rounded-4x btn-u-default" data-dismiss="modal">Thoát</button>
-				<button type="button" class="btn-u rounded-4x btn-u-green" id="btn-save-note" onclick="saveListQtyPruoduct()">Xuất Kho</button>
+				<button type="button" class="btn-u rounded-4x btn-u-green" id="btn-save-list" onclick="saveListQtyPruoduct()">Xuất Kho</button>
 			</div>
 		</div>
 	</div>

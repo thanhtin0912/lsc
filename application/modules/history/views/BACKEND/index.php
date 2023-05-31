@@ -67,7 +67,7 @@
 									<div class="col-sm-4"><input onkeypress="return enterSearch(event)" type="text" class="form-control" id="search_url"></div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label">Tên nhân viên:</label>
+									<label class="col-sm-2 control-label">Ngày nhập:</label>
 									<div class="col-sm-4"><input onkeypress="return enterSearch(event)" type="text" class="form-control" id="search_name"></div>
 								</div>
 								<div class="form-group">

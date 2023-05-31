@@ -88,7 +88,7 @@
         var str1 = '' ;
 		for (var i = 0; i < p.length; i++) {
 			var checkQty = $('#qty' + p[i].id).val();
-			if (p[i].inventory >= p[i].estimates && p[i].inventory > 0 && p[i].estimates > 0) {
+			if (p[i].inventory >= p[i].estimates && p[i].inventory > 0  && checkQty > 0) {
 				str += '<tr>';
 				str += '<td>' + (i + 1) + '</td>';
 				str += '<td class="font-bold">' + p[i].name + '</td>';

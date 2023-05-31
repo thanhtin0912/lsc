@@ -145,6 +145,14 @@ function showResponse(responseText, statusText, xhr, $form) {
 						
 						</div>
 						<div class="form-group">
+							<label class="control-label col-md-2">Kho hủy hàng: <span class="required" aria-required="true">*</span></label>
+							<div class="col-md-3">
+								<label class="radio-inline"><input type="radio" name="isTestAdmincp" value="0" <?= isset($result->isTest) ? $result->isTest == 0 ? 'checked' : '' : '' ?> > Không</label>
+								<label class="radio-inline"><input type="radio" name="isTestAdmincp" value="1" <?= isset($result->isTest) ? $result->isTest == 1 ? 'checked' : '' : 'checked' ?> > Có</label>
+							</div>
+						
+						</div>
+						<div class="form-group">
 							<label class="control-label col-md-2">Định mức kho tổng tăng thêm(%): <span class="required" aria-required="true">*</span></label>
 							<div class="col-md-3"><input value="<?php if(isset($result->percenQuoteMain)) { print $result->percenQuoteMain; }else{ print '';} ?>" type="text" name="percenQuoteMainAdmincp" class="form-control"/></div>
 

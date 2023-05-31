@@ -8,7 +8,7 @@ class History_model extends CI_Model {
 
 
 	function getsearchContent($limit,$page){
-		$this->db->select('i.*, c.name as store_name, u.name as user_name, p.name as product_name');
+		$this->db->select('i.*, c.name as store_name, p.name as product_name');
 		$this->db->limit($limit,$page);
 		$this->db->order_by('i.delete','ASC');
 		$this->db->order_by($this->input->post('func_order_by'),$this->input->post('order_by'));
@@ -19,7 +19,7 @@ class History_model extends CI_Model {
 			$this->db->like('c.name', $this->input->post('url'));
 		}
 		if($this->input->post('name')!=''){
-			$this->db->like('u.name', $this->input->post('name'));
+			$this->db->like('i.created', $this->input->post('name'));
 		}
 
 		if($this->input->post('status')!= 2){
@@ -32,7 +32,6 @@ class History_model extends CI_Model {
 		$this->db->from(PREFIX.$this->table." i");
 		$this->db->join(PREFIX.$this->table_cate." c", 'c.id = i.storeId', "left");
 		$this->db->join(PREFIX.$this->table_pro." p", 'p.id = i.ProductId', "left");
-		$this->db->join(PREFIX.$this->table_cus." u", 'u.id = i.customerId', "left");
 		$query = $this->db->get();
 
 		if($query->result()){
@@ -43,7 +42,7 @@ class History_model extends CI_Model {
 	}
 	
 	function getTotalsearchContent(){
-		$this->db->select('i.*, c.name as store_name, u.name as user_name, p.name as product_name');
+		$this->db->select('i.*, c.name as store_name, p.name as product_name');
 		if($this->input->post('title')!=''){
 			$this->db->like('p.name', $this->input->post('title'));
 		}
@@ -51,7 +50,7 @@ class History_model extends CI_Model {
 			$this->db->like('c.name', $this->input->post('url'));
 		}
 		if($this->input->post('name')!=''){
-			$this->db->like('u.name', $this->input->post('name'));
+			$this->db->like('i.created', $this->input->post('name'));
 		}
 		if($this->input->post('status')!= 2){
 			$this->db->where('i.status', $this->input->post('status'));
@@ -63,7 +62,6 @@ class History_model extends CI_Model {
 		$this->db->from(PREFIX.$this->table." i");
 		$this->db->join(PREFIX.$this->table_cate." c", 'c.id = i.storeId', "left");
 		$this->db->join(PREFIX.$this->table_pro." p", 'p.id = i.ProductId', "left");
-		$this->db->join(PREFIX.$this->table_cus." u", 'u.id = i.customerId', "left");
 		$query = $this->db->count_all_results();
 
 		if($query > 0){
