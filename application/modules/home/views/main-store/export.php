@@ -184,11 +184,12 @@
     }
 
 	function saveListQtyPruoduct(){
+		$('#btn-save-list-qty').hide()
 		var options = {
 			beforeSubmit:  showRequest,  // pre-submit callback 
 			success:       showResponse  // post-submit callback 
 		};
-		$('#btn-save-list').attr('disabled', true);
+		
 		$('#frmManagement').ajaxSubmit(options);
 	}
 	function showRequest(formData, jqForm, options) {
@@ -200,6 +201,7 @@
 		if(responseText[0]=='success'){
 			$('#modalConfirm').modal('hide');
 			notify('<strong>'+responseText[1] + '</strong> Sản phẩm đã được xuất kho', 'success');
+			$("#btn-save-list-qty").show()
 			setTimeout(function(){ 
 				searchProduct();
 			}, 1500);
@@ -221,7 +223,6 @@
 				var responseText = JSON.parse(data)
 				if(responseText.return){
 					var pro = responseText.data
-					console.log(pro);
 					$('#txtProductName').html(pro[0].name);
 					$('#txtProductID').val(pro[0].productId);
 					$('#txtNote').val(pro[0].note);
@@ -360,7 +361,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn-u rounded-4x btn-u-default" data-dismiss="modal">Thoát</button>
-				<button type="button" class="btn-u rounded-4x btn-u-green" id="btn-save-list" onclick="saveListQtyPruoduct()">Xuất Kho</button>
+				<button type="button" class="btn-u rounded-4x btn-u-green" id="btn-save-list-qty" onclick="saveListQtyPruoduct()">Xuất Kho</button>
 			</div>
 		</div>
 	</div>

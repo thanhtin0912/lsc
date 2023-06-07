@@ -116,6 +116,7 @@
     }
 
 	function saveListQuoteInventory(){
+		$("#btn-save-list-qty").hide();
 		var options = {
 			beforeSubmit:  showRequest,  // pre-submit callback 
 			success:       showResponse  // post-submit callback 
@@ -129,8 +130,11 @@
 	function showResponse(responseText, statusText, xhr, $form) {
 		responseText = responseText.split(".");          
 		if(responseText[0]=='success'){
+			console.log(responseText);
 			$('#modalConfirm').modal('hide');
 			notify('<strong>'+responseText[1] + '</strong> Sản phẩm đã được nhập kiểm tra vào hệ thống', 'success');
+			$("#btn-save-list-qty").show()
+			$("#csrf_token").val(responseText[1])
 		} else {
 			notify('Không Sản phẩm được nhập kho.', 'danger');
 		}
@@ -224,7 +228,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn-u rounded-4x btn-u-default" data-dismiss="modal">Thoát</button>
-				<button type="button" class="btn-u rounded-4x btn-u-green" id="btn-save-note" onclick="saveListQuoteInventory()">Nhập</button>
+				<button type="button" class="btn-u rounded-4x btn-u-green" id="btn-save-list-qty" onclick="saveListQuoteInventory()">Nhập</button>
 			</div>
 		</div>
 	</div>

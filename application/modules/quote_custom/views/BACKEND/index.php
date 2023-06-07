@@ -30,6 +30,11 @@
 }
 </style>
 <script type="text/javascript">
+	$(document).ready(function(){
+		$('#days').change(function(){
+			showFromToDate();
+		});
+	});
 	function calculatorQuoteCustom(store){
 		var store = $('#store').val();
 		var rate = $('#rate').val();
@@ -105,6 +110,17 @@
 			$('#nameAdmincp').focus();
 			return false;
 		}
+	}
+	function showFromToDate() {
+		let days = $('#days').val();
+		let today = new Date();
+		var fromDate = new Date(today - days*24*60*60*1000);
+		$('#caledar_to').val(formatDate(today));
+		$('#caledar_from').val(formatDate(fromDate));
+	}
+	function formatDate(date) {
+		console.log(date);
+		return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " 00:00:00" ;
 	}
 </script>
 <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
@@ -214,10 +230,10 @@
 					<div class="form-group">
 						<label class="control-label col-md-3">Khoản thời gian:</label>
 						<div class="col-md-9">
-							<div class="input-group date-picker input-daterange" data-date-format="yyyy-mm-dd" style="width: 100%;">
-								<input onkeypress="return enterSearch(event)" id="caledar_from" type="text" placeholder="date" class="form-control" name="from">
+							<div class="input-group date-picker input-daterange" style="width: 100%;">
+								<input id="caledar_from" type="text" placeholder="date" class="form-control" name="from">
 								<span class="input-group-addon">to</span>
-								<input onkeypress="return enterSearch(event)" id="caledar_to" type="text" placeholder="date" class="form-control" name="to">
+								<input id="caledar_to" type="text" placeholder="date" class="form-control" name="to">
 							</div>
 						</div>
 					</div>
