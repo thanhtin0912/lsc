@@ -340,7 +340,57 @@ class Home extends MX_Controller {
 			$this->load->view("main-store/ajaxSearchExportMainStore", $data);
 		}
 	}
-	
+
+	public function main_export2(){
+		//teamplate
+		$data['products'] = $this->home->getProducts($this->session->userdata('userStaff')[0]->storeId);
+		$data['stores'] = $this->home->getListOtherStore($this->session->userdata('userStaff')[0]->storeId);
+		$this->template->write_view('content', 'main-store/export2', $data);
+		$this->template->render();
+	}
+
+	public function ajaxSearchExport2MainStore (){
+		if(!empty($_POST)){
+			$compareEstimatesOrderStore = array();
+			$products = $this->home->getProducts($this->session->userdata('userStaff')[0]->storeId, $_POST['name']);
+			$store = $_POST['store'];
+			if ($products && !empty($store)) {
+				foreach ($products as $key => $p) {
+					$object = new StdClass;
+					$object->id = $p->id;
+					$object->name = $p->name;
+					$object->inventory = (float)$p->inventory;
+					$object->note = $p->note;
+
+					$inventoryForStore = 0;
+					$quoteForStore = 0;
+
+					$inventoryProductStore = $this->home->getInventory($p->id, $store);
+					// var_dump($inventoryProductStore);
+					if($inventoryProductStore) {
+						$inventoryForStore = $inventoryProductStore[0]->value;
+					}
+					// var_dump($inventoryForStore);
+					$quoteProductStore = $this->home->getQuote($p->id, $store);
+					
+					if($quoteProductStore) {
+						$quoteForStore = $quoteProductStore[0]->valueMin;
+					}
+					// var_dump($quoteForStore);
+					$sumEstimates = $quoteForStore - $inventoryForStore;
+					$object->valueMin = $quoteForStore;
+					$object->estimates = $sumEstimates;
+
+					$compareEstimatesOrderStore[] = $object;
+					// exit();
+				}
+			}
+			$data['products'] = $compareEstimatesOrderStore;
+
+			$this->load->view("main-store/ajaxSearchExport2MainStore", $data);
+		}
+	}
+
 	public function search_history(){
 		$this->template->write_view('content','search_history');
 		$this->template->render();

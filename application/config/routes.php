@@ -85,6 +85,9 @@ $route['kho-tong'] = "home/main_info";
 $route['nhap-kho-chinh'] = "home/main_import";
 $route['xuat-kho-chinh'] = "home/main_export";
 $route['ajaxSearchExportMainStore'] = "home/ajaxSearchExportMainStore";
+// xuat hang lan 2
+$route['xuat-kho-chinh-2'] = "home/main_export2";
+$route['ajaxSearchExport2MainStore'] = "home/ajaxSearchExport2MainStore";
 // 
 $route['kiem-tra-xuat-cua-hang'] = "home/check_export";
 $route['ajaxSearchExportProductFromStore'] = "home/ajaxSearchExportProductFromStore";

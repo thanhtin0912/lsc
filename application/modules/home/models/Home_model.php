@@ -297,7 +297,7 @@ class Home_model extends CI_Model {
 
 
 	function getQuote($productId, $storeId) {
-		$this->db->select('id, value');
+		$this->db->select('id, value, valueMin');
 		$this->db->where('storeId', $storeId);
 		$this->db->where('productId', $productId);
 		$query = $this->db->get('quote');

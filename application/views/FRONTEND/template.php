@@ -86,6 +86,7 @@
 
 						<!-- Tables -->
 						<li class="export-page"><a href="<?= PATH_URL ?>xuat-kho-chinh">Xuất kho</a></li>
+						<li class="export2-page"><a href="<?= PATH_URL ?>xuat-kho-chinh-2">Xuất kho lần 2</a></li>
 						<!-- End Tables -->
 						<li class="kt-xuat-page"><a href="<?= PATH_URL ?>kiem-tra-xuat-cua-hang">KT xuất CH</a></li>
 						<!-- Tables -->

@@ -49,9 +49,9 @@ class Api extends MX_Controller {
 								if($cal > 1) {
 									$value = $cal;
 								}
-								
 								$data = array(
 									'value'=> $value,
+									'valueMin'=> number_format($value* ($s->percenLimitExportSecord/100), 0),
 									'updated'=> date('Y-m-d H:i:s',time()),
 								);
 								$this->db->where('storeId', $s->id);
@@ -84,6 +84,7 @@ class Api extends MX_Controller {
 						}
 						$data = array(
 							'value'=> $value,
+							'valueMin'=> number_format($value* ($storeMain[0]->percenLimitExportSecord/100), 0),
 							'updated'=> date('Y-m-d H:i:s',time()),
 						);
 						$this->db->where('storeId', $storeMain[0]->id);
