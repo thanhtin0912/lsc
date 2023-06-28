@@ -98,7 +98,7 @@
 				str += '</tr>';
 			} else {
                 var thieu = p[i].estimates  - p[i].inventory;
-                if (p[i].estimates > 0) {
+                if (p[i].estimates > 0 && checkQty > 0) {
                     str1 += '<tr class="bg-color-orange">';
                     str1 += '<td>' + (i + 1) + '</td>';
                     str1 += '<td class="font-bold">' + p[i].name + '</td>';

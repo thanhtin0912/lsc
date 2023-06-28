@@ -100,6 +100,10 @@
 	function saveInventory(proId, oldInven){
         var url = '<?= PATH_URL ?>';
 		var qty = $('#qty' + proId).val();
+		if ($('#seachStore').val()=='') {
+			notify('Vui lòng chọn cửa hàng cần xuất kho.', 'danger');
+			return false;
+		}
 		if (qty && qty <=0) {
 			notify('Số lượng sản phẩm chưa được nhập hoặc số lượng = 0.', 'danger');
 			return false;
@@ -184,6 +188,10 @@
     }
 
 	function saveListQtyPruoduct(){
+		if ($('#seachStore').val()=='') {
+			notify('Vui lòng chọn cửa hàng cần xuất kho.', 'danger');
+			return false;
+		}
 		$('#btn-save-list-qty').hide()
 		var options = {
 			beforeSubmit:  showRequest,  // pre-submit callback 
@@ -270,6 +278,11 @@
 		return (dd[1]?dd:"0"+dd[0])  + "/" + (mm[1]?mm:"0"+mm[0]) + "/" + yyyy + " - " + ((h > 12) ? h-12 : h) + ":" + m + ":" + s;
 	};
 
+	function remove(){
+		$('.quantity-field').each(function(i, obj) {
+			$( obj ).val(0);
+		});
+	}
 
 </script>
 <div class="col-md-12">
@@ -298,6 +311,7 @@
 		<div class="panel panel-grey margin-bottom-40 ">
 			<div class="panel-heading d-flex justify-content-between">
 				<h3 class="panel-title font-bold"><i class="fa fa-tasks"></i> Danh sách sản phẩm </h3>
+				<button class="btn btn-danger" type="button" onclick="remove()">Xóa đề xuất</button>
 				<div class="form-check">
 					<input class="form-check-input" type="checkbox" value="" id="flexInputAll">
 					<label class="form-check-label panel-title pl-4" for="flexCheckDefault">
