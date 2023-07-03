@@ -1,9 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class History extends MX_Controller {
+class History_kt extends MX_Controller {
 
-	private $module = 'history';
-	private $table = 'inventory_history';
+	private $module = 'history_kt';
+	private $table = 'inventory_quote';
 	function __construct(){
 		parent::__construct();
 		$this->load->model($this->module.'_model','model');
@@ -134,47 +134,15 @@ class History extends MX_Controller {
 			exit;
 		}
 		if($this->input->post('id')){
+			$data = array(
+				'delete' => 1
+			);
 			$id = $this->input->post('id');
 			$result = $this->model->getDetailManagement($id);
 			foreach ($result as $key => $value) {
-				// if($value->delete == 0){
-				modules::run('admincp/saveLog',$this->module,$id,'Trash','Trash');
-				$inventoryProductOfStore = $this->model->getDetailinventoryProductOfStore($result[0]->productId, $result[0]->storeId);
-				$data  = array (
-					'productId' => $result[0]->productId,
-					'storeId'  	=> $result[0]->storeId,
-					'note'=> "Admin Xóa ID". $id,
-					'prevQty' => $inventoryProductOfStore[0]->value,
-					'adjQty' => $result[0]->adjQty,
-					'mainStore' => $result[0]->mainStore,
-					'status'=> 2,
-					'delete'=> 1,
-					'created'=> date('Y-m-d H:i:s',time()),
-				);
-
-				if ($result[0]->prevQty > $result[0]->newQty) {
-					$data['newQty']  = ($inventoryProductOfStore[0]->value) + ($result[0]->adjQty);
-				} else {
-					$data['newQty']  = ($inventoryProductOfStore[0]->value) - ($result[0]->adjQty);
-				}
-				// update new
-				$newInventoryData = array(
-					'value'=> $data['newQty'],
-					'update'=> date('Y-m-d H:i:s',time()),
-				);
-				$this->db->where('productId', $result[0]->productId);
-				$this->db->where('storeId', $result[0]->storeId);
-				if($this->db->update('inventory', $newInventoryData)){ 
-					$this->db->insert(PREFIX.$this->table,$data);
-
-					$dataDel = array(
-						'status'=> 2,
-						'delete' => 1,
-						'note' => 'Xóa bởi amdin',
-					);
-					$this->db->where('id',$id);
-					$this->db->update($this->table,$dataDel);
-
+				modules::run('admincp/saveLog',$this->module,$id,'Delete','Delete');
+				$this->db->where('id',$id);
+				if($this->db->delete(PREFIX.$this->table)){
 					print $this->security->get_csrf_hash();
 					exit;
 				}

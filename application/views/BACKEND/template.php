@@ -124,19 +124,14 @@
                 </li>
                 <li class="nav-item">
                     <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class="icon-bar-chart"></i>
+                        <i class="fa fa-cubes"></i>
                         <span class="title">Kho và Đại lý</span>
                         <span class="arrow"></span>
                     </a>
-                    <ul class="sub-menu" <?php if (($this->uri->segment(2) == 'history' ) ||  ($this->uri->segment(2) == 'compare')) { print "style='display: block;' ";} ?>>
+                    <ul class="sub-menu" <?php if ($this->uri->segment(2) == 'compare') { print "style='display: block;' ";} ?>>
                         <li class="nav-item  <?php if ($this->uri->segment(2) == 'compare') { print 'active open';} ?>">
                             <a href="<?= PATH_URL_ADMIN . 'compare' ?>" class="nav-link ">
                                 <i class="fa fa-arrow-right"></i><span class="title">So sánh</span>
-                            </a>
-                        </li>
-                        <li class="nav-item  last<?php if ($this->uri->segment(2) == 'history') { print 'active open';} ?>">
-                            <a href="<?= PATH_URL_ADMIN . 'history' ?>" class="nav-link ">
-                                <i class="fa fa-arrow-right"></i><span class="title">Lịch sử</span>
                             </a>
                         </li>
                     </ul>
@@ -201,7 +196,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class="icon-layers"></i>
+                        <i class="fa fa-home"></i>
                         <span class="title">Kho tổng</span>
                         <span class="arrow"></span>
                     </a>
@@ -212,6 +207,26 @@
                             </a>
                         </li>
                         
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <i class="	fa fa-calendar"></i>
+                        <span class="title">Lịch sử</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu" <?php if (($this->uri->segment(2) == 'history') || ($this->uri->segment(2) == 'history_kt')) { print "style='display: block;' ";} ?>>
+                        <li class="nav-item  last<?php if ($this->uri->segment(2) == 'history') { print 'active open';} ?>">
+                            <a href="<?= PATH_URL_ADMIN . 'history' ?>" class="nav-link ">
+                                <i class="fa fa-arrow-right"></i><span class="title">Lịch sử xuất/nhập</span>
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item  last<?php if ($this->uri->segment(2) == 'history_kt') { print 'active open';} ?>">
+                            <a href="<?= PATH_URL_ADMIN . 'history_kt' ?>" class="nav-link ">
+                                <i class="fa fa-arrow-right"></i><span class="title">Lịch sử nhập kiểm tra </span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="heading">

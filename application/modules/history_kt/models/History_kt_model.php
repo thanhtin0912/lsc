@@ -1,8 +1,7 @@
 <?php
-class History_model extends CI_Model {
-	private $module = 'history';
-	private $table = 'inventory_history';
-	private $table_inven = 'inventory';
+class History_kt_model extends CI_Model {
+	private $module = 'history_kt';
+	private $table = 'inventory_quote';
 	private $table_cate = 'stores';
 	private $table_pro = 'products';
 	private $table_cus = 'users';
@@ -13,17 +12,14 @@ class History_model extends CI_Model {
 		$this->db->limit($limit,$page);
 		$this->db->order_by('i.delete','ASC');
 		$this->db->order_by($this->input->post('func_order_by'),$this->input->post('order_by'));
-		if($this->input->post('name')!=''){
-			$this->db->like('p.name', $this->input->post('name'));
-		}
-		if($this->input->post('cate_name')!=''){
-			$this->db->like('c.name', $this->input->post('cate_name'));
-		}
 		if($this->input->post('title')!=''){
-			$this->db->like('i.adjQty', $this->input->post('title'));
+			$this->db->like('p.name', $this->input->post('title'));
 		}
-		if($this->input->post('dateFrom')!=''){
-			$this->db->like('i.created', $this->input->post('dateFrom'));
+		if($this->input->post('url')!=''){
+			$this->db->like('c.name', $this->input->post('url'));
+		}
+		if($this->input->post('name')!=''){
+			$this->db->like('i.checkDate', $this->input->post('name'));
 		}
 
 		if($this->input->post('status')!= 2){
@@ -47,19 +43,15 @@ class History_model extends CI_Model {
 	
 	function getTotalsearchContent(){
 		$this->db->select('i.*, c.name as store_name, p.name as product_name');
-		if($this->input->post('name')!=''){
-			$this->db->like('p.name', $this->input->post('name'));
-		}
-		if($this->input->post('cate_name')!=''){
-			$this->db->like('c.name', $this->input->post('cate_name'));
-		}
 		if($this->input->post('title')!=''){
-			$this->db->like('i.adjQty', $this->input->post('title'));
+			$this->db->like('p.name', $this->input->post('title'));
 		}
-		if($this->input->post('dateFrom')!=''){
-			$this->db->like('i.created', $this->input->post('dateFrom'));
+		if($this->input->post('url')!=''){
+			$this->db->like('c.name', $this->input->post('url'));
 		}
-
+		if($this->input->post('name')!=''){
+			$this->db->like('i.created', $this->input->post('name'));
+		}
 		if($this->input->post('status')!= 2){
 			$this->db->where('i.status', $this->input->post('status'));
 		}
@@ -90,19 +82,6 @@ class History_model extends CI_Model {
 		}
 	}
 	
-	function getDetailinventoryProductOfStore($proId, $storeId){
-		$this->db->select('*');
-		$this->db->where('productId',$proId);
-		$this->db->where('storeId',$storeId);
-		$this->db->order_by('created','DESC');
-		$this->db->limit(1);
-		$query = $this->db->get(PREFIX.$this->table_inven);
-		if($query->result()){
-			return $query->result();
-		}else{
-			return false;
-		}
-	}
 	/*----------------------FRONTEND----------------------*/
 	function getData(){
 		$this->db->select('*');

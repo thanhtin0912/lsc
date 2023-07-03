@@ -26,12 +26,11 @@
 				<tr role="row">
 					<th class="table-checkbox sorting_disabled" width="25"><input type="checkbox" id="selectAllItems" onclick="selectAllItems(<?=count($result)?>)"></th>
 					<th class="center sorting_disabled" width="35">No.</th>
-					<th class="sorting" >Chi nhánh</th>
 					<th class="sorting" >Tên sản phẩm</th>
-					<th class="sorting" >Tồn đầu</th>
-					<th class="sorting" >SL nhập</th>
-					<th class="sorting" >Tồn cuối</th>
-					<th class="sorting" >Ghi Chú</th>
+					<th class="sorting" >Chi nhánh</th>
+					<th class="sorting" >Số lượng</th>
+					<th class="sorting" >Ngày kiểm tra</th>
+					<th class="center sorting" width="60" onclick="sort('status')" id="status">Status</th>
 					<th class="center sorting" width="80" onclick="sort('created')" id="created">Created</th>
 				</tr>
 			</thead>
@@ -45,17 +44,11 @@
 				<tr class="item_row<?=$i?> gradeX <?php ($k%2==0) ? print 'odd' : print 'even' ?>" role="row">
 					<td><input type="checkbox" id="item<?=$i?>" onclick="selectItem(<?=$i?>)" value="<?=$v->id?>"></td>
 					<td class="center"><?=$k+1+$start?></td>
-					<td><?= $v->store_name;?></td>
 					<td><?= $v->product_name;?></td>
-					<td><?= $v->prevQty;?></td>
-					<?php if ($v->prevQty < $v->newQty) { ?>
-						<td><span class="label label-sm label-success"><i class="fa fa-arrow-up"></i></span> <?= $v->adjQty;?></td>
-						<td><span class="label label-sm label-success"><?= $v->newQty;?></span></td>
-					<?php } else { ?>
-						<td><span class="label label-sm label-danger"><i class="fa fa-arrow-down"></i></span> <?= $v->adjQty;?></td>
-						<td><span class="label label-sm label-danger"><?= $v->newQty;?></span></td>
-					<?php } ?>
-					<td class="center"><?= $v->note;?></td>
+					<td><?= $v->store_name;?></td>
+					<td><?= $v->value;?></td>
+					<td><?= $v->checkDate;?></td>
+					<td class="center" id="loadStatusID_<?=$v->id?>"><a class="no_underline" href="javascript:void(0)" onclick="updateStatus(<?=$v->id?>,<?=$v->status?>,'<?=$module?>')"><?php ($v->status==0) ? print '<span class="label label-sm label-default status-blocked">Blocked</span>' : print '<span class="label label-sm label-success status-approved">Approved</span>' ?></a></td>
 					<td class="center"><?=date('Y-m-d H:i:s',strtotime($v->created))?></td>
 				</tr>
 				<?php $i++;}
@@ -63,17 +56,11 @@
 					<tr style="background:#c6c6c6;" class="item_row<?=$i?> gradeX" role="row">
 						<td><input type="checkbox" id="item<?=$i?>" onclick="selectItem(<?=$i?>)" value="<?=$v->id?>"></td>
 						<td class="center"><?=$k+1+$start?></td>
-						<td><?= $v->store_name;?></td>
 						<td><?= $v->product_name;?></td>
-						<td><?= $v->prevQty;?></td>
-						<?php if ($v->prevQty < $v->newQty) { ?>
-							<td><span class="label label-sm label-success"><i class="fa fa-arrow-up"></i></span> <?= $v->adjQty;?></td>
-							<td><span class="label label-sm label-success"><?= $v->newQty;?></span></td>
-						<?php } else { ?>
-							<td><span class="label label-sm label-danger"><i class="fa fa-arrow-down"></i></span> <?= $v->adjQty;?></td>
-							<td><span class="label label-sm label-danger"><?= $v->newQty;?></span></td>
-						<?php } ?>
-						<td class="center"><?= $v->note;?></td>
+						<td><?= $v->store_name;?></td>
+						<td><?= $v->value;?></td>
+						<td><?= $v->checkDate;?></td>
+						<td class="center" id="loadStatusID_<?=$v->id?>"><span class="label label-sm label-default status-deleted">Deleted</span></td>
 						<td class="center"><?=date('Y-m-d H:i:s',strtotime($v->created))?></td>
 					</tr>
 				<?php $i++;}

@@ -61,18 +61,14 @@
 						<div class="col-md-12 col-sm-12">
 							<form class="form-horizontal">
 								<div class="form-group">
-									<label for="inputPassword" class="col-sm-2 control-label">Tên đại lý:</label>
-									<div class="col-sm-4"><input onkeypress="return enterSearch(event)" type="text" class="form-control" id="search_cate_name"></div>
-
 									<label class="col-sm-2 control-label">Tên sản phẩm:</label>
-									<div class="col-sm-4"><input onkeypress="return enterSearch(event)" type="text" class="form-control" id="search_name"></div>
+									<div class="col-sm-4"><input onkeypress="return enterSearch(event)" type="text" class="form-control" id="search_title"></div>
+									<label for="inputPassword" class="col-sm-2 control-label">Tên đại lý:</label>
+									<div class="col-sm-4"><input onkeypress="return enterSearch(event)" type="text" class="form-control" id="search_url"></div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label">Số lượng:</label>
-									<div class="col-sm-4"><input onkeypress="return enterSearch(event)" type="text" class="form-control" id="search_title"></div>
-
 									<label class="col-sm-2 control-label">Ngày nhập:</label>
-									<div class="col-sm-4"><input onkeypress="return enterSearch(event)" type="text" class="form-control" id="caledar_from"></div>
+									<div class="col-sm-4"><input onkeypress="return enterSearch(event)" type="text" class="form-control" id="search_name"></div>
 								</div>
 								<div class="form-group">
 									
@@ -83,6 +79,7 @@
 										<label class="radio-inline"><input onclick="searchContent(0)" type="radio" name="search_status" value="1"> Approved</label>
                                     </div>
 								</div>
+								
 							</form>
 						</div>
 					</div>
@@ -112,8 +109,12 @@
                         <label class="btn btn-circle btn-transparent grey-salsa" name="lbShowData" onclick="showData(this)" value="1">
                             <input type="radio" class="toggle" value="1">Trash</label>
                     </div>
+	                <!-- <a href="<?=PATH_URL_ADMIN.$module.'/update/'?>" class="btn btn-primary btn-circle btn-sm"><i class="fa fa-plus"></i> Add</a> -->
+	                <!-- <a href="javascript:;" onclick="showStatusAll()" class="btn btn-success btn-circle btn-sm"><i class="fa fa-check"></i> Approved</a> -->
+	                <!-- <a href="javascript:;" onclick="hideStatusAll()" class="btn btn-default btn-circle btn-sm"><i class="fa fa-close"></i> Blocked</a> -->
 					<a href="#portlet-alert" data-toggle="modal"><button class="btn btn-danger btn-circle btn-sm" data-toggle="modal" href="#basic"><i class="fa fa-trash"></i> Delete</button></a>
-	                <a href="javascript:;" onclick="searchContent(0)" class="btn btn-info btn-circle btn-sm reload"><i class="fa fa-spinner"></i> Reload</a>
+					<!-- <a href="javascript:;" onclick="restoreAll()"><button class="btn btn-danger btn-circle btn-sm restore"><i class="fa fa-undo"></i> Restore</button></a> -->
+	                <!-- <a href="javascript:;" onclick="searchContent(0)" class="btn btn-info btn-circle btn-sm reload"><i class="fa fa-spinner"></i> Reload</a> -->
 	            	<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""></a>
 	            </div>
 			</div>
