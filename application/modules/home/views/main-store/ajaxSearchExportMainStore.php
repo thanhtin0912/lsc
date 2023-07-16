@@ -14,7 +14,11 @@
     }
     ?>
     <td class="new-inventory fa-2x font-bold"><?php echo $foramt_inventory?></td>
-    <td class="font-bold"><span <?php if($p->estimates > 0) { echo 'class="badge bg-color-red"'; }?>><?= $p->estimates; ?></span></td>
+    <td class="font-bold"><span <?php if($p->estimates > 0) { echo 'class="badge bg-color-red"'; }?>><?= $p->estimates; ?></span>
+    <?php if (($p->inventory) == 0 &&  $p->estimates > 0) { ?>
+    <input type="hidden" value="<?= $p->estimates; ?>" name="thieu<?=$p->id?>" />
+    <?php } ?>
+    </td>
     <td>
         <button type="button" class="quantity-button hidden-xs" name="subtract" onclick="javascript: document.getElementById(&quot;qty<?=$p->id?>&quot;).value--;" value="-">-</button>
         <input type="number" min="0" onkeypress="return Enter(event,<?=$p->id?>)"  class="quantity-field" id="qty<?=$p->id?>" 
@@ -97,8 +101,8 @@
                 str += '<td></td>';
 				str += '</tr>';
 			} else {
-                var thieu = p[i].estimates  - p[i].inventory;
-                if (p[i].estimates > 0 && checkQty > 0) {
+                var thieu = p[i].estimates  - checkQty;
+                if (p[i].estimates > 0 && p[i].estimates > p[i].inventory) {
                     str1 += '<tr class="bg-color-orange">';
                     str1 += '<td>' + (i + 1) + '</td>';
                     str1 += '<td class="font-bold">' + p[i].name + '</td>';

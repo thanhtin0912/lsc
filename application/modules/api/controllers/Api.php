@@ -132,12 +132,13 @@ class Api extends MX_Controller {
 						$object->totalExportKho = $totalExportKho[0]->adjQty;
 					}
 
-					$object->totalChange = abs($object->totalImportCH - $object->totalExportKho);
+					$object->totalChange = $object->totalExportKho - $object->totalImportCH;
 					if ($object->totalChange != 0) {
 						$arrCompare[] = $object;
 					}
 				}
 				$storeData->products = $arrCompare;
+				
 			}
 			$arrData[] = $storeData;
 		}
@@ -154,6 +155,34 @@ class Api extends MX_Controller {
 				'created'=> date('Y-m-d H:i:s',time()),
 			);
 			$this->db->insert('cron', $cronData);
+
+			$mes = '';
+			foreach ($arrData as $key => $s) {
+				if (count($s->products) > 0) {
+					$mes .= "-----------------------------";
+					$mes .= " \n ";
+					$mes .= '<code>'.$s->name. ' chênh lệch</code>';
+					$mes .= " \n ";
+					foreach ($s->products as $key => $p) {
+						$mes .= '<b>'.$p->name.': '.$p->totalChange.'</b>';
+						$mes .= " \n ";
+					}
+				} else {
+					$mes .= "-----------------------------";
+					$mes .= " \n ";
+					$mes .= '<code>'.$s->name. ' chênh lệch: không có.</code>';
+					$mes .= " \n ";
+				}
+			}
+
+			if($mes!='') {
+				$chat_id = '-974528858';
+				$content = '<strong>Thông báo kiểm tra NHẬN - ' .date('Y-m-d H:i:s',time()). '! </strong>';
+				$content .= " \n ";
+				$content .= $mes;
+				$content .= '<code>From '. PATH_URL.'</code>';
+				$data = $this->telegram_lib->sendmsg($content, $chat_id);
+			}
 		} else {
 			$cronData  = array (
 				'name' => "checkInputDataImport",
@@ -168,7 +197,7 @@ class Api extends MX_Controller {
 
 	public function apiCheckInputDataExport() {
 		$stores = $this->api->getDataStore();
-		$date = date('Y-m-d',time());
+		$date = date('Y-m-d H:i:s',time());
 		$arrData = array();
 		foreach ($stores as $key => $s) {
 			$products = $this->api->getProducts($s->id, null);
@@ -192,7 +221,7 @@ class Api extends MX_Controller {
 						$object->totalCheck = $totalCheck[0]->value;
 					}
 
-					$object->totalChange = abs($object->totalExport - $object->totalCheck);
+					$object->totalChange = $object->totalExport - $object->totalCheck;
 					if ($object->totalChange != 0) {
 						$arrCompare[] = $object;
 					}
@@ -214,6 +243,33 @@ class Api extends MX_Controller {
 				'created'=> date('Y-m-d H:i:s',time()),
 			);
 			$this->db->insert('cron', $cronData);
+			$mes = '';
+			foreach ($arrData as $key => $s) {
+				if (count($s->products) > 0) {
+					$mes .= "-----------------------------";
+					$mes .= " \n ";
+					$mes .= '<code>'.$s->name. ' chênh lệch</code>';
+					$mes .= " \n ";
+					foreach ($s->products as $key => $p) {
+						$mes .= '<b>'.$p->name.': '.$p->totalChange.'</b>';
+						$mes .= " \n ";
+					}
+				} else {
+					$mes .= "-----------------------------";
+					$mes .= " \n ";
+					$mes .= '<code>'.$s->name. ' chênh lệch: không có.</code>';
+					$mes .= " \n ";
+				}
+			}
+
+			if($mes!='') {
+				$chat_id = '-998428325';
+				$content = '<strong>Thông báo kiểm tra XUẤT - ' .date('Y-m-d H:i:s',time()). '! </strong>';
+				$content .= " \n ";
+				$content .= $mes;
+				$content .= '<code>From '. PATH_URL.'</code>';
+				$data = $this->telegram_lib->sendmsg($content, $chat_id);
+			}
 		} else {
 			$cronData  = array (
 				'name' => "checkInputDataExport",
@@ -225,7 +281,6 @@ class Api extends MX_Controller {
 		}
 		return true;
 	}
-
 	/*------------------------------------ End API --------------------------------*/
 
 }
