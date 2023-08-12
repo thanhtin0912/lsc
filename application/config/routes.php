@@ -101,6 +101,7 @@ $route[API] = "api";
 $route[API.'/apiAutoSetupQuote'] = "api/apiAutoSetupQuote";
 $route[API.'/apiCheckInputDataImport'] = "api/apiCheckInputDataImport";
 $route[API.'/apiCheckInputDataExport'] = "api/apiCheckInputDataExport";
+$route[API.'/veryfiChangeProduct'] = "api/veryfiChangeProduct";
 
 //Config Router Admincp
 $route[ADMINCP] = "admincp";

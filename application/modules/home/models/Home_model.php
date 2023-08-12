@@ -145,9 +145,8 @@ class Home_model extends CI_Model {
 					'created'=> date('Y-m-d H:i:s',time()),
 				);
 				if($this->db->insert($this->tbl_inven_his, $logInventory)){
-					return true;
+					return $getinventory[0]->value + $qty;
 				} 
-				return true;
 			}
 		}
 

@@ -122,8 +122,20 @@ class Home extends MX_Controller {
 		if(!empty($_POST)){
 			$id = $_POST['productId'];
 			$qty = $_POST['qty'];
-			$updateInventory = $this->home->updateImportInventory($id, $qty);
-			if ($updateInventory) {
+			$mes = '';
+			$inventoryNow = $this->home->updateImportInventory($id, $qty);
+			if ($inventoryNow) {
+				$this->load->model('products/products_model');
+				$product =$this->products_model->getDetailManagement($_POST['productId']);
+				if($this->session->userdata('userStaff')[0]->isMain) {
+					$mes = '<b>'.$product[0]->name.': '.$_POST['qty'].'</b>';
+					$mes .= " \n ";
+					$mes .= '<b>Tồn kho: ' .$inventoryNow.'</b>';
+					$mes .= " \n ";
+					if($mes!='') {
+						$this->sendImportMessageTelegram($mes, 1);
+					}
+				}
 				print 'success.'.$this->security->get_csrf_hash();
 				exit;
 			}
@@ -134,17 +146,23 @@ class Home extends MX_Controller {
 		//teamplate
 		$products = $this->home->getProducts($this->session->userdata('userStaff')[0]->storeId);
 		$count = 0;
+		$mes = '';
 		foreach ($products as $key => $p) {
 			$changedQty = $_POST['qty'.$p->id];
 			if ($changedQty && $changedQty > 0) {
 				$updateInventory = $this->home->updateImportInventory($p->id, $changedQty);
 				if ($updateInventory) {
+					$mes = '<b>'.$p->name.': '.$changedQty.'</b>';
+					$mes .= " \n ";
 					$count = $count + 1;
 				}
 			}
 		}
 
 		if($count > 0){
+			if($mes!='') {
+				$this->sendImportMessageTelegram($mes, 1);
+			}
 			print 'success.'.$count.'.'.$this->security->get_csrf_hash();
 			exit;
 		} 
@@ -562,7 +580,18 @@ class Home extends MX_Controller {
 		$chat_id = '-998428325';
 		$this->load->model('stores/stores_model');
 		$store =$this->stores_model->getDetailManagement($store);
-		$content = '<strong>Xuất hàng cho - '.$store[0]->name. ' - ' .date('Y-m-d H:i:s',time()). '! </strong>';
+		$content = '<strong>Nhập hàng cho - '.$store[0]->name. ' - ' .date('Y-m-d H:i:s',time()). '! </strong>';
+		$content .= " \n ";
+		$content .= $body;
+		$content .= '<code>Tổng sản phẩm: '. $total.'</code>';
+		$content .= " \n ";
+		$content .= '<code>From '. PATH_URL.'</code>';
+		$data = $this->telegram_lib->sendmsg($content, $chat_id);
+    }
+
+	public function sendImportMessageTelegram($body, $total){
+		$chat_id = '-998428325';
+		$content = '<strong>Nhập hàng kho - ' .date('Y-m-d H:i:s',time()). '! </strong>';
 		$content .= " \n ";
 		$content .= $body;
 		$content .= '<code>Tổng sản phẩm: '. $total.'</code>';

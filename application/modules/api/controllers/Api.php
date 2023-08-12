@@ -281,6 +281,21 @@ class Api extends MX_Controller {
 		}
 		return true;
 	}
+
+	public function veryfiChangeProduct(){
+		$chat_id = '-998428325';
+		$content = '<strong>Xác nhận cho chuyển hàng - ' .date('Y-m-d H:i:s',time()). '! </strong>';
+		$content .= " \n ";
+		
+		$content .= '<b>1 HT: 1</b>';
+		$content .= " \n ";
+		$content .= '<b>3 OL: 2</b>';
+		$content .= " \n ";
+		$content .= '<a href="https://kho.leotea.vn/kho/api/veryfiChangeProduct?status=1">Xác nhận</a>';
+		$content .= " \n ";
+		$content .= "<code href='http://localhost/kho/api/veryfiChangeProduct?status=1'>From ". PATH_URL.'</code>';
+		$data = $this->telegram_lib->sendmsg($content, $chat_id);
+	}
 	/*------------------------------------ End API --------------------------------*/
 
 }
