@@ -72,6 +72,61 @@ class Home extends MX_Controller {
 		$this->template->render();
 	}
 
+	public function moveProductToStore(){
+		$data['products'] = $this->home->getProducts($this->session->userdata('userStaff')[0]->storeId);
+		$data['stores'] = $this->home->getListOtherStore($this->session->userdata('userStaff')[0]->storeId);
+		$this->template->write_view('content','moveProduct', $data);
+		$this->template->render();
+	}
+
+	public function ajaxSearchMoveProductStore (){
+		$data['products'] = $this->home->getProducts($this->session->userdata('userStaff')[0]->storeId, $_POST['name']);
+		$this->load->view("ajaxMoveProductStore", $data);
+	}
+
+	public function historyMoveProductToStore(){
+		$data['history'] = $this->home->getMoveProduct();
+		$this->template->write_view('content','moveProductHistory', $data);
+		$this->template->render();
+	}
+	public function moveProductStore() {
+		if(!empty($_POST)){
+			$id = $_POST['productId'];
+			$qty = $_POST['qty'];
+			$toStore = $_POST['store'];
+			$mes = '';
+
+			$this->load->model('products/products_model');
+			$this->load->model('stores/stores_model');
+			$product =$this->products_model->getDetailManagement($_POST['productId']);
+			$fromStoreDetail = $this->stores_model->getDetailManagement($this->session->userdata('userStaff')[0]->storeId);
+			$toStoreDetail = $this->stores_model->getDetailManagement($toStore);
+			$data = array(
+				'productId' => $id,
+				'qty' => $qty,
+				'fromStore' => $this->session->userdata('userStaff')[0]->storeId,
+				'toStore' => $toStore,
+				'customerId' => $this->session->userdata('userStaff')[0]->id,
+				'created'=> date('Y-m-d H:i:s',time()),
+			);
+			$saveMoveProduct = $this->home->saveMoveProduct($data);
+			if ($saveMoveProduct) {
+				$mes = '<b>'.$product[0]->name.': '.$_POST['qty'].'</b>';
+				$mes .= " \n ";
+				$mes .= '<b>['.$fromStoreDetail[0]->name.'] chuyển cho ['.$toStoreDetail[0]->name.']</b>';
+				$mes .= " \n ";
+				$mes .= '<b>Nhân viên: '.$this->session->userdata('userStaff')[0]->name.'</b>';
+				$mes .= " \n ";
+				$mes .= '<a href="https://kho.leotea.vn/api/verifyPage?id='.$saveMoveProduct.'">Xác nhận</a>';
+				$mes .= " \n ";
+				if($mes!='') {
+					$this->sendMessageVerify($mes);
+				}
+				print 'success.'.$this->security->get_csrf_hash();
+				exit;
+			}
+		} 
+	}
 	public function remove(){
 		//teamplate
 		$data['productsIsRemove'] = $this->home->productsIsRemove($this->session->userdata('userStaff')[0]->storeId);
@@ -123,7 +178,8 @@ class Home extends MX_Controller {
 			$id = $_POST['productId'];
 			$qty = $_POST['qty'];
 			$mes = '';
-			$inventoryNow = $this->home->updateImportInventory($id, $qty);
+			$userSes = $this->session->userdata('userStaff');
+			$inventoryNow = $this->home->updateImportInventory($id, $qty, $userSes[0]->storeId, $userSes[0]->id);
 			if ($inventoryNow) {
 				$this->load->model('products/products_model');
 				$product =$this->products_model->getDetailManagement($_POST['productId']);
@@ -182,7 +238,8 @@ class Home extends MX_Controller {
 				$mes = '<b>'.$product[0]->name.': '.$_POST['qty'].'</b>';
 				$mes .= " \n ";
 			}
-			$updateInventory = $this->home->updateExportInventory($id, $qty, $mainStore);
+			$userSes = $this->session->userdata('userStaff');
+			$updateInventory = $this->home->updateExportInventory($id, $qty, $mainStore, $userSes[0]->storeId, $userSes[0]->id);
 			if ($updateInventory) {
 				if($mes!='') {
 					$this->sendMessageTelegram($mes, $mainStore, 1);
@@ -196,46 +253,51 @@ class Home extends MX_Controller {
 	public function exportListQtyPruoduct() {
 		$products = $this->home->getProducts($this->session->userdata('userStaff')[0]->storeId);
 		$count = 0;
-		$mainStore = NULL;
-		if (!empty($_POST['mainStore'])) {
-			$mainStore = $_POST['mainStore'];
-		}
+		$mainStore =  $_POST['mainStore'];
 		$mes = '';
-		foreach ($products as $key => $p) {
-			if (isset($_POST['qty'.$p->id]) && $_POST['qty'.$p->id] > 0) {
-				$updateInventory = $this->home->updateExportInventory($p->id, $_POST['qty'.$p->id], $mainStore);
-				if ($updateInventory) {
-					$count = $count + 1;
-					$new = '<b>'.$p->name.': '.$_POST['qty'.$p->id].'</b>';
-					$quoteProductStore = $this->home->getQuote($p->id, $_POST['mainStore']);
-					if ($quoteProductStore && $quoteProductStore[0]->value > $p->inventory) {
-						$thieu = $quoteProductStore[0]->value  - $_POST['qty'.$p->id];
-						$new = '<b>'.$p->name.': '.$_POST['qty'.$p->id].' (Thiếu ' .$thieu. ')</b>';
+		if ($mainStore || $mainStore != '') {
+			foreach ($products as $key => $p) {
+				if (isset($_POST['qty'.$p->id]) && $_POST['qty'.$p->id] > 0) {
+					$userSes = $this->session->userdata('userStaff');
+					$updateInventory = $this->home->updateExportInventory($p->id, $_POST['qty'.$p->id], $mainStore, $userSes[0]->storeId, $userSes[0]->id);
+					if ($updateInventory) {
+						$count = $count + 1;
+						$new = '<b>'.$p->name.': '.$_POST['qty'.$p->id].'</b>';
+						$quoteProductStore = $this->home->getQuote($p->id, $_POST['mainStore']);
+						if ($quoteProductStore && $quoteProductStore[0]->value > $p->inventory) {
+							$thieu = $quoteProductStore[0]->value  - $_POST['qty'.$p->id];
+							$new = '<b>'.$p->name.': '.$_POST['qty'.$p->id].' (Thiếu ' .$thieu. ')</b>';
+						}
+						$mes .= $new;
+						$mes .= " \n ";
 					}
-					$mes .= $new;
-					$mes .= " \n ";
-				}
-			} else {
-				if (isset($_POST['thieu'.$p->id]) && $_POST['thieu'.$p->id] > 0) {
-					$mes .= '<b>'.$p->name.': 0 (Thiếu '.$_POST['thieu'.$p->id].')</b>';
-					$mes .= " \n ";
+				} else {
+					if (isset($_POST['thieu'.$p->id]) && $_POST['thieu'.$p->id] > 0) {
+						$mes .= '<b>'.$p->name.': 0 (Thiếu '.$_POST['thieu'.$p->id].')</b>';
+						$mes .= " \n ";
+					}
 				}
 			}
+
+			if($count > 0){
+				if($mes!='' && $mainStore) {
+					$this->sendMessageTelegram($mes, $mainStore, $count);
+				}
+				print 'success.'.$count.'.'.$this->security->get_csrf_hash();
+				
+			} 
+		} else {
+			print 'fail'.$this->security->get_csrf_hash();
+			exit;
 		}
 
-		if($count > 0){
-			if($mes!='' && $mainStore) {
-				$this->sendMessageTelegram($mes, $mainStore, $count);
-			}
-			print 'success.'.$count.'.'.$this->security->get_csrf_hash();
-			exit;
-		} 
 	}
 
 	public function removeInventory(){
 		//teamplate
 		if(!empty($_POST)){
-			$updateInventory = $this->home->updateRemoveInventory();
+			$userSes = $this->session->userdata('userStaff');
+			$updateInventory = $this->home->updateRemoveInventory($_POST['productId'], $_POST['qty'], $userSes[0]->storeId, $userSes[0]->id);
 			if ($updateInventory) {
 				print 'success.'.$this->security->get_csrf_hash();
 				exit;
@@ -599,4 +661,15 @@ class Home extends MX_Controller {
 		$content .= '<code>From '. PATH_URL.'</code>';
 		$data = $this->telegram_lib->sendmsg($content, $chat_id);
     }
+
+	public function sendMessageVerify($body){
+		$chat_id = '-955132579';
+		$content = '<strong>Thông tin chuyển hàng cần xác nhận - ' .date('Y-m-d H:i:s',time()). '! </strong>';
+		$content .= " \n ";
+		$content .= $body;
+		$content .= '<code>From '. PATH_URL.'</code>';
+		$data = $this->telegram_lib->sendmsg($content, $chat_id);
+    }
+
+	
 }

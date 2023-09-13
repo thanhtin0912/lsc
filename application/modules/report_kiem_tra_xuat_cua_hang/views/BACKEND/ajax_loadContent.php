@@ -6,16 +6,18 @@
         <div class="panel-heading">
             <h4 class="panel-title font-bold">
                 <a class="accordion-toggle collapsed bold p-1" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-<?= $key; ?>" aria-expanded="false" style="<?php if($p->totalChange > 0 ) { echo 'background: #ffbc62;';}?>">
+                <div class="container">    
                     <div class="row">
-                        <div class="col-5"><div class="d-flex p-3 justify-content-between"><span class="bold"><?= $p->name; ?></span></div></div>
-                        <div class="col-7">
-                            <div class="d-flex p-3 justify-content-between">
-                                <span class="bold font-red mt-sweetalert">Xuất CH: <?= $p->totalExport; ?></span>
-                                <span class="bold font-green mt-sweetalert">Nhập KT: <?= $p->totalCheck; ?></span>
-                                <span class="bold mt-sweetalert">CL: <?= $p->totalExport - $p->totalCheck; ?></span>
+                            <div class="col-5"><div class="d-flex p-3 justify-content-between"><span class="bold"><?= $p->name; ?></span></div></div>
+                            <div class="col-7">
+                                <div class="d-flex p-3 justify-content-between">
+                                    <span class="bold font-red mt-sweetalert">Xuất CH: <?= $p->totalExport; ?></span>
+                                    <span class="bold font-green mt-sweetalert">Nhập KT: <?= $p->totalCheck; ?></span>
+                                    <span class="bold mt-sweetalert">CL: <?= $p->totalExport - $p->totalCheck; ?></span>
+                                </div>
                             </div>
-                        </div>
-                    </div>    
+                        </div> 
+                    </div>   
                 </a>
             </h4>
         </div>

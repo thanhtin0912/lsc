@@ -61,6 +61,13 @@ $route['hang-huy'] = "home/remove";
 $route['lich-su'] = "home/history";
 $route['tim-kiem-lich-su'] = "home/search_history";
 
+// 
+$route['lich-su-chuyen-hang'] = "home/historyMoveProductToStore";
+$route['chuyen-hang'] = "home/moveProductToStore";
+$route['ajaxSearchMoveProductStore'] = "home/ajaxSearchMoveProductStore";
+$route['moveProductStore'] = "home/moveProductStore";
+
+// 
 $route['don-hang-online'] = "home/orderApp";
 $route['ton-kho-cua-hang'] = "home/inventoryStore";
 // api
@@ -101,8 +108,8 @@ $route[API] = "api";
 $route[API.'/apiAutoSetupQuote'] = "api/apiAutoSetupQuote";
 $route[API.'/apiCheckInputDataImport'] = "api/apiCheckInputDataImport";
 $route[API.'/apiCheckInputDataExport'] = "api/apiCheckInputDataExport";
-$route[API.'/veryfiChangeProduct'] = "api/veryfiChangeProduct";
-
+$route[API.'/verify'] = "api/veryfiChangeProduct";
+$route[API.'/verifyPage'] = "api/verifyPage";
 //Config Router Admincp
 $route[ADMINCP] = "admincp";
 $route[ADMINCP.'/help'] = "admincp/help";

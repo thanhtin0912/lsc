@@ -59,6 +59,7 @@
 
         $('#seachStore').change(function(){
 			var mainStore = $('#seachStore').val();
+			console.log(mainStore);
 			$("#mainStore").val(mainStore);
             searchProduct();
         });
@@ -126,7 +127,7 @@
 			'<form action="" class="formName">' +
 			'<strong>'+formatDate(d)+'</strong>' +
 			'<div class="form-group d-flex align-items-center pt-2">' +
-			'<label>'+$('#name' + proId).html()+'</label>' +
+			'<label class="w-75">'+$('#name' + proId).html()+'</label>' +
 			'<input value="'+qty+'" class="ml-2 name form-control" disabled />' +
 			'</div>' +
 			'</form>',

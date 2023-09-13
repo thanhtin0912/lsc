@@ -11,6 +11,8 @@ class Home_model extends CI_Model {
 	private $tbl_inven_his				= 'inventory_history';
 	private $tbl_conn				= 'connections';
 	private $tbl_inven_quote				= 'inventory_quote';
+	private $tbl_move				= 'move_products';
+	
 	
 	function checkLogin($user){
 		$this->db->select('c.*');
@@ -125,20 +127,20 @@ class Home_model extends CI_Model {
 	}
 	
 
-	function updateImportInventory($id, $qty) {
-		$getinventory = $this->getinventory($id, $this->session->userdata('userStaff')[0]->storeId);
+	function updateImportInventory($id, $qty, $store, $userId) {
+		$getinventory = $this->getinventory($id, $store);
 		if ($getinventory) {
 			$data = array(
 				'value'=> $getinventory[0]->value + $qty,
 				'update'=> date('Y-m-d H:i:s',time()),
 			);
 			$this->db->where('productId',$id);
-			$this->db->where('storeId',$this->session->userdata('userStaff')[0]->storeId);
+			$this->db->where('storeId',$store);
 			if($this->db->update($this->tbl_inven,$data)){
 				$logInventory  = array (
 					'productId' => $id,
-					'storeId'  	=> $this->session->userdata('userStaff')[0]->storeId,
-					'customerId'=> $this->session->userdata('userStaff')[0]->id,
+					'storeId'  	=> $store,
+					'customerId'=> $userId,
 					'prevQty' => $getinventory[0]->value,
 					'adjQty' => $qty,
 					'newQty' => $getinventory[0]->value + $qty,
@@ -152,20 +154,20 @@ class Home_model extends CI_Model {
 
 	}
 
-	function updateExportInventory($id, $qty, $mainStore='') {
-		$getinventory = $this->getinventory($id, $this->session->userdata('userStaff')[0]->storeId);
+	function updateExportInventory($id, $qty, $mainStore='', $store, $userId) {
+		$getinventory = $this->getinventory($id, $store);
 		if ($getinventory) {
 			$data = array(
 				'value'=> $getinventory[0]->value - $qty,
 				'update'=> date('Y-m-d H:i:s',time()),
 			);
 			$this->db->where('productId',$id);
-			$this->db->where('storeId',$this->session->userdata('userStaff')[0]->storeId);
+			$this->db->where('storeId', $store);
 			if($this->db->update($this->tbl_inven,$data)){
 				$logInventory  = array (
 					'productId' => $id,
-					'storeId'  	=> $this->session->userdata('userStaff')[0]->storeId,
-					'customerId'=> $this->session->userdata('userStaff')[0]->id,
+					'storeId'  	=> $store,
+					'customerId'=> $userId,
 					'prevQty' => $getinventory[0]->value,
 					'adjQty' => $qty,
 					'newQty' => $getinventory[0]->value - $qty,
@@ -181,23 +183,23 @@ class Home_model extends CI_Model {
 
 	}
 	
-	function updateRemoveInventory() {
-		$getinventory = $this->getinventory($_POST['productId'], $this->session->userdata('userStaff')[0]->storeId);
+	function updateRemoveInventory($productId, $qty, $store, $userId) {
+		$getinventory = $this->getinventory($productId, $store);
 		if ($getinventory) {
 			$data = array(
-				'value'=> $getinventory[0]->value - $_POST['qty'],
+				'value'=> $getinventory[0]->value - $qty,
 				'update'=> date('Y-m-d H:i:s',time()),
 			);
-			$this->db->where('productId',$_POST['productId']);
-			$this->db->where('storeId',$this->session->userdata('userStaff')[0]->storeId);
+			$this->db->where('productId', $productId);
+			$this->db->where('storeId', $store);
 			if($this->db->update($this->tbl_inven,$data)){
 				$logInventory  = array (
-					'productId' => $_POST['productId'],
-					'storeId'  	=> $this->session->userdata('userStaff')[0]->storeId,
-					'customerId'=> $this->session->userdata('userStaff')[0]->id,
+					'productId' => $productId,
+					'storeId'  	=> $store,
+					'customerId'=> $userId,
 					'prevQty' => $getinventory[0]->value,
-					'adjQty' => $_POST['qty'],
-					'newQty' => $getinventory[0]->value - $_POST['qty'],
+					'adjQty' => $qty,
+					'newQty' => $getinventory[0]->value - $qty,
 					'is_remove' => 1,
 					'created'=> date('Y-m-d H:i:s',time()),
 				);
@@ -207,7 +209,6 @@ class Home_model extends CI_Model {
 				return true;
 			}
 		}
-
 	}
 
 	function getinventory($proID, $storeId)
@@ -403,5 +404,29 @@ class Home_model extends CI_Model {
 			return true;
 		} 
 	}
+
+	function saveMoveProduct($data) {
+		if($this->db->insert('move_products' , $data)){
+			return $this->db->insert_id();
+		} 
+	}
+
+	function getMoveProduct() {
+		$this->db->select('i.*, p.name as product_name, s.name as store_name');
+		$this->db->limit(20);
+		$this->db->where('i.customerId', $this->session->userdata('userStaff')[0]->id);
+		$this->db->order_by('i.created','DESC');
+		$this->db->from(PREFIX.$this->tbl_move." i");
+		$this->db->join(PREFIX.$this->tbl_store." s", 'i.toStore = s.id', "left");
+		$this->db->join(PREFIX.$this->tbl_products." p", 'i.productId = p.id', "left");
+		$query = $this->db->get();
+
+		if($query->result()){
+			return $query->result();
+		}else{
+			return false;
+		}
+	}
+	
 }
 ?>

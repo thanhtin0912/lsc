@@ -281,21 +281,80 @@ class Api extends MX_Controller {
 		}
 		return true;
 	}
-
 	public function veryfiChangeProduct(){
-		$chat_id = '-998428325';
-		$content = '<strong>Xác nhận cho chuyển hàng - ' .date('Y-m-d H:i:s',time()). '! </strong>';
-		$content .= " \n ";
-		
-		$content .= '<b>1 HT: 1</b>';
-		$content .= " \n ";
-		$content .= '<b>3 OL: 2</b>';
-		$content .= " \n ";
-		$content .= '<a href="https://kho.leotea.vn/kho/api/veryfiChangeProduct?status=1">Xác nhận</a>';
-		$content .= " \n ";
-		$content .= "<code href='http://localhost/kho/api/veryfiChangeProduct?status=1'>From ". PATH_URL.'</code>';
-		$data = $this->telegram_lib->sendmsg($content, $chat_id);
+		if ($_GET['id']) {
+			$res = $this->api->getDetailVerifyId($_GET['id']);
+			if ($res) {
+				$this->load->model('home/Home_model','home');
+				$removeItemStore = $this->home->updateRemoveInventory($res[0]->productId, $res[0]->qty, $res[0]->fromStore, $res[0]->customerId);
+				if($removeItemStore) {
+					$storeMain = $this->api->getDataStoreMain();
+					$importMainStore  = $this->home->updateImportInventory($res[0]->productId, $res[0]->qty, $storeMain[0]->id, null);
+					$this->load->model('products/products_model', 'products');
+					$product =$this->products->getDetailManagement($res[0]->productId);
+					//nhập kho kho chính
+					if ($importMainStore) {
+						$mes = '<b>'.$product[0]->name.': '.$res[0]->qty.'</b>';
+						$mes .= " \n ";
+						if($mes!='') {
+							$this->sendImportMessageTelegram($mes, 1);
+						}
+					}
+					//Xuất kho chính
+					$userSes = $this->session->userdata('userStaff');
+					$exportMainStore = $this->home->updateExportInventory($res[0]->productId, $res[0]->qty, $res[0]->toStore, $storeMain[0]->id,  null);
+					if ($exportMainStore) {
+						$mes = '<b>'.$product[0]->name.': '. $res[0]->qty.'</b>';
+						$mes .= " \n ";
+						if($mes!='') {
+							$this->sendMessageTelegram($mes, $res[0]->toStore, 1);
+						}
+					}
+					if ($importMainStore && $exportMainStore) {
+						$data = array(
+							'status'=> 1,
+							'updated'=> date('Y-m-d H:i:s',time()),
+						);
+						$this->db->where('id',$_GET['id']);
+						if($this->db->update('moveproducts',$data)){
+							echo 'Thông tin chuyển hàng đã được XÁC NHẬN thành công.';
+							exit;
+						}
+					}
+				}
+			} else {
+				echo 'Thông tin chuyển hàng đã được thực hiện hoặc đã quá thời gian.';
+				exit;
+			}
+		}
 	}
+	public function verifyPage() {
+		echo '<a href="https://kho.leotea.vn/api/verifyPage?id='.$_GET['id'].'">Xác nhận chuyển hàng</a>';
+		exit;
+	}
+	public function sendMessageTelegram($body, $store, $total){
+		$chat_id = '-955132579';
+		$this->load->model('stores/stores_model');
+		$store =$this->stores_model->getDetailManagement($store);
+		$content = '<strong>Xuất hàng cho - '.$store[0]->name. ' - ' .date('Y-m-d H:i:s',time()). '! </strong>';
+		$content .= " \n ";
+		$content .= $body;
+		$content .= '<code>Tổng sản phẩm: '. $total.'</code>';
+		$content .= " \n ";
+		$content .= '<code>From '. PATH_URL.'</code>';
+		$data = $this->telegram_lib->sendmsg($content, $chat_id);
+    }
+
+	public function sendImportMessageTelegram($body, $total){
+		$chat_id = '-955132579';
+		$content = '<strong>Tăng tồn kho để chuyển hàng - ' .date('Y-m-d H:i:s',time()). '! </strong>';
+		$content .= " \n ";
+		$content .= $body;
+		$content .= '<code>Tổng sản phẩm: '. $total.'</code>';
+		$content .= " \n ";
+		$content .= '<code>From '. PATH_URL.'</code>';
+		$data = $this->telegram_lib->sendmsg($content, $chat_id);
+    }
 	/*------------------------------------ End API --------------------------------*/
 
 }

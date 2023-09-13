@@ -3,6 +3,7 @@ class Api_model extends CI_Model {
 	private $module 		= 'quote_custom';
 	private $table_cate			= 'categories';
 	private $table_inven		= 'inventory';
+	private $table_inven_his				= 'inventory_history';
 	private $table_pro		= 'products';
 	private $table_quote		= 'quote';
 	private $table_quote_custom		= 'quote_custom';
@@ -235,6 +236,106 @@ class Api_model extends CI_Model {
 		}
 	}
 
+	function getDetailVerifyId($id){
+		$date= date('Y-m-d H:i:s',time());
+		$this->db->select('*');
+		$this->db->where('id', $id);
+		$this->db->where('created >=', date('Y-m-d 00:00:01', strtotime($date)));
+		$this->db->where('created <=', date('Y-m-d 23:59:59', strtotime($date)));
+		$this->db->where('status',0);
+		$this->db->where('delete',0);
+		$query = $this->db->get('move_products');
+		
+		if($query->result()){
+			return $query->result();
+		}else{
+			return false;
+		}
+	}
+
+	function updateImportInventory($id, $qty, $store, $userId) {
+		$getinventory = $this->getinventory($id, $store);
+		if ($getinventory) {
+			$data = array(
+				'value'=> $getinventory[0]->value + $qty,
+				'update'=> date('Y-m-d H:i:s',time()),
+			);
+			$this->db->where('productId',$id);
+			$this->db->where('storeId',$store);
+			if($this->db->update($this->table_inven,$data)){
+				$logInventory  = array (
+					'productId' => $id,
+					'storeId'  	=> $store,
+					'customerId'=> $userId,
+					'prevQty' => $getinventory[0]->value,
+					'adjQty' => $qty,
+					'newQty' => $getinventory[0]->value + $qty,
+					'created'=> date('Y-m-d H:i:s',time()),
+				);
+				if($this->db->insert($this->table_inven_his, $logInventory)){
+					return $getinventory[0]->value + $qty;
+				} 
+			}
+		}
+
+	}
+
+	function updateExportInventory($id, $qty, $mainStore='', $store, $userId) {
+		$getinventory = $this->getinventory($id, $store);
+		if ($getinventory) {
+			$data = array(
+				'value'=> $getinventory[0]->value - $qty,
+				'update'=> date('Y-m-d H:i:s',time()),
+			);
+			$this->db->where('productId',$id);
+			$this->db->where('storeId', $store);
+			if($this->db->update($this->table_inven,$data)){
+				$logInventory  = array (
+					'productId' => $id,
+					'storeId'  	=> $store,
+					'customerId'=> $userId,
+					'prevQty' => $getinventory[0]->value,
+					'adjQty' => $qty,
+					'newQty' => $getinventory[0]->value - $qty,
+					'mainStore' => $mainStore,
+					'created'=> date('Y-m-d H:i:s',time()),
+				);
+				if($this->db->insert($this->table_inven_his, $logInventory)){
+					return true;
+				} 
+				return true;
+			}
+		}
+
+	}
+
+	function updateRemoveInventory($productId, $qty, $store, $userId) {
+		$getinventory = $this->getinventory($productId, $store);
+		if ($getinventory) {
+			$data = array(
+				'value'=> $getinventory[0]->value - $qty,
+				'update'=> date('Y-m-d H:i:s',time()),
+			);
+			$this->db->where('productId', $productId);
+			$this->db->where('storeId', $store);
+			if($this->db->update($this->table_inven,$data)){
+				$logInventory  = array (
+					'productId' => $productId,
+					'storeId'  	=> $store,
+					'customerId'=> $userId,
+					'prevQty' => $getinventory[0]->value,
+					'adjQty' => $qty,
+					'newQty' => $getinventory[0]->value - $qty,
+					'is_remove' => 1,
+					'created'=> date('Y-m-d H:i:s',time()),
+				);
+				if($this->db->insert($this->table_inven_his, $logInventory)){
+					return true;
+				} 
+				return true;
+			}
+		}
+	}
 
 	/*--------------------END FRONTEND--------------------*/
 }

@@ -56,7 +56,7 @@
 
 				<div class="topbar">
 					<ul class="loginbar pull-right">
-						<li><a href="page_faq.html"><?= $this->session->userdata('userStaff')[0]->name;?></a></li>
+						<li><a href="page_faq.html"><?= $this->session->userdata('userStaff')[0]->name;?> | <?= $this->session->userdata('userStaff')[0]->store_name;?> </a></li>
 					</ul>
 				</div>
 				<!-- End Topbar -->
@@ -119,7 +119,14 @@
 						 <li class="history-page"><a href="<?= PATH_URL ?>lich-su">Lịch sử</a></li> 
 						<!-- End Tables -->
 						<!-- Tables -->
-						<!--<li class="inventory-page"><a href="<?= PATH_URL ?>tim-kiem-lich-su">Nhập/xuất Ngày</a></li>-->
+						<li class="dropdown">
+							<a class="move-page" href="javascript:void(0);" data-toggle="dropdown">Chuyển hàng
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="<?= PATH_URL ?>chuyen-hang">Chuyển hàng</a></li>
+								<li><a href="<?= PATH_URL ?>lich-su-chuyen-hang">Lịch sử</a></li>
+							</ul>
+						</li>
 						<!-- End Tables -->
 					</ul>
 				</div><!--/end container-->
