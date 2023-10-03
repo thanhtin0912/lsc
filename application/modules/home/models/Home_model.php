@@ -13,6 +13,19 @@ class Home_model extends CI_Model {
 	private $tbl_inven_quote				= 'inventory_quote';
 	private $tbl_move				= 'move_products';
 	
+	function getCommonData(){
+		$this->db->select('*');
+		$this->db->where('status',1);
+		$this->db->where('delete',0);
+		$this->db->limit(1);
+		$query = $this->db->get('infos');
+        //echo $this->db->last_query();
+		if($query->result()){
+			return $query->result();
+		}else{
+			return false;
+		}
+	}
 	
 	function checkLogin($user){
 		$this->db->select('c.*');
@@ -66,6 +79,43 @@ class Home_model extends CI_Model {
 			return false;
 		}
 	}
+
+
+
+	function getInfoCode($code){
+		$this->db->select('c.*, s.name as store_name, s.isMain');
+		$this->db->where('c.code', $code);
+		$this->db->where('c.status', 1);
+		$this->db->where('c.delete', 0);
+
+		$this->db->from(PREFIX.$this->tbl_customer." c");
+		$this->db->join(PREFIX.$this->tbl_store." s", 's.id = c.storeID', "left");
+		$query = $this->db->get();
+
+		if($query->result()){
+			return $query->result();
+		}else{
+			return false;
+		}
+	}
+
+	function getInfoSession($phone, $ses){
+		$this->db->select('*');
+		$this->db->where('phone', $phone);
+		$this->db->where('session', $ses);
+		$this->db->where('status', 1);
+		$this->db->where('delete', 0);
+
+		$this->db->from(PREFIX.$this->tbl_customer);
+		$query = $this->db->get();
+
+		if($query->result()){
+			return $query->result();
+		}else{
+			return false;
+		}
+	}
+
 
 	function getProducts($store, $name =''){
 		$this->db->select('p.*, i.value as inventory, i.note as note');

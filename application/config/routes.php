@@ -101,6 +101,7 @@ $route['ajaxSearchExportProductFromStore'] = "home/ajaxSearchExportProductFromSt
 $route['importQtyCheckStore'] = "home/importQtyCheckStore";
 $route['importListQtyCheckStore'] = "home/importListQtyCheckStore";
 $route['hang-can'] = "home/mainStoreInventory";
+$route['formatStringImportProduct'] = "home/formatStringImportProduct";
 //Config Router Multi Language
 // $route['^(en|jp)$'] = $route['default_controller'];
 //Config Router API

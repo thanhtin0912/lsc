@@ -8,11 +8,25 @@ class Home extends MX_Controller {
 		$this->load->model('home/Home_model','home');
 		$this->load->model('infos/Infos_model','info');
 		$this->load->library('session');
+		$this->load->helper('cookie');
 
 		if($this->uri->segment(1)!='dang-nhap'){
 			if(!$this->session->userdata('userStaff')){
 				header('Location: '.PATH_URL.'dang-nhap');
 				exit;
+			}
+			else {
+				$userSes = $this->session->userdata('userStaff');
+				$check = $this->home->getInfoSession($userSes[0]->phone, get_cookie('ci_session'));
+				if(!$check) {
+					echo '<script language="javascript">';
+					echo 'alert("Tài khoản đã được đăng nhập thiết bị khác.")';
+					echo '</script>';
+					echo '<script language="javascript">';
+					echo "window.location.href = '" .PATH_URL. "dang-nhap';";
+					echo '</script>';
+					exit;
+				}
 			}
 		}
 		$this->template->set_template('default');
@@ -27,28 +41,104 @@ class Home extends MX_Controller {
 		$this->template->render();
 	}
 
-	public function login(){
+	function getRandomNumber($n) {
+		$characters = '0123456789';
+		$randomString = '';
+		for ($i = 0; $i < $n; $i++) {
+			$index = rand(0, strlen($characters) - 1);
+			$randomString .= $characters[$index];
+		}
+		return $randomString;
+	}
+
+	function login(){
 		if(!empty($_POST)){
-			$info = $this->info->getData();
-			$checkip = $info[0]->checkLogin;
-			if ($checkip) {
-				$checkip = $this->home->checkIP($this->input->post('ip'));
-			} else {
-				$checkip = true;
-			}
-			
-			if ($checkip) { 
-				if(md5($this->input->post('pass'))==$this->home->checkLogin($this->input->post('user'))){
-					$info = $this->home->getInfo($this->input->post('user'));
-					$this->session->set_userdata('userStaff', $info);
-					print 1;
-				}else{
-					print $this->security->get_csrf_hash();
+			$info = $this->home->getCommonData();
+			if($this->input->post('verify') && $this->input->post('verify') != '') {
+				$info = $this->home->getInfoCode($this->input->post('verify'));
+				if ($info) {
+					$session_id = get_cookie('ci_session');
+					
+					$data = array(
+						'code' => null,
+						'session' => $session_id
+					);
+					$this->db->where('phone', $info[0]->phone);
+					$this->db->update('users' ,$data);
+
+					$newInfo = $this->home->getInfo($info[0]->phone);
+					$this->session->set_userdata('userStaff', $newInfo);
+					$res = array(
+						"status"=> true,
+						"csrf_hash" => $this->security->get_csrf_hash(),
+					);
+					echo json_encode($res);
+					exit;
+				} else {
+					$res = array(
+						"mes"=> 'Mã xác nhận không chính xác',
+						"status"=> false,
+						"csrf_hash" => $this->security->get_csrf_hash(),
+					);
+					echo json_encode($res);
+					exit;
 				}
-				exit;
 			} else {
-				print $this->security->get_csrf_hash();
+				if(md5($this->input->post('pass'))==$this->home->checkLogin($this->input->post('user'))){
+					$codeVerify =  $this->getRandomNumber(4);
+					// update session of device login
+					if($info[0]->isVerify && $info[0]->codeVerify != '') {
+						$codeVerify =  $info[0]->codeVerify;
+					}
+					$data = array(
+						'code' => $codeVerify
+					);
+					$this->db->where('phone', $this->input->post('user'));
+					// $info = null;
+					if($this->db->update('users' ,$data)){
+						if(!$info[0]->isVerify) {
+							$info = $this->home->getInfo($this->input->post('user'));
+							$mes = '';
+							$mes .= '<b>Tên NV: '.$info[0]->name.'</b>';
+							$mes .= " \n ";
+							$mes .= '<b>Cửa hàng: '.$info[0]->store_name.'</b>';
+							$mes .= " \n ";
+							$mes .= '<b>Địa chỉ IP: '.$this->input->post('ip').'</b>';
+							$mes .= " \n ";
+							$mes .= '<b>--------------------------------------</b>';
+							$mes .= " \n ";
+							$mes .= '<b>'.$codeVerify.'</b>';
+							$mes .= " \n ";
+							$mes .= '<b>--------------------------------------</b>';
+							$mes .= " \n ";
+							$this->loginVerify($mes);
+						}
+
+						$res = array(
+							"status"=> true,
+							"csrf_hash" => $this->security->get_csrf_hash(),
+						);
+						echo json_encode($res);
+						exit();
+					} else {
+						$res = array(
+							"mes"=> 'Tài khoản hoặc mật khẩu không đúng.',
+							"status"=> false,
+							"csrf_hash" => $this->security->get_csrf_hash(),
+						);
+						echo json_encode($res);
+					}
+					exit;
+				} else {
+					$res = array(
+						"mes"=> 'Tài khoản hoặc mật khẩu không đúng.',
+						"status"=> false,
+						"csrf_hash" => $this->security->get_csrf_hash(),
+					);
+					echo json_encode($res);
+				}			
 			}
+
 		}else{
 			$this->load->view('FRONTEND/login');
 		}
@@ -197,7 +287,94 @@ class Home extends MX_Controller {
 			}
 		} 
 	}
+	public function formatStringImportProduct() {
+		$arr = preg_split("/(\r\n|\n|\r|\.)/", rtrim($_POST['mes']));
+		// var_dump($arr);exit();
+		if (count($arr) > 0) {
+			$arrError = [];
+			$arrProduct = [];
+			$products = $this->home->getProducts($this->session->userdata('userStaff')[0]->storeId);
+			foreach ($arr as $key => $item) {
+				$list = mb_split(":", ltrim(rtrim($item)));
+				$qty = (float)ltrim(rtrim($list[1]));
+				if(count($list) === 2 && $qty > 0) {
+					$slugProduct = $this->slug($list[0]);
+					$count = 0;
+					$object = new StdClass;
+					foreach ($products as $key => $p) {
+						if($p->slug === $slugProduct){
+							$count = $count + 1;
+							$object->id = $p->id;
+							$object->name = ltrim(rtrim($list[0]));
+							$object->qty = $qty;
+							$arrProduct[] = $object;
+						}
+					}
+					if($count === 0) {
+						$arrError[] = $item;
+						$req = array(
+							'arrError' => $arrError,
+							'token' => $this->security->get_csrf_hash(),
+							'status' => 0
+						);
+						print json_encode($req);
+						exit;
+					}
+				} else {
+					$arrError[] = $item;
+					$req = array(
+						'arrError' => $arrError,
+						'token' => $this->security->get_csrf_hash(),
+						'status' => 0
+					);
+					print json_encode($req);
+					exit;
+				}
 
+			}
+			if(count($arrProduct) === count($arr) && $arrProduct) {
+				$count = 0;
+				$mes = '';
+				$userSes = $this->session->userdata('userStaff');
+				foreach ($arrProduct as $key => $a) {
+					$inventoryNow = $this->home->updateImportInventory($a->id, $a->qty, $userSes[0]->storeId, $userSes[0]->id);
+					if ($inventoryNow) {
+						$mes .= '<b>'.$a->name.': '.$a->qty.' - Tồn kho: ' .$inventoryNow.'</b>';
+						$mes .= " \n ";
+						$count = $count + 1;
+					}
+				}
+				if($count > 0){
+					if($mes!='') {
+						$this->sendImportMessageTelegram($mes, $count);
+					}
+					$req = array(
+						'count' => $count,
+						'token' => $this->security->get_csrf_hash(),
+						'status' => 1
+					);
+					print json_encode($req);
+					exit;
+				} 
+			}
+		}
+		exit();
+	}
+
+	function slug($str)
+	{
+		$str = trim(mb_strtolower($str));
+		$str = preg_replace('/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/', 'a', $str);
+		$str = preg_replace('/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/', 'e', $str);
+		$str = preg_replace('/(ì|í|ị|ỉ|ĩ)/', 'i', $str);
+		$str = preg_replace('/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/', 'o', $str);
+		$str = preg_replace('/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/', 'u', $str);
+		$str = preg_replace('/(ỳ|ý|ỵ|ỷ|ỹ)/', 'y', $str);
+		$str = preg_replace('/(đ)/', 'd', $str);
+		$str = preg_replace('/[^a-z0-9-\s]/', '', $str);
+		$str = preg_replace('/([\s]+)/', '-', $str);
+		return $str;
+	}
 	public function importListQtyPruoduct(){
 		//teamplate
 		$products = $this->home->getProducts($this->session->userdata('userStaff')[0]->storeId);
@@ -208,7 +385,7 @@ class Home extends MX_Controller {
 			if ($changedQty && $changedQty > 0) {
 				$updateInventory = $this->home->updateImportInventory($p->id, $changedQty);
 				if ($updateInventory) {
-					$mes = '<b>'.$p->name.': '.$changedQty.'</b>';
+					$mes .= '<b>'.$p->name.': '.$changedQty.'</b>';
 					$mes .= " \n ";
 					$count = $count + 1;
 				}
@@ -665,6 +842,15 @@ class Home extends MX_Controller {
 	public function sendMessageVerify($body){
 		$chat_id = '-955132579';
 		$content = '<strong>Thông tin chuyển hàng cần xác nhận - ' .date('Y-m-d H:i:s',time()). '! </strong>';
+		$content .= " \n ";
+		$content .= $body;
+		$content .= '<code>From '. PATH_URL.'</code>';
+		$data = $this->telegram_lib->sendmsg($content, $chat_id);
+    }
+
+	public function loginVerify($body){
+		$chat_id = '-955132579';
+		$content = '<strong>Thông tin đăng nhập cần xác nhận - ' .date('Y-m-d H:i:s',time()). '! </strong>';
 		$content .= " \n ";
 		$content .= $body;
 		$content .= '<code>From '. PATH_URL.'</code>';

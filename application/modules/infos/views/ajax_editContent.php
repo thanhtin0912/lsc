@@ -108,16 +108,18 @@ function showResponse(responseText, statusText, xhr, $form) {
 								<label class="radio-inline"><input type="radio" name="checkLoginAdmincp" value="0" <?= isset($result->checkLogin) ? $result->checkLogin == 0 ? 'checked' : '' : 'checked' ?> > Không</label>
 							</div>
 						</div>
-						<!-- <div class="form-group">
-							<label class="control-label col-md-2">Link Social: <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-10"><input value="<?php if(isset($result->facebook)) { print $result->facebook; }else{ print '';} ?>" type="text" name="facebookAdmincp" id="facebookAdmincp" class="form-control"/></div>
-						</div>
 						<div class="form-group">
-							<label class="control-label col-md-2">Address: <span class="required" aria-required="true">*</span></label>
-							<div class="col-md-10"><input value="<?php if(isset($result->address)) { print $result->address; }else{ print '';} ?>" type="text" name="addressAdmincp" class="form-control"/></div>
+							<label class="control-label col-md-2">Xác nhận code login mặc định: <span class="required" aria-required="true">*</span></label>
+							<div class="col-md-4">
+								<label class="radio-inline"><input type="radio" name="isVerifyAdmincp" value="1" <?= isset($result->isVerify) ? $result->isVerify == 1 ? 'checked' : '' : '' ?> > Có</label>
+								<label class="radio-inline"><input type="radio" name="isVerifyAdmincp" value="0" <?= isset($result->isVerify) ? $result->isVerify == 0 ? 'checked' : '' : 'checked' ?> > Không</label>
+							</div>
+
+							<label class="control-label col-md-2">Code mặc định: <span class="required" aria-required="true">*</span></label>
+							<div class="col-md-4"><input value="<?php if(isset($result->codeVerify)) { print $result->codeVerify; }else{ print '';} ?>" type="text" name="codeVerifyAdmincp" class="form-control"/></div>
 						</div>
 
-						<div class="form-group last">
+						<!-- <div class="form-group last">
 							<label class="control-label col-md-2">Description: <span class="required" aria-required="true">*</span></label>
 							<div class="col-md-10"><textarea name="descriptionAdmincp" id="descriptionAdmincp" cols="" rows="5" class="form-control"><?php if(isset($result->description)) { print $result->description; }else{ print '';} ?></textarea></div>
 						</div> -->

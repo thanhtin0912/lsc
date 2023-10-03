@@ -17,7 +17,7 @@
     border-radius: 3px !important;
 }
 </style>
-
+<link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/sky-form.css">
 
 
 <script type="text/javascript">
@@ -190,6 +190,50 @@
         });	
     }
 
+	function modalOpenImportString() {
+		$('#modalImportString').modal('show');
+		$('#content').val('')
+	}
+
+	function saveStringImportProduct () {
+		var url = '<?= PATH_URL ?>';
+		var mes = $("#content").val();
+		if (mes == '') {
+			notify('Vui lòng nhập nội dung tin nhắn .', 'danger');
+			return false;
+		}
+		$('#btn-save-list-qty').attr('disabled', true);	
+        $.ajax({    
+            type: 'POST',
+            url:  url +'formatStringImportProduct',
+            data: {
+                mes    : mes,
+				csrf_token: $('#csrf_token').val()
+            },           
+            success: function(data) { 
+                var responseText =  JSON.parse(data)     
+                if(responseText['status'] == 1){
+					notify('Với nội dung được nhập trên, đã có <strong>'+responseText['count'] + '</strong> sản phẩm nhập vào hệ thống.', 'success');
+					$('#modalImportString').modal('hide');
+					searchProduct();
+                } else if (responseText['status'] == 2) {
+                    notify(responseText['arrError'], 'danger');
+                } else {
+                    let arrError = responseText['arrError']
+                    var note = mes
+					for (let i = 0; i < arrError.length; i++) {
+                        if (mes.indexOf(arrError[i])!=-1) {
+                            note = note.replace(arrError[i], '<strong>'+arrError[i]+'</strong> sai cấu trúc');
+                        }
+                    }
+                    $("#txtError").html(note.replaceAll("\n", "<br>"));
+                    $("#txtError").show();
+				}
+                $('#csrf_token').val(responseText['token'])
+                $('#btn-save-list-qty').attr('disabled', false);	
+            }     
+        });	
+	}
 
 </script>
 <div class="col-md-12">
@@ -208,6 +252,7 @@
 		<div class="panel panel-green margin-bottom-40">
 			<div class="panel-heading d-flex justify-content-between">
 				<h3 class="panel-title font-bold"><i class="fa fa-tasks"></i> Danh sách sản phẩm</h3>
+				<button class="btn-u btn-u-xs btn-u-green" type="button" onclick="modalOpenImportString()">Nhập nhanh</button>
 				<!--<div class="form-check">-->
 				<!--	<input class="form-check-input" type="checkbox" value="" id="flexInputAll">-->
 				<!--	<label class="form-check-label panel-title pl-4" for="flexCheckDefault">-->
@@ -259,4 +304,45 @@
 </div>
 <div id="importControl" style="position: fixed; right: 5px; opacity: 1; cursor: pointer;">
 	<button class="btn-u btn-u-xs btn-u-green p-3 handle-control d-none"  type="button" onclick="saveListQtyPruoduct()">Nhập tất cả</button>
+</div>
+
+<div class="modal lg fade" id="modalImportString" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title font-bold">Nhập nhanh sản phẩm kho</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="py-2 sky-form">
+					<div class="alert alert-danger fade in">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						<h4>Cách nhập tin nhắn!</h4>
+						<span><strong>Tên sản phẩm : Số lượng</strong></span><br>
+						<strong>Ví dụ:  in Sticker: 1 </strong><br>
+						<span>Nếu muốn nhập nhiều sản phẩm thì xuống hàng cho mỗi sản phẩm</span>
+					</div>
+					<fieldset>
+						<section>
+							<label class="label">Nhập tin nhắn:</label>
+							<label class="textarea py-3">
+								<textarea rows="12" name="info" placeholder="Nội dung" id="content"></textarea>
+							</label>
+						</section>
+					</fieldset>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn-u rounded-4x btn-u-default" data-dismiss="modal">Thoát</button>
+				<button type="button" class="btn-u rounded-4x btn-u-green" id="btn-save-list-qty" onclick="saveStringImportProduct()">Nhập</button>
+			</div>
+			<fieldset class=" mt-2">
+				<div class="alert alert-danger fade in" id="txtError" style="display:none">
+					
+				</div>
+			</fieldset>
+		</div>
+	</div>
 </div>
