@@ -118,7 +118,13 @@ function showResponse(responseText, statusText, xhr, $form) {
 							<label class="control-label col-md-2">Code mặc định: <span class="required" aria-required="true">*</span></label>
 							<div class="col-md-4"><input value="<?php if(isset($result->codeVerify)) { print $result->codeVerify; }else{ print '';} ?>" type="text" name="codeVerifyAdmincp" class="form-control"/></div>
 						</div>
-
+						<div class="form-group">
+							<label class="control-label col-md-2">Đăng xuất toàn hệ thống:</label>
+							<div class="col-md-3">
+								<label class="radio-inline"><input type="radio" name="logoutAdmincp" value="0" checked> Không</label>
+								<label class="radio-inline"><input type="radio" name="logoutAdmincp" value="1"> Có</label>
+							</div>
+						</div>
 						<!-- <div class="form-group last">
 							<label class="control-label col-md-2">Description: <span class="required" aria-required="true">*</span></label>
 							<div class="col-md-10"><textarea name="descriptionAdmincp" id="descriptionAdmincp" cols="" rows="5" class="form-control"><?php if(isset($result->description)) { print $result->description; }else{ print '';} ?></textarea></div>

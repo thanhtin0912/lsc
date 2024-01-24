@@ -103,15 +103,15 @@ class Report_kiem_tra_xuat_cua_hang_model extends CI_Model {
 	}
 
 	function getExportDate($proId, $storeId, $date){
-		$this->db->select('adjQty, created');
+		$this->db->select('adjQty, created, delete');
 		$this->db->where('newQty < prevQty');
 		$this->db->where('is_remove', 0);
 		$this->db->where('productId', $proId);
 		$this->db->where('storeId', $storeId);
 		$this->db->where('created >=', date('Y-m-d 00:00:00', strtotime($date)));
 		$this->db->where('created <=', date('Y-m-d 23:59:59', strtotime($date)));
-		$this->db->where('status',1);
-		$this->db->where('delete',0);
+		$this->db->where('status !=',3);
+		// $this->db->where('delete',0);
 		$query = $this->db->get('inventory_history');
 		
 		if($query->result()){

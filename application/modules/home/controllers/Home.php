@@ -17,7 +17,7 @@ class Home extends MX_Controller {
 			}
 			else {
 				$userSes = $this->session->userdata('userStaff');
-				$check = $this->home->getInfoSession($userSes[0]->phone, get_cookie('ci_session'));
+				$check = $this->home->getInfoSession($userSes[0]->phone, $userSes[0]->session);
 				if(!$check) {
 					echo '<script language="javascript">';
 					echo 'alert("Tài khoản đã được đăng nhập thiết bị khác.")';
@@ -41,6 +41,16 @@ class Home extends MX_Controller {
 		$this->template->render();
 	}
 
+	function getRandomCharacters($n) {
+		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$randomString = '';
+		for ($i = 0; $i < $n; $i++) {
+			$index = rand(0, strlen($characters) - 1);
+			$randomString .= $characters[$index];
+		}
+		return $randomString;
+	}
+
 	function getRandomNumber($n) {
 		$characters = '0123456789';
 		$randomString = '';
@@ -51,17 +61,17 @@ class Home extends MX_Controller {
 		return $randomString;
 	}
 
+
 	function login(){
 		if(!empty($_POST)){
-			$info = $this->home->getCommonData();
+		    $info = $this->home->getCommonData();
 			if($this->input->post('verify') && $this->input->post('verify') != '') {
 				$info = $this->home->getInfoCode($this->input->post('verify'));
 				if ($info) {
-					$session_id = get_cookie('ci_session');
-					
+					$session = $this->getRandomCharacters(6);
 					$data = array(
 						'code' => null,
-						'session' => $session_id
+						'session' => $session
 					);
 					$this->db->where('phone', $info[0]->phone);
 					$this->db->update('users' ,$data);
@@ -96,6 +106,7 @@ class Home extends MX_Controller {
 					$this->db->where('phone', $this->input->post('user'));
 					// $info = null;
 					if($this->db->update('users' ,$data)){
+					    
 						if(!$info[0]->isVerify) {
 							$info = $this->home->getInfo($this->input->post('user'));
 							$mes = '';
@@ -136,13 +147,15 @@ class Home extends MX_Controller {
 						"csrf_hash" => $this->security->get_csrf_hash(),
 					);
 					echo json_encode($res);
-				}			
+				}
+				
 			}
 
 		}else{
 			$this->load->view('FRONTEND/login');
 		}
 	}
+
 
 	function logout(){
 		$this->session->unset_userdata('userStaff');

@@ -56,7 +56,9 @@
 
 				<div class="topbar">
 					<ul class="loginbar pull-right">
-						<li><a href="page_faq.html"><?= $this->session->userdata('userStaff')[0]->name;?> | <?= $this->session->userdata('userStaff')[0]->store_name;?> </a></li>
+						<li ><a href="page_faq.html"><?= $this->session->userdata('userStaff')[0]->name;?> </a></li>
+						<li class="topbar-devider"></li>
+						<li><a href="https://nv.leotea.vn/home?by=<?= $this->session->userdata('userStaff')[0]->phone;?>">Nhập ca làm việc</a></li>
 					</ul>
 				</div>
 				<!-- End Topbar -->

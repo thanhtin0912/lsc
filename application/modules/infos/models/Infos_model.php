@@ -2,6 +2,7 @@
 class infos_model extends CI_Model {
 	private $module = 'infos';
 	private $table = 'infos';
+	private $table_users = 'infos';
 
 	function getsearchContent($limit,$page){
 		$this->db->select('*');
@@ -81,7 +82,13 @@ class infos_model extends CI_Model {
 		}else{
 			$result = $this->getDetailManagement($this->input->post('hiddenIdAdmincp'));
 			//Kiểm tra đã tồn tại chưa?
-
+			
+			if($this->input->post('logoutAdmincp')==1) {
+				$data = array(
+					'session'=> '',
+				);
+				$this->db->update('users', $data);
+			}
 			
 			$data = array(
 				'name'=> trim($this->input->post('nameAdmincp')),

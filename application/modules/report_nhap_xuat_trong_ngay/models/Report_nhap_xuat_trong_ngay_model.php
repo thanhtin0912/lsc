@@ -27,14 +27,14 @@ class Report_nhap_xuat_trong_ngay_model extends CI_Model {
 	}
 
 	function totalImportDate($proId, $storeId, $date){
-		$this->db->select('adjQty, created');
+		$this->db->select('adjQty, created, delete');
 		$this->db->where('newQty > prevQty');
 		$this->db->where('productId', $proId);
 		$this->db->where('storeId', $storeId);
 		$this->db->where('created >=', date('Y-m-d 00:00:01', strtotime($date)));
 		$this->db->where('created <=', date('Y-m-d 23:59:59', strtotime($date)));
-		$this->db->where('status',1);
-		$this->db->where('delete',0);
+		$this->db->where('status !=',3);
+		// $this->db->where('delete',0);
 		$query = $this->db->get('inventory_history');
 		
 		if($query->result()){
@@ -44,15 +44,15 @@ class Report_nhap_xuat_trong_ngay_model extends CI_Model {
 		}
 	}
 	function totalExportDate($proId, $storeId, $date){
-		$this->db->select('adjQty, created');
+		$this->db->select('adjQty, created, delete');
 		$this->db->where('newQty < prevQty');
 		$this->db->where('is_remove', 0);
 		$this->db->where('productId', $proId);
 		$this->db->where('storeId', $storeId);
 		$this->db->where('created >=', date('Y-m-d 00:00:01', strtotime($date)));
 		$this->db->where('created <=', date('Y-m-d 23:59:59', strtotime($date)));
-		$this->db->where('status',1);
-		$this->db->where('delete',0);
+		$this->db->where('status !=',3);
+		// $this->db->where('delete',0);
 		$query = $this->db->get('inventory_history');
 		
 		if($query->result()){

@@ -124,6 +124,13 @@ class Customers_model extends CI_Model {
 			}else{
 				$pass = md5($this->input->post('passAdmincp'));
 			}
+
+			if($this->input->post('logoutAdmincp')){
+				$session  = '';
+			}else{
+				$session = $result[0]->session;
+			}
+
 			$data = array(
 				'phone'=> $this->input->post('phoneAdmincp'),
 				'password'=> $pass,
@@ -131,6 +138,7 @@ class Customers_model extends CI_Model {
 				'address'=> $this->input->post('addressAdmincp'),
 				'email'=> $this->input->post('emailAdmincp'),
 				'storeId'=> $this->input->post('storeAdmincp'),
+				'session'=> $session,
 				'isCheck'=> $this->input->post('isCheckAdmincp'),
 				'status'=> $this->input->post('statusAdmincp')
 			);

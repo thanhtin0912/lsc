@@ -131,6 +131,13 @@ function showResponse(responseText, statusText, xhr, $form) {
 								<label class="radio-inline"><input type="radio" name="isCheckAdmincp" value="0" <?= isset($result->isCheck) ? $result->isCheck == 0 ? 'checked' : '' : 'checked' ?> > Không</label>
 								<label class="radio-inline"><input type="radio" name="isCheckAdmincp" value="1" <?= isset($result->isCheck) ? $result->isCheck == 1 ? 'checked' : '' : '' ?> > Có</label>
 							</div>
+							<?php if ($id) { ?>
+								<label class="control-label col-md-2">Đăng xuất thiết bị:</label>
+							<div class="col-md-3">
+								<label class="radio-inline"><input type="radio" name="logoutAdmincp" value="0" checked> Không</label>
+								<label class="radio-inline"><input type="radio" name="logoutAdmincp" value="1"> Có</label>
+							</div>
+							<?php } ?>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-md-2">Số điện thoại: <span class="required" aria-required="true">*</span></label>

@@ -147,7 +147,7 @@ class History extends MX_Controller {
 					'prevQty' => $inventoryProductOfStore[0]->value,
 					'adjQty' => $result[0]->adjQty,
 					'mainStore' => $result[0]->mainStore,
-					'status'=> 2,
+					'status'=> 3,
 					'delete'=> 1,
 					'created'=> date('Y-m-d H:i:s',time()),
 				);
