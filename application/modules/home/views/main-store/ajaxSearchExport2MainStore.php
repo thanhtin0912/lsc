@@ -16,6 +16,9 @@
     <td class="new-inventory fa-2x font-bold"><?php echo $foramt_inventory?></td>
     
     <td class="font-bold"><span <?php if($p->estimates > 0) { echo 'class="badge bg-color-red"'; }?>><?= $p->estimates; ?></span></td>
+    <?php if (($p->inventory) == 0 &&  $p->estimates > 0) { ?>
+    <input type="hidden" value="<?= $p->estimates; ?>" name="thieu<?=$p->id?>" />
+    <?php } ?>
     <td>
         <button type="button" class="quantity-button hidden-xs" name="subtract" onclick="javascript: document.getElementById(&quot;qty<?=$p->id?>&quot;).value--;" value="-">-</button>
         <input type="number" min="0" onkeypress="return Enter(event,<?=$p->id?>)"  class="quantity-field" id="qty<?=$p->id?>" 
@@ -78,5 +81,38 @@
 			}
             $button.closest('tr').find('.label-red').text(parseFloat(oldInventory) - parseFloat(qty));
 	});
+
+    function confirm(params) {
+		$('#modalConfirm').modal('show');
+		var p = <?php echo json_encode($products) ?>;
+		var str = '' ;
+        var str1 = '' ;
+		for (var i = 0; i < p.length; i++) {
+			var checkQty = $('#qty' + p[i].id).val();
+			if (p[i].inventory >= p[i].estimates && p[i].inventory > 0 && checkQty > 0) {
+				str += '<tr>';
+				str += '<td>' + (i + 1) + '</td>';
+				str += '<td class="font-bold">' + p[i].name + '</td>';
+				str += '<td class="font-bold">' + p[i].inventory + '</td>';
+				str += '<td ><span class="badge bg-color-red font-16">' + checkQty+ '</span></td>';
+                str += '<td></td>';
+				str += '</tr>';
+			} else {
+                var thieu = p[i].estimates  - checkQty;
+                if (p[i].estimates > 0 && p[i].estimates > p[i].inventory) {
+                    str1 += '<tr class="bg-color-orange">';
+                    str1 += '<td>' + (i + 1) + '</td>';
+                    str1 += '<td class="font-bold">' + p[i].name + '</td>';
+                    str1 += '<td class="font-bold">' + p[i].inventory + '</td>';
+                    str1 += '<td ><span class="badge bg-color-red font-16">' + checkQty+ '</span></td>';
+                    str1 += '<td><span class="badge bg-color-green font-16">' + thieu+ ' </span>Thiếu</td>';
+                    str1 += '</tr>';
+                }
+
+            }
+		}
+		$('#tableDataConfirm').children().remove();
+        $('#tableDataConfirm').append(str, str1);
+	}
 
 </script>

@@ -480,6 +480,57 @@ class Home extends MX_Controller {
 		} 
 	}
 
+	public function exportListQtyPruoduct2() {
+		$products = $this->home->getProducts($this->session->userdata('userStaff')[0]->storeId);
+		$count = 0;
+		$mainStore = NULL;
+		if (!empty($_POST['mainStore'])) {
+			$mainStore = $_POST['mainStore'];
+		}
+		$mes = '';
+		$arrThieu = [];
+		$userSes = $this->session->userdata('userStaff');
+		foreach ($products as $key => $p) {
+			if (isset($_POST['qty'.$p->id]) && $_POST['qty'.$p->id] > 0) {
+				$userSes = $this->session->userdata('userStaff');
+				$missingProduct = $this->home->getMissingProduct($_POST['mainStore']);
+				$list = unserialize($missingProduct[0]->missing);
+				$quoteValue = $list[$p->id];
+				$updateInventory = $this->home->updateExportInventory($p->id, $_POST['qty'.$p->id], $mainStore, $userSes[0]->storeId, $userSes[0]->id);
+				if ($updateInventory) {
+					$count = $count + 1;
+					$new = '<b>'.$p->name.': '.$_POST['qty'.$p->id].'</b>';
+					if ($quoteValue > $p->inventory) {
+						$thieu = $quoteValue  - $_POST['qty'.$p->id];
+						$new = '<b>'.$p->name.': '.$_POST['qty'.$p->id].' (Thiếu ' .$thieu. ')</b>';
+						$arrThieu[$p->id] = $thieu;
+					}
+					$mes .= $new;
+					$mes .= " \n ";
+				}
+			} else {
+				if (isset($_POST['thieu'.$p->id]) && $_POST['thieu'.$p->id] > 0) {
+				    $arrThieu[$p->id] = $_POST['thieu'.$p->id];
+					$mes .= '<b>'.$p->name.': 0 (Thiếu '.$_POST['thieu'.$p->id].')</b>';
+					$mes .= " \n ";
+				}
+			}
+		}
+		
+		if ($arrThieu != [] ) {
+			$saveMissingProduct = $this->home->insertMissingProduct($arrThieu, $mainStore,  $userSes[0]->phone);
+		}
+
+		if($count > 0){
+		    if($mes!='' && $mainStore) {
+				$plus = ' bổ sung ';
+				$this->sendMessageTelegram($mes, $mainStore, $count, $plus);
+			}
+			print 'success.'.$count.'.'.$this->security->get_csrf_hash();
+			exit;
+		} 
+	}
+
 	public function removeInventory(){
 		//teamplate
 		if(!empty($_POST)){
@@ -845,11 +896,11 @@ public function check_export(){
 		return $products;
 	}
 	/*------------------------------------ End API --------------------------------*/
-    public function sendMessageTelegram($body, $store, $total){
+    public function sendMessageTelegram($body, $store, $total, $plus=''){
         $chat_id = '-919335720';
 		$this->load->model('stores/stores_model');
 		$store =$this->stores_model->getDetailManagement($store);
-		$content = '<strong>Xuất hàng cho - '.$store[0]->name. ' - ' .date('Y-m-d H:i:s',time()). '! </strong>';
+		$content = '<strong>Xuất hàng'.$plus.' cho - '.$store[0]->name. ' - ' .date('Y-m-d H:i:s',time()). '! </strong>';
 		$content .= " \n ";
 		$content .= $body;
 		$content .= '<code>Tổng sản phẩm: '. $total.'</code>';

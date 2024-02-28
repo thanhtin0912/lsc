@@ -94,6 +94,7 @@ $route['ajaxSearchExportMainStore'] = "home/ajaxSearchExportMainStore";
 // xuat hang lan 2
 $route['xuat-kho-chinh-2'] = "home/main_export2";
 $route['ajaxSearchExport2MainStore'] = "home/ajaxSearchExport2MainStore";
+$route['exportListQtyPruoduct2'] = "home/exportListQtyPruoduct2";
 // 
 $route['kiem-tra-xuat-cua-hang'] = "home/check_export";
 $route['ajaxSearchExportProductFromStore'] = "home/ajaxSearchExportProductFromStore";

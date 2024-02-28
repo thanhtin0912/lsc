@@ -494,6 +494,7 @@ class Home_model extends CI_Model {
 		$this->db->where('storeId', $store);
 		$this->db->where('dateExport >=', date('Y-m-d 21:00:00', strtotime($date . "-1 days")));
 		$this->db->where('dateExport <=', date('Y-m-d 20:59:59', strtotime($date)));
+		$this->db->order_by('created','DESC');
 		$this->db->limit(1);
 		$query = $this->db->get('history_missing_export');
 		
