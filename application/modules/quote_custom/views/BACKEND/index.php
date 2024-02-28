@@ -31,6 +31,7 @@
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
+	    showFromToDate();
 		$('#days').change(function(){
 			showFromToDate();
 		});
@@ -119,7 +120,6 @@
 		$('#caledar_from').val(formatDate(fromDate));
 	}
 	function formatDate(date) {
-		console.log(date);
 		return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " 00:00:00" ;
 	}
 </script>
@@ -230,7 +230,7 @@
 					<div class="form-group">
 						<label class="control-label col-md-3">Khoản thời gian:</label>
 						<div class="col-md-9">
-							<div class="input-group date-picker input-daterange" style="width: 100%;">
+							<div class="input-group date-picker input-daterange" data-date-format="yyyy-mm-dd" style="width: 100%;">
 								<input id="caledar_from" type="text" placeholder="date" class="form-control" name="from">
 								<span class="input-group-addon">to</span>
 								<input id="caledar_to" type="text" placeholder="date" class="form-control" name="to">

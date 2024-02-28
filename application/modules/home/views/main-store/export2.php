@@ -1,9 +1,9 @@
 <style > 
-.export-page2 {
+.export2-page {
 	position: relative;
     border-bottom: solid 2px #72c02c;
 }
-.export-page2 > a {
+.export2-page > a {
 	color: #72c02c;
 }
 #importControl {
@@ -78,6 +78,7 @@
 			<div class="panel-heading d-flex justify-content-between">
 				<h3 class="panel-title font-bold"><i class="fa fa-tasks"></i> Danh sách sản phẩm </h3>
 			</div>
+			<form id="frmManagement" action="<?= PATH_URL ?>exportListQtyPruoduct" method="post" enctype="multipart/form-data" class="form-horizontal form-row-seperated">
 			<input type="hidden" value="<?=$this->security->get_csrf_hash()?>" name="csrf_token" />
 			<input type="hidden" value="" name="mainStore" id="mainStore"/>
 			<table class="table table-striped import">
@@ -96,6 +97,7 @@
 				<tbody id="tableProduct" >
 				</tbody>
 			</table>
+			</form>
 		</div>
 		<!--End Basic Table-->
 	</div>

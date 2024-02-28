@@ -19,6 +19,7 @@
 			<div class="panel-heading d-flex justify-content-between">
 				<h3 class="panel-title font-bold"><i class="fa fa-tasks"></i> Danh sách</h3>
 			</div>
+			<form id="frmManagement" action="<?= PATH_URL ?>exportListQtyPruoduct" method="post" enctype="multipart/form-data" class="form-horizontal form-row-seperated">
 			<input type="hidden" value="<?=$this->security->get_csrf_hash()?>" name="csrf_token" />
 			<table class="table table-striped import">
 				<thead>
@@ -50,6 +51,7 @@
 					<?php } ?>
 				</tbody>
 			</table>
+			</form>
 		</div>
 		<!--End Basic Table-->
 	</div>

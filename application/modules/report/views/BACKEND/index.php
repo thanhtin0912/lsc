@@ -21,8 +21,20 @@
 </style>
 <script>
 	function searchInvenToday(store, name){
-		$('#title-report').text('Báo cáo cửa hàng - '+ name);
-
+		var el = $('a.reload').closest(".portlet").children(".portlet-body");
+		var date = $('#report-date').val();
+	
+		$.post(root+module+'/ajaxLoadContent',{
+			store : store,
+			date: date,
+			csrf_token: token_value
+		},function(data){
+			$('#data-table-report').show();
+			$('.dataTables_wrapper').html(data);
+			const button = `<button class="btn blue" type="button" onclick="searchInvenToday(${store}, '${name}')">Tìm kiếm</button>`
+			$('#title-report').text('Báo cáo tồn kho - '+ name +' - ngày  ' + date );
+			$('#search-report').html(button);
+		});
 	}
 	function exportExcel() {
 		// document.getElementsByClassName("table")[0].classList.remove("hidden");
@@ -118,7 +130,9 @@
                             <div class="col-md-6 d-flex">
                                 <div class="input-group pr-2">
                                     <input type="text" class="form-control date-picker" data-date-format="yyyy-mm-dd" value="<?= date('Y-m-d'); ?>" id="report-date">
-									<button class="btn blue" type="button" onclick="searchInvenToday(${store}, '${name}')">Tìm kiếm</button>
+									<span class="input-group-btn" id="search-report">
+                                       
+                                    </span>
                                 </div>
                                 <button class="btn blue" type="button" onclick="exportExcel()">Xuất File</button>
                             </div>

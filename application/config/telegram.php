@@ -5,4 +5,4 @@ if (!defined('BASEPATH')) {
 }
 
 $config['bot_token'] = '6364559440:AAG7dbqx2jita_exjh5AfyFEAJ2RsDa4OyM';
-$config['chat_id'] = '-998428325';
+$config['chat_id'] = '-919335720';

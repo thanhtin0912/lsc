@@ -116,7 +116,7 @@
     }
 
 	function saveListQuoteInventory(){
-		$("#btn-save-list-qty").hide();
+	    $('#btn-save-list-qty').hide()
 		var options = {
 			beforeSubmit:  showRequest,  // pre-submit callback 
 			success:       showResponse  // post-submit callback 
@@ -130,11 +130,9 @@
 	function showResponse(responseText, statusText, xhr, $form) {
 		responseText = responseText.split(".");          
 		if(responseText[0]=='success'){
-			console.log(responseText);
 			$('#modalConfirm').modal('hide');
 			notify('<strong>'+responseText[1] + '</strong> Sản phẩm đã được nhập kiểm tra vào hệ thống', 'success');
-			$("#btn-save-list-qty").show()
-			$("#csrf_token").val(responseText[1])
+			$('#btn-save-list-qty').show()
 		} else {
 			notify('Không Sản phẩm được nhập kho.', 'danger');
 		}

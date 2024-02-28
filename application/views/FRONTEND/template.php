@@ -214,6 +214,9 @@
 			App.init();
 			StyleSwitcher.initStyleSwitcher();
 			ComponentsPickers.init();
+		    $('.quantity-field').bind('keyup paste', function(){
+                this.value = this.value.replace(/[^0-9]/g, '');
+            });
 		});
         var root = '<?= PATH_URL ?>';
         var csrf_token;

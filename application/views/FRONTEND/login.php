@@ -39,8 +39,8 @@
     <!-- CSS Customization -->
     <link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/custom.css">
     <link rel="stylesheet" href="<?= PATH_URL; ?>assets/css/frontend/antd.css">
-    <script type="text/javascript" src="<?= PATH_URL . 'assets/js/' ?>jquery-1.11.2.min.js"></script>
-    <!-- <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.min.js"></script> -->
+    <!--<script type="text/javascript" src="<?= PATH_URL . 'assets/js/' ?>jquery-1.11.2.min.js"></script>-->
+     <script type="text/javascript" src="<?= PATH_URL; ?>assets/js/frontend/jquery.min.js"></script> 
 </head>
 
 <body>
@@ -54,11 +54,11 @@
 
             <div class="input-group margin-bottom-20">
                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                <input type="text" class="form-control" id="loginUser" placeholder="Tài khoản">
+                <input type="text" class="form-control"  onkeypress="return EnterLogin(event)"  id="loginUser" placeholder="Tài khoản">
             </div>
             <div class="input-group margin-bottom-20">
                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                <input class="form-control" type="password" id="loginPass" placeholder="Mật khẩu">
+                <input class="form-control" onkeypress="return EnterLogin(event)"  type="password" id="loginPass" placeholder="Mật khẩu">
             </div>
             <div class="alert alert-warning fade in" id="alertWarning" style="display:none;">
                 <div id="divError"></div>
@@ -68,7 +68,7 @@
 
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
-                    <button type="submit" class="btn-u btn-block" onclick="login()">Đăng nhập</button>
+                    <button type="submit" class="btn-u btn-block" id="loginAndVerify" onclick="login(false)">Đăng nhập</button>
                 </div>
             </div>
         </div>
@@ -93,7 +93,7 @@
                                         class="text-center redText" id="countdowntimer"></span></h4>
                                 <input type="text" class="ant-input py-2" id="inputCode" style="margin: 20px 0">
                                 <button type="button" class="ant-btn jbo-primary-btn"
-                                    onclick="login()"><span>Xác thực</span></button>
+                                    onclick="login(true)"><span>Xác thực</span></button>
                             </div>
                             <div class="alert alert-warning fade in" id="alertVerify" style="display:none;">
                                 <div id="divErrorVerify"></div>
@@ -117,14 +117,21 @@
         $.ajaxSetup({
             async: false
         });
-        $.get('http://jsonip.com/', function(r) {
+        $.get('https://jsonip.com/', function(r) {
             ret_ip = r.ip;
         });
         return ret_ip;
     }
-
-    function login() {
+    
+	function EnterLogin(e){
+		if(e.keyCode == 13){ 
+			login();
+		}
+	}
+	
+    function login(eventClick) {
         $('#alertWarning').hide();
+        $('#loginAndVerify').attr('disabled', true);	
         name = $('#loginUser').val();
         pass = $('#loginPass').val();
         verify = $('#inputCode').val();
@@ -145,6 +152,10 @@
             $('#loginUser').focus();
             return false;
         } else if (name != '' && pass != '') {
+            if (verify == "" && eventClick == true) {
+                notify('Vui lòng nhập mã xác nhận', 'danger');
+                return false;
+            }
             var url = root + 'dang-nhap';
             $.post(url, {
                 user: name,
@@ -167,6 +178,7 @@
                 } else {
                     token_value = data.csrf_hash;
                     notify(data.mes, 'danger');
+                    $('#loginAndVerify').attr('disabled', false);	
                 }
             });
         }

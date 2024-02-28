@@ -31,6 +31,7 @@
 					<th class="sorting" >Tồn đầu</th>
 					<th class="sorting" >SL nhập</th>
 					<th class="sorting" >Tồn cuối</th>
+					<th class="sorting" >Kho đến</th>
 					<th class="sorting" >Ghi Chú</th>
 					<th class="center sorting" width="80" onclick="sort('created')" id="created">Created</th>
 				</tr>
@@ -55,6 +56,7 @@
 						<td><span class="label label-sm label-danger"><i class="fa fa-arrow-down"></i></span> <?= $v->adjQty;?></td>
 						<td><span class="label label-sm label-danger"><?= $v->newQty;?></span></td>
 					<?php } ?>
+					<td class="center"><?= $v->mainStore;?></td>
 					<td class="center"><?= $v->note;?></td>
 					<td class="center"><?=date('Y-m-d H:i:s',strtotime($v->created))?></td>
 				</tr>
@@ -73,6 +75,7 @@
 							<td><span class="label label-sm label-danger"><i class="fa fa-arrow-down"></i></span> <?= $v->adjQty;?></td>
 							<td><span class="label label-sm label-danger"><?= $v->newQty;?></span></td>
 						<?php } ?>
+						<td class="center"><?= $v->mainStore;?></td>
 						<td class="center"><?= $v->note;?></td>
 						<td class="center"><?=date('Y-m-d H:i:s',strtotime($v->created))?></td>
 					</tr>

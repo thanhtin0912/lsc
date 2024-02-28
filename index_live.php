@@ -294,9 +294,11 @@ define('API', 'api');
 if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on'){
 	define('PATH_URL', 'https://'.$_SERVER['HTTP_HOST'].FOLDER);
 	define('PATH_URL_ADMIN', 'https://'.$_SERVER['HTTP_HOST'].FOLDER.ADMINCP.'/');
+    define('PATH_URL_API', 'https://'.$_SERVER['HTTP_HOST'].FOLDER.API.'/');
 }else{
 	define('PATH_URL', 'http://'.$_SERVER['HTTP_HOST'].FOLDER);
 	define('PATH_URL_ADMIN', 'http://'.$_SERVER['HTTP_HOST'].FOLDER.ADMINCP.'/');
+    define('PATH_URL_API', 'http://'.$_SERVER['HTTP_HOST'].FOLDER.API.'/');
 }
 define('BASEFOLDER', substr(BASEPATH, 0, count(BASEPATH)-8));
 define('PREFIX', '');

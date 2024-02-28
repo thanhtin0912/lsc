@@ -29,7 +29,7 @@
                                     <?php $listExport = unserialize($p->export);?>
                                     <?php if ($listExport) {?>
                                     <?php foreach ($listExport as $key => $e) {?>
-                                    <li class="py-2"><i class="fa fa-check color-green"></i> <?= $e->created ?> - <span class="label font-16 bold <?php if($e->delete != 0) {echo 'bg-secondary';} else { echo 'label-danger'; }  ?>">SL: <?= $e->adjQty ?></span></li>
+                                    <li class="py-2"><i class="fa <?php if($e->delete != 0) {echo 'fa-trash';} else { echo 'fa-check'; }  ?> color-green"></i> <?= $e->created ?> - <span class="label font-16 bold <?php if($e->delete != 0) {echo 'bg-secondary';} else { echo 'label-danger'; }  ?>">SL: <?= $e->adjQty ?></span></li>
                                     <?php } ?>
                                     <?php } else { echo "No data";} ?>
                                 </ul>
@@ -39,7 +39,7 @@
                                     <?php $listImport = unserialize($p->import);?>
                                     <?php if ($listImport) {?>
                                     <?php foreach ($listImport as $key => $i) {?>
-                                    <li class="py-2"><i class="fa fa-check color-green"></i> <?= $i->created ?> - <span class="label font-16 bold <?php if($i->delete != 0) {echo 'bg-secondary';} else { echo 'label-success'; }  ?>">SL: <?= $i->adjQty ?></span></li>
+                                    <li class="py-2"><i class="fa <?php if($i->delete != 0) {echo 'fa-trash';} else { echo 'fa-check'; }  ?> color-green"></i> <?= $i->created ?> - <span class="label font-16 bold <?php if($i->delete != 0) {echo 'bg-secondary';} else { echo 'label-success'; }  ?>">SL: <?= $i->adjQty ?></span></li>
                                     <?php } ?>
                                     <?php } else { echo "No data";} ?>
                                 </ul>

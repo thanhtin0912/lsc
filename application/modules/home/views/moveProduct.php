@@ -206,6 +206,7 @@
 			<div class="panel-heading d-flex justify-content-between">
 				<h3 class="panel-title font-bold"><i class="fa fa-tasks"></i> Danh sách sản phẩm</h3>
 			</div>
+			<form id="frmManagement" action="<?= PATH_URL ?>exportListQtyPruoduct" method="post" enctype="multipart/form-data" class="form-horizontal form-row-seperated">
 			<input type="hidden" value="<?=$this->security->get_csrf_hash()?>" name="csrf_token" />
 			<table class="table table-striped import">
 				<thead>
@@ -243,4 +244,8 @@
 		</div>
 		<!--End Basic Table-->
 	</div>
+</div>
+
+<div id="importControl" style="position: fixed; right: 5px; opacity: 1; cursor: pointer;">
+	<button class="btn-u btn-u-xs btn-u-dark p-3 handle-control d-none"  type="button" onclick="saveListQtyPruoduct()">Nhập tất cả</button>
 </div>

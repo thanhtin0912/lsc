@@ -124,7 +124,7 @@ class Customers_model extends CI_Model {
 			}else{
 				$pass = md5($this->input->post('passAdmincp'));
 			}
-
+            // check đăng xuất 			
 			if($this->input->post('logoutAdmincp')){
 				$session  = '';
 			}else{

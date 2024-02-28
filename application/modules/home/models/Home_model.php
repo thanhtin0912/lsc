@@ -27,6 +27,7 @@ class Home_model extends CI_Model {
 		}
 	}
 	
+	
 	function checkLogin($user){
 		$this->db->select('c.*');
 		$this->db->where('c.phone', $user);
@@ -79,9 +80,8 @@ class Home_model extends CI_Model {
 			return false;
 		}
 	}
-
-
-
+	
+	
 	function getInfoCode($code){
 		$this->db->select('c.*, s.name as store_name, s.isMain');
 		$this->db->where('c.code', $code);
@@ -98,13 +98,11 @@ class Home_model extends CI_Model {
 			return false;
 		}
 	}
-
+	
 	function getInfoSession($phone, $ses){
-		$this->db->select('*');
-		$this->db->where('phone', $phone);
+		$this->db->select('id');
 		$this->db->where('session', $ses);
-		$this->db->where('status', 1);
-		$this->db->where('delete', 0);
+		$this->db->where('phone', $phone);
 
 		$this->db->from(PREFIX.$this->tbl_customer);
 		$query = $this->db->get();
@@ -115,7 +113,6 @@ class Home_model extends CI_Model {
 			return false;
 		}
 	}
-
 
 	function getProducts($store, $name =''){
 		$this->db->select('p.*, i.value as inventory, i.note as note');
@@ -176,6 +173,7 @@ class Home_model extends CI_Model {
 		}
 	}
 	
+
 
 	function updateImportInventory($id, $qty, $store, $userId) {
 		$getinventory = $this->getinventory($id, $store);
@@ -285,7 +283,7 @@ class Home_model extends CI_Model {
 		}
 		$this->db->where('i.storeId', $this->session->userdata('userStaff')[0]->storeId);
 		$this->db->where('i.customerId', $this->session->userdata('userStaff')[0]->id);
-		$this->db->order_by('i.created','DESC');
+		$this->db->order_by('i.id','DESC');
 		$this->db->from(PREFIX.$this->tbl_inven_his." i");
 		$this->db->join(PREFIX.$this->tbl_products." p", 'p.id = i.productId', "left");
 		$query = $this->db->get();
@@ -454,7 +452,7 @@ class Home_model extends CI_Model {
 			return true;
 		} 
 	}
-
+	
 	function saveMoveProduct($data) {
 		if($this->db->insert('move_products' , $data)){
 			return $this->db->insert_id();
@@ -478,5 +476,32 @@ class Home_model extends CI_Model {
 		}
 	}
 	
+	function insertMissingProduct($list, $store, $user) {
+		$data  = array (
+			'missing' => serialize($list),
+			'storeId'  	=> $store,
+			'exportBy'=> $user,
+			'dateExport' => date('Y-m-d H:i:s',time()),
+			'created'=> date('Y-m-d H:i:s',time()),
+		);
+		if($this->db->insert('history_missing_export', $data)){
+			return true;
+		} 
+	}
+	function getMissingProduct($store){
+		$date = date("Y-m-d H:i:s", time());
+		$this->db->select('*');
+		$this->db->where('storeId', $store);
+		$this->db->where('dateExport >=', date('Y-m-d 21:00:00', strtotime($date . "-1 days")));
+		$this->db->where('dateExport <=', date('Y-m-d 20:59:59', strtotime($date)));
+		$this->db->limit(1);
+		$query = $this->db->get('history_missing_export');
+		
+		if($query->result()){
+			return $query->result();
+		}else{
+			return false;
+		}
+	}
 }
 ?>

@@ -8,26 +8,25 @@ class Home extends MX_Controller {
 		$this->load->model('home/Home_model','home');
 		$this->load->model('infos/Infos_model','info');
 		$this->load->library('session');
-		$this->load->helper('cookie');
-
+        $this->load->helper('cookie');
+        
 		if($this->uri->segment(1)!='dang-nhap'){
 			if(!$this->session->userdata('userStaff')){
 				header('Location: '.PATH_URL.'dang-nhap');
 				exit;
-			}
-			else {
-				$userSes = $this->session->userdata('userStaff');
-				$check = $this->home->getInfoSession($userSes[0]->phone, $userSes[0]->session);
-				if(!$check) {
-					echo '<script language="javascript">';
-					echo 'alert("Tài khoản đã được đăng nhập thiết bị khác.")';
-					echo '</script>';
-					echo '<script language="javascript">';
-					echo "window.location.href = '" .PATH_URL. "dang-nhap';";
-					echo '</script>';
-					exit;
-				}
-			}
+			} else {
+    				$userSes = $this->session->userdata('userStaff');
+    				$check = $this->home->getInfoSession($userSes[0]->phone, $userSes[0]->session);
+    				if(!$check) {
+    					echo '<script language="javascript">';
+    					echo 'alert("Tài khoản đã được đăng nhập thiết bị khác.")';
+    					echo '</script>';
+    					echo '<script language="javascript">';
+    					echo "window.location.href = '" .PATH_URL. "dang-nhap';";
+    					echo '</script>';
+    					exit;
+    				}
+    			}
 		}
 		$this->template->set_template('default');
 		$this->template->write('title','Admin Control Panel');
@@ -60,7 +59,6 @@ class Home extends MX_Controller {
 		}
 		return $randomString;
 	}
-
 
 	function login(){
 		if(!empty($_POST)){
@@ -174,7 +172,7 @@ class Home extends MX_Controller {
 		$this->template->write_view('content','export', $data);
 		$this->template->render();
 	}
-
+	
 	public function moveProductToStore(){
 		$data['products'] = $this->home->getProducts($this->session->userdata('userStaff')[0]->storeId);
 		$data['stores'] = $this->home->getListOtherStore($this->session->userdata('userStaff')[0]->storeId);
@@ -230,6 +228,7 @@ class Home extends MX_Controller {
 			}
 		} 
 	}
+
 	public function remove(){
 		//teamplate
 		$data['productsIsRemove'] = $this->home->productsIsRemove($this->session->userdata('userStaff')[0]->storeId);
@@ -287,7 +286,7 @@ class Home extends MX_Controller {
 				$this->load->model('products/products_model');
 				$product =$this->products_model->getDetailManagement($_POST['productId']);
 				if($this->session->userdata('userStaff')[0]->isMain) {
-					$mes = '<b>'.$product[0]->name.': '.$_POST['qty'].'</b>';
+					$mes .= '<b>'.$product[0]->name.': '.$_POST['qty'].'</b>';
 					$mes .= " \n ";
 					$mes .= '<b>Tồn kho: ' .$inventoryNow.'</b>';
 					$mes .= " \n ";
@@ -300,7 +299,7 @@ class Home extends MX_Controller {
 			}
 		} 
 	}
-	public function formatStringImportProduct() {
+    public function formatStringImportProduct() {
 		$arr = preg_split("/(\r\n|\n|\r|\.)/", rtrim($_POST['mes']));
 		// var_dump($arr);exit();
 		if (count($arr) > 0) {
@@ -392,23 +391,17 @@ class Home extends MX_Controller {
 		//teamplate
 		$products = $this->home->getProducts($this->session->userdata('userStaff')[0]->storeId);
 		$count = 0;
-		$mes = '';
 		foreach ($products as $key => $p) {
 			$changedQty = $_POST['qty'.$p->id];
 			if ($changedQty && $changedQty > 0) {
 				$updateInventory = $this->home->updateImportInventory($p->id, $changedQty);
 				if ($updateInventory) {
-					$mes .= '<b>'.$p->name.': '.$changedQty.'</b>';
-					$mes .= " \n ";
 					$count = $count + 1;
 				}
 			}
 		}
 
 		if($count > 0){
-			if($mes!='') {
-				$this->sendImportMessageTelegram($mes, 1);
-			}
 			print 'success.'.$count.'.'.$this->security->get_csrf_hash();
 			exit;
 		} 
@@ -420,7 +413,6 @@ class Home extends MX_Controller {
 			$id = $_POST['productId'];
 			$qty = $_POST['qty'];
 			$mainStore = NULL;
-			$mes = '';
 			if (!empty($_POST['mainStore'])) {
 				$mainStore = $_POST['mainStore'];
 				$this->load->model('products/products_model');
@@ -443,44 +435,49 @@ class Home extends MX_Controller {
 	public function exportListQtyPruoduct() {
 		$products = $this->home->getProducts($this->session->userdata('userStaff')[0]->storeId);
 		$count = 0;
-		$mainStore =  $_POST['mainStore'];
+		$mainStore = NULL;
+		if (!empty($_POST['mainStore'])) {
+			$mainStore = $_POST['mainStore'];
+		}
 		$mes = '';
-		if ($mainStore || $mainStore != '') {
-			foreach ($products as $key => $p) {
-				if (isset($_POST['qty'.$p->id]) && $_POST['qty'.$p->id] > 0) {
-					$userSes = $this->session->userdata('userStaff');
-					$updateInventory = $this->home->updateExportInventory($p->id, $_POST['qty'.$p->id], $mainStore, $userSes[0]->storeId, $userSes[0]->id);
-					if ($updateInventory) {
-						$count = $count + 1;
-						$new = '<b>'.$p->name.': '.$_POST['qty'.$p->id].'</b>';
-						$quoteProductStore = $this->home->getQuote($p->id, $_POST['mainStore']);
-						if ($quoteProductStore && $quoteProductStore[0]->value > $p->inventory) {
-							$thieu = $quoteProductStore[0]->value  - $_POST['qty'.$p->id];
-							$new = '<b>'.$p->name.': '.$_POST['qty'.$p->id].' (Thiếu ' .$thieu. ')</b>';
-						}
-						$mes .= $new;
-						$mes .= " \n ";
+		$arrThieu = [];
+		$userSes = $this->session->userdata('userStaff');
+		foreach ($products as $key => $p) {
+			if (isset($_POST['qty'.$p->id]) && $_POST['qty'.$p->id] > 0) {
+				$userSes = $this->session->userdata('userStaff');
+				$updateInventory = $this->home->updateExportInventory($p->id, $_POST['qty'.$p->id], $mainStore, $userSes[0]->storeId, $userSes[0]->id);
+				if ($updateInventory) {
+					$count = $count + 1;
+					$new = '<b>'.$p->name.': '.$_POST['qty'.$p->id].'</b>';
+					$quoteProductStore = $this->home->getQuote($p->id, $_POST['mainStore']);
+					if ($quoteProductStore && $quoteProductStore[0]->value > $p->inventory) {
+						$thieu = $quoteProductStore[0]->value  - $_POST['qty'.$p->id];
+						$new = '<b>'.$p->name.': '.$_POST['qty'.$p->id].' (Thiếu ' .$thieu. ')</b>';
+						$arrThieu[$p->id] = $thieu;
 					}
-				} else {
-					if (isset($_POST['thieu'.$p->id]) && $_POST['thieu'.$p->id] > 0) {
-						$mes .= '<b>'.$p->name.': 0 (Thiếu '.$_POST['thieu'.$p->id].')</b>';
-						$mes .= " \n ";
-					}
+					$mes .= $new;
+					$mes .= " \n ";
+				}
+			} else {
+				if (isset($_POST['thieu'.$p->id]) && $_POST['thieu'.$p->id] > 0) {
+				    $arrThieu[$p->id] = $_POST['thieu'.$p->id];
+					$mes .= '<b>'.$p->name.': 0 (Thiếu '.$_POST['thieu'.$p->id].')</b>';
+					$mes .= " \n ";
 				}
 			}
-
-			if($count > 0){
-				if($mes!='' && $mainStore) {
-					$this->sendMessageTelegram($mes, $mainStore, $count);
-				}
-				print 'success.'.$count.'.'.$this->security->get_csrf_hash();
-				
-			} 
-		} else {
-			print 'fail'.$this->security->get_csrf_hash();
-			exit;
+		}
+		
+		if ($arrThieu != [] ) {
+			$saveMissingProduct = $this->home->insertMissingProduct($arrThieu, $mainStore,  $userSes[0]->phone);
 		}
 
+		if($count > 0){
+		    if($mes!='' && $mainStore) {
+				$this->sendMessageTelegram($mes, $mainStore, $count);
+			}
+			print 'success.'.$count.'.'.$this->security->get_csrf_hash();
+			exit;
+		} 
 	}
 
 	public function removeInventory(){
@@ -600,6 +597,15 @@ class Home extends MX_Controller {
 			$compareEstimatesOrderStore = array();
 			$products = $this->home->getProducts($this->session->userdata('userStaff')[0]->storeId, $_POST['name']);
 			$store = $_POST['store'];
+			$percen  = 1 ;
+			
+			if (!empty($_POST['exportSecord'])) {
+				$this->load->model('stores/stores_model');
+				$detailStore = $this->stores_model->getDetailManagement($store);
+				if ($detailStore && $detailStore[0]->percenLimitExportSecord > 0) {
+					$percen  = number_format(($detailStore[0]->percenLimitExportSecord / 100),2);
+				}
+			}
 			if ($products && !empty($store)) {
 				foreach ($products as $key => $p) {
 					$object = new StdClass;
@@ -623,7 +629,10 @@ class Home extends MX_Controller {
 					}
 					// var_dump($quoteForStore);
 					$sumEstimates = $quoteForStore - $inventoryForStore;
-					
+					if ($percen < 1 && $sumEstimates > 0) {
+						$sumEstimates = number_format($sumEstimates * $percen, 0);
+						if ($sumEstimates < 1) $sumEstimates = 1;
+					}
 					$object->estimates = $sumEstimates;
 
 					$compareEstimatesOrderStore[] = $object;
@@ -635,7 +644,7 @@ class Home extends MX_Controller {
 			$this->load->view("main-store/ajaxSearchExportMainStore", $data);
 		}
 	}
-
+	
 	public function main_export2(){
 		//teamplate
 		$data['products'] = $this->home->getProducts($this->session->userdata('userStaff')[0]->storeId);
@@ -650,6 +659,7 @@ class Home extends MX_Controller {
 			$products = $this->home->getProducts($this->session->userdata('userStaff')[0]->storeId, $_POST['name']);
 			$store = $_POST['store'];
 			if ($products && !empty($store)) {
+			    $missingProduct = $this->home->getMissingProduct($store);
 				foreach ($products as $key => $p) {
 					$object = new StdClass;
 					$object->id = $p->id;
@@ -660,11 +670,11 @@ class Home extends MX_Controller {
 					$inventoryForStore = 0;
 					$quoteForStore = 0;
 
-					$inventoryProductStore = $this->home->getInventory($p->id, $store);
+				    // 	$inventoryProductStore = $this->home->getInventory($p->id, $store);
 					// var_dump($inventoryProductStore);
-					if($inventoryProductStore) {
-						$inventoryForStore = $inventoryProductStore[0]->value;
-					}
+    				// 	if($inventoryProductStore) {
+    				// 		$inventoryForStore = $inventoryProductStore[0]->value;
+    				// 	}
 					// var_dump($inventoryForStore);
 					$quoteProductStore = $this->home->getQuote($p->id, $store);
 					
@@ -674,8 +684,15 @@ class Home extends MX_Controller {
 					// var_dump($quoteForStore);
 					$sumEstimates = $quoteForStore - $inventoryForStore;
 					$object->valueMin = $quoteForStore;
-					$object->estimates = $sumEstimates;
+					$object->estimates = 0;
 
+					if($missingProduct) {
+						$list = unserialize($missingProduct[0]->missing);
+						if($list && isset($list[$p->id])){
+							$object->estimates = $list[$p->id];
+						}
+					}
+					
 					$compareEstimatesOrderStore[] = $object;
 					// exit();
 				}
@@ -720,7 +737,7 @@ class Home extends MX_Controller {
 			}
 		}
 	}
-	public function check_export(){
+public function check_export(){
 		//teamplate
 		$data['stores'] = $this->home->getListOtherStore($this->session->userdata('userStaff')[0]->storeId);
 		$this->template->write_view('content', 'main-store/check_export', $data);
@@ -755,7 +772,7 @@ class Home extends MX_Controller {
 			}
 		}
 	}
-		
+	
 	public function importListQtyCheckStore(){
 		//teamplate
 		$products = $this->home->getProducts($_POST['store']);
@@ -792,7 +809,7 @@ class Home extends MX_Controller {
 			}
 		} 
 	}
-		
+	
 	public function mainStoreInventory() {
 		$data['stores'] = $this->home->getListOtherStore($this->session->userdata('userStaff')[0]->storeId);
 		$data['products'] = $this->loadMainStoreInventory();
@@ -828,11 +845,11 @@ class Home extends MX_Controller {
 		return $products;
 	}
 	/*------------------------------------ End API --------------------------------*/
-	public function sendMessageTelegram($body, $store, $total){
-		$chat_id = '-998428325';
+    public function sendMessageTelegram($body, $store, $total){
+        $chat_id = '-919335720';
 		$this->load->model('stores/stores_model');
 		$store =$this->stores_model->getDetailManagement($store);
-		$content = '<strong>Nhập hàng cho - '.$store[0]->name. ' - ' .date('Y-m-d H:i:s',time()). '! </strong>';
+		$content = '<strong>Xuất hàng cho - '.$store[0]->name. ' - ' .date('Y-m-d H:i:s',time()). '! </strong>';
 		$content .= " \n ";
 		$content .= $body;
 		$content .= '<code>Tổng sản phẩm: '. $total.'</code>';
@@ -840,9 +857,9 @@ class Home extends MX_Controller {
 		$content .= '<code>From '. PATH_URL.'</code>';
 		$data = $this->telegram_lib->sendmsg($content, $chat_id);
     }
-
-	public function sendImportMessageTelegram($body, $total){
-		$chat_id = '-998428325';
+    
+    public function sendImportMessageTelegram($body, $total){
+		$chat_id = '-961191570';
 		$content = '<strong>Nhập hàng kho - ' .date('Y-m-d H:i:s',time()). '! </strong>';
 		$content .= " \n ";
 		$content .= $body;
@@ -851,8 +868,8 @@ class Home extends MX_Controller {
 		$content .= '<code>From '. PATH_URL.'</code>';
 		$data = $this->telegram_lib->sendmsg($content, $chat_id);
     }
-
-	public function sendMessageVerify($body){
+    
+    public function sendMessageVerify($body){
 		$chat_id = '-955132579';
 		$content = '<strong>Thông tin chuyển hàng cần xác nhận - ' .date('Y-m-d H:i:s',time()). '! </strong>';
 		$content .= " \n ";
@@ -860,8 +877,8 @@ class Home extends MX_Controller {
 		$content .= '<code>From '. PATH_URL.'</code>';
 		$data = $this->telegram_lib->sendmsg($content, $chat_id);
     }
-
-	public function loginVerify($body){
+    
+    public function loginVerify($body){
 		$chat_id = '-955132579';
 		$content = '<strong>Thông tin đăng nhập cần xác nhận - ' .date('Y-m-d H:i:s',time()). '! </strong>';
 		$content .= " \n ";
@@ -870,5 +887,4 @@ class Home extends MX_Controller {
 		$data = $this->telegram_lib->sendmsg($content, $chat_id);
     }
 
-	
 }

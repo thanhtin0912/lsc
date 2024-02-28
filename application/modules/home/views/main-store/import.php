@@ -190,6 +190,7 @@
         });	
     }
 
+
 	function modalOpenImportString() {
 		$('#modalImportString').modal('show');
 		$('#content').val('')

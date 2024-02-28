@@ -59,7 +59,6 @@
 
         $('#seachStore').change(function(){
 			var mainStore = $('#seachStore').val();
-			console.log(mainStore);
 			$("#mainStore").val(mainStore);
             searchProduct();
         });
@@ -127,7 +126,7 @@
 			'<form action="" class="formName">' +
 			'<strong>'+formatDate(d)+'</strong>' +
 			'<div class="form-group d-flex align-items-center pt-2">' +
-			'<label class="w-75">'+$('#name' + proId).html()+'</label>' +
+			'<label class="w-25">'+$('#name' + proId).html()+'</label>' +
 			'<input value="'+qty+'" class="ml-2 name form-control" disabled />' +
 			'</div>' +
 			'</form>',
@@ -193,12 +192,11 @@
 			notify('Vui lòng chọn cửa hàng cần xuất kho.', 'danger');
 			return false;
 		}
-		$('#btn-save-list-qty').hide()
+	    $('#btn-save-list-qty').hide()
 		var options = {
 			beforeSubmit:  showRequest,  // pre-submit callback 
 			success:       showResponse  // post-submit callback 
 		};
-		
 		$('#frmManagement').ajaxSubmit(options);
 	}
 	function showRequest(formData, jqForm, options) {
@@ -210,7 +208,7 @@
 		if(responseText[0]=='success'){
 			$('#modalConfirm').modal('hide');
 			notify('<strong>'+responseText[1] + '</strong> Sản phẩm đã được xuất kho', 'success');
-			$("#btn-save-list-qty").show()
+			$('#btn-save-list-qty').show()
 			setTimeout(function(){ 
 				searchProduct();
 			}, 1500);
@@ -268,7 +266,8 @@
             }     
         });	
     }
-	function formatDate(d) {
+    
+    function formatDate(d) {
 		var yyyy = d.getFullYear().toString();
 		var mm = (d.getMonth()+1).toString(); // getMonth() is zero-based
 		var dd  = d.getDate().toString();
@@ -278,12 +277,14 @@
 
 		return (dd[1]?dd:"0"+dd[0])  + "/" + (mm[1]?mm:"0"+mm[0]) + "/" + yyyy + " - " + ((h > 12) ? h-12 : h) + ":" + m + ":" + s;
 	};
-
+	
 	function remove(){
 		$('.quantity-field').each(function(i, obj) {
 			$( obj ).val(0);
 		});
 	}
+
+
 
 </script>
 <div class="col-md-12">
@@ -310,15 +311,19 @@
 
 		<!--Basic Table-->
 		<div class="panel panel-grey margin-bottom-40 ">
-			<div class="panel-heading d-flex justify-content-between">
+			<div class="panel-heading d-flex justify-content-between flex-lg-row flex-column">
 				<h3 class="panel-title font-bold"><i class="fa fa-tasks"></i> Danh sách sản phẩm </h3>
-				<button class="btn btn-danger" type="button" onclick="remove()">Xóa đề xuất</button>
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" value="" id="flexInputAll">
-					<label class="form-check-label panel-title pl-4" for="flexCheckDefault">
-						Nhập nhiều sản phẩm
-					</label>
+				
+				<div class="d-flex align-items-center">
+				    <button class="btn btn-danger mr-3" type="button" onclick="remove()">Xóa đề xuất</button>				
+				    <div class="form-check">
+    					<input class="form-check-input" type="checkbox" value="" id="flexInputAll">
+    					<label class="form-check-label panel-title pl-4" for="flexCheckDefault">
+    						Nhập nhiều sản phẩm
+    					</label>
+    				</div>
 				</div>
+
 			</div>
 			<form id="frmManagement" action="<?= PATH_URL ?>exportListQtyPruoduct" method="post" enctype="multipart/form-data" class="form-horizontal form-row-seperated">
 			<input type="hidden" value="<?=$this->security->get_csrf_hash()?>" name="csrf_token" />

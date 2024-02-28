@@ -49,6 +49,7 @@ class Api extends MX_Controller {
 								if($cal > 1) {
 									$value = $cal;
 								}
+								
 								$data = array(
 									'value'=> $value,
 									'valueMin'=> number_format($value* ($s->percenLimitExportSecord/100), 0),
@@ -56,7 +57,7 @@ class Api extends MX_Controller {
 								);
 								$this->db->where('storeId', $s->id);
 								$this->db->where('productId', $p->id);
-								if($this->db->update('quote',$data)) {
+								if($this->db->update('quote', $data)) {
 									$count++;
 								}
 							}
@@ -138,7 +139,6 @@ class Api extends MX_Controller {
 					}
 				}
 				$storeData->products = $arrCompare;
-				
 			}
 			$arrData[] = $storeData;
 		}
@@ -155,11 +155,10 @@ class Api extends MX_Controller {
 				'created'=> date('Y-m-d H:i:s',time()),
 			);
 			$this->db->insert('cron', $cronData);
-
 			$mes = '';
 			foreach ($arrData as $key => $s) {
 				if (count($s->products) > 0) {
-					$mes .= "-----------------------------";
+				    $mes .= "-----------------------------";
 					$mes .= " \n ";
 					$mes .= '<code>'.$s->name. ' chênh lệch</code>';
 					$mes .= " \n ";
@@ -168,7 +167,7 @@ class Api extends MX_Controller {
 						$mes .= " \n ";
 					}
 				} else {
-					$mes .= "-----------------------------";
+				    $mes .= "-----------------------------";
 					$mes .= " \n ";
 					$mes .= '<code>'.$s->name. ' chênh lệch: không có.</code>';
 					$mes .= " \n ";
@@ -197,7 +196,7 @@ class Api extends MX_Controller {
 
 	public function apiCheckInputDataExport() {
 		$stores = $this->api->getDataStore();
-		$date = date('Y-m-d H:i:s',time());
+		$date = date('Y-m-d',time());
 		$arrData = array();
 		foreach ($stores as $key => $s) {
 			$products = $this->api->getProducts($s->id, null);
@@ -263,7 +262,7 @@ class Api extends MX_Controller {
 			}
 
 			if($mes!='') {
-				$chat_id = '-998428325';
+				$chat_id = '-914985629';
 				$content = '<strong>Thông báo kiểm tra XUẤT - ' .date('Y-m-d H:i:s',time()). '! </strong>';
 				$content .= " \n ";
 				$content .= $mes;
@@ -281,6 +280,7 @@ class Api extends MX_Controller {
 		}
 		return true;
 	}
+	
 	public function veryfiChangeProduct(){
 		if ($_GET['id']) {
 			$res = $this->api->getDetailVerifyId($_GET['id']);
@@ -316,7 +316,7 @@ class Api extends MX_Controller {
 							'updated'=> date('Y-m-d H:i:s',time()),
 						);
 						$this->db->where('id',$_GET['id']);
-						if($this->db->update('moveproducts',$data)){
+						if($this->db->update('move_products',$data)){
 							echo 'Thông tin chuyển hàng đã được XÁC NHẬN thành công.';
 							exit;
 						}
@@ -329,7 +329,7 @@ class Api extends MX_Controller {
 		}
 	}
 	public function verifyPage() {
-		echo '<a href="https://kho.leotea.vn/api/verifyPage?id='.$_GET['id'].'">Xác nhận chuyển hàng</a>';
+		echo '<a href="https://kho.leotea.vn/api/verify?id='.$_GET['id'].'" style="font-size:30px; padding: 20px;">Xác nhận chuyển hàng</a>';
 		exit;
 	}
 	public function sendMessageTelegram($body, $store, $total){
@@ -355,6 +355,7 @@ class Api extends MX_Controller {
 		$content .= '<code>From '. PATH_URL.'</code>';
 		$data = $this->telegram_lib->sendmsg($content, $chat_id);
     }
+
 	/*------------------------------------ End API --------------------------------*/
 
 }
