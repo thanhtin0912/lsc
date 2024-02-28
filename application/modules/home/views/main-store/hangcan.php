@@ -36,7 +36,15 @@
 	function sortArr(row) {
 		let arr = <?php echo json_encode($products) ?>;
 		let newArr = Object.values(arr);
-		if (row > 0) {
+		if (row == 1) {
+			newArr.sort(function(a, b) {
+				return parseFloat(a.id) - parseFloat(b.id);
+			});
+		} else if (row == 2) {
+			newArr.sort(function(a, b) {
+				return parseFloat(a.name) - parseFloat(b.name);
+			});
+		} else if (row == 3) {
 			newArr.sort(function(a, b) {
 				return parseFloat(b.percen) - parseFloat(a.percen);
 			});
@@ -75,10 +83,10 @@
 			<table class="table import">
 				<thead>
 					<tr>
-						<th width="20px">STT</th>
-						<th>Sản phẩm</th>
-						<th><button type="button" class="btn btn-default" onclick="sortArr(1)">Cần Hàng(%) <i class="fa fa-angle-down"></i></button></th>
-						<th><button type="button" class="btn btn-default" onclick="sortArr(0)">Tỷ số <i class="fa fa-angle-down"></i></button></th>
+						<th width="20px"><button type="button" class="btn btn-default" onclick="sortArr(1)">STT<i class="fa fa-angle-down"></i></button></th>
+						<th><button type="button" class="btn btn-default" onclick="sortArr(2)">Sản phẩm<i class="fa fa-angle-down"></i></button></th>
+						<th><button type="button" class="btn btn-default" onclick="sortArr(3)">Cần Hàng(%) <i class="fa fa-angle-down"></i></button></th>
+						<th><button type="button" class="btn btn-default" onclick="sortArr(4)">Tỷ số <i class="fa fa-angle-down"></i></button></th>
 						<th>Định mức</th>
 						<th>Tồn kho</th>
 						<th>Cần Hàng</th>
