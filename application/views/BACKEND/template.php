@@ -142,7 +142,13 @@
                         <span class="title">Báo cáo</span>
                         <span class="arrow"></span>
                     </a>
-                    <ul class="sub-menu" <?php if (($this->uri->segment(2) == 'report') || ($this->uri->segment(2) == 'report_nhap_xuat_trong_ngay') || ($this->uri->segment(2) == 'report_nhap_xuat_kho_cua_hang' )) { print "style='display: block;' ";} ?>>
+                    <ul class="sub-menu" <?php 
+                    if (($this->uri->segment(2) == 'report') 
+                    || ($this->uri->segment(2) == 'report_nhap_xuat_trong_ngay') 
+                    || ($this->uri->segment(2) == 'report_nhap_xuat_kho_cua_hang')
+                    || ($this->uri->segment(2) == 'report_kiem_tra_xuat_cua_hang')
+                    || ($this->uri->segment(2) == 'report_kiem_tra_xuat_san_pham')
+                    ) { print "style='display: block;' ";} ?>>
                         <li class="nav-item  last<?php if ($this->uri->segment(2) == 'report') { print 'active open';} ?>">
                             <a href="<?= PATH_URL_ADMIN . 'report' ?>" class="nav-link ">
                                 <i class="fa fa-arrow-right"></i><span class="title">Tồn kho </span>
@@ -163,6 +169,11 @@
                         <li class="nav-item  last<?php if ($this->uri->segment(2) == 'report_kiem_tra_xuat_cua_hang') { print 'active open';} ?>">
                             <a href="<?= PATH_URL_ADMIN . 'report_kiem_tra_xuat_cua_hang' ?>" class="nav-link ">
                                 <i class="fa fa-arrow-right"></i><span class="title">KT xuất CH </span>
+                            </a>
+                        </li>
+                        <li class="nav-item  last<?php if ($this->uri->segment(2) == 'report_kiem_tra_xuat_san_pham') { print 'active open';} ?>">
+                            <a href="<?= PATH_URL_ADMIN . 'report_kiem_tra_xuat_san_pham' ?>" class="nav-link ">
+                                <i class="fa fa-arrow-right"></i><span class="title">KT xuất SP </span>
                             </a>
                         </li>
                     </ul>
