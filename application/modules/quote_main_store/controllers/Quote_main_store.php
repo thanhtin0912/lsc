@@ -168,6 +168,7 @@ class Quote_main_store extends MX_Controller {
 		$this->load->model('stores/stores_model');
 		$mainStore = $this->stores_model->getDetailManagement($_POST['store']);
 		foreach ($products as $key => $pro) {
+			$pro->num = $key + 1;
 			$cal = 0;
 			if($pro->quote > 0) {
 				$cal = number_format((($pro->quote - $pro->inventory)/($pro->quote)),2);
@@ -183,15 +184,25 @@ class Quote_main_store extends MX_Controller {
 				$pro->effect = number_format((($pro->quote - $pro->inventory)/$pro->effectStoreMain),1);
 			}
 		}
-		if ($_POST['sort'] > 0) {
+		if ($_POST['sort'] == 0) {
+			uasort($products, function ($a, $b) {
+				return $a->effect < $b->effect;
+				
+			});
+		} else if ($_POST['sort'] == 1){
 			uasort($products, function ($a, $b) {
 				return $a->percen < $b->percen;
 			});
-		} else {
+		} else if ($_POST['sort'] == 2){
 			uasort($products, function ($a, $b) {
-				return $a->effect < $b->effect;
+				return $a->name > $b->name;
+			});
+		} else{
+			uasort($products, function ($a, $b) {
+				return $a->num > $b->num;
 			});
 		}
+		
 		$data = array (
 			'products' => $products,
 		);

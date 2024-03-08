@@ -33,11 +33,11 @@
             <table class="table table-hover dataTable">
                 <thead>
                     <tr>
-                        <th data-field="id" tabindex="0" width="5%">
+                        <th data-field="id" tabindex="0" width="5%" class="sorting" onclick="searchInvenToday(79, '30d', 3)">
                             <div class="th-inner bold">STT.</div>
                             <div class="fht-cell"></div>
                         </th>
-                        <th width="20%" data-field="name" tabindex="0">
+                        <th width="20%" data-field="name" tabindex="0" class="sorting" onclick="searchInvenToday(79, '30d', 2)">
                             <div class="th-inner bold">Sản phẩm</div>
                             <div class="fht-cell" ></div>
                         </th>
